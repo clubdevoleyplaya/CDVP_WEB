@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --bg: #ffffff;
+  --surface: #f4f6fb;
+  --ink: #2b2166;
+  --ink-soft: #4b4a78;
+  --line: #dbdeef;
+  --blue: #1f4fa0;
+  --yellow: #c9920a;
+  --green: #2f9e5b;
+  --band: #2b2166;
+}
+
+[data-theme="dark"] {
+  --bg: #2b2166;
+  --surface: #362b7a;
+  --ink: #f4f6fb;
+  --ink-soft: #b7b6de;
+  --line: #4a3f8f;
+  --blue: #6fa3e0;
+  --yellow: #f7b733;
+  --green: #5fcb90;
+  --band: #3a2f86;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-blue: var(--blue);
+  --color-yellow: var(--yellow);
+  --color-green: var(--green);
+  --color-band: var(--band);
+  --font-display: var(--font-oswald);
+  --font-body: var(--font-source-serif);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, .font-display {
+  text-wrap: balance;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

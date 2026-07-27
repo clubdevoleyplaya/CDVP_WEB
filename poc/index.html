@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Club de Voley Playa — PoC</title>
+<style>
+  :root{
+    --sand:#FFFFFF;
+    --paper:#F4F6FB;
+    --ink:#1B1959;
+    --ink-soft:#4B4A78;
+    --line:#DBDEEF;
+    --signal:#2D6CB5;
+    --signal-ink:#184C82;
+    --gold:#C48F00;
+    --ok:#2E9E5B;
+    --navy:#1B1959;
+    --band:#1B1959;
+    --radius:2px;
+    --font-display:"Arial Narrow","Archivo Narrow","Helvetica Neue Condensed","Roboto Condensed",Arial,sans-serif;
+    --font-body:Georgia,"Iowan Old Style","Palatino Linotype","Times New Roman",serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --sand:#1B1959;
+      --paper:#262163;
+      --ink:#F4F6FB;
+      --ink-soft:#B7B6DE;
+      --line:#3B356F;
+      --signal:#6FA8DC;
+      --signal-ink:#BFE0FF;
+      --gold:#F7D154;
+      --ok:#5FCB90;
+      --navy:#1B1959;
+      --band:#332C78;
+    }
+  }
+  :root[data-theme="dark"]{
+    --sand:#1B1959;--paper:#262163;--ink:#F4F6FB;--ink-soft:#B7B6DE;
+    --line:#3B356F;--signal:#6FA8DC;--signal-ink:#BFE0FF;--gold:#F7D154;--ok:#5FCB90;--navy:#1B1959;--band:#332C78;
+  }
+  :root[data-theme="light"]{
+    --sand:#FFFFFF;--paper:#F4F6FB;--ink:#1B1959;--ink-soft:#4B4A78;
+    --line:#DBDEEF;--signal:#2D6CB5;--signal-ink:#184C82;--gold:#C48F00;--ok:#2E9E5B;--navy:#1B1959;--band:#1B1959;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{color-scheme:light dark}
+  body{
+    margin:0;background:var(--sand);color:var(--ink);
+    font-family:var(--font-body);line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.eyebrow,nav a,button,.card-tag,.price-now,.price-old,.brand,.wp-locked,.wp-unlocked{
+    font-family:var(--font-display);
+  }
+  h1,h2,h3{text-wrap:balance;margin:0 0 .5em;letter-spacing:.01em}
+  p{max-width:65ch}
+  .price-now,.price-old{font-variant-numeric:tabular-nums}
+  a{color:inherit}
+  button{font:inherit;cursor:pointer}
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;
+    color:var(--signal-ink);font-weight:700;margin:0 0 .6em;
+  }
+
+  /* ---- header ---- */
+  .site-header{
+    position:sticky;top:0;z-index:20;
+    display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;
+    padding:.9rem 1.5rem;background:color-mix(in srgb, var(--sand) 88%, transparent);
+    backdrop-filter:blur(6px);border-bottom:1px solid var(--line);
+  }
+  .brand{font-weight:900;font-size:1.3rem;letter-spacing:.04em;text-transform:uppercase}
+  .brand span{font-family:var(--font-body);font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-soft);font-size:.85rem}
+  .site-header nav{display:flex;gap:1.3rem;margin-left:auto;flex-wrap:wrap}
+  .site-header nav a{
+    text-transform:uppercase;font-size:.8rem;letter-spacing:.08em;font-weight:700;
+    text-decoration:none;border-bottom:2px solid transparent;padding-bottom:2px;
+  }
+  .site-header nav a:hover{border-color:var(--signal)}
+  .auth-actions{display:flex;gap:.6rem}
+  .btn-ghost,.btn-signal{
+    border-radius:var(--radius);border:1px solid var(--ink);
+    padding:.5rem 1rem;text-transform:uppercase;font-size:.78rem;letter-spacing:.08em;font-weight:700;
+    background:transparent;color:var(--ink);
+  }
+  .btn-signal{background:var(--signal);border-color:var(--signal);color:var(--paper)}
+  .btn-signal:hover{filter:brightness(1.08)}
+  .btn-lg{padding:.9rem 1.8rem;font-size:.9rem}
+
+  /* ---- demo bar ---- */
+  .demo-bar{
+    display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;
+    padding:.8rem 1.5rem;background:var(--band);color:#fff;
+    font-size:.85rem;
+  }
+  .demo-bar strong{text-transform:uppercase;letter-spacing:.08em;font-family:var(--font-display)}
+  .switch{display:flex;align-items:center;gap:.5rem;cursor:pointer}
+  .switch input{accent-color:var(--gold);width:1.1rem;height:1.1rem}
+  .currency-picker{display:flex;gap:.3rem;margin-left:auto}
+  .currency-picker button{
+    border:1px solid rgba(255,255,255,.6);background:transparent;color:#fff;
+    padding:.35rem .7rem;border-radius:var(--radius);font-size:.8rem;font-weight:700;
+  }
+  .currency-picker button.is-active{background:var(--signal);border-color:var(--signal)}
+
+  /* ---- hero ---- */
+  .hero{
+    display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;
+    padding:4.5rem 1.5rem;max-width:1200px;margin:0 auto;
+  }
+  .hero h1{
+    font-size:clamp(2.8rem,7vw,5.2rem);line-height:.95;text-transform:uppercase;
+    font-weight:900;letter-spacing:0;
+  }
+  .hero-quote{font-style:italic;font-size:1.15rem;color:var(--ink-soft);max-width:38ch;margin:1.2rem 0 1.8rem}
+  .hero-court{
+    aspect-ratio:1/1;border-radius:50%;position:relative;overflow:hidden;
+    background:linear-gradient(180deg, var(--signal) 0 34%, var(--gold) 34% 55%, var(--paper) 55% 100%);
+    border:10px solid var(--ok);
+    box-shadow:inset 0 0 0 3px var(--paper);
+  }
+  @media (max-width:820px){ .hero{grid-template-columns:1fr} .hero-court{max-width:280px;margin:0 auto} }
+
+  section{max-width:1200px;margin:0 auto;padding:3.5rem 1.5rem}
+
+  /* ---- welcome pack ---- */
+  .wp-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:2rem;display:flex;flex-direction:column;gap:.8rem;
+  }
+  .wp-state span{
+    display:inline-block;padding:.4rem .8rem;border-radius:var(--radius);font-weight:700;
+    font-family:var(--font-display);font-size:.85rem;letter-spacing:.04em;
+  }
+  .wp-locked{background:color-mix(in srgb, var(--signal) 15%, transparent);color:var(--signal-ink)}
+  .wp-unlocked{background:color-mix(in srgb, var(--ok) 20%, transparent);color:var(--ink)}
+
+  /* ---- bio / why ---- */
+  .bio{display:grid;grid-template-columns:auto 1fr;gap:2.5rem;align-items:start}
+  .bio-photo{
+    width:150px;height:150px;border-radius:50%;flex-shrink:0;
+    background:repeating-linear-gradient(45deg, var(--paper) 0 6px, var(--line) 6px 7px);
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .bio-photo span{font-family:var(--font-display);font-weight:900;font-size:2.6rem;color:var(--signal)}
+  .credentials{list-style:none;padding:0;margin:1.2rem 0 0;display:flex;flex-direction:column;gap:.4rem}
+  .credentials li{font-family:var(--font-display);font-size:.85rem;letter-spacing:.03em;text-transform:uppercase}
+  .credentials li::before{content:"— "}
+  @media (max-width:600px){.bio{grid-template-columns:1fr}.bio-photo{width:100px;height:100px}}
+
+  .why blockquote{
+    margin:0 0 1.5rem;padding-left:1.2rem;border-left:3px solid var(--signal);
+    font-style:italic;font-size:1.2rem;max-width:56ch;
+  }
+  .why blockquote footer{margin-top:.6rem;font-family:var(--font-display);font-size:.78rem;text-transform:uppercase;color:var(--ink-soft);font-style:normal}
+
+  /* ---- catalog ---- */
+  .cat-heading{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
+  .cat-note{font-size:.8rem;color:var(--ink-soft);font-family:var(--font-display);text-transform:uppercase;letter-spacing:.03em}
+  .cat-note.is-positive{color:var(--ok)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.2rem;margin-top:1.5rem}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:1.3rem;display:flex;flex-direction:column;gap:.6rem;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:0 10px 20px -12px color-mix(in srgb, var(--ink) 40%, transparent)}
+  .card-tag{
+    align-self:flex-start;text-transform:uppercase;font-size:.7rem;letter-spacing:.1em;font-weight:700;
+    color:var(--signal-ink);background:color-mix(in srgb, var(--signal) 12%, transparent);
+    padding:.2rem .6rem;border-radius:var(--radius);
+  }
+  .card h3{font-size:1.15rem;text-transform:uppercase;margin:0}
+  .card-desc{font-size:.9rem;color:var(--ink-soft);margin:0;flex-grow:1}
+  .card-chips{display:flex;flex-wrap:wrap;gap:.3rem;padding:0;margin:0;list-style:none}
+  .card-chips li{font-size:.7rem;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.03em;color:var(--ink-soft);border:1px solid var(--line);padding:.15rem .5rem;border-radius:var(--radius)}
+  .card-meta{display:flex;gap:1rem;margin:0;font-size:.8rem;color:var(--ink-soft)}
+  .card-meta dt{font-weight:700;display:inline;font-family:var(--font-display)}
+  .card-meta dd{display:inline;margin:0 .3em 0 0}
+  .price-block{display:flex;align-items:baseline;gap:.5rem;margin-top:.3rem}
+  .price-old{text-decoration:line-through;color:var(--ink-soft);font-size:.9rem}
+  .price-now{font-size:1.4rem;font-weight:900;color:var(--gold)}
+  .price-note{font-size:.72rem;color:var(--ink-soft)}
+  .btn-buy{
+    margin-top:.4rem;background:var(--ink);color:var(--paper);border:none;border-radius:var(--radius);
+    padding:.6rem 1rem;text-transform:uppercase;font-family:var(--font-display);font-weight:700;font-size:.8rem;letter-spacing:.06em;
+  }
+  .btn-buy:hover{background:var(--signal)}
+
+  /* ---- testimonials ---- */
+  .testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;margin-top:1.5rem}
+  .testi-grid blockquote{
+    margin:0;padding:1.2rem;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    font-size:.92rem;font-style:italic;
+  }
+  .testi-grid footer{margin-top:.8rem;font-style:normal;font-family:var(--font-display);font-size:.75rem;text-transform:uppercase;color:var(--signal-ink)}
+
+  /* ---- footer ---- */
+  .site-footer{border-top:1px solid var(--line);padding:2.5rem 1.5rem;text-align:center}
+  .footer-note{font-size:.78rem;color:var(--ink-soft);max-width:52ch;margin:.5rem auto 0}
+
+  /* ---- modal ---- */
+  dialog{
+    border:1px solid var(--line);border-radius:var(--radius);padding:2rem;max-width:380px;width:90%;
+    background:var(--paper);color:var(--ink);
+  }
+  dialog::backdrop{background:color-mix(in srgb, var(--ink) 55%, transparent)}
+  dialog h2{text-transform:uppercase}
+  #checkoutPrice{font-size:1.6rem;font-weight:900;font-family:var(--font-display);color:var(--gold)}
+  #checkoutRail{font-size:.85rem;color:var(--ink-soft)}
+  .modal-disclaimer{font-size:.75rem;color:var(--signal-ink);font-family:var(--font-display);text-transform:uppercase;letter-spacing:.03em}
+  dialog menu{display:flex;gap:.6rem;justify-content:flex-end;padding:0;margin:1.2rem 0 0}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;animation:none !important}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">CDVP <span>· Club de Voley Playa</span></div>
+  <nav>
+    <a href="#catalogo-cursos">Cursos</a>
+    <a href="#catalogo-programas">Programas</a>
+    <a href="#catalogo-descargables">Descargables</a>
+    <a href="#catalogo-combos">Combos</a>
+  </nav>
+  <div class="auth-actions">
+    <button class="btn-ghost" id="themeToggle" type="button" aria-label="Cambiar tema claro/oscuro">🌗</button>
+    <button class="btn-ghost" type="button">Iniciar sesión</button>
+    <button class="btn-signal" type="button">Registrate</button>
+  </div>
+</header>
+
+<div class="demo-bar">
+  <strong>Panel de demo</strong>
+  <label class="switch">
+    <input type="checkbox" id="subscriberToggle">
+    Soy suscriptor activo (Welcome Pack + 20% OFF en cursos)
+  </label>
+  <div class="currency-picker" role="group" aria-label="Elegí moneda">
+    <button type="button" data-currency="ARS" class="is-active">🇦🇷 ARS</button>
+    <button type="button" data-currency="USD">🌎 USD</button>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Academia asincrónica de voley playa</p>
+    <h1>Club de<br>Voley Playa</h1>
+    <p class="hero-quote">"Hoy mismo podés empezar a convertirte en un atleta profesional de voley playa."</p>
+    <a href="#catalogo-cursos" class="btn-signal btn-lg">Ver productos</a>
+  </div>
+  <div class="hero-court" aria-hidden="true"></div>
+</section>
+
+<section id="welcome-pack">
+  <div class="wp-card">
+    <p class="eyebrow">Beneficio de suscripción</p>
+    <h2>Welcome Pack</h2>
+    <p class="card-desc">Acceso completo al pack de bienvenida mientras tu suscripción mensual esté activa. Si se vence o se cancela, el acceso se corta al instante.</p>
+    <div class="wp-state">
+      <span class="wp-locked">🔒 Bloqueado — activá "Soy suscriptor" arriba para ver el contenido</span>
+      <span class="wp-unlocked" hidden>✅ Desbloqueado — bienvenido al club</span>
+    </div>
+  </div>
+</section>
+
+<section class="bio">
+  <div class="bio-photo" aria-hidden="true"><span>JA</span></div>
+  <div class="bio-copy">
+    <p class="eyebrow">¿Quién soy?</p>
+    <p>A los 13 años jugué mi primer torneo de beach volley y no me quise ir más de la arena. Desde ese día mi carrera se dividió en dos: inviernos de indoor, veranos de playa.</p>
+    <p>"Para el año 2011 llegó la propuesta más linda y esperada de mi carrera, empecé a formar parte de la <strong>selección argentina</strong>." Ahí empezaron a cumplirse los sueños del Juli niño.</p>
+    <ul class="credentials">
+      <li>Profesor de Educación Física</li>
+      <li>Entrenador internacional FIVB nivel I</li>
+    </ul>
+  </div>
+</section>
+
+<section class="why">
+  <p class="eyebrow">¿Por qué hago esto?</p>
+  <blockquote>
+    "Los trofeos hay que guardarlos en una caja: el mejor premio es lo que aprendemos, y eso en algún momento hay que transmitirlo."
+    <footer>— un entrenador de Juli</footer>
+  </blockquote>
+  <p>Hace años que Juli le da vueltas a esta idea: un espacio virtual donde cualquiera pueda aprender voley playa — técnica, físico y cabeza — desde lo más básico hasta los detalles que solo se aprenden compitiendo. Hoy podés empezar a convertirte en un <strong>jugador profesional</strong>.</p>
+</section>
+
+<section id="catalogo-cursos">
+  <div class="cat-heading">
+    <h2>Cursos</h2>
+    <span class="cat-note is-positive">20% OFF para suscriptores</span>
+  </div>
+  <p class="card-desc">Cursos asincrónicos con acceso de por vida — toda la información técnica de cada gesto del voley playa.</p>
+  <div class="grid">
+
+    <article class="card" data-category="curso" data-discountable="true" data-price-ars="50000" data-price-usd="50">
+      <p class="card-tag">Curso</p>
+      <h3>Ataque</h3>
+      <p class="card-desc">Entrada de ataque, brazos, impacto de pelota y los errores que más le cuestan a un atacante amateur.</p>
+      <ul class="card-chips"><li>Pies</li><li>Brazos</li><li>Impacto</li><li>Errores</li><li>Tips</li></ul>
+      <p class="card-meta"><dt>Módulos</dt><dd>5</dd><dt>Rating</dt><dd>5.0★ (9)</dd></p>
+      <div class="price-block"><span class="price-old" hidden></span><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+    <article class="card" data-category="curso" data-discountable="true" data-price-ars="50000" data-price-usd="50">
+      <p class="card-tag">Curso</p>
+      <h3>Mentalidad para voley playa</h3>
+      <p class="card-desc">Objetivos, mentalidad de entrenamiento y de partido, concentración y disciplina.</p>
+      <p class="card-meta"><dt>Módulos</dt><dd>1</dd><dt>Rating</dt><dd>4.75★ (4)</dd></p>
+      <div class="price-block"><span class="price-old" hidden></span><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+    <article class="card" data-category="curso" data-discountable="true" data-price-ars="50000" data-price-usd="50">
+      <p class="card-tag">Curso</p>
+      <h3>Planificación para entrenadores/as</h3>
+      <p class="card-desc">Planificá aspectos técnicos, físicos y mentales de una sesión de entrenamiento.</p>
+      <p class="card-meta"><dt>Módulos</dt><dd>1</dd><dt>Rating</dt><dd>4.67★ (3)</dd></p>
+      <div class="price-block"><span class="price-old" hidden></span><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+    <article class="card" data-category="curso" data-discountable="true" data-price-ars="50000" data-price-usd="50">
+      <p class="card-tag">Curso</p>
+      <h3>Defensa</h3>
+      <p class="card-desc">Toda la información exclusiva para mejorar tu posicionamiento y lectura en defensa.</p>
+      <p class="card-meta"><dt>Módulos</dt><dd>1</dd><dt>Rating</dt><dd>5.0★ (7)</dd></p>
+      <div class="price-block"><span class="price-old" hidden></span><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+    <article class="card" data-category="curso" data-discountable="true" data-price-ars="50000" data-price-usd="50">
+      <p class="card-tag">Curso</p>
+      <h3>Bloqueo</h3>
+      <p class="card-desc">Técnica de bloqueo individual y lectura del ataque rival.</p>
+      <div class="price-block"><span class="price-old" hidden></span><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+    <article class="card" data-category="curso" data-discountable="true" data-price-ars="50000" data-price-usd="50">
+      <p class="card-tag">Curso</p>
+      <h3>Armado</h3>
+      <p class="card-desc">Fundamentos de armado para dominar todos los ritmos de ataque.</p>
+      <div class="price-block"><span class="price-old" hidden></span><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+    <article class="card" data-category="curso" data-discountable="true" data-price-ars="50000" data-price-usd="50">
+      <p class="card-tag">Curso</p>
+      <h3>Saque</h3>
+      <p class="card-desc">Técnica y variantes de saque para presionar la recepción rival.</p>
+      <div class="price-block"><span class="price-old" hidden></span><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+    <article class="card" data-category="curso" data-discountable="true" data-price-ars="50000" data-price-usd="50">
+      <p class="card-tag">Curso</p>
+      <h3>Conceptos generales</h3>
+      <p class="card-desc">Las bases del voley playa antes de meterte en la técnica de cada gesto.</p>
+      <div class="price-block"><span class="price-old" hidden></span><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+    <article class="card" data-category="curso" data-discountable="true" data-price-ars="50000" data-price-usd="50">
+      <p class="card-tag">Curso</p>
+      <h3>Recepción</h3>
+      <p class="card-desc">Posicionamiento y lectura de saque para una recepción más consistente.</p>
+      <div class="price-block"><span class="price-old" hidden></span><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+  </div>
+</section>
+
+<section id="catalogo-programas">
+  <div class="cat-heading">
+    <h2>Programas</h2>
+    <span class="cat-note">Sin 20% OFF — regla vigente aplica solo a cursos y eventos</span>
+  </div>
+  <div class="grid">
+
+    <article class="card" data-category="programa" data-price-ars="400000" data-price-usd="400">
+      <p class="card-tag">Programa</p>
+      <h3>Beach Voley Pro — Gold</h3>
+      <p class="card-desc">Programa completo de 7 productos para llevar tu juego a nivel competitivo.</p>
+      <p class="card-meta"><dt>Incluye</dt><dd>7 productos</dd></p>
+      <div class="price-block"><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+    <article class="card" data-category="programa" data-price-ars="300000" data-price-usd="300">
+      <p class="card-tag">Programa</p>
+      <h3>Beach Voley Pro — Silver</h3>
+      <p class="card-desc">Versión reducida del programa Gold, 6 productos clave para arrancar.</p>
+      <p class="card-meta"><dt>Incluye</dt><dd>6 productos</dd></p>
+      <div class="price-block"><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+  </div>
+</section>
+
+<section id="catalogo-descargables">
+  <h2>Descargables</h2>
+  <div class="grid">
+
+    <article class="card" data-category="descargable" data-price-ars="100000" data-price-usd="100">
+      <p class="card-tag">Documento</p>
+      <h3>Análisis técnico-biomecánico</h3>
+      <p class="card-desc">Informe detallado del gesto técnico, pensado para entrenadores.</p>
+      <div class="price-block"><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+    <article class="card" data-category="descargable" data-price-ars="50000" data-price-usd="50">
+      <p class="card-tag">Planificación</p>
+      <h3>Plan de movilidad — 21 días</h3>
+      <p class="card-desc">Rutina progresiva de movilidad para sostener el volumen de entrenamiento.</p>
+      <div class="price-block"><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+    <article class="card" data-category="descargable" data-price-ars="30000" data-price-usd="30">
+      <p class="card-tag">Documento</p>
+      <h3>Guía nutricional para torneos y entrenamientos</h3>
+      <p class="card-desc">Pautas de alimentación para competir y entrenar sin bajar el nivel.</p>
+      <div class="price-block"><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+    <article class="card" data-category="descargable" data-price-ars="50000" data-price-usd="50">
+      <p class="card-tag">Planificación</p>
+      <h3>Planificación de entrenamientos en cancha</h3>
+      <p class="card-desc">Estructura de sesiones de cancha lista para aplicar con tu grupo.</p>
+      <div class="price-block"><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+    <article class="card" data-category="descargable" data-price-ars="50000" data-price-usd="50">
+      <p class="card-tag">Planificación</p>
+      <h3>Plan de gimnasio PRO</h3>
+      <p class="card-desc">Rutina de gimnasio orientada a potencia de salto y prevención de lesiones.</p>
+      <div class="price-block"><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+    <article class="card" data-category="descargable" data-price-ars="50000" data-price-usd="50">
+      <p class="card-tag">Planificación</p>
+      <h3>Plan aeróbico PRO</h3>
+      <p class="card-desc">Base aeróbica para sostener el ritmo de partido en la arena.</p>
+      <div class="price-block"><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+  </div>
+</section>
+
+<section id="catalogo-combos">
+  <h2>Combos</h2>
+  <div class="grid">
+
+    <article class="card" data-category="combo" data-price-ars="340000" data-price-usd="340" data-compare-ars="400000" data-compare-usd="400">
+      <p class="card-tag">Combo</p>
+      <h3>Todos los cursos</h3>
+      <p class="card-desc">Los 8 cursos técnicos del club en un solo pack, con descuento por volumen.</p>
+      <div class="price-block"><span class="price-old"></span><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+    <article class="card" data-category="combo" data-price-ars="135000" data-price-usd="135" data-compare-ars="150000" data-compare-usd="150">
+      <p class="card-tag">Combo</p>
+      <h3>Combo K2 — Saque, Defensa, Bloqueo</h3>
+      <p class="card-desc">Los 3 fundamentos defensivos y de saque en un solo pack.</p>
+      <div class="price-block"><span class="price-old"></span><span class="price-now"></span></div>
+      <button class="btn-buy" type="button">Comprar</button>
+    </article>
+
+  </div>
+</section>
+
+<section class="testimonials">
+  <h2>Lo que dicen los alumnos</h2>
+  <div class="testi-grid">
+    <blockquote>"Este curso de ataque, al igual que el de recepción y armado, describe los movimientos desde un análisis minucioso y claro."<footer>Fernando Ariel Mezzera · ★5</footer></blockquote>
+    <blockquote>"Gracias Juli por explicar fácil lo que puede ser difícil de entender. Es una gran ayuda brindarnos tanta calidad de contenido."<footer>Diego Huicy · ★5</footer></blockquote>
+    <blockquote>"Desde Side Out Volleyball Club en Venezuela recomendamos este curso, muy práctico, dinámico y fluido."<footer>Lenhil Linares · ★5</footer></blockquote>
+    <blockquote>"Muy buen desglose de las formas de ataque, entrada, shot, la carrera de entrada y la forma de golpear el balón."<footer>Hugo Morgado · ★5</footer></blockquote>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p class="brand">Club de Voley Playa — Juli Azaad</p>
+  <p class="footer-note">PoC de arquitectura y contenido — migrado desde clubdevoleyplaya.com (Wisboo). Precios en USD son ilustrativos; el tipo de cambio real se define con Paddle. Sin conexión a pagos ni backend real.</p>
+</footer>
+
+<dialog id="checkoutModal">
+  <form method="dialog">
+    <p class="eyebrow" id="checkoutRail">—</p>
+    <h2 id="checkoutTitle">—</h2>
+    <p id="checkoutPrice">—</p>
+    <p class="modal-disclaimer">Demo — no se procesa ningún pago real</p>
+    <menu>
+      <button value="cancel" class="btn-ghost" type="submit">Cerrar</button>
+      <button id="simulatePay" class="btn-signal" type="button">Simular pago</button>
+    </menu>
+  </form>
+</dialog>
+
+<script>
+(function(){
+  const root = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+  function currentTheme(){
+    return root.dataset.theme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+  themeToggle.addEventListener('click', () => {
+    root.dataset.theme = currentTheme() === 'dark' ? 'light' : 'dark';
+  });
+
+  const body = document.body;
+  const currencyButtons = document.querySelectorAll('.currency-picker button');
+  const subscriberToggle = document.getElementById('subscriberToggle');
+  let currency = 'ARS';
+
+  function fmt(n, cur){
+    if(cur === 'USD') return '$' + n.toLocaleString('en-US') + ' USD';
+    return '$' + n.toLocaleString('es-AR') + ' ARS';
+  }
+
+  function updatePrices(){
+    const isSub = subscriberToggle.checked;
+    document.querySelectorAll('.card').forEach(card => {
+      const priceArs = Number(card.dataset.priceArs);
+      const priceUsd = Number(card.dataset.priceUsd);
+      const compareArs = Number(card.dataset.compareArs || 0);
+      const compareUsd = Number(card.dataset.compareUsd || 0);
+      const discountable = card.dataset.discountable === 'true';
+      const basePrice = currency === 'USD' ? priceUsd : priceArs;
+      const compare = currency === 'USD' ? compareUsd : compareArs;
+
+      let finalPrice = basePrice;
+      let showOld = false;
+      let oldValue = compare || basePrice;
+
+      if(discountable && isSub){
+        finalPrice = Math.round(basePrice * 0.8);
+        showOld = true;
+        oldValue = basePrice;
+      } else if(compare){
+        showOld = true;
+        oldValue = compare;
+      }
+
+      const nowEl = card.querySelector('.price-now');
+      const oldEl = card.querySelector('.price-old');
+      if(nowEl) nowEl.textContent = fmt(finalPrice, currency);
+      if(oldEl){
+        if(showOld){
+          oldEl.textContent = fmt(oldValue, currency);
+          oldEl.hidden = false;
+        } else {
+          oldEl.hidden = true;
+        }
+      }
+    });
+
+    document.querySelector('.wp-locked').hidden = isSub;
+    document.querySelector('.wp-unlocked').hidden = !isSub;
+  }
+
+  currencyButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      currency = btn.dataset.currency;
+      currencyButtons.forEach(b => b.classList.toggle('is-active', b === btn));
+      updatePrices();
+    });
+  });
+  subscriberToggle.addEventListener('change', updatePrices);
+  updatePrices();
+
+  const modal = document.getElementById('checkoutModal');
+  const simulateBtn = document.getElementById('simulatePay');
+  document.querySelectorAll('.btn-buy').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.card');
+      const title = card.querySelector('h3').textContent;
+      const priceText = card.querySelector('.price-now').textContent;
+      document.getElementById('checkoutTitle').textContent = title;
+      document.getElementById('checkoutPrice').textContent = priceText;
+      document.getElementById('checkoutRail').textContent = currency === 'USD'
+        ? 'Pago internacional vía Paddle (Merchant of Record)'
+        : 'Pago en Argentina vía MercadoPago';
+      simulateBtn.textContent = 'Simular pago';
+      simulateBtn.disabled = false;
+      modal.showModal();
+    });
+  });
+  simulateBtn.addEventListener('click', () => {
+    simulateBtn.textContent = '✅ Pago simulado';
+    simulateBtn.disabled = true;
+  });
+})();
+</script>
+
+</body>
+</html>
