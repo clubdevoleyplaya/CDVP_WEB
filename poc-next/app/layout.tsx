@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Oswald, Source_Serif_4 } from "next/font/google";
+import { Oswald, Source_Serif_4, Geist } from "next/font/google";
 import { DemoStateProvider } from "@/context/demo-state";
 import { Header } from "@/components/header";
 import { DemoBar } from "@/components/demo-bar";
 import { Footer } from "@/components/footer";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const oswald = Oswald({
   variable: "--font-oswald",
@@ -35,7 +38,7 @@ export default function RootLayout({
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${oswald.variable} ${sourceSerif.variable} h-full`}
+      className={cn("h-full", oswald.variable, sourceSerif.variable, "font-sans", geist.variable)}
     >
       <body className="flex min-h-full flex-col antialiased">
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH_THEME_SCRIPT }} />

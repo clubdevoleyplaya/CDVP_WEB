@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { ShoppingBag } from "lucide-react";
 import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice, formatPrice } from "@/lib/price";
 import type { Product } from "@/lib/products";
 
 export function ProductBuyBox({ product }: { product: Product }) {
-  const { currency, isSubscriber } = useDemoState();
+  const { currency, isSubscriber, addToCart } = useDemoState();
   const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [paid, setPaid] = useState(false);
@@ -27,16 +28,26 @@ export function ProductBuyBox({ product }: { product: Product }) {
         )}
         <span className="tabular text-3xl font-black text-yellow">{formatPrice(now, currency)}</span>
       </div>
-      <button
-        type="button"
-        onClick={() => {
-          setCheckoutOpen((v) => !v);
-          setPaid(false);
-        }}
-        className="w-fit rounded-sm bg-ink px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
-      >
-        {checkoutOpen ? "Cerrar" : "Comprar"}
-      </button>
+      <div className="flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={() => {
+            setCheckoutOpen((v) => !v);
+            setPaid(false);
+          }}
+          className="w-fit rounded-sm bg-ink px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
+        >
+          {checkoutOpen ? "Cerrar" : "Comprar"}
+        </button>
+        <button
+          type="button"
+          onClick={() => addToCart(product.slug)}
+          className="flex w-fit items-center gap-2 rounded-sm border border-line px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide transition-colors hover:border-blue hover:text-blue"
+        >
+          <ShoppingBag className="size-4" />
+          Agregar al carrito
+        </button>
+      </div>
 
       <AnimatePresence initial={false}>
         {checkoutOpen && (

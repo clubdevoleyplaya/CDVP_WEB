@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { ProductCard } from "@/components/product-card";
+import { CatalogGrid } from "@/components/catalog-grid";
 import {
   CATEGORY_ROUTES,
   CATEGORY_ROUTE_LABELS,
@@ -45,10 +45,8 @@ export default async function CatalogoPage({
           </span>
         )}
       </div>
-      <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((product) => (
-          <ProductCard key={product.slug} product={product} />
-        ))}
+      <div className="mt-8">
+        <CatalogGrid items={items} />
       </div>
     </section>
   );

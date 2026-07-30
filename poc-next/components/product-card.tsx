@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ShoppingBag } from "lucide-react";
 import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice, formatPrice } from "@/lib/price";
 import { CATEGORY_LABELS, type Product } from "@/lib/products";
 
 export function ProductCard({ product }: { product: Product }) {
-  const { currency, isSubscriber } = useDemoState();
+  const { currency, isSubscriber, addToCart } = useDemoState();
   const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber);
 
   return (
@@ -45,12 +46,22 @@ export function ProductCard({ product }: { product: Product }) {
           {formatPrice(now, currency)}
         </span>
       </div>
-      <Link
-        href={`/producto/${product.slug}`}
-        className="mt-2 w-fit rounded-sm bg-ink px-4 py-2 font-display text-xs font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
-      >
-        Ver detalle
-      </Link>
+      <div className="mt-2 flex items-center gap-2">
+        <Link
+          href={`/producto/${product.slug}`}
+          className="w-fit rounded-sm bg-ink px-4 py-2 font-display text-xs font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
+        >
+          Ver detalle
+        </Link>
+        <button
+          type="button"
+          onClick={() => addToCart(product.slug)}
+          aria-label={`Agregar ${product.title} al carrito`}
+          className="rounded-sm border border-line p-2 text-ink-soft transition-colors hover:border-blue hover:text-blue"
+        >
+          <ShoppingBag className="size-4" />
+        </button>
+      </div>
     </motion.article>
   );
 }
