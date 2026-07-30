@@ -29,7 +29,7 @@ export function Testimonials() {
         {TESTIMONIALS.map((t) => (
           <blockquote
             key={t.author}
-            className="rounded-sm border border-line bg-surface p-5 text-sm italic"
+            className="rounded-xl border border-line bg-surface p-5 text-sm italic"
           >
             &ldquo;{t.quote}&rdquo;
             <footer className="mt-3 font-display text-xs font-bold not-italic uppercase tracking-wide text-blue">

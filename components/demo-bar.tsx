@@ -30,7 +30,7 @@ export function DemoBar() {
             key={code}
             type="button"
             onClick={() => setCurrency(code)}
-            className={`rounded-sm border px-3 py-1 text-xs font-bold transition-colors ${
+            className={`rounded-lg border px-3 py-1 text-xs font-bold transition-colors ${
               currency === code
                 ? "bg-blue border-blue text-white"
                 : "border-white/60 text-white"

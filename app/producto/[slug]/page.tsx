@@ -30,7 +30,7 @@ export default async function ProductPage({
         ← {CATEGORY_LABELS[product.category]}s
       </Link>
 
-      <p className="mt-6 w-fit rounded-sm bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">
+      <p className="mt-6 w-fit rounded-lg bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">
         {CATEGORY_LABELS[product.category]}
       </p>
       <h1 className="mt-2 font-display text-4xl font-bold uppercase">{product.title}</h1>
@@ -41,7 +41,7 @@ export default async function ProductPage({
           {product.chips.map((chip) => (
             <li
               key={chip}
-              className="rounded-sm border border-line font-display text-xs uppercase tracking-wide text-ink-soft px-2 py-1"
+              className="rounded-lg border border-line font-display text-xs uppercase tracking-wide text-ink-soft px-2 py-1"
             >
               {chip}
             </li>

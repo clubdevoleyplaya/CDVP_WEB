@@ -25,7 +25,7 @@ export function Hero() {
         </p>
         <a
           href="#destacados"
-          className="mt-8 inline-block rounded-sm bg-blue px-7 py-3 font-display text-sm font-bold uppercase tracking-wide text-white transition-colors hover:brightness-110"
+          className="mt-8 inline-block rounded-lg bg-blue px-7 py-3 font-display text-sm font-bold uppercase tracking-wide text-white transition-colors hover:brightness-110"
         >
           Ver productos
         </a>

@@ -41,7 +41,7 @@
   --chart-3: var(--yellow);
   --chart-4: var(--ink-soft);
   --chart-5: var(--ink);
-  --radius: 0.5rem;
+  --radius: 0.875rem;
   --sidebar: var(--surface);
   --sidebar-foreground: var(--ink);
   --sidebar-primary: var(--blue);

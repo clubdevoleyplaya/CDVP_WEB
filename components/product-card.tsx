@@ -18,9 +18,9 @@ export function ProductCard({ product }: { product: Product }) {
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.35 }}
       whileHover={{ y: -3 }}
-      className="flex flex-col gap-2 rounded-sm border border-line bg-surface p-5"
+      className="flex flex-col gap-2 rounded-xl border border-line bg-surface p-5"
     >
-      <p className="w-fit rounded-sm bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">
+      <p className="w-fit rounded-lg bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">
         {CATEGORY_LABELS[product.category]}
       </p>
       <h3 className="font-display text-lg font-bold uppercase">{product.title}</h3>
@@ -49,7 +49,7 @@ export function ProductCard({ product }: { product: Product }) {
       <div className="mt-2 flex items-center gap-2">
         <Link
           href={`/producto/${product.slug}`}
-          className="w-fit rounded-sm bg-ink px-4 py-2 font-display text-xs font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
+          className="w-fit rounded-lg bg-ink px-4 py-2 font-display text-xs font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
         >
           Ver detalle
         </Link>
@@ -57,7 +57,7 @@ export function ProductCard({ product }: { product: Product }) {
           type="button"
           onClick={() => addToCart(product.slug)}
           aria-label={`Agregar ${product.title} al carrito`}
-          className="rounded-sm border border-line p-2 text-ink-soft transition-colors hover:border-blue hover:text-blue"
+          className="rounded-lg border border-line p-2 text-ink-soft transition-colors hover:border-blue hover:text-blue"
         >
           <ShoppingBag className="size-4" />
         </button>

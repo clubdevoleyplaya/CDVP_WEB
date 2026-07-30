@@ -19,7 +19,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
       : "Pago en Argentina vía MercadoPago";
 
   return (
-    <div className="flex flex-col gap-3 rounded-sm border border-line bg-surface p-6">
+    <div className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-6">
       <div className="flex items-baseline gap-2">
         {showOld && (
           <span className="tabular text-base text-ink-soft line-through">
@@ -35,14 +35,14 @@ export function ProductBuyBox({ product }: { product: Product }) {
             setCheckoutOpen((v) => !v);
             setPaid(false);
           }}
-          className="w-fit rounded-sm bg-ink px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
+          className="w-fit rounded-lg bg-ink px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
         >
           {checkoutOpen ? "Cerrar" : "Comprar"}
         </button>
         <button
           type="button"
           onClick={() => addToCart(product.slug)}
-          className="flex w-fit items-center gap-2 rounded-sm border border-line px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide transition-colors hover:border-blue hover:text-blue"
+          className="flex w-fit items-center gap-2 rounded-lg border border-line px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide transition-colors hover:border-blue hover:text-blue"
         >
           <ShoppingBag className="size-4" />
           Agregar al carrito
@@ -58,7 +58,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
             transition={{ duration: 0.25 }}
             className="overflow-hidden"
           >
-            <div className="flex flex-col gap-2 rounded-sm border border-line bg-bg p-4">
+            <div className="flex flex-col gap-2 rounded-xl border border-line bg-bg p-4">
               <p className="font-display text-xs font-bold uppercase tracking-wide text-blue">
                 {rail}
               </p>
@@ -66,14 +66,14 @@ export function ProductBuyBox({ product }: { product: Product }) {
                 Demo — no se procesa ningún pago real.
               </p>
               {paid ? (
-                <p className="w-fit rounded-sm bg-green/20 px-3 py-1.5 font-display text-sm font-bold">
+                <p className="w-fit rounded-lg bg-green/20 px-3 py-1.5 font-display text-sm font-bold">
                   ✅ Pago simulado — bienvenido a bordo
                 </p>
               ) : (
                 <button
                   type="button"
                   onClick={() => setPaid(true)}
-                  className="w-fit rounded-sm bg-blue px-5 py-2 font-display text-xs font-bold uppercase tracking-wide text-white"
+                  className="w-fit rounded-lg bg-blue px-5 py-2 font-display text-xs font-bold uppercase tracking-wide text-white"
                 >
                   Simular pago
                 </button>
