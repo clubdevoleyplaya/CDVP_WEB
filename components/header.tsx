@@ -1,13 +1,18 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { NavDrawer } from "@/components/nav-drawer";
 import { CartDrawer } from "@/components/cart-drawer";
 import { CATEGORY_ROUTE_LABELS } from "@/lib/products";
+import { useDemoState } from "@/context/demo-state";
 
 const NAV_ROUTES = ["cursos", "programas", "descargables", "combos"] as const;
 
 export function Header() {
+  const { session, signOut } = useDemoState();
+
   return (
     <header className="sticky top-0 z-20 flex flex-wrap items-center gap-4 border-b border-line bg-bg/90 px-6 py-3 backdrop-blur">
       <NavDrawer />
@@ -31,18 +36,35 @@ export function Header() {
       <div className="ml-auto flex items-center gap-2">
         <ThemeToggle />
         <CartDrawer />
-        <button
-          type="button"
-          className="hidden rounded-lg border border-ink px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide md:inline-flex"
-        >
-          Iniciar sesión
-        </button>
-        <button
-          type="button"
-          className="hidden rounded-lg border border-blue bg-blue px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide text-white md:inline-flex"
-        >
-          Registrate
-        </button>
+        {session ? (
+          <>
+            <span className="hidden text-xs font-bold uppercase tracking-wide md:inline-flex">
+              {session.user.email}
+            </span>
+            <button
+              type="button"
+              onClick={() => signOut()}
+              className="hidden rounded-lg border border-ink px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide md:inline-flex"
+            >
+              Cerrar sesión
+            </button>
+          </>
+        ) : (
+          <>
+            <Link
+              href="/login"
+              className="hidden rounded-lg border border-ink px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide md:inline-flex"
+            >
+              Iniciar sesión
+            </Link>
+            <Link
+              href="/signup"
+              className="hidden rounded-lg border border-blue bg-blue px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide text-white md:inline-flex"
+            >
+              Registrate
+            </Link>
+          </>
+        )}
       </div>
     </header>
   );
