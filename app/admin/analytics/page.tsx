@@ -137,9 +137,9 @@ export default function AdminAnalyticsPage() {
         </span>
       </div>
       <p className="mt-2 max-w-2xl text-sm text-ink-soft">
-        Vista solo para admins. Todavía no tiene autenticación real: cuando se integre Supabase
-        Auth, esta ruta se va a proteger por rol antes de mostrar datos reales de ventas y
-        visitas.
+        Vista solo para admins (protegida por rol en el middleware). Los datos de ventas y
+        visitas de abajo todavía son de ejemplo — falta reemplazarlos por datos reales del
+        backend.
       </p>
 
       <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
