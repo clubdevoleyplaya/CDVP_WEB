@@ -18,18 +18,7 @@ export default function PerfilPage() {
   const { session, me, isSubscriber, signOut, updateProfile, setLoginOpen } = useDemoState();
 
   const [courses, setCourses] = useState<CourseAccess[]>([]);
-  const [nickname, setNickname] = useState("");
-  const [team, setTeam] = useState("");
-  const [bio, setBio] = useState("");
-  const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
-
-  useEffect(() => {
-    if (!me) return;
-    setNickname(me.nickname ?? "");
-    setTeam(me.team ?? "");
-    setBio(me.bio ?? "");
-  }, [me]);
 
   useEffect(() => {
     if (!session) return;
@@ -60,15 +49,6 @@ export default function PerfilPage() {
   const displayName = me?.nickname || session.user.user_metadata?.full_name || session.user.email;
   const initial = (displayName ?? "?").charAt(0).toUpperCase();
   const accessCount = courses.filter((c) => c.has_access).length;
-
-  async function handleSaveProfile() {
-    setSaving(true);
-    try {
-      await updateProfile({ nickname, team, bio });
-    } finally {
-      setSaving(false);
-    }
-  }
 
   async function handleAvatarUpload(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -122,51 +102,16 @@ export default function PerfilPage() {
       </div>
 
       <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_380px]">
-        <Card className="font-sans">
-          <CardHeader>
-            <CardTitle>Sobre mí</CardTitle>
-            <CardDescription>Equipo, apodo y biografía visibles en tu perfil.</CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-4">
-            <div className="flex flex-col gap-1.5">
-              <Label htmlFor="team">Equipo</Label>
-              <Input
-                id="team"
-                value={team}
-                onChange={(e) => setTeam(e.target.value)}
-                placeholder="Ej. Beach Volley Lab"
-              />
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <Label htmlFor="nickname">Apodo (opcional)</Label>
-              <Input
-                id="nickname"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
-                placeholder="Cómo te dicen en la cancha"
-              />
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <Label htmlFor="bio">Biografía</Label>
-              <textarea
-                id="bio"
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-                rows={4}
-                placeholder="Contanos un poco de vos"
-                className="w-full rounded-lg border border-input bg-transparent px-2.5 py-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
-              />
-            </div>
-            <Button
-              type="button"
-              onClick={handleSaveProfile}
-              disabled={saving}
-              className="w-fit font-display text-xs font-bold uppercase tracking-wide"
-            >
-              {saving ? "Guardando..." : "Guardar"}
-            </Button>
-          </CardContent>
-        </Card>
+        {me ? (
+          <ProfileForm me={me} onSave={updateProfile} />
+        ) : (
+          <Card className="font-sans">
+            <CardHeader>
+              <CardTitle>Sobre mí</CardTitle>
+              <CardDescription>Cargando...</CardDescription>
+            </CardHeader>
+          </Card>
+        )}
 
         <div className="flex flex-col gap-4">
           <Card className="font-sans">
@@ -218,5 +163,75 @@ export default function PerfilPage() {
         </div>
       </div>
     </section>
+  );
+}
+
+function ProfileForm({
+  me,
+  onSave,
+}: {
+  me: { nickname: string | null; team: string | null; bio: string | null };
+  onSave: (fields: { nickname: string; team: string; bio: string }) => Promise<void>;
+}) {
+  const [nickname, setNickname] = useState(me.nickname ?? "");
+  const [team, setTeam] = useState(me.team ?? "");
+  const [bio, setBio] = useState(me.bio ?? "");
+  const [saving, setSaving] = useState(false);
+
+  async function handleSaveProfile() {
+    setSaving(true);
+    try {
+      await onSave({ nickname, team, bio });
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <Card className="font-sans">
+      <CardHeader>
+        <CardTitle>Sobre mí</CardTitle>
+        <CardDescription>Equipo, apodo y biografía visibles en tu perfil.</CardDescription>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4">
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="team">Equipo</Label>
+          <Input
+            id="team"
+            value={team}
+            onChange={(e) => setTeam(e.target.value)}
+            placeholder="Ej. Beach Volley Lab"
+          />
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="nickname">Apodo (opcional)</Label>
+          <Input
+            id="nickname"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+            placeholder="Cómo te dicen en la cancha"
+          />
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="bio">Biografía</Label>
+          <textarea
+            id="bio"
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+            rows={4}
+            placeholder="Contanos un poco de vos"
+            className="w-full rounded-lg border border-input bg-transparent px-2.5 py-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+          />
+        </div>
+        <Button
+          type="button"
+          onClick={handleSaveProfile}
+          disabled={saving}
+          className="w-fit font-display text-xs font-bold uppercase tracking-wide"
+        >
+          {saving ? "Guardando..." : "Guardar"}
+        </Button>
+      </CardContent>
+    </Card>
   );
 }
