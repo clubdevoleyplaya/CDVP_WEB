@@ -12,6 +12,13 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ProductCard } from "@/components/product-card";
 import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice } from "@/lib/price";
@@ -84,22 +91,22 @@ export function CatalogGrid({ items }: { items: Product[] }) {
                 <span className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
                   Ordenar por
                 </span>
-                <div className="flex flex-col gap-1">
-                  {(Object.keys(SORT_LABELS) as SortBy[]).map((key) => (
-                    <button
-                      key={key}
-                      type="button"
-                      onClick={() => setSortBy(key)}
-                      className={`rounded-md px-2 py-1.5 text-left text-sm transition-colors ${
-                        sortBy === key
-                          ? "bg-primary text-primary-foreground"
-                          : "hover:bg-accent"
-                      }`}
-                    >
-                      {SORT_LABELS[key]}
-                    </button>
-                  ))}
-                </div>
+                <Select
+                  items={SORT_LABELS}
+                  value={sortBy}
+                  onValueChange={(value) => setSortBy(value as SortBy)}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {(Object.keys(SORT_LABELS) as SortBy[]).map((key) => (
+                      <SelectItem key={key} value={key}>
+                        {SORT_LABELS[key]}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <label className="flex items-center gap-2 text-sm">
                 <input
@@ -108,7 +115,7 @@ export function CatalogGrid({ items }: { items: Product[] }) {
                   onChange={(e) => setOnlyDiscountable(e.target.checked)}
                   className="size-4 accent-blue"
                 />
-                Solo con 20% OFF para suscriptores
+                Solo con 50% OFF para suscriptores
               </label>
             </div>
             <DrawerFooter>

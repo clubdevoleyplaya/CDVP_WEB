@@ -12,8 +12,8 @@ export function generateStaticParams() {
 }
 
 const CATEGORY_NOTES: Partial<Record<CategoryRoute, string>> = {
-  cursos: "20% OFF para suscriptores",
-  programas: "Sin 20% OFF — la regla vigente aplica solo a cursos y eventos",
+  cursos: "50% OFF para suscriptores",
+  programas: "Sin descuento — la regla vigente aplica solo a cursos y eventos",
 };
 
 export default async function CatalogoPage({
