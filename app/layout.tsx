@@ -23,8 +23,7 @@ const sourceSerif = Source_Serif_4({
 
 export const metadata: Metadata = {
   title: "Club de Voley Playa",
-  description:
-    "Academia asincrónica de voley playa de Juli Azaad — PoC de arquitectura y contenido.",
+  description: "Academia asincrónica de voley playa de Juli Azaad.",
 };
 
 const NO_FLASH_THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('cdvp-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;

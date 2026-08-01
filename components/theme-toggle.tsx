@@ -1,5 +1,9 @@
 "use client";
 
+import { Moon, Sun } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+
 export function ThemeToggle() {
   function toggle() {
     const root = document.documentElement;
@@ -14,13 +18,16 @@ export function ThemeToggle() {
   }
 
   return (
-    <button
+    <Button
       type="button"
+      variant="outline"
+      size="icon"
       onClick={toggle}
       aria-label="Cambiar tema claro/oscuro"
-      className="rounded-lg border border-ink/20 px-3 py-1.5 text-sm hover:border-blue hover:text-blue transition-colors"
+      className="relative border-ink/20 hover:border-blue hover:text-blue"
     >
-      🌗
-    </button>
+      <Sun className="scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+      <Moon className="absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+    </Button>
   );
 }

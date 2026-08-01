@@ -12,16 +12,25 @@ export type CartItem = { slug: string; qty: number };
 type Me = {
   role: "user" | "admin";
   isSubscriber: boolean;
+  nickname: string | null;
+  team: string | null;
+  bio: string | null;
+  avatarUrl: string | null;
+};
+
+type ProfileFields = {
+  nickname?: string | null;
+  team?: string | null;
+  bio?: string | null;
+  avatarUrl?: string | null;
 };
 
 type DemoState = {
   session: Session | null;
   me: Me | null;
   isSubscriber: boolean;
-  /** true cuando no hay sesión real: isSubscriber viene del toggle de demo, no de la DB. */
-  isDemoOverride: boolean;
-  toggleSubscriber: () => void;
   signOut: () => Promise<void>;
+  updateProfile: (fields: ProfileFields) => Promise<void>;
   currency: Currency;
   setCurrency: (c: Currency) => void;
   cart: CartItem[];
@@ -29,17 +38,45 @@ type DemoState = {
   removeFromCart: (slug: string) => void;
   cartOpen: boolean;
   setCartOpen: (open: boolean) => void;
+  loginOpen: boolean;
+  setLoginOpen: (open: boolean) => void;
 };
+
+function mapMe(data: {
+  role: "user" | "admin";
+  is_subscriber: boolean;
+  nickname: string | null;
+  team: string | null;
+  bio: string | null;
+  avatar_url: string | null;
+}): Me {
+  return {
+    role: data.role,
+    isSubscriber: data.is_subscriber,
+    nickname: data.nickname,
+    team: data.team,
+    bio: data.bio,
+    avatarUrl: data.avatar_url,
+  };
+}
+
+async function fetchMe(accessToken: string): Promise<Me | null> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/me`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  if (!res.ok) return null;
+  return mapMe(await res.json());
+}
 
 const DemoStateContext = createContext<DemoState | null>(null);
 
 export function DemoStateProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [me, setMe] = useState<Me | null>(null);
-  const [demoIsSubscriber, setDemoIsSubscriber] = useState(false);
   const [currency, setCurrency] = useState<Currency>("ARS");
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -59,13 +96,7 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
     // `me` solo se lee cuando hay session (ver el cálculo de isSubscriber más abajo),
     // así que no hace falta resetearlo acá si session es null.
     if (!session) return;
-
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/me`, {
-      headers: { Authorization: `Bearer ${session.access_token}` },
-    })
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => setMe(data ? { role: data.role, isSubscriber: data.is_subscriber } : null))
-      .catch(() => setMe(null));
+    fetchMe(session.access_token).then(setMe).catch(() => setMe(null));
   }, [session]);
 
   async function signOut() {
@@ -73,6 +104,25 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
     await supabase.auth.signOut();
     setSession(null);
     setMe(null);
+  }
+
+  async function updateProfile(fields: ProfileFields) {
+    if (!session) return;
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/me`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${session.access_token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nickname: fields.nickname,
+        team: fields.team,
+        bio: fields.bio,
+        avatar_url: fields.avatarUrl,
+      }),
+    });
+    if (!res.ok) throw new Error("No se pudo actualizar el perfil");
+    setMe(mapMe(await res.json()));
   }
 
   function addToCart(slug: string) {
@@ -90,7 +140,7 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
     setCart((items) => items.filter((i) => i.slug !== slug));
   }
 
-  const isSubscriber = session ? (me?.isSubscriber ?? false) : demoIsSubscriber;
+  const isSubscriber = session ? (me?.isSubscriber ?? false) : false;
 
   return (
     <DemoStateContext.Provider
@@ -98,9 +148,8 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
         session,
         me,
         isSubscriber,
-        isDemoOverride: !session,
-        toggleSubscriber: () => setDemoIsSubscriber((v) => !v),
         signOut,
+        updateProfile,
         currency,
         setCurrency,
         cart,
@@ -108,6 +157,8 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
         removeFromCart,
         cartOpen,
         setCartOpen,
+        loginOpen,
+        setLoginOpen,
       }}
     >
       {children}

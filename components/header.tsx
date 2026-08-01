@@ -5,13 +5,14 @@ import Image from "next/image";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { NavDrawer } from "@/components/nav-drawer";
 import { CartDrawer } from "@/components/cart-drawer";
+import { LoginDrawer } from "@/components/login-drawer";
 import { CATEGORY_ROUTE_LABELS } from "@/lib/products";
 import { useDemoState } from "@/context/demo-state";
 
 const NAV_ROUTES = ["cursos", "programas", "descargables", "combos"] as const;
 
 export function Header() {
-  const { session, signOut } = useDemoState();
+  const { session } = useDemoState();
 
   return (
     <header className="sticky top-0 z-20 flex flex-wrap items-center gap-4 border-b border-line bg-bg/90 px-6 py-3 backdrop-blur">
@@ -37,26 +38,15 @@ export function Header() {
         <ThemeToggle />
         <CartDrawer />
         {session ? (
-          <>
-            <span className="hidden text-xs font-bold uppercase tracking-wide md:inline-flex">
-              {session.user.email}
-            </span>
-            <button
-              type="button"
-              onClick={() => signOut()}
-              className="hidden rounded-lg border border-ink px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide md:inline-flex"
-            >
-              Cerrar sesión
-            </button>
-          </>
+          <Link
+            href="/perfil"
+            className="hidden rounded-lg border border-ink px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide md:inline-flex"
+          >
+            {session.user.email}
+          </Link>
         ) : (
           <>
-            <Link
-              href="/login"
-              className="hidden rounded-lg border border-ink px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide md:inline-flex"
-            >
-              Iniciar sesión
-            </Link>
+            <LoginDrawer />
             <Link
               href="/signup"
               className="hidden rounded-lg border border-blue bg-blue px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide text-white md:inline-flex"
