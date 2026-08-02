@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { NavDrawer } from "@/components/nav-drawer";
 import { CartDrawer } from "@/components/cart-drawer";
@@ -12,7 +13,9 @@ import { useDemoState } from "@/context/demo-state";
 const NAV_ROUTES = ["cursos", "programas", "descargables", "combos"] as const;
 
 export function Header() {
-  const { session } = useDemoState();
+  const { session, me } = useDemoState();
+  const displayName = me?.nickname || session?.user.email;
+  const initial = (displayName ?? "?").charAt(0).toUpperCase();
 
   return (
     <header className="sticky top-0 z-20 flex flex-wrap items-center gap-4 border-b border-line bg-bg/90 px-6 py-3 backdrop-blur">
@@ -40,9 +43,13 @@ export function Header() {
         {session ? (
           <Link
             href="/perfil"
-            className="hidden rounded-lg border border-ink px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide md:inline-flex"
+            className="hidden items-center gap-2 rounded-lg border border-ink px-3 py-1.5 font-display text-xs font-bold uppercase tracking-wide md:inline-flex"
           >
-            {session.user.email}
+            <Avatar size="sm">
+              {me?.avatarUrl ? <AvatarImage src={me.avatarUrl} alt="" /> : null}
+              <AvatarFallback>{initial}</AvatarFallback>
+            </Avatar>
+            {displayName}
           </Link>
         ) : (
           <>

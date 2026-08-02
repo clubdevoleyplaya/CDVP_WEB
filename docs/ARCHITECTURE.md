@@ -5,9 +5,9 @@
 - **Frontend Repo (`CDVP_WEB`):** Interfaz moderna basada en la web original de referencia, conectada al backend por REST API.
 
 ## 2. Reglas del Modelo de Negocio
-1. **Welcome Pack:**
+1. **Pack de Bienvenida:**
    - Se activa únicamente con la suscripción mensual activa.
-   - Si la suscripción expira o se cancela, el usuario pierde el acceso al Welcome Pack inmediatamente.
+   - Si la suscripción expira o se cancela, el usuario pierde el acceso al Pack de Bienvenida inmediatamente.
 2. **Beneficio del 20% OFF:**
    - 20% de descuento automático en Cursos y Eventos para miembros con suscripción activa.
 3. **Procesamiento de Pagos Global + Argentina:**
@@ -30,14 +30,14 @@
 
 **B. Visor de PDFs y Material del Curso**
 - Renderizar PDFs utilizando visores seguros (ej. `@react-pdf-viewer/core` o embebidos protegidos de Google Drive).
-- Deshabilitar/dificultar botones de descarga directa sobre el material exclusivo o el Welcome Pack.
+- Deshabilitar/dificultar botones de descarga directa sobre el material exclusivo o el Pack de Bienvenida.
 
 **C. Flujo de Suscripción y Descuentos Dinámicos**
 - **Estado de Suscripción:** Mostrar el estado actual en el perfil (`Activa`, `Expirada`, `Cancelar`).
 - **Vista de Cursos y Eventos:**
   - Usuarios no suscriptores: Muestra el precio base y un banner promocional *"Suscríbete y obtén 20% OFF en este curso"*.
   - Usuarios suscriptores: Muestra el precio con tachado `~~$100~~ $80 (20% OFF aplicado)`.
-- **Acceso al Welcome Pack:** UI con bloqueo visual/overlay si la suscripción no está activa.
+- **Acceso al Pack de Bienvenida:** UI con bloqueo visual/overlay si la suscripción no está activa.
 
 ### 3.3 Normas de Comunicación con Backend
 - Nunca calcular descuentos o montos finales en el cliente. Solicitar siempre al backend el checkout session / preferencia de pago.

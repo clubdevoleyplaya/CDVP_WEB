@@ -30,7 +30,7 @@ export default async function CatalogoPage({
   const note = CATEGORY_NOTES[route];
 
   return (
-    <section className="mx-auto max-w-6xl px-6 py-16">
+    <section className="mx-auto max-w-7xl px-6 py-16">
       <div className="flex flex-wrap items-baseline gap-4">
         <h1 className="font-display text-3xl font-bold uppercase">
           {CATEGORY_ROUTE_LABELS[route]}

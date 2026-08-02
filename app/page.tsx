@@ -23,14 +23,14 @@ export default function Home() {
     <>
       <Hero />
 
-      <section className="mx-auto max-w-6xl px-6 py-8">
+      <section className="mx-auto max-w-7xl px-6 py-8">
         <WelcomePack />
       </section>
 
       <Bio />
       <Why />
 
-      <section id="destacados" className="mx-auto max-w-6xl px-6 py-16">
+      <section id="destacados" className="mx-auto max-w-7xl px-6 py-16">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <h2 className="font-display text-2xl font-bold uppercase">Destacados</h2>
           <div className="flex flex-wrap gap-4">

@@ -23,7 +23,7 @@ const TESTIMONIALS = [
 
 export function Testimonials() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-16">
+    <section className="mx-auto max-w-7xl px-6 py-16">
       <h2 className="font-display text-2xl font-bold uppercase">Lo que dicen los alumnos</h2>
       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {TESTIMONIALS.map((t) => (

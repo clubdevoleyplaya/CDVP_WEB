@@ -1,6 +1,6 @@
 export function Bio() {
   return (
-    <section className="mx-auto grid max-w-6xl grid-cols-[auto_1fr] items-start gap-8 px-6 py-16 sm:grid-cols-[150px_1fr]">
+    <section className="mx-auto grid max-w-7xl grid-cols-[auto_1fr] items-start gap-8 px-6 py-16 sm:grid-cols-[150px_1fr]">
       <div
         aria-hidden
         className="flex h-[100px] w-[100px] items-center justify-center rounded-full border border-line bg-[repeating-linear-gradient(45deg,var(--surface)_0_6px,var(--line)_6px_7px)] sm:h-[150px] sm:w-[150px]"
