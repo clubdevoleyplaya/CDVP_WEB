@@ -46,8 +46,9 @@ export default function PerfilPage() {
     );
   }
 
-  const displayName = me?.nickname || session.user.user_metadata?.full_name || session.user.email;
-  const initial = (displayName ?? "?").charAt(0).toUpperCase();
+  const displayName = me?.nickname;
+  const initialSource = displayName || session.user.user_metadata?.full_name || session.user.email;
+  const initial = (initialSource ?? "?").charAt(0).toUpperCase();
   const accessCount = courses.filter((c) => c.has_access).length;
 
   async function handleAvatarUpload(e: ChangeEvent<HTMLInputElement>) {
@@ -68,7 +69,7 @@ export default function PerfilPage() {
   }
 
   return (
-    <section className="mx-auto w-full max-w-6xl px-6 py-16">
+    <section className="mx-auto w-full max-w-7xl px-6 py-16">
       <div className="overflow-hidden rounded-xl border border-line">
         <div className="relative h-52 bg-gradient-to-r from-blue via-green to-yellow">
           <label className="group absolute -bottom-10 left-8 flex size-28 cursor-pointer items-center justify-center overflow-hidden rounded-full border-4 border-surface bg-surface font-display text-3xl font-bold text-ink">
@@ -92,10 +93,18 @@ export default function PerfilPage() {
         </div>
         <div className="flex flex-wrap items-center justify-between gap-4 bg-surface px-8 pt-16 pb-8">
           <div>
-            <h1 className="font-display text-3xl font-bold uppercase">{displayName}</h1>
+            <h1 className="font-display text-3xl font-bold uppercase">
+              {displayName || "Sin apodo"}
+            </h1>
             {me?.team && <p className="mt-1 text-sm text-ink-soft">{me.team}</p>}
           </div>
-          <Badge variant={isSubscriber ? "default" : "outline"}>
+          <Badge
+            variant={isSubscriber ? "default" : "outline"}
+            render={isSubscriber ? undefined : <Link href="/suscripcion" />}
+            className={
+              isSubscriber ? undefined : "border-yellow bg-yellow text-white hover:opacity-90"
+            }
+          >
             {isSubscriber ? "Suscriptor" : "Sin suscripción"}
           </Badge>
         </div>

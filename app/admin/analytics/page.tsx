@@ -129,7 +129,7 @@ export default function AdminAnalyticsPage() {
   );
 
   return (
-    <section className="mx-auto max-w-6xl px-6 py-16">
+    <section className="mx-auto max-w-7xl px-6 py-16">
       <div className="flex flex-wrap items-baseline gap-4">
         <h1 className="font-display text-3xl font-bold uppercase">Panel admin</h1>
         <span className="font-display text-xs font-bold uppercase tracking-wide text-yellow">

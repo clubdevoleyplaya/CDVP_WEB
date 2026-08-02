@@ -2,7 +2,13 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ProductBuyBox } from "@/components/product-buy-box";
 import { ProductCard } from "@/components/product-card";
-import { CATEGORY_LABELS, CATEGORY_TO_ROUTE, getProductBySlug, products } from "@/lib/products";
+import {
+  CATEGORY_LABELS,
+  CATEGORY_ROUTE_LABELS,
+  CATEGORY_TO_ROUTE,
+  getProductBySlug,
+  products,
+} from "@/lib/products";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -27,7 +33,7 @@ export default async function ProductPage({
         href={`/catalogo/${CATEGORY_TO_ROUTE[product.category]}`}
         className="font-display text-xs font-bold uppercase tracking-wide text-blue hover:underline"
       >
-        ← {CATEGORY_LABELS[product.category]}s
+        ← {CATEGORY_ROUTE_LABELS[CATEGORY_TO_ROUTE[product.category]]}
       </Link>
 
       <p className="mt-6 w-fit rounded-lg bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">

@@ -28,14 +28,14 @@ export const CATEGORY_ROUTES: Record<CategoryRoute, Category> = {
 export const CATEGORY_LABELS: Record<Category, string> = {
   curso: "Curso",
   programa: "Programa",
-  descargable: "Descargable",
+  descargable: "Guía y plan",
   combo: "Combo",
 };
 
 export const CATEGORY_ROUTE_LABELS: Record<CategoryRoute, string> = {
   cursos: "Cursos",
   programas: "Programas",
-  descargables: "Descargables",
+  descargables: "Guías y planes",
   combos: "Combos",
 };
 

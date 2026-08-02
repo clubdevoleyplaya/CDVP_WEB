@@ -53,11 +53,11 @@
 }
 
 [data-theme="dark"] {
-  --bg: #2b2166;
-  --surface: #362b7a;
+  --bg: #0f1533;
+  --surface: #161d45;
   --ink: #f4f6fb;
-  --ink-soft: #b7b6de;
-  --line: #4a3f8f;
+  --ink-soft: #a9b0d6;
+  --line: rgba(255, 255, 255, 0.16);
   --blue: #6fa3e0;
   --yellow: #f7b733;
   --green: #5fcb90;

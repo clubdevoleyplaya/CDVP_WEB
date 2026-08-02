@@ -10,7 +10,7 @@ export function WelcomePack() {
       <p className="font-display text-xs font-bold uppercase tracking-wide text-blue">
         Beneficio de suscripción
       </p>
-      <h2 className="font-display text-2xl font-bold uppercase">Welcome Pack</h2>
+      <h2 className="font-display text-2xl font-bold uppercase">Pack de Bienvenida</h2>
       <p className="max-w-[60ch] text-sm text-ink-soft">
         Acceso completo al pack de bienvenida como parte de tu suscripción mensual.
       </p>

@@ -1,6 +1,6 @@
 export function Why() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-16">
+    <section className="mx-auto max-w-7xl px-6 py-16">
       <p className="font-display text-xs font-bold uppercase tracking-wide text-blue">
         ¿Por qué hago esto?
       </p>
