@@ -1,5 +1,5 @@
-export type Category = "curso" | "programa" | "descargable" | "combo";
-export type CategoryRoute = "cursos" | "programas" | "descargables" | "combos";
+export type Category = "curso" | "descargable" | "combo";
+export type CategoryRoute = "cursos" | "descargables" | "combos";
 
 export interface Product {
   slug: string;
@@ -7,6 +7,7 @@ export interface Product {
   title: string;
   shortDescription: string;
   longDescription: string;
+  image?: string;
   chips?: string[];
   modules?: number;
   rating?: { value: number; count: number };
@@ -20,28 +21,24 @@ export interface Product {
 
 export const CATEGORY_ROUTES: Record<CategoryRoute, Category> = {
   cursos: "curso",
-  programas: "programa",
   descargables: "descargable",
   combos: "combo",
 };
 
 export const CATEGORY_LABELS: Record<Category, string> = {
   curso: "Curso",
-  programa: "Programa",
   descargable: "Guía y plan",
   combo: "Combo",
 };
 
 export const CATEGORY_ROUTE_LABELS: Record<CategoryRoute, string> = {
   cursos: "Cursos",
-  programas: "Programas",
   descargables: "Guías y planes",
   combos: "Combos",
 };
 
 export const CATEGORY_TO_ROUTE: Record<Category, CategoryRoute> = {
   curso: "cursos",
-  programa: "programas",
   descargable: "descargables",
   combo: "combos",
 };
@@ -50,6 +47,7 @@ export const products: Product[] = [
   {
     slug: "ataque",
     category: "curso",
+    image: "/images/products/ataque.png",
     title: "Ataque",
     shortDescription:
       "Entrada de ataque, brazos, impacto de pelota y los errores que más le cuestan a un atacante amateur.",
@@ -65,6 +63,7 @@ export const products: Product[] = [
   {
     slug: "mentalidad-deportiva",
     category: "curso",
+    image: "/images/products/mentalidad-deportiva.png",
     title: "Mentalidad para voley playa",
     shortDescription:
       "Objetivos, mentalidad de entrenamiento y de partido, concentración y disciplina.",
@@ -79,6 +78,7 @@ export const products: Product[] = [
   {
     slug: "planificacion",
     category: "curso",
+    image: "/images/products/planificacion.png",
     title: "Planificación para entrenadores/as",
     shortDescription:
       "Planificá aspectos técnicos, físicos y mentales de una sesión de entrenamiento.",
@@ -93,6 +93,7 @@ export const products: Product[] = [
   {
     slug: "defensa",
     category: "curso",
+    image: "/images/products/defensa.png",
     title: "Defensa",
     shortDescription:
       "Toda la información exclusiva para mejorar tu posicionamiento y lectura en defensa.",
@@ -107,6 +108,7 @@ export const products: Product[] = [
   {
     slug: "bloqueo",
     category: "curso",
+    image: "/images/products/bloqueo.png",
     title: "Bloqueo",
     shortDescription: "Técnica de bloqueo individual y lectura del ataque rival.",
     longDescription:
@@ -118,6 +120,7 @@ export const products: Product[] = [
   {
     slug: "armado",
     category: "curso",
+    image: "/images/products/armado.png",
     title: "Armado",
     shortDescription: "Fundamentos de armado para dominar todos los ritmos de ataque.",
     longDescription:
@@ -129,6 +132,7 @@ export const products: Product[] = [
   {
     slug: "saque",
     category: "curso",
+    image: "/images/products/saque.png",
     title: "Saque",
     shortDescription: "Técnica y variantes de saque para presionar la recepción rival.",
     longDescription:
@@ -140,6 +144,7 @@ export const products: Product[] = [
   {
     slug: "conceptos-generales",
     category: "curso",
+    image: "/images/products/conceptos-generales.png",
     title: "Conceptos generales",
     shortDescription: "Las bases del voley playa antes de meterte en la técnica de cada gesto.",
     longDescription:
@@ -151,6 +156,7 @@ export const products: Product[] = [
   {
     slug: "recepcion",
     category: "curso",
+    image: "/images/products/recepcion.png",
     title: "Recepción",
     shortDescription: "Posicionamiento y lectura de saque para una recepción más consistente.",
     longDescription:
@@ -158,30 +164,6 @@ export const products: Product[] = [
     priceArs: 50000,
     priceUsd: 50,
     discountable: true,
-  },
-  {
-    slug: "copia-de-programa-beach-voley-pro",
-    category: "programa",
-    title: "Beach Voley Pro — Gold",
-    shortDescription: "Programa completo de 7 productos para llevar tu juego a nivel competitivo.",
-    longDescription:
-      "El programa más completo del club: 7 productos combinados para llevar tu nivel de juego hacia lo competitivo, con progresión técnica y física integrada.",
-    includes: "7 productos",
-    priceArs: 400000,
-    priceUsd: 400,
-    discountable: false,
-  },
-  {
-    slug: "beachvoleyprosilver",
-    category: "programa",
-    title: "Beach Voley Pro — Silver",
-    shortDescription: "Versión reducida del programa Gold, 6 productos clave para arrancar.",
-    longDescription:
-      "Una versión más compacta del programa Gold: 6 productos clave para arrancar tu proceso sin necesitar el paquete completo.",
-    includes: "6 productos",
-    priceArs: 300000,
-    priceUsd: 300,
-    discountable: false,
   },
   {
     slug: "analisis-tecnico-biomecanico",

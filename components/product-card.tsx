@@ -1,20 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice, formatPrice } from "@/lib/price";
 import { CATEGORY_LABELS, type Product } from "@/lib/products";
-
-const PLACEHOLDER_SLIDES = [1, 2, 3];
 
 export function ProductCard({ product }: { product: Product }) {
   const { currency, isSubscriber, addToCart } = useDemoState();
@@ -29,19 +21,21 @@ export function ProductCard({ product }: { product: Product }) {
       whileHover={{ y: -3 }}
       className="flex flex-col overflow-hidden rounded-xl border border-line bg-surface"
     >
-      <Carousel className="group w-full">
-        <CarouselContent className="ml-0">
-          {PLACEHOLDER_SLIDES.map((i) => (
-            <CarouselItem key={i} className="pl-0">
-              <div className="flex aspect-video items-center justify-center bg-line font-display text-xs font-bold uppercase tracking-wide text-ink-soft">
-                Imagen {i}
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious className="left-2 size-7 opacity-0 transition-opacity group-hover:opacity-100" />
-        <CarouselNext className="right-2 size-7 opacity-0 transition-opacity group-hover:opacity-100" />
-      </Carousel>
+      {product.image ? (
+        <div className="relative aspect-video w-full">
+          <Image
+            src={product.image}
+            alt={product.title}
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover"
+          />
+        </div>
+      ) : (
+        <div className="flex aspect-video w-full items-center justify-center bg-line font-display text-xs font-bold uppercase tracking-wide text-ink-soft">
+          Imagen próximamente
+        </div>
+      )}
 
       <div className="flex flex-1 flex-col gap-2 p-5">
         <p className="w-fit rounded-lg bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">

@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { CATEGORY_ROUTE_LABELS, type CategoryRoute } from "@/lib/products";
 
-const NAV_ROUTES = ["cursos", "programas", "descargables", "combos"] as const satisfies readonly CategoryRoute[];
+const NAV_ROUTES = ["cursos", "descargables", "combos"] as const satisfies readonly CategoryRoute[];
 
 export function NavDrawer() {
   const [open, setOpen] = useState(false);

@@ -10,7 +10,7 @@ import { LoginDrawer } from "@/components/login-drawer";
 import { CATEGORY_ROUTE_LABELS } from "@/lib/products";
 import { useDemoState } from "@/context/demo-state";
 
-const NAV_ROUTES = ["cursos", "programas", "descargables", "combos"] as const;
+const NAV_ROUTES = ["cursos", "descargables", "combos"] as const;
 
 export function Header() {
   const { session, me } = useDemoState();

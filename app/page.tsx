@@ -9,12 +9,12 @@ import { getProductBySlug, CATEGORY_ROUTE_LABELS, type CategoryRoute } from "@/l
 
 const FEATURED_SLUGS = [
   "ataque",
-  "copia-de-programa-beach-voley-pro",
+  "recepcion",
   "analisis-tecnico-biomecanico",
   "todos-los-cursos",
 ] as const;
 
-const CATEGORY_ROUTES: CategoryRoute[] = ["cursos", "programas", "descargables", "combos"];
+const CATEGORY_ROUTES: CategoryRoute[] = ["cursos", "descargables", "combos"];
 
 export default function Home() {
   const featured = FEATURED_SLUGS.map(getProductBySlug).filter((p) => p !== undefined);

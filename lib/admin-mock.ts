@@ -16,18 +16,17 @@ export const DAILY_VISITS = [
 ];
 
 export const REVENUE_BY_CATEGORY = [
-  { name: "Cursos", value: 46 },
-  { name: "Programas", value: 28 },
-  { name: "Combos", value: 16 },
-  { name: "Descargables", value: 10 },
+  { name: "Cursos", value: 58 },
+  { name: "Combos", value: 26 },
+  { name: "Descargables", value: 16 },
 ];
 
 export const TOP_PRODUCTS = [
   { name: "Ataque", ventas: 34 },
-  { name: "Beach Voley Pro — Gold", ventas: 21 },
-  { name: "Defensa", ventas: 18 },
-  { name: "Recepción", ventas: 15 },
-  { name: "Plan de gimnasio PRO", ventas: 12 },
+  { name: "Defensa", ventas: 21 },
+  { name: "Recepción", ventas: 18 },
+  { name: "Plan de gimnasio PRO", ventas: 15 },
+  { name: "Análisis técnico-biomecánico", ventas: 12 },
 ];
 
 export const STATS = {
