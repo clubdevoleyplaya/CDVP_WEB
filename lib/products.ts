@@ -17,6 +17,7 @@ export interface Product {
   compareUsd?: number;
   discountable: boolean;
   includes?: string;
+  testimonials?: { quote: string; author: string }[];
 }
 
 export const CATEGORY_ROUTES: Record<CategoryRoute, Category> = {
@@ -59,6 +60,18 @@ export const products: Product[] = [
     priceArs: 50000,
     priceUsd: 50,
     discountable: true,
+    testimonials: [
+      {
+        quote:
+          "Este curso de ataque, al igual que el de recepción y armado, describe los movimientos desde un análisis minucioso y claro.",
+        author: "Fernando Ariel Mezzera",
+      },
+      {
+        quote:
+          "Muy buen desglose de las formas de ataque, entrada, shot, la carrera de entrada y la forma de golpear el balón.",
+        author: "Hugo Morgado",
+      },
+    ],
   },
   {
     slug: "mentalidad-deportiva",
