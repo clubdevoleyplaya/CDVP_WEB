@@ -1,6 +1,6 @@
 ---
 numero: 00
-estado: en_progreso # implementado | en_progreso | propuesto
+estado: implementado # implementado | en_progreso | propuesto
 fecha: 2026-08-13
 depende_de: []
 complejidad_cafes: 1

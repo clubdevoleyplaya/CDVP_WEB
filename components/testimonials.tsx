@@ -1,13 +1,21 @@
-// Testimonios en texto: ver spec_00_testimonios-landing.md (CDVP_WEB). Se
-// reasignaron por curso asincrónico y viven en `lib/products.ts` (campo
-// `testimonials` de cada producto), no acá — se muestran en /producto/[slug].
+import Link from "next/link";
+
+import { products } from "@/lib/products";
+
+// Testimonios en texto: el dato vive en `lib/products.ts` (campo
+// `testimonials` de cada producto, fuente única) y se muestra tanto acá
+// (landing, agrupado por curso) como en /producto/[slug] — ver
+// spec_00_testimonios-landing.md.
 //
 // Dos citas quedan sin asignar (ninguna nombra un curso identificable):
 // "Gracias Juli por explicar fácil..." (Diego Huicy) y "Desde Side Out
 // Volleyball Club en Venezuela recomendamos este curso..." (Lenhil Linares).
 // Pendiente que Juli confirme a qué curso corresponden — no se inventa. Ver
 // TODO.md, Fase 3.
-//
+const TEXT_TESTIMONIALS = products.flatMap((p) =>
+  (p.testimonials ?? []).map((t) => ({ ...t, productSlug: p.slug, productTitle: p.title })),
+);
+
 // IDs reales de YouTube Shorts, pasados por Juli el 2026-08-13 (todo el
 // listado de campus/campamento). Formato vertical (9:16), no 16:9.
 const CAMPUS_VIDEO_IDS = [
@@ -40,7 +48,7 @@ function VideoCard({ context, videoId }: { context: string; videoId: string | nu
         <div className="aspect-[9/16] w-full">
           <iframe
             className="h-full w-full"
-            src={`https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0`}
+            src={`https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&controls=0`}
             title={`Testimonio — ${context}`}
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -83,6 +91,29 @@ export function Testimonials() {
           ))}
         </div>
       </section>
+
+      {TEXT_TESTIMONIALS.length > 0 && (
+        <section className="mx-auto max-w-7xl px-6 pb-16">
+          <h2 className="font-display text-2xl font-bold uppercase">Testimonios por curso</h2>
+
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {TEXT_TESTIMONIALS.map((t) => (
+              <blockquote
+                key={`${t.productSlug}-${t.author}`}
+                className="rounded-xl border border-line bg-surface p-5 text-sm italic"
+              >
+                &ldquo;{t.quote}&rdquo;
+                <footer className="mt-3 font-display text-xs font-bold not-italic uppercase tracking-wide text-blue">
+                  {t.author} · ★5{" "}
+                  <Link href={`/producto/${t.productSlug}`} className="underline">
+                    {t.productTitle}
+                  </Link>
+                </footer>
+              </blockquote>
+            ))}
+          </div>
+        </section>
+      )}
     </>
   );
 }

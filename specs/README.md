@@ -43,5 +43,6 @@ Sin jerga técnica: se escribe como se le explicaría a Juli.
 
 ## Specs existentes
 
-- `spec_00_testimonios-landing.md` [en_progreso] — testimonios de video (Campus/1:1) y de texto (por curso) implementados; falta la sección propia de Campamento, pendiente de definición con el usuario.
+- [`spec_00_testimonios-landing.md`](./spec_00_testimonios-landing.md) [implementado] — testimonios de video (Campus mezclado, Campamento en sección propia) y de texto (por curso, en `/producto/[slug]` y en el landing) implementados.
 - [`spec_01_registro-usuarios.md`](./spec_01_registro-usuarios.md) [propuesto]
+- [`spec_02_privacidad-datos.md`](./spec_02_privacidad-datos.md) [implementado] — página `/privacidad`, borrador pendiente de revisión legal.
