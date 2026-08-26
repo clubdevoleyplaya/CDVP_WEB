@@ -20,15 +20,16 @@ export function ProductCard({ product }: { product: Product }) {
       transition={{ duration: 0.35 }}
       whileHover={{ y: -3 }}
       className="flex flex-col overflow-hidden rounded-xl border border-line bg-surface"
+      style={{ WebkitMaskImage: "-webkit-radial-gradient(white, black)" }}
     >
       {product.image ? (
-        <div className="relative aspect-video w-full">
+        <div className="relative aspect-video w-full overflow-hidden rounded-t-xl">
           <Image
             src={product.image}
             alt={product.title}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover"
+            className="object-cover scale-[1.03]"
           />
         </div>
       ) : (

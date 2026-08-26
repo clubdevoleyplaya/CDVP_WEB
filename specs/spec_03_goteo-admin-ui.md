@@ -1,7 +1,7 @@
 ---
 numero: 03
-estado: propuesto # implementado | en_progreso | propuesto
-fecha: null
+estado: implementado # implementado | en_progreso | propuesto
+fecha: 2026-08-26
 depende_de: [goteo-contenido]
 complejidad_cafes: 1
 ---

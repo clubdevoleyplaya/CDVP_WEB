@@ -46,7 +46,9 @@ Sin jerga técnica: se escribe como se le explicaría a Juli.
 - [`spec_00_testimonios-landing.md`](./spec_00_testimonios-landing.md) [implementado] — testimonios de video (Campus mezclado, Campamento en sección propia) y de texto (por curso, en `/producto/[slug]` y en el landing) implementados.
 - [`spec_01_registro-usuarios.md`](./spec_01_registro-usuarios.md) [propuesto]
 - [`spec_02_privacidad-datos.md`](./spec_02_privacidad-datos.md) [implementado] — página `/privacidad`, borrador pendiente de revisión legal.
-- [`spec_03_goteo-admin-ui.md`](./spec_03_goteo-admin-ui.md) [propuesto]
-- [`spec_04_reproductor-protegido.md`](./spec_04_reproductor-protegido.md) [propuesto]
-- [`spec_05_checkout-ui.md`](./spec_05_checkout-ui.md) [propuesto] — botón de compra conectado al pago real
-- [`spec_06_checkout-ui.md`](./spec_06_checkout-ui.md) [propuesto] — página `/suscripcion` real
+- [`spec_03_goteo-admin-ui.md`](./spec_03_goteo-admin-ui.md) [implementado] — `/admin/goteo`, navegación 1↔12 sin recargar, edita ejercicios de una cápsula.
+- [`spec_04_reproductor-protegido.md`](./spec_04_reproductor-protegido.md) [en_progreso] — player de Vimeo real hecho; visor de PDF pendiente, no hay ningún campo/URL de material real en el sistema todavía.
+- [`spec_05_checkout-ui.md`](./spec_05_checkout-ui.md) [implementado] — botón "Comprar" llama a `POST /checkout` real y redirige al `init_point` de MercadoPago; USD/Paddle aún no soportado.
+- [`spec_06_checkout-ui.md`](./spec_06_checkout-ui.md) [implementado] — página `/suscripcion` real: detalle público, "Suscribirme" crea preapproval real y redirige, ya-suscripto lo indica en vez de ofrecer suscribirse de nuevo.
+- [`spec_07_goteo-admin-ui.md`](./spec_07_goteo-admin-ui.md) [implementado] — formulario de admin: título, contenido, link de video (detecta Vimeo/YouTube solo)
+- [`spec_08_perfil-ui.md`](./spec_08_perfil-ui.md) [implementado] — sección "Suscripción" en `/perfil`, botón "Cancelar suscripción" con confirmación, actualiza en la misma página sin recargar.

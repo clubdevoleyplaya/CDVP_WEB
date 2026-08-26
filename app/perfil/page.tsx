@@ -23,7 +23,7 @@ import { createClient } from "@/lib/supabase/client";
 type CourseAccess = { slug: string; title: string; has_access: boolean };
 
 export default function PerfilPage() {
-  const { session, me, isSubscriber, signOut, updateProfile } = useDemoState();
+  const { session, me, isSubscriber, signOut, updateProfile, cancelSubscription } = useDemoState();
 
   const [courses, setCourses] = useState<CourseAccess[]>([]);
   const [coursesLoading, setCoursesLoading] = useState(true);
@@ -175,6 +175,8 @@ export default function PerfilPage() {
             </CardContent>
           </Card>
 
+          {isSubscriber && <SubscriptionCard onCancel={cancelSubscription} />}
+
           {me?.role === "admin" && (
             <Card className="font-sans border-blue">
               <CardHeader>
@@ -205,6 +207,45 @@ export default function PerfilPage() {
         </div>
       </div>
     </section>
+  );
+}
+
+function SubscriptionCard({ onCancel }: { onCancel: () => Promise<void> }) {
+  const [canceling, setCanceling] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleCancel() {
+    if (!window.confirm("¿Seguro que querés cancelar tu suscripción?")) return;
+    setCanceling(true);
+    setError(null);
+    try {
+      await onCancel();
+    } catch {
+      setError("No se pudo cancelar la suscripción. Probá de nuevo.");
+    } finally {
+      setCanceling(false);
+    }
+  }
+
+  return (
+    <Card className="font-sans">
+      <CardHeader>
+        <CardTitle>Suscripción</CardTitle>
+        <CardDescription>Estás suscripto al club.</CardDescription>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-2">
+        <Button
+          type="button"
+          variant="outline"
+          onClick={handleCancel}
+          disabled={canceling}
+          className="w-fit font-display text-xs font-bold uppercase tracking-wide text-destructive hover:border-destructive"
+        >
+          {canceling ? "Cancelando..." : "Cancelar suscripción"}
+        </Button>
+        {error && <p className="text-sm text-destructive">{error}</p>}
+      </CardContent>
+    </Card>
   );
 }
 

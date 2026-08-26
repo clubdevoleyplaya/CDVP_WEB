@@ -1,22 +1,64 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice, formatPrice } from "@/lib/price";
 import type { Product } from "@/lib/products";
 
 export function ProductBuyBox({ product }: { product: Product }) {
-  const { currency, isSubscriber, addToCart } = useDemoState();
+  const { currency, isSubscriber, addToCart, session, setLoginOpen } = useDemoState();
   const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber);
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const [paid, setPaid] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const rail =
     currency === "USD"
-      ? "Pago internacional vía Paddle (Merchant of Record)"
+      ? "Pago internacional vía Paddle (Merchant of Record) — próximamente"
       : "Pago en Argentina vía MercadoPago";
+
+  async function handleBuy() {
+    if (!session) {
+      setLoginOpen(true);
+      return;
+    }
+    if (currency === "USD") {
+      setError("El pago en USD todavía no está disponible — cambiá a ARS para comprar.");
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/checkout`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          items: [{ slug: product.slug, quantity: 1 }],
+          payment_provider: "mercadopago",
+        }),
+      });
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+
+      if (data.init_point) {
+        window.location.href = data.init_point;
+        return;
+      }
+      if (data.payment_error) {
+        setError(data.payment_error);
+        return;
+      }
+      setError("Ya tenés este producto — revisá tu perfil.");
+    } catch {
+      setError("No se pudo iniciar la compra. Probá de nuevo.");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-6">
@@ -28,16 +70,15 @@ export function ProductBuyBox({ product }: { product: Product }) {
         )}
         <span className="tabular text-3xl font-black text-yellow">{formatPrice(now, currency)}</span>
       </div>
+      <p className="text-xs text-ink-soft">{rail}</p>
       <div className="flex flex-wrap gap-2">
         <button
           type="button"
-          onClick={() => {
-            setCheckoutOpen((v) => !v);
-            setPaid(false);
-          }}
-          className="w-fit rounded-lg bg-ink px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
+          onClick={handleBuy}
+          disabled={loading}
+          className="w-fit rounded-lg bg-ink px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue disabled:opacity-50"
         >
-          {checkoutOpen ? "Cerrar" : "Comprar"}
+          {loading ? "Redirigiendo..." : session ? "Comprar" : "Iniciar sesión para comprar"}
         </button>
         <button
           type="button"
@@ -49,39 +90,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
         </button>
       </div>
 
-      <AnimatePresence initial={false}>
-        {checkoutOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden"
-          >
-            <div className="flex flex-col gap-2 rounded-xl border border-line bg-bg p-4">
-              <p className="font-display text-xs font-bold uppercase tracking-wide text-blue">
-                {rail}
-              </p>
-              <p className="text-sm text-ink-soft">
-                Demo — no se procesa ningún pago real.
-              </p>
-              {paid ? (
-                <p className="w-fit rounded-lg bg-green/20 px-3 py-1.5 font-display text-sm font-bold">
-                  ✅ Pago simulado — bienvenido a bordo
-                </p>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => setPaid(true)}
-                  className="w-fit rounded-lg bg-blue px-5 py-2 font-display text-xs font-bold uppercase tracking-wide text-white"
-                >
-                  Simular pago
-                </button>
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {error && <p className="text-sm text-destructive">{error}</p>}
     </div>
   );
 }

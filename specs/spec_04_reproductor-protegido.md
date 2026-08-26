@@ -1,6 +1,6 @@
 ---
 numero: 04
-estado: propuesto # implementado | en_progreso | propuesto
+estado: en_progreso # implementado | en_progreso | propuesto
 fecha: null
 depende_de: [contenido-video-vimeo]
 complejidad_cafes: 1
