@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ProductBuyBox } from "@/components/product-buy-box";
 import { ProductCard } from "@/components/product-card";
+import { ProductVideoSection } from "@/components/product-video-section";
 import {
   CATEGORY_LABELS,
   CATEGORY_ROUTE_LABELS,
@@ -70,6 +71,8 @@ export default async function ProductPage({
       <div className="mt-8 max-w-sm">
         <ProductBuyBox product={product} />
       </div>
+
+      <ProductVideoSection slug={product.slug} category={product.category} />
 
       {product.testimonials && product.testimonials.length > 0 && (
         <div className="mt-16">

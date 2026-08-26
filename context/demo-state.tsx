@@ -12,6 +12,7 @@ export type CartItem = { slug: string; qty: number };
 type Me = {
   role: "user" | "admin";
   isSubscriber: boolean;
+  subscriptionStatus: string | null;
   nickname: string | null;
   team: string | null;
   bio: string | null;
@@ -40,11 +41,13 @@ type DemoState = {
   setCartOpen: (open: boolean) => void;
   loginOpen: boolean;
   setLoginOpen: (open: boolean) => void;
+  cancelSubscription: () => Promise<void>;
 };
 
 function mapMe(data: {
   role: "user" | "admin";
   is_subscriber: boolean;
+  subscription_status: string | null;
   nickname: string | null;
   team: string | null;
   bio: string | null;
@@ -53,6 +56,7 @@ function mapMe(data: {
   return {
     role: data.role,
     isSubscriber: data.is_subscriber,
+    subscriptionStatus: data.subscription_status,
     nickname: data.nickname,
     team: data.team,
     bio: data.bio,
@@ -125,6 +129,17 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
     setMe(mapMe(await res.json()));
   }
 
+  async function cancelSubscription() {
+    if (!session) return;
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/suscripcion/cancelar`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${session.access_token}` },
+    });
+    if (!res.ok) throw new Error("No se pudo cancelar la suscripción");
+    const me = await fetchMe(session.access_token);
+    setMe(me);
+  }
+
   function addToCart(slug: string) {
     setCart((items) => {
       const existing = items.find((i) => i.slug === slug);
@@ -150,6 +165,7 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
         isSubscriber,
         signOut,
         updateProfile,
+        cancelSubscription,
         currency,
         setCurrency,
         cart,
