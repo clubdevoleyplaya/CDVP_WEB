@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import Link from "next/link";
 import { EChart } from "@/components/echart";
 import { useTheme } from "@/lib/use-theme";
 import { AuthGuard } from "@/components/auth-guard";
@@ -171,6 +172,12 @@ export default function AdminAnalyticsPage() {
           <span className="font-display text-xs font-bold uppercase tracking-wide text-yellow">
             Demo — datos de ejemplo
           </span>
+          <Link
+            href="/admin/goteo"
+            className="font-display text-xs font-bold uppercase tracking-wide text-blue underline"
+          >
+            Goteo de contenido
+          </Link>
         </div>
         <p className="mt-2 max-w-2xl text-sm text-ink-soft">
           Vista solo para admins (protegida en el servidor por{" "}
