@@ -44,7 +44,7 @@ export function CatalogGrid({ items }: { items: Product[] }) {
 
     if (sortBy === "mejor-valorados") {
       result = [...result].sort(
-        (a, b) => (b.rating?.value ?? 0) - (a.rating?.value ?? 0)
+        (a, b) => (b.rating?.value ?? 0) - (a.rating?.value ?? 0),
       );
     } else if (sortBy === "precio-asc" || sortBy === "precio-desc") {
       const withPrice = result.map((p) => ({
@@ -52,7 +52,7 @@ export function CatalogGrid({ items }: { items: Product[] }) {
         price: computeDisplayPrice(p, currency, isSubscriber).now,
       }));
       withPrice.sort((a, b) =>
-        sortBy === "precio-asc" ? a.price - b.price : b.price - a.price
+        sortBy === "precio-asc" ? a.price - b.price : b.price - a.price,
       );
       result = withPrice.map((w) => w.product);
     }
@@ -60,7 +60,8 @@ export function CatalogGrid({ items }: { items: Product[] }) {
     return result;
   }, [items, sortBy, onlyDiscountable, currency, isSubscriber]);
 
-  const activeFilters = (onlyDiscountable ? 1 : 0) + (sortBy !== "relevancia" ? 1 : 0);
+  const activeFilters =
+    (onlyDiscountable ? 1 : 0) + (sortBy !== "relevancia" ? 1 : 0);
 
   return (
     <div>
@@ -71,7 +72,11 @@ export function CatalogGrid({ items }: { items: Product[] }) {
         <Drawer open={open} onOpenChange={setOpen} swipeDirection="right">
           <DrawerTrigger
             render={
-              <Button type="button" variant="outline" className="font-sans gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                className="font-sans gap-2"
+              >
                 <SlidersHorizontal className="size-4" />
                 Filtros y orden
                 {activeFilters > 0 && (
@@ -121,7 +126,10 @@ export function CatalogGrid({ items }: { items: Product[] }) {
             <DrawerFooter>
               <DrawerClose
                 render={
-                  <Button type="button" className="font-display text-xs font-bold tracking-wide uppercase">
+                  <Button
+                    type="button"
+                    className="font-display text-xs font-bold tracking-wide uppercase"
+                  >
                     Ver resultados
                   </Button>
                 }
@@ -131,7 +139,7 @@ export function CatalogGrid({ items }: { items: Product[] }) {
         </Drawer>
       </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {visible.map((product) => (
           <ProductCard key={product.slug} product={product} />
         ))}

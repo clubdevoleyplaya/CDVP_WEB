@@ -46,3 +46,7 @@ Sin jerga técnica: se escribe como se le explicaría a Juli.
 - [`spec_00_testimonios-landing.md`](./spec_00_testimonios-landing.md) [implementado] — testimonios de video (Campus mezclado, Campamento en sección propia) y de texto (por curso, en `/producto/[slug]` y en el landing) implementados.
 - [`spec_01_registro-usuarios.md`](./spec_01_registro-usuarios.md) [propuesto]
 - [`spec_02_privacidad-datos.md`](./spec_02_privacidad-datos.md) [implementado] — página `/privacidad`, borrador pendiente de revisión legal.
+- [`spec_03_goteo-admin-ui.md`](./spec_03_goteo-admin-ui.md) [propuesto]
+- [`spec_04_reproductor-protegido.md`](./spec_04_reproductor-protegido.md) [propuesto]
+- [`spec_05_checkout-ui.md`](./spec_05_checkout-ui.md) [propuesto] — botón de compra conectado al pago real
+- [`spec_06_checkout-ui.md`](./spec_06_checkout-ui.md) [propuesto] — página `/suscripcion` real

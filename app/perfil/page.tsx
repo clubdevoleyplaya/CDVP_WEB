@@ -6,18 +6,28 @@ import { Check, Lock } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
+import { AuthGuard } from "@/components/auth-guard";
 import { useDemoState } from "@/context/demo-state";
 import { createClient } from "@/lib/supabase/client";
 
 type CourseAccess = { slug: string; title: string; has_access: boolean };
 
 export default function PerfilPage() {
-  const { session, me, isSubscriber, signOut, updateProfile, setLoginOpen } = useDemoState();
+  const { session, me, isSubscriber, signOut, updateProfile } = useDemoState();
 
   const [courses, setCourses] = useState<CourseAccess[]>([]);
+  const [coursesLoading, setCoursesLoading] = useState(true);
+  const [coursesError, setCoursesError] = useState(false);
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
@@ -25,29 +35,19 @@ export default function PerfilPage() {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/me/courses`, {
       headers: { Authorization: `Bearer ${session.access_token}` },
     })
-      .then((res) => (res.ok ? res.json() : []))
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
       .then(setCourses)
-      .catch(() => setCourses([]));
+      .catch(() => setCoursesError(true))
+      .finally(() => setCoursesLoading(false));
   }, [session]);
 
   if (!session) {
-    return (
-      <section className="mx-auto max-w-md px-6 py-16 text-center">
-        <h1 className="font-display text-2xl font-bold uppercase">Tu perfil</h1>
-        <p className="mt-4 text-sm text-ink-soft">Iniciá sesión para ver tu perfil.</p>
-        <Button
-          type="button"
-          onClick={() => setLoginOpen(true)}
-          className="mt-6 font-display text-xs font-bold uppercase tracking-wide"
-        >
-          Iniciar sesión
-        </Button>
-      </section>
-    );
+    return <AuthGuard>{null}</AuthGuard>;
   }
 
   const displayName = me?.nickname;
-  const initialSource = displayName || session.user.user_metadata?.full_name || session.user.email;
+  const initialSource =
+    displayName || session.user.user_metadata?.full_name || session.user.email;
   const initial = (initialSource ?? "?").charAt(0).toUpperCase();
   const accessCount = courses.filter((c) => c.has_access).length;
 
@@ -58,7 +58,9 @@ export default function PerfilPage() {
     try {
       const supabase = createClient();
       const path = `${session.user.id}/${Date.now()}-${file.name}`;
-      const { error } = await supabase.storage.from("avatars").upload(path, file, { upsert: true });
+      const { error } = await supabase.storage
+        .from("avatars")
+        .upload(path, file, { upsert: true });
       if (error) throw error;
       const { data } = supabase.storage.from("avatars").getPublicUrl(path);
       await updateProfile({ avatarUrl: data.publicUrl });
@@ -75,7 +77,11 @@ export default function PerfilPage() {
           <label className="group absolute -bottom-10 left-8 flex size-28 cursor-pointer items-center justify-center overflow-hidden rounded-full border-4 border-surface bg-surface font-display text-3xl font-bold text-ink">
             {me?.avatarUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={me.avatarUrl} alt="" className="size-full object-cover" />
+              <img
+                src={me.avatarUrl}
+                alt=""
+                className="size-full object-cover"
+              />
             ) : (
               initial
             )}
@@ -96,13 +102,17 @@ export default function PerfilPage() {
             <h1 className="font-display text-3xl font-bold uppercase">
               {displayName || "Sin apodo"}
             </h1>
-            {me?.team && <p className="mt-1 text-sm text-ink-soft">{me.team}</p>}
+            {me?.team && (
+              <p className="mt-1 text-sm text-ink-soft">{me.team}</p>
+            )}
           </div>
           <Badge
             variant={isSubscriber ? "default" : "outline"}
             render={isSubscriber ? undefined : <Link href="/suscripcion" />}
             className={
-              isSubscriber ? undefined : "border-yellow bg-yellow text-white hover:opacity-90"
+              isSubscriber
+                ? undefined
+                : "border-yellow bg-yellow text-white hover:opacity-90"
             }
           >
             {isSubscriber ? "Suscriptor" : "Sin suscripción"}
@@ -127,20 +137,41 @@ export default function PerfilPage() {
             <CardHeader>
               <CardTitle>Mis cursos</CardTitle>
               <CardDescription>
-                {accessCount} de {courses.length} con acceso
+                {coursesLoading
+                  ? "Cargando..."
+                  : coursesError
+                    ? "No se pudieron cargar tus cursos."
+                    : `${accessCount} de ${courses.length} con acceso`}
               </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-2">
-              {courses.map((course) => (
-                <div key={course.slug} className="flex items-center justify-between gap-2 text-sm">
-                  <span className={course.has_access ? "" : "text-ink-soft"}>{course.title}</span>
-                  {course.has_access ? (
-                    <Check className="size-4 text-green" />
-                  ) : (
-                    <Lock className="size-4 text-ink-soft" />
-                  )}
-                </div>
-              ))}
+              {coursesLoading ? (
+                <>
+                  <Skeleton className="h-5 w-full" />
+                  <Skeleton className="h-5 w-full" />
+                  <Skeleton className="h-5 w-2/3" />
+                </>
+              ) : coursesError ? (
+                <p className="text-sm text-ink-soft">
+                  Hubo un error al traer tus cursos. Probá de nuevo más tarde.
+                </p>
+              ) : (
+                courses.map((course) => (
+                  <div
+                    key={course.slug}
+                    className="flex items-center justify-between gap-2 text-sm"
+                  >
+                    <span className={course.has_access ? "" : "text-ink-soft"}>
+                      {course.title}
+                    </span>
+                    {course.has_access ? (
+                      <Check className="size-4 text-green" />
+                    ) : (
+                      <Lock className="size-4 text-ink-soft" />
+                    )}
+                  </div>
+                ))
+              )}
             </CardContent>
           </Card>
 
@@ -148,7 +179,9 @@ export default function PerfilPage() {
             <Card className="font-sans border-blue">
               <CardHeader>
                 <CardTitle>Panel admin</CardTitle>
-                <CardDescription>Ventas, visitas y métricas del sitio.</CardDescription>
+                <CardDescription>
+                  Ventas, visitas y métricas del sitio.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <Link
@@ -180,7 +213,11 @@ function ProfileForm({
   onSave,
 }: {
   me: { nickname: string | null; team: string | null; bio: string | null };
-  onSave: (fields: { nickname: string; team: string; bio: string }) => Promise<void>;
+  onSave: (fields: {
+    nickname: string;
+    team: string;
+    bio: string;
+  }) => Promise<void>;
 }) {
   const [nickname, setNickname] = useState(me.nickname ?? "");
   const [team, setTeam] = useState(me.team ?? "");
@@ -200,7 +237,9 @@ function ProfileForm({
     <Card className="font-sans">
       <CardHeader>
         <CardTitle>Sobre mí</CardTitle>
-        <CardDescription>Equipo, apodo y biografía visibles en tu perfil.</CardDescription>
+        <CardDescription>
+          Equipo, apodo y biografía visibles en tu perfil.
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div className="flex flex-col gap-1.5">

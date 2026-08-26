@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { EChart } from "@/components/echart";
 import { useTheme } from "@/lib/use-theme";
+import { AuthGuard } from "@/components/auth-guard";
 import {
   Card,
   CardContent,
@@ -20,8 +21,22 @@ import {
 } from "@/lib/admin-mock";
 
 const BRAND = {
-  light: { blue: "#1F4FA0", yellow: "#C9920A", green: "#2F9E5B", ink: "#2B2166", inkSoft: "#4B4A78", line: "#DBDEEF" },
-  dark: { blue: "#6FA3E0", yellow: "#F7B733", green: "#5FCB90", ink: "#F4F6FB", inkSoft: "#B7B6DE", line: "#4A3F8F" },
+  light: {
+    blue: "#1F4FA0",
+    yellow: "#C9920A",
+    green: "#2F9E5B",
+    ink: "#2B2166",
+    inkSoft: "#4B4A78",
+    line: "#DBDEEF",
+  },
+  dark: {
+    blue: "#6FA3E0",
+    yellow: "#F7B733",
+    green: "#5FCB90",
+    ink: "#F4F6FB",
+    inkSoft: "#B7B6DE",
+    line: "#4A3F8F",
+  },
 };
 
 function formatArs(n: number) {
@@ -34,9 +49,15 @@ export default function AdminAnalyticsPage() {
 
   const salesVisitsOption = useMemo(
     () => ({
-      textStyle: { color: c.inkSoft, fontFamily: "var(--font-sans, sans-serif)" },
+      textStyle: {
+        color: c.inkSoft,
+        fontFamily: "var(--font-sans, sans-serif)",
+      },
       tooltip: { trigger: "axis" as const },
-      legend: { data: ["Ventas (ARS)", "Visitas"], textStyle: { color: c.inkSoft } },
+      legend: {
+        data: ["Ventas (ARS)", "Visitas"],
+        textStyle: { color: c.inkSoft },
+      },
       grid: { left: 48, right: 48, top: 40, bottom: 28 },
       xAxis: {
         type: "category" as const,
@@ -48,7 +69,10 @@ export default function AdminAnalyticsPage() {
         {
           type: "value" as const,
           name: "Ventas (ARS)",
-          axisLabel: { color: c.inkSoft, formatter: (v: number) => `$${v / 1000}k` },
+          axisLabel: {
+            color: c.inkSoft,
+            formatter: (v: number) => `$${v / 1000}k`,
+          },
           splitLine: { lineStyle: { color: c.line } },
         },
         {
@@ -76,12 +100,15 @@ export default function AdminAnalyticsPage() {
         },
       ],
     }),
-    [c]
+    [c],
   );
 
   const categoryOption = useMemo(
     () => ({
-      textStyle: { color: c.inkSoft, fontFamily: "var(--font-sans, sans-serif)" },
+      textStyle: {
+        color: c.inkSoft,
+        fontFamily: "var(--font-sans, sans-serif)",
+      },
       tooltip: { trigger: "item" as const },
       legend: { bottom: 0, textStyle: { color: c.inkSoft } },
       color: [c.blue, c.green, c.yellow, c.inkSoft],
@@ -91,18 +118,24 @@ export default function AdminAnalyticsPage() {
           type: "pie" as const,
           radius: ["45%", "70%"],
           center: ["50%", "42%"],
-          itemStyle: { borderColor: theme === "dark" ? "#362b7a" : "#ffffff", borderWidth: 2 },
+          itemStyle: {
+            borderColor: theme === "dark" ? "#362b7a" : "#ffffff",
+            borderWidth: 2,
+          },
           label: { color: c.inkSoft },
           data: REVENUE_BY_CATEGORY,
         },
       ],
     }),
-    [c, theme]
+    [c, theme],
   );
 
   const topProductsOption = useMemo(
     () => ({
-      textStyle: { color: c.inkSoft, fontFamily: "var(--font-sans, sans-serif)" },
+      textStyle: {
+        color: c.inkSoft,
+        fontFamily: "var(--font-sans, sans-serif)",
+      },
       tooltip: { trigger: "axis" as const },
       grid: { left: 120, right: 24, top: 16, bottom: 24 },
       xAxis: {
@@ -125,80 +158,94 @@ export default function AdminAnalyticsPage() {
         },
       ],
     }),
-    [c]
+    [c],
   );
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="flex flex-wrap items-baseline gap-4">
-        <h1 className="font-display text-3xl font-bold uppercase">Panel admin</h1>
-        <span className="font-display text-xs font-bold uppercase tracking-wide text-yellow">
-          Demo — datos de ejemplo
-        </span>
-      </div>
-      <p className="mt-2 max-w-2xl text-sm text-ink-soft">
-        Vista solo para admins (protegida por rol en el middleware). Los datos de ventas y
-        visitas de abajo todavía son de ejemplo — falta reemplazarlos por datos reales del
-        backend.
-      </p>
+    <AuthGuard role="admin">
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="flex flex-wrap items-baseline gap-4">
+          <h1 className="font-display text-3xl font-bold uppercase">
+            Panel admin
+          </h1>
+          <span className="font-display text-xs font-bold uppercase tracking-wide text-yellow">
+            Demo — datos de ejemplo
+          </span>
+        </div>
+        <p className="mt-2 max-w-2xl text-sm text-ink-soft">
+          Vista solo para admins (protegida en el servidor por{" "}
+          <code>proxy.ts</code>, que valida el rol contra{" "}
+          <code>profiles.role</code> antes de dejar pasar la request). Los datos
+          de ventas y visitas de abajo todavía son de ejemplo — falta
+          reemplazarlos por datos reales del backend.
+        </p>
 
-      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card className="font-sans">
-          <CardHeader>
-            <CardDescription>Ventas totales (14 días)</CardDescription>
-            <CardTitle className="tabular text-2xl">{formatArs(STATS.ventasTotales)}</CardTitle>
-          </CardHeader>
-        </Card>
-        <Card className="font-sans">
-          <CardHeader>
-            <CardDescription>Visitas totales (14 días)</CardDescription>
-            <CardTitle className="tabular text-2xl">
-              {STATS.visitasTotales.toLocaleString("es-AR")}
-            </CardTitle>
-          </CardHeader>
-        </Card>
-        <Card className="font-sans">
-          <CardHeader>
-            <CardDescription>Conversión</CardDescription>
-            <CardTitle className="tabular text-2xl">{STATS.conversion}%</CardTitle>
-          </CardHeader>
-        </Card>
-        <Card className="font-sans">
-          <CardHeader>
-            <CardDescription>Ticket promedio</CardDescription>
-            <CardTitle className="tabular text-2xl">{formatArs(STATS.ticketPromedio)}</CardTitle>
-          </CardHeader>
-        </Card>
-      </div>
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <Card className="font-sans">
+            <CardHeader>
+              <CardDescription>Ventas totales (14 días)</CardDescription>
+              <CardTitle className="tabular text-2xl">
+                {formatArs(STATS.ventasTotales)}
+              </CardTitle>
+            </CardHeader>
+          </Card>
+          <Card className="font-sans">
+            <CardHeader>
+              <CardDescription>Visitas totales (14 días)</CardDescription>
+              <CardTitle className="tabular text-2xl">
+                {STATS.visitasTotales.toLocaleString("es-AR")}
+              </CardTitle>
+            </CardHeader>
+          </Card>
+          <Card className="font-sans">
+            <CardHeader>
+              <CardDescription>Conversión</CardDescription>
+              <CardTitle className="tabular text-2xl">
+                {STATS.conversion}%
+              </CardTitle>
+            </CardHeader>
+          </Card>
+          <Card className="font-sans">
+            <CardHeader>
+              <CardDescription>Ticket promedio</CardDescription>
+              <CardTitle className="tabular text-2xl">
+                {formatArs(STATS.ticketPromedio)}
+              </CardTitle>
+            </CardHeader>
+          </Card>
+        </div>
 
-      <Card className="mt-6 font-sans">
-        <CardHeader>
-          <CardTitle>Ventas y visitas por día</CardTitle>
-          <CardDescription>Últimos 14 días — datos de ejemplo</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <EChart option={salesVisitsOption} height={340} />
-        </CardContent>
-      </Card>
-
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <Card className="font-sans">
+        <Card className="mt-6 font-sans">
           <CardHeader>
-            <CardTitle>Ingresos por categoría</CardTitle>
+            <CardTitle>Ventas y visitas por día</CardTitle>
+            <CardDescription>
+              Últimos 14 días — datos de ejemplo
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <EChart option={categoryOption} height={300} />
+            <EChart option={salesVisitsOption} height={340} />
           </CardContent>
         </Card>
-        <Card className="font-sans">
-          <CardHeader>
-            <CardTitle>Productos más vendidos</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <EChart option={topProductsOption} height={300} />
-          </CardContent>
-        </Card>
-      </div>
-    </section>
+
+        <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <Card className="font-sans">
+            <CardHeader>
+              <CardTitle>Ingresos por categoría</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <EChart option={categoryOption} height={300} />
+            </CardContent>
+          </Card>
+          <Card className="font-sans">
+            <CardHeader>
+              <CardTitle>Productos más vendidos</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <EChart option={topProductsOption} height={300} />
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+    </AuthGuard>
   );
 }
