@@ -19,7 +19,7 @@ function parseVideo(videoUrl: string): { provider: "vimeo" | "youtube"; videoId:
 function safePhotoUrls(urls: string[]): string[] {
   const result: string[] = [];
   for (const url of urls) {
-    if (HTTP_URL_RE.test(url.trim())) {
+    if (HTTP_URL_RE.test(url)) {
       result.push(url);
     }
   }
@@ -48,7 +48,7 @@ function VideoPreview({ videoUrl }: { videoUrl: string }) {
 }
 
 export function ExercisePreview({ values }: { values: ExerciseFormValues }) {
-  const pdfHref = HTTP_URL_RE.test(values.pdfUrl.trim()) ? values.pdfUrl : null;
+  const pdfHref = HTTP_URL_RE.test(values.pdfUrl) ? values.pdfUrl : null;
   const photoUrls = safePhotoUrls(values.photoUrls);
 
   return (
