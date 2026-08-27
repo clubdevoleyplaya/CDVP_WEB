@@ -6,11 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ExercisePreview } from "@/components/exercise-preview";
 
 export type ExerciseFormValues = {
   title: string;
   content: string;
   videoUrl: string;
+  pdfUrl: string;
+  photoUrls: string[];
 };
 
 type ExerciseFormProps = {
@@ -31,19 +34,28 @@ export function ExerciseForm({
   const [title, setTitle] = useState(initialValues?.title ?? "");
   const [content, setContent] = useState(initialValues?.content ?? "");
   const [videoUrl, setVideoUrl] = useState(initialValues?.videoUrl ?? "");
+  const [pdfUrl, setPdfUrl] = useState(initialValues?.pdfUrl ?? "");
+  const [photoUrls, setPhotoUrls] = useState<string[]>(initialValues?.photoUrls ?? []);
   const [validationError, setValidationError] = useState<string | null>(null);
 
   function handleSubmit() {
     if (!title.trim() || !content.trim() || !videoUrl.trim()) {
-      setValidationError("Los 3 campos son obligatorios.");
+      setValidationError("Título, contenido y video son obligatorios.");
       return;
     }
     setValidationError(null);
-    onSave({ title, content, videoUrl });
+    onSave({
+      title,
+      content,
+      videoUrl,
+      pdfUrl,
+      photoUrls: photoUrls.map((url) => url.trim()).filter(Boolean),
+    });
   }
 
   return (
-    <Card className="font-sans">
+    <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
+    <Card className="font-sans lg:flex-1">
       <CardHeader>
         <CardTitle>{initialValues ? "Editar ejercicio" : "Nuevo ejercicio"}</CardTitle>
       </CardHeader>
@@ -75,6 +87,50 @@ export function ExerciseForm({
             placeholder="https://vimeo.com/... o https://youtube.com/watch?v=..."
           />
         </div>
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="exercise-pdf">Link de PDF (opcional)</Label>
+          <Input
+            id="exercise-pdf"
+            value={pdfUrl}
+            onChange={(e) => setPdfUrl(e.target.value)}
+            placeholder="https://..."
+          />
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <Label>Fotos (opcional)</Label>
+          <div className="flex flex-col gap-2">
+            {photoUrls.map((url, index) => (
+              <div key={index} className="flex gap-2">
+                <Input
+                  value={url}
+                  onChange={(e) =>
+                    setPhotoUrls((prev) =>
+                      prev.map((p, i) => (i === index ? e.target.value : p)),
+                    )
+                  }
+                  placeholder="https://..."
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() =>
+                    setPhotoUrls((prev) => prev.filter((_, i) => i !== index))
+                  }
+                >
+                  Quitar
+                </Button>
+              </div>
+            ))}
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setPhotoUrls((prev) => [...prev, ""])}
+              className="w-fit"
+            >
+              Agregar foto
+            </Button>
+          </div>
+        </div>
 
         {(validationError || error) && (
           <p className="text-sm text-destructive">{validationError || error}</p>
@@ -96,5 +152,12 @@ export function ExerciseForm({
         </div>
       </CardContent>
     </Card>
+
+    <div className="lg:sticky lg:top-4 lg:w-[28rem] xl:w-[32rem]">
+      <ExercisePreview
+        values={{ title, content, videoUrl, pdfUrl, photoUrls }}
+      />
+    </div>
+    </div>
   );
 }

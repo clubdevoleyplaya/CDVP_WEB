@@ -18,6 +18,8 @@ type Ejercicio = {
   content: string;
   video_provider: VideoProvider;
   video_id: string;
+  pdf_url: string | null;
+  photo_urls: string[];
 };
 
 function videoUrlFor(ejercicio: Ejercicio): string {
@@ -88,11 +90,21 @@ export function GoteoCapsuleEditor() {
               content: values.content,
               video_provider: provider,
               video_id: videoId,
+              pdf_url: values.pdfUrl.trim() || null,
+              photo_urls: values.photoUrls,
             },
           ]
         : ejercicios.map((e) =>
             e.id === editingId
-              ? { ...e, title: values.title, content: values.content, video_provider: provider, video_id: videoId }
+              ? {
+                  ...e,
+                  title: values.title,
+                  content: values.content,
+                  video_provider: provider,
+                  video_id: videoId,
+                  pdf_url: values.pdfUrl.trim() || null,
+                  photo_urls: values.photoUrls,
+                }
               : e,
           );
 
@@ -113,6 +125,8 @@ export function GoteoCapsuleEditor() {
               title: e.title,
               content: e.content,
               video_url: videoUrlFor(e),
+              pdf_url: e.pdf_url,
+              photo_urls: e.photo_urls,
             })),
           }),
         },
@@ -207,6 +221,8 @@ export function GoteoCapsuleEditor() {
                   title: editing.title,
                   content: editing.content,
                   videoUrl: videoUrlFor(editing),
+                  pdfUrl: editing.pdf_url ?? "",
+                  photoUrls: editing.photo_urls,
                 }
               : undefined
           }
