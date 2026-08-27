@@ -5,7 +5,6 @@ import { detectVideoProvider } from "@/lib/video-link";
 import type { ExerciseFormValues } from "@/components/exercise-form";
 
 const YOUTUBE_ID_RE = /^[A-Za-z0-9_-]+$/;
-const HTTP_URL_RE = /^https?:\/\//i;
 
 function parseVideo(videoUrl: string): { provider: "vimeo" | "youtube"; videoId: string } | null {
   if (!videoUrl.trim()) return null;
@@ -56,7 +55,7 @@ export function ExercisePreview({ values }: { values: ExerciseFormValues }) {
           {values.content.trim() || "El contenido del ejercicio aparece acá."}
         </p>
 
-        {HTTP_URL_RE.test(values.pdfUrl) && (
+        {(values.pdfUrl.startsWith("https://") || values.pdfUrl.startsWith("http://")) && (
           <a
             href={values.pdfUrl}
             target="_blank"
@@ -67,10 +66,10 @@ export function ExercisePreview({ values }: { values: ExerciseFormValues }) {
           </a>
         )}
 
-        {values.photoUrls.some((url) => HTTP_URL_RE.test(url)) && (
+        {values.photoUrls.some((url) => url.startsWith("https://") || url.startsWith("http://")) && (
           <div className="grid grid-cols-3 gap-2">
             {values.photoUrls.map((url, index) =>
-              HTTP_URL_RE.test(url) ? (
+              url.startsWith("https://") || url.startsWith("http://") ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   key={index}
