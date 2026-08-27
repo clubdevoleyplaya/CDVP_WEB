@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -10,7 +11,8 @@ import { formatPrice } from "@/lib/price";
 type Plan = { title: string; description: string; price_ars: number };
 
 export default function SuscripcionPage() {
-  const { session, isSubscriber, setLoginOpen } = useDemoState();
+  const { session, isSubscriber } = useDemoState();
+  const router = useRouter();
 
   const [plan, setPlan] = useState<Plan | null>(null);
   const [planError, setPlanError] = useState(false);
@@ -26,7 +28,7 @@ export default function SuscripcionPage() {
 
   async function handleSubscribe() {
     if (!session) {
-      setLoginOpen(true);
+      router.push("/login");
       return;
     }
 

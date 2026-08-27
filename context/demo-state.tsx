@@ -39,8 +39,6 @@ type DemoState = {
   removeFromCart: (slug: string) => void;
   cartOpen: boolean;
   setCartOpen: (open: boolean) => void;
-  loginOpen: boolean;
-  setLoginOpen: (open: boolean) => void;
   cancelSubscription: () => Promise<void>;
 };
 
@@ -80,7 +78,6 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
   const [currency, setCurrency] = useState<Currency>("ARS");
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
-  const [loginOpen, setLoginOpen] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -173,8 +170,6 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
         removeFromCart,
         cartOpen,
         setCartOpen,
-        loginOpen,
-        setLoginOpen,
       }}
     >
       {children}

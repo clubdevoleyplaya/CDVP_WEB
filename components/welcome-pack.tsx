@@ -1,9 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useDemoState } from "@/context/demo-state";
 
 export function WelcomePack() {
-  const { isSubscriber, session, setLoginOpen } = useDemoState();
+  const { isSubscriber, session } = useDemoState();
 
   return (
     <div className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-8">
@@ -23,13 +24,12 @@ export function WelcomePack() {
           🔒 Bloqueado — sumate a la suscripción para ver el contenido
         </span>
       ) : (
-        <button
-          type="button"
-          onClick={() => setLoginOpen(true)}
+        <Link
+          href="/login"
           className="w-fit rounded-lg bg-blue/10 px-3 py-1 font-display text-sm font-bold text-blue"
         >
           🔒 Bloqueado — iniciá sesión para ver el contenido
-        </button>
+        </Link>
       )}
     </div>
   );
