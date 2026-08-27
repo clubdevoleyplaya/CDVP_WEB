@@ -52,3 +52,5 @@ Sin jerga técnica: se escribe como se le explicaría a Juli.
 - [`spec_06_checkout-ui.md`](./spec_06_checkout-ui.md) [implementado] — página `/suscripcion` real: detalle público, "Suscribirme" crea preapproval real y redirige, ya-suscripto lo indica en vez de ofrecer suscribirse de nuevo.
 - [`spec_07_goteo-admin-ui.md`](./spec_07_goteo-admin-ui.md) [implementado] — formulario de admin: título, contenido, link de video (detecta Vimeo/YouTube solo)
 - [`spec_08_perfil-ui.md`](./spec_08_perfil-ui.md) [implementado] — sección "Suscripción" en `/perfil`, botón "Cancelar suscripción" con confirmación, actualiza en la misma página sin recargar.
+- [`spec_09_goteo-admin-ui.md`](./spec_09_goteo-admin-ui.md) [propuesto]
+- [`spec_10_registro-usuarios.md`](./spec_10_registro-usuarios.md) [en_progreso] — recuperar contraseña con mail con marca CDVP (SMTP propio vía Resend + plantilla branded ya cargados en Supabase); falta la verificación visual de un mail real antes de pasar a implementado.
