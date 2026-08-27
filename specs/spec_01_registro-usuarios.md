@@ -1,7 +1,7 @@
 ---
 numero: 01
-estado: propuesto # implementado | en_progreso | propuesto
-fecha: null
+estado: implementado # implementado | en_progreso | propuesto
+fecha: 2026-08-27
 depende_de: [migracion-usuarios-legado]
 complejidad_cafes: 1
 ---
