@@ -11,7 +11,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CATEGORY_ROUTE_LABELS, type CategoryRoute } from "@/lib/products";
 import { useDemoState } from "@/context/demo-state";
@@ -24,7 +24,7 @@ const NAV_ROUTES = [
 
 export function NavDrawer() {
   const [open, setOpen] = useState(false);
-  const { session, me, signOut, setLoginOpen } = useDemoState();
+  const { session, me, signOut } = useDemoState();
   const displayName = me?.nickname || session?.user.email;
   const initial = (displayName ?? "?").charAt(0).toUpperCase();
 
@@ -97,17 +97,20 @@ export function NavDrawer() {
             </>
           ) : (
             <>
-              <Button
-                type="button"
-                variant="outline"
-                className="font-display text-xs font-bold tracking-wide uppercase"
-                onClick={() => {
-                  setOpen(false);
-                  setLoginOpen(true);
-                }}
-              >
-                Iniciar sesión
-              </Button>
+              <DrawerClose
+                nativeButton={false}
+                render={
+                  <Link
+                    href="/login"
+                    className={buttonVariants({
+                      variant: "outline",
+                      className: "font-display text-xs font-bold tracking-wide uppercase",
+                    })}
+                  >
+                    Iniciar sesión
+                  </Link>
+                }
+              />
               <DrawerClose
                 nativeButton={false}
                 render={

@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useDemoState } from "@/context/demo-state";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 
 type AuthGuardProps = {
   role?: "admin";
@@ -9,7 +10,7 @@ type AuthGuardProps = {
 };
 
 export function AuthGuard({ role, children }: AuthGuardProps) {
-  const { session, me, setLoginOpen } = useDemoState();
+  const { session, me } = useDemoState();
 
   if (!session || (role && me?.role !== role)) {
     return (
@@ -19,13 +20,12 @@ export function AuthGuard({ role, children }: AuthGuardProps) {
             ? "Necesitás una cuenta de administrador para ver esto."
             : "Iniciá sesión para ver esto."}
         </p>
-        <Button
-          type="button"
-          onClick={() => setLoginOpen(true)}
-          className="mt-6 font-display text-xs font-bold uppercase tracking-wide"
+        <Link
+          href="/login"
+          className={buttonVariants({ className: "mt-6 font-display text-xs font-bold uppercase tracking-wide" })}
         >
           Iniciar sesión
-        </Button>
+        </Link>
       </section>
     );
   }

@@ -6,7 +6,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { NavDrawer } from "@/components/nav-drawer";
 import { CartDrawer } from "@/components/cart-drawer";
-import { LoginDrawer } from "@/components/login-drawer";
 import { CATEGORY_ROUTE_LABELS } from "@/lib/products";
 import { useDemoState } from "@/context/demo-state";
 
@@ -53,7 +52,12 @@ export function Header() {
           </Link>
         ) : (
           <>
-            <LoginDrawer />
+            <Link
+              href="/login"
+              className="hidden rounded-lg border border-ink px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide md:inline-flex"
+            >
+              Iniciar sesión
+            </Link>
             <Link
               href="/signup"
               className="hidden rounded-lg border border-blue bg-blue px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide text-white md:inline-flex"
