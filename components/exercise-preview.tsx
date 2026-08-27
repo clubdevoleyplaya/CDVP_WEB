@@ -16,16 +16,6 @@ function parseVideo(videoUrl: string): { provider: "vimeo" | "youtube"; videoId:
   }
 }
 
-function safePhotoUrls(urls: string[]): string[] {
-  const result: string[] = [];
-  for (const url of urls) {
-    if (HTTP_URL_RE.test(url)) {
-      result.push(url);
-    }
-  }
-  return result;
-}
-
 function VideoPreview({ videoUrl }: { videoUrl: string }) {
   const parsed = parseVideo(videoUrl);
 
@@ -48,9 +38,6 @@ function VideoPreview({ videoUrl }: { videoUrl: string }) {
 }
 
 export function ExercisePreview({ values }: { values: ExerciseFormValues }) {
-  const pdfHref = HTTP_URL_RE.test(values.pdfUrl) ? values.pdfUrl : null;
-  const photoUrls = safePhotoUrls(values.photoUrls);
-
   return (
     <Card className="font-sans">
       <CardHeader>
@@ -69,9 +56,9 @@ export function ExercisePreview({ values }: { values: ExerciseFormValues }) {
           {values.content.trim() || "El contenido del ejercicio aparece acá."}
         </p>
 
-        {pdfHref && (
+        {HTTP_URL_RE.test(values.pdfUrl) && (
           <a
-            href={pdfHref}
+            href={values.pdfUrl}
             target="_blank"
             rel="noreferrer"
             className="w-fit rounded-lg border border-line px-3 py-1.5 text-sm font-bold uppercase tracking-wide hover:bg-surface"
@@ -80,17 +67,19 @@ export function ExercisePreview({ values }: { values: ExerciseFormValues }) {
           </a>
         )}
 
-        {photoUrls.length > 0 && (
+        {values.photoUrls.some((url) => HTTP_URL_RE.test(url)) && (
           <div className="grid grid-cols-3 gap-2">
-            {photoUrls.map((url, index) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={index}
-                src={url}
-                alt=""
-                className="aspect-square w-full rounded-lg border border-line object-cover"
-              />
-            ))}
+            {values.photoUrls.map((url, index) =>
+              HTTP_URL_RE.test(url) ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={index}
+                  src={url}
+                  alt=""
+                  className="aspect-square w-full rounded-lg border border-line object-cover"
+                />
+              ) : null,
+            )}
           </div>
         )}
       </CardContent>
