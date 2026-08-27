@@ -5,6 +5,7 @@ import { detectVideoProvider } from "@/lib/video-link";
 import type { ExerciseFormValues } from "@/components/exercise-form";
 
 const YOUTUBE_ID_RE = /^[A-Za-z0-9_-]+$/;
+const HTTP_URL_RE = /^https?:\/\//i;
 
 function parseVideo(videoUrl: string): { provider: "vimeo" | "youtube"; videoId: string } | null {
   if (!videoUrl.trim()) return null;
@@ -15,14 +16,14 @@ function parseVideo(videoUrl: string): { provider: "vimeo" | "youtube"; videoId:
   }
 }
 
-function safeHttpUrl(value: string): string | null {
-  if (!value.trim()) return null;
-  try {
-    const parsed = new URL(value);
-    return parsed.protocol === "http:" || parsed.protocol === "https:" ? value : null;
-  } catch {
-    return null;
+function safePhotoUrls(urls: string[]): string[] {
+  const result: string[] = [];
+  for (const url of urls) {
+    if (HTTP_URL_RE.test(url.trim())) {
+      result.push(url);
+    }
   }
+  return result;
 }
 
 function VideoPreview({ videoUrl }: { videoUrl: string }) {
@@ -47,10 +48,8 @@ function VideoPreview({ videoUrl }: { videoUrl: string }) {
 }
 
 export function ExercisePreview({ values }: { values: ExerciseFormValues }) {
-  const pdfHref = safeHttpUrl(values.pdfUrl);
-  const photoUrls = values.photoUrls
-    .map((url) => safeHttpUrl(url))
-    .filter((url): url is string => url !== null);
+  const pdfHref = HTTP_URL_RE.test(values.pdfUrl.trim()) ? values.pdfUrl : null;
+  const photoUrls = safePhotoUrls(values.photoUrls);
 
   return (
     <Card className="font-sans">
