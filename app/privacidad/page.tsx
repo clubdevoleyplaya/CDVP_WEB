@@ -25,17 +25,13 @@ export default function PrivacidadPage() {
           </h2>
           <ul className="mt-2 list-disc space-y-1 pl-5">
             <li>
-              <strong className="text-ink">Supabase:</strong> guarda tu cuenta y tus datos de
-              acceso (autenticación y base de datos).
+              Un proveedor externo de autenticación y base de datos, donde se guarda tu cuenta y
+              tus datos de acceso.
             </li>
+            <li>Un procesador de pagos externo, que procesa el pago cuando comprás un curso o combo.</li>
             <li>
-              <strong className="text-ink">Mercado Pago:</strong> procesa el pago cuando comprás
-              un curso o combo.
-            </li>
-            <li>
-              <strong className="text-ink">YouTube:</strong> los videos del sitio están embebidos
-              desde YouTube — al reproducirlos, YouTube puede registrar tu IP según sus propias
-              políticas.
+              Los videos del sitio están embebidos desde una plataforma de video externa — al
+              reproducirlos, esa plataforma puede registrar tu IP según sus propias políticas.
             </li>
           </ul>
           <p className="mt-2">No usamos inteligencia artificial en ninguna parte del sitio.</p>
@@ -47,8 +43,13 @@ export default function PrivacidadPage() {
           </h2>
           <p className="mt-2">
             Si querés dar de baja tu cuenta o que borremos tus datos, escribinos a{" "}
-            <span className="font-bold text-ink">[mail de contacto — completar]</span> desde el
-            mismo mail con el que te registraste.
+            <a
+              href="mailto:clubdevoleyplaya@gmail.com"
+              className="font-bold text-ink underline underline-offset-2"
+            >
+              clubdevoleyplaya@gmail.com
+            </a>{" "}
+            desde el mismo mail con el que te registraste.
           </p>
         </div>
       </div>
