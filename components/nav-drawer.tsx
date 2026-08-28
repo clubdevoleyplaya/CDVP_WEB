@@ -20,6 +20,7 @@ const NAV_ROUTES = [
   "cursos",
   "descargables",
   "combos",
+  "eventos",
 ] as const satisfies readonly CategoryRoute[];
 
 export function NavDrawer() {

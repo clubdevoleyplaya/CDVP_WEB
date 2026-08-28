@@ -6,8 +6,16 @@ export function formatPrice(amount: number, currency: Currency) {
   return `$${amount.toLocaleString("es-AR")} ARS`;
 }
 
+const DISCOUNT_MULTIPLIER_BY_CATEGORY: Partial<Record<Product["category"], number>> = {
+  curso: 0.5,
+  evento: 0.9,
+};
+
 export function computeDisplayPrice(
-  product: Pick<Product, "priceArs" | "priceUsd" | "compareArs" | "compareUsd" | "discountable">,
+  product: Pick<
+    Product,
+    "priceArs" | "priceUsd" | "compareArs" | "compareUsd" | "discountable" | "category"
+  >,
   currency: Currency,
   isSubscriber: boolean
 ) {
@@ -15,10 +23,11 @@ export function computeDisplayPrice(
   const compare = currency === "USD" ? product.compareUsd : product.compareArs;
 
   if (product.discountable && isSubscriber) {
+    const multiplier = DISCOUNT_MULTIPLIER_BY_CATEGORY[product.category] ?? 1;
     return {
-      now: Math.round(base * 0.8),
+      now: Math.round(base * multiplier),
       old: base,
-      showOld: true,
+      showOld: multiplier < 1,
     };
   }
   if (compare) {

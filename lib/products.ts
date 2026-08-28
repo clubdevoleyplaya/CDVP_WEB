@@ -1,5 +1,5 @@
-export type Category = "curso" | "descargable" | "combo";
-export type CategoryRoute = "cursos" | "descargables" | "combos";
+export type Category = "curso" | "descargable" | "combo" | "evento";
+export type CategoryRoute = "cursos" | "descargables" | "combos" | "eventos";
 
 export interface Product {
   slug: string;
@@ -24,24 +24,28 @@ export const CATEGORY_ROUTES: Record<CategoryRoute, Category> = {
   cursos: "curso",
   descargables: "descargable",
   combos: "combo",
+  eventos: "evento",
 };
 
 export const CATEGORY_LABELS: Record<Category, string> = {
   curso: "Curso",
   descargable: "Guía y plan",
   combo: "Combo",
+  evento: "Evento",
 };
 
 export const CATEGORY_ROUTE_LABELS: Record<CategoryRoute, string> = {
   cursos: "Cursos",
   descargables: "Guías y planes",
   combos: "Combos",
+  eventos: "Eventos",
 };
 
 export const CATEGORY_TO_ROUTE: Record<Category, CategoryRoute> = {
   curso: "cursos",
   descargable: "descargables",
   combo: "combos",
+  evento: "eventos",
 };
 
 export const products: Product[] = [

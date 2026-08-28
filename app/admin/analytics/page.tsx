@@ -57,9 +57,10 @@ export default function AdminAnalyticsPage() {
       tooltip: { trigger: "axis" as const },
       legend: {
         data: ["Ventas (ARS)", "Visitas"],
+        bottom: 0,
         textStyle: { color: c.inkSoft },
       },
-      grid: { left: 48, right: 48, top: 40, bottom: 28 },
+      grid: { left: 48, right: 48, top: 40, bottom: 56 },
       xAxis: {
         type: "category" as const,
         data: DAILY_LABELS,
@@ -111,19 +112,24 @@ export default function AdminAnalyticsPage() {
         fontFamily: "var(--font-sans, sans-serif)",
       },
       tooltip: { trigger: "item" as const },
-      legend: { bottom: 0, textStyle: { color: c.inkSoft } },
+      legend: {
+        orient: "vertical" as const,
+        right: 8,
+        top: "middle" as const,
+        textStyle: { color: c.inkSoft },
+      },
       color: [c.blue, c.green, c.yellow, c.inkSoft],
       series: [
         {
           name: "Ingresos por categoría",
           type: "pie" as const,
           radius: ["45%", "70%"],
-          center: ["50%", "42%"],
+          center: ["36%", "50%"],
           itemStyle: {
             borderColor: theme === "dark" ? "#362b7a" : "#ffffff",
             borderWidth: 2,
           },
-          label: { color: c.inkSoft },
+          label: { show: false },
           data: REVENUE_BY_CATEGORY,
         },
       ],
@@ -164,7 +170,7 @@ export default function AdminAnalyticsPage() {
 
   return (
     <AuthGuard role="admin">
-      <section className="mx-auto max-w-7xl px-6 py-16">
+      <section className="w-full px-6 py-16">
         <div className="flex flex-wrap items-baseline gap-4">
           <h1 className="font-display text-3xl font-bold uppercase">
             Panel admin
@@ -187,7 +193,7 @@ export default function AdminAnalyticsPage() {
           reemplazarlos por datos reales del backend.
         </p>
 
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
           <Card className="font-sans">
             <CardHeader>
               <CardDescription>Ventas totales (14 días)</CardDescription>
@@ -222,36 +228,36 @@ export default function AdminAnalyticsPage() {
           </Card>
         </div>
 
-        <Card className="mt-6 font-sans">
-          <CardHeader>
-            <CardTitle>Ventas y visitas por día</CardTitle>
-            <CardDescription>
-              Últimos 14 días — datos de ejemplo
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <EChart option={salesVisitsOption} height={340} />
-          </CardContent>
-        </Card>
-
-        <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-3">
+          <Card className="font-sans xl:col-span-2">
+            <CardHeader>
+              <CardTitle>Ventas y visitas por día</CardTitle>
+              <CardDescription>
+                Últimos 14 días — datos de ejemplo
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <EChart option={salesVisitsOption} height={340} />
+            </CardContent>
+          </Card>
           <Card className="font-sans">
             <CardHeader>
               <CardTitle>Ingresos por categoría</CardTitle>
             </CardHeader>
             <CardContent>
-              <EChart option={categoryOption} height={300} />
-            </CardContent>
-          </Card>
-          <Card className="font-sans">
-            <CardHeader>
-              <CardTitle>Productos más vendidos</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <EChart option={topProductsOption} height={300} />
+              <EChart option={categoryOption} height={340} />
             </CardContent>
           </Card>
         </div>
+
+        <Card className="mt-6 font-sans">
+          <CardHeader>
+            <CardTitle>Productos más vendidos</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <EChart option={topProductsOption} height={280} />
+          </CardContent>
+        </Card>
       </section>
     </AuthGuard>
   );

@@ -14,7 +14,7 @@ const FEATURED_SLUGS = [
   "todos-los-cursos",
 ] as const;
 
-const CATEGORY_ROUTES: CategoryRoute[] = ["cursos", "descargables", "combos"];
+const CATEGORY_ROUTES: CategoryRoute[] = ["cursos", "descargables", "combos", "eventos"];
 
 export default function Home() {
   const featured = FEATURED_SLUGS.map(getProductBySlug).filter((p) => p !== undefined);

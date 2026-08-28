@@ -13,6 +13,7 @@ export function generateStaticParams() {
 
 const CATEGORY_NOTES: Partial<Record<CategoryRoute, string>> = {
   cursos: "50% OFF para suscriptores",
+  eventos: "10% OFF para suscriptores",
 };
 
 export default async function CatalogoPage({
