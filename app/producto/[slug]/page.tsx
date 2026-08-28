@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ProductBuyBox } from "@/components/product-buy-box";
 import { ProductCard } from "@/components/product-card";
 import { ProductVideoSection } from "@/components/product-video-section";
+import { QuizSection } from "@/components/quiz-section";
 import {
   CATEGORY_LABELS,
   CATEGORY_ROUTE_LABELS,
@@ -73,6 +74,7 @@ export default async function ProductPage({
       </div>
 
       <ProductVideoSection slug={product.slug} category={product.category} />
+      <QuizSection slug={product.slug} category={product.category} />
 
       {product.testimonials && product.testimonials.length > 0 && (
         <div className="mt-16">

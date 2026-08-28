@@ -16,16 +16,12 @@ export function ProductBuyBox({ product }: { product: Product }) {
 
   const rail =
     currency === "USD"
-      ? "Pago internacional vía Paddle (Merchant of Record) — próximamente"
+      ? "Pago internacional vía Paddle (Merchant of Record)"
       : "Pago en Argentina vía MercadoPago";
 
   async function handleBuy() {
     if (!session) {
       router.push("/login");
-      return;
-    }
-    if (currency === "USD") {
-      setError("El pago en USD todavía no está disponible — cambiá a ARS para comprar.");
       return;
     }
 
@@ -40,7 +36,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
         },
         body: JSON.stringify({
           items: [{ slug: product.slug, quantity: 1 }],
-          payment_provider: "mercadopago",
+          payment_provider: currency === "USD" ? "paddle" : "mercadopago",
         }),
       });
       if (!res.ok) throw new Error();

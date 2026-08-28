@@ -1,7 +1,7 @@
 ---
 numero: 11
-estado: propuesto
-fecha: null
+estado: implementado
+fecha: 2026-08-28
 depende_de: []
 complejidad_cafes: 1
 ---

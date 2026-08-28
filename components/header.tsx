@@ -9,7 +9,7 @@ import { CartDrawer } from "@/components/cart-drawer";
 import { CATEGORY_ROUTE_LABELS } from "@/lib/products";
 import { useDemoState } from "@/context/demo-state";
 
-const NAV_ROUTES = ["cursos", "descargables", "combos"] as const;
+const NAV_ROUTES = ["cursos", "descargables", "combos", "eventos"] as const;
 
 export function Header() {
   const { session, me } = useDemoState();
