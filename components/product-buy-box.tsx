@@ -8,9 +8,9 @@ import { computeDisplayPrice, formatPrice } from "@/lib/price";
 import type { Product } from "@/lib/products";
 
 export function ProductBuyBox({ product }: { product: Product }) {
-  const { currency, isSubscriber, addToCart, session } = useDemoState();
+  const { currency, isSubscriber, discountPercent, addToCart, session } = useDemoState();
   const router = useRouter();
-  const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber);
+  const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber, discountPercent);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

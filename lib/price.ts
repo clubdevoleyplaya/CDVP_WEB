@@ -6,9 +6,15 @@ export function formatPrice(amount: number, currency: Currency) {
   return `$${amount.toLocaleString("es-AR")} ARS`;
 }
 
-const DISCOUNT_MULTIPLIER_BY_CATEGORY: Partial<Record<Product["category"], number>> = {
-  curso: 0.5,
-  evento: 0.9,
+export type DiscountPercent = Record<Product["category"], number>;
+
+// Valores iniciales, iguales a los del backend. Se usan mientras llegan (o si no llegan)
+// los porcentajes vigentes desde `GET /descuentos`.
+export const DEFAULT_DISCOUNT_PERCENT: DiscountPercent = {
+  curso: 50,
+  evento: 10,
+  combo: 0,
+  descargable: 0,
 };
 
 export function computeDisplayPrice(
@@ -17,17 +23,18 @@ export function computeDisplayPrice(
     "priceArs" | "priceUsd" | "compareArs" | "compareUsd" | "discountable" | "category"
   >,
   currency: Currency,
-  isSubscriber: boolean
+  isSubscriber: boolean,
+  discountPercent: DiscountPercent = DEFAULT_DISCOUNT_PERCENT
 ) {
   const base = currency === "USD" ? product.priceUsd : product.priceArs;
   const compare = currency === "USD" ? product.compareUsd : product.compareArs;
 
   if (product.discountable && isSubscriber) {
-    const multiplier = DISCOUNT_MULTIPLIER_BY_CATEGORY[product.category] ?? 1;
+    const percentOff = discountPercent[product.category] ?? 0;
     return {
-      now: Math.round(base * multiplier),
+      now: Math.round(base * (1 - percentOff / 100) * 100) / 100,
       old: base,
-      showOld: multiplier < 1,
+      showOld: percentOff > 0,
     };
   }
   if (compare) {

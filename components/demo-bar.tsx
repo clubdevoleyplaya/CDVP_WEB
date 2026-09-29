@@ -11,12 +11,14 @@ const CURRENCIES: { code: Currency; label: string }[] = [
 ];
 
 export function DemoBar() {
-  const { isSubscriber, currency, setCurrency } = useDemoState();
+  const { isSubscriber, discountPercent, currency, setCurrency } = useDemoState();
 
   return (
     <div className="flex flex-wrap items-center gap-5 bg-band px-6 py-3 text-sm text-white">
       {isSubscriber ? (
-        <span>Suscripción activa (Pack de Bienvenida + 50% OFF en cursos)</span>
+        <span>
+          Suscripción activa (Pack de Bienvenida{discountPercent.curso > 0 && ` + ${discountPercent.curso}% OFF en cursos`})
+        </span>
       ) : (
         <>
           <Badge
@@ -25,7 +27,9 @@ export function DemoBar() {
           >
             Sin suscripción activa
           </Badge>
-          <span>Suscribite y conseguí el Pack de Bienvenida + 50% OFF en cursos</span>
+          <span>
+            Suscribite y conseguí el Pack de Bienvenida{discountPercent.curso > 0 && ` + ${discountPercent.curso}% OFF en cursos`}
+          </span>
         </>
       )}
       <div className="ml-auto flex gap-1" role="group" aria-label="Elegí moneda">

@@ -3,6 +3,7 @@
 import type { Session } from "@supabase/supabase-js";
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
+import { DEFAULT_DISCOUNT_PERCENT, type DiscountPercent } from "@/lib/price";
 import { createClient } from "@/lib/supabase/client";
 
 export type Currency = "ARS" | "USD";
@@ -17,6 +18,7 @@ type Me = {
   team: string | null;
   bio: string | null;
   avatarUrl: string | null;
+  bannerUrl: string | null;
 };
 
 type ProfileFields = {
@@ -24,12 +26,14 @@ type ProfileFields = {
   team?: string | null;
   bio?: string | null;
   avatarUrl?: string | null;
+  bannerUrl?: string | null;
 };
 
 type DemoState = {
   session: Session | null;
   me: Me | null;
   isSubscriber: boolean;
+  discountPercent: DiscountPercent;
   signOut: () => Promise<void>;
   updateProfile: (fields: ProfileFields) => Promise<void>;
   currency: Currency;
@@ -50,6 +54,7 @@ function mapMe(data: {
   team: string | null;
   bio: string | null;
   avatar_url: string | null;
+  banner_url: string | null;
 }): Me {
   return {
     role: data.role,
@@ -59,6 +64,7 @@ function mapMe(data: {
     team: data.team,
     bio: data.bio,
     avatarUrl: data.avatar_url,
+    bannerUrl: data.banner_url,
   };
 }
 
@@ -70,10 +76,18 @@ async function fetchMe(accessToken: string): Promise<Me | null> {
   return mapMe(await res.json());
 }
 
+async function fetchDiscountPercent(): Promise<DiscountPercent | null> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/descuentos`);
+  if (!res.ok) return null;
+  const data = await res.json();
+  return { ...DEFAULT_DISCOUNT_PERCENT, ...data.descuentos };
+}
+
 const DemoStateContext = createContext<DemoState | null>(null);
 
 export function DemoStateProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
+  const [discountPercent, setDiscountPercent] = useState<DiscountPercent>(DEFAULT_DISCOUNT_PERCENT);
   const [me, setMe] = useState<Me | null>(null);
   const [currency, setCurrency] = useState<Currency>("ARS");
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -91,6 +105,13 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
     });
 
     return () => subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    // Públicos (también para visitantes): si falla, quedan los valores iniciales.
+    fetchDiscountPercent()
+      .then((rules) => rules && setDiscountPercent(rules))
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -120,6 +141,7 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
         team: fields.team,
         bio: fields.bio,
         avatar_url: fields.avatarUrl,
+        banner_url: fields.bannerUrl,
       }),
     });
     if (!res.ok) throw new Error("No se pudo actualizar el perfil");
@@ -160,6 +182,7 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
         session,
         me,
         isSubscriber,
+        discountPercent,
         signOut,
         updateProfile,
         cancelSubscription,
