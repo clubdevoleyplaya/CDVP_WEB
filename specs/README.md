@@ -54,3 +54,6 @@ Sin jerga técnica: se escribe como se le explicaría a Juli.
 - [`spec_08_perfil-ui.md`](./spec_08_perfil-ui.md) [implementado] — sección "Suscripción" en `/perfil`, botón "Cancelar suscripción" con confirmación, actualiza en la misma página sin recargar.
 - [`spec_09_goteo-admin-ui.md`](./spec_09_goteo-admin-ui.md) [propuesto]
 - [`spec_10_registro-usuarios.md`](./spec_10_registro-usuarios.md) [en_progreso] — recuperar contraseña con mail con marca CDVP (SMTP propio vía Resend + plantilla branded ya cargados en Supabase); falta la verificación visual de un mail real antes de pasar a implementado.
+- [`spec_14_descuentos-admin-ui.md`](./spec_14_descuentos-admin-ui.md) [implementado] — pantalla `/admin/descuentos`.
+- [`spec_15_catalogo-ui.md`](./spec_15_catalogo-ui.md) [implementado] — precios y carteles de descuento leen los porcentajes vigentes del servidor.
+- [`spec_16_admin-navegacion-ui.md`](./spec_16_admin-navegacion-ui.md) [implementado] — barra de navegación común a `/admin/*`; `/admin` redirige al panel general.

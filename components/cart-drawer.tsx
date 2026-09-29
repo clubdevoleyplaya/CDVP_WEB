@@ -18,14 +18,14 @@ import { computeDisplayPrice, formatPrice } from "@/lib/price";
 import { getProductBySlug } from "@/lib/products";
 
 export function CartDrawer() {
-  const { cart, removeFromCart, currency, isSubscriber, cartOpen, setCartOpen } =
+  const { cart, removeFromCart, currency, isSubscriber, discountPercent, cartOpen, setCartOpen } =
     useDemoState();
 
   const lines = cart
     .map((item) => {
       const product = getProductBySlug(item.slug);
       if (!product) return null;
-      const { now } = computeDisplayPrice(product, currency, isSubscriber);
+      const { now } = computeDisplayPrice(product, currency, isSubscriber, discountPercent);
       return { item, product, lineTotal: now * item.qty };
     })
     .filter((l): l is NonNullable<typeof l> => l !== null);

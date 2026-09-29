@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { CatalogGrid } from "@/components/catalog-grid";
+import { CategoryDiscountNote } from "@/components/category-discount-note";
 import {
   CATEGORY_ROUTES,
   CATEGORY_ROUTE_LABELS,
@@ -10,11 +11,6 @@ import {
 export function generateStaticParams() {
   return Object.keys(CATEGORY_ROUTES).map((categoria) => ({ categoria }));
 }
-
-const CATEGORY_NOTES: Partial<Record<CategoryRoute, string>> = {
-  cursos: "50% OFF para suscriptores",
-  eventos: "10% OFF para suscriptores",
-};
 
 export default async function CatalogoPage({
   params,
@@ -27,7 +23,6 @@ export default async function CatalogoPage({
   const route = categoria as CategoryRoute;
   const category = CATEGORY_ROUTES[route];
   const items = getProductsByCategory(category);
-  const note = CATEGORY_NOTES[route];
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
@@ -35,15 +30,12 @@ export default async function CatalogoPage({
         <h1 className="font-display text-3xl font-bold uppercase">
           {CATEGORY_ROUTE_LABELS[route]}
         </h1>
-        {note && (
-          <span
-            className={`font-display text-xs font-bold uppercase tracking-wide ${
-              route === "cursos" ? "text-green" : "text-ink-soft"
-            }`}
-          >
-            {note}
-          </span>
-        )}
+        <CategoryDiscountNote
+          category={category}
+          className={`font-display text-xs font-bold uppercase tracking-wide ${
+            route === "cursos" ? "text-green" : "text-ink-soft"
+          }`}
+        />
       </div>
       <div className="mt-8">
         <CatalogGrid items={items} />
