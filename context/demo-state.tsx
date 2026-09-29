@@ -18,6 +18,7 @@ type Me = {
   team: string | null;
   bio: string | null;
   avatarUrl: string | null;
+  bannerUrl: string | null;
 };
 
 type ProfileFields = {
@@ -25,6 +26,7 @@ type ProfileFields = {
   team?: string | null;
   bio?: string | null;
   avatarUrl?: string | null;
+  bannerUrl?: string | null;
 };
 
 type DemoState = {
@@ -52,6 +54,7 @@ function mapMe(data: {
   team: string | null;
   bio: string | null;
   avatar_url: string | null;
+  banner_url: string | null;
 }): Me {
   return {
     role: data.role,
@@ -61,6 +64,7 @@ function mapMe(data: {
     team: data.team,
     bio: data.bio,
     avatarUrl: data.avatar_url,
+    bannerUrl: data.banner_url,
   };
 }
 
@@ -137,6 +141,7 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
         team: fields.team,
         bio: fields.bio,
         avatar_url: fields.avatarUrl,
+        banner_url: fields.bannerUrl,
       }),
     });
     if (!res.ok) throw new Error("No se pudo actualizar el perfil");

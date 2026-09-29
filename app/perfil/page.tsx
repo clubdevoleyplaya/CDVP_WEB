@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type ChangeEvent } from "react";
 import Link from "next/link";
-import { Check, Lock } from "lucide-react";
+import { Check, ImagePlus, Lock, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -20,6 +20,8 @@ import { AuthGuard } from "@/components/auth-guard";
 import { useDemoState } from "@/context/demo-state";
 import { createClient } from "@/lib/supabase/client";
 
+const MAX_BANNER_BYTES = 5 * 1024 * 1024;
+
 type CourseAccess = { slug: string; title: string; has_access: boolean };
 
 export default function PerfilPage() {
@@ -29,6 +31,8 @@ export default function PerfilPage() {
   const [coursesLoading, setCoursesLoading] = useState(true);
   const [coursesError, setCoursesError] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [bannerUploading, setBannerUploading] = useState(false);
+  const [bannerError, setBannerError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!session) return;
@@ -70,10 +74,86 @@ export default function PerfilPage() {
     }
   }
 
+  async function handleBannerUpload(e: ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file || !session) return;
+    setBannerError(null);
+    if (!file.type.startsWith("image/")) {
+      setBannerError("El archivo tiene que ser una imagen (JPG, PNG o WebP).");
+      e.target.value = "";
+      return;
+    }
+    if (file.size > MAX_BANNER_BYTES) {
+      setBannerError("La imagen pesa más de 5 MB. Elegí una más liviana.");
+      e.target.value = "";
+      return;
+    }
+    setBannerUploading(true);
+    try {
+      const supabase = createClient();
+      const path = `${session.user.id}/${Date.now()}-${file.name}`;
+      const { error } = await supabase.storage
+        .from("banners")
+        .upload(path, file, { upsert: true });
+      if (error) throw error;
+      const { data } = supabase.storage.from("banners").getPublicUrl(path);
+      await updateProfile({ bannerUrl: data.publicUrl });
+    } catch {
+      setBannerError("No se pudo subir el banner. Probá de nuevo.");
+    } finally {
+      setBannerUploading(false);
+      e.target.value = "";
+    }
+  }
+
+  async function handleBannerRemove() {
+    setBannerError(null);
+    try {
+      await updateProfile({ bannerUrl: null });
+    } catch {
+      setBannerError("No se pudo quitar el banner. Probá de nuevo.");
+    }
+  }
+
   return (
     <section className="mx-auto w-full max-w-7xl px-6 py-16">
       <div className="overflow-hidden rounded-xl border border-line">
         <div className="relative h-52 bg-gradient-to-r from-blue via-green to-yellow">
+          {me?.bannerUrl && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={me.bannerUrl}
+              alt=""
+              className="absolute inset-0 size-full object-cover"
+            />
+          )}
+          <div className="absolute top-3 right-3 flex gap-2">
+            <label className="flex cursor-pointer items-center gap-1.5 rounded-full bg-black/50 px-3 py-1.5 font-display text-[10px] font-bold uppercase tracking-wide text-white hover:bg-black/70">
+              <ImagePlus className="size-3.5" />
+              {bannerUploading
+                ? "Subiendo..."
+                : me?.bannerUrl
+                  ? "Cambiar banner"
+                  : "Subir banner"}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleBannerUpload}
+                disabled={bannerUploading}
+                className="hidden"
+              />
+            </label>
+            {me?.bannerUrl && (
+              <button
+                type="button"
+                onClick={handleBannerRemove}
+                aria-label="Quitar banner"
+                className="flex items-center rounded-full bg-black/50 px-2 text-white hover:bg-black/70"
+              >
+                <X className="size-3.5" />
+              </button>
+            )}
+          </div>
           <label className="group absolute -bottom-10 left-8 flex size-28 cursor-pointer items-center justify-center overflow-hidden rounded-full border-4 border-surface bg-surface font-display text-3xl font-bold text-ink">
             {me?.avatarUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -97,6 +177,11 @@ export default function PerfilPage() {
             </span>
           </label>
         </div>
+        {bannerError && (
+          <p className="bg-surface px-8 pt-3 text-sm text-destructive">
+            {bannerError}
+          </p>
+        )}
         <div className="flex flex-wrap items-center justify-between gap-4 bg-surface px-8 pt-16 pb-8">
           <div>
             <h1 className="font-display text-3xl font-bold uppercase">

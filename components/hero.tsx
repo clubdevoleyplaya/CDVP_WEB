@@ -20,8 +20,8 @@ export function Hero() {
           Voley Playa
         </h1>
         <p className="mt-5 max-w-[38ch] text-lg italic text-ink-soft">
-          &ldquo;Hoy mismo podés empezar a convertirte en un atleta profesional de voley
-          playa.&rdquo;
+          Hoy mismo podés empezar a convertirte en un atleta profesional de voley
+          playa.
         </p>
         <a
           href="#destacados"

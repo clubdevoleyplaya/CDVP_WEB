@@ -36,9 +36,13 @@ export function Bio() {
         </div>
         <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-start">
           <p className="max-w-[65ch] text-base">
-            &ldquo;Para el año 2011 llegó la propuesta más linda y esperada de mi carrera, empecé a
-            formar parte de la <strong>selección argentina</strong>.&rdquo; Ahí empezaron a
+            Para el año 2011 llegó la propuesta más linda y esperada de mi carrera, empecé a
+            formar parte de la <strong>selección argentina</strong>. Ahí empezaron a
             cumplirse los sueños del Juli niño.
+            <br />
+            <br />
+            Para el año 2021 pude concretar el gran sueño: participé de los{" "}
+            <strong>Juegos Olímpicos de Tokio</strong>.
           </p>
           <figure className="w-full shrink-0 sm:w-48">
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-line">
@@ -58,7 +62,13 @@ export function Bio() {
             Profesor de Educación Física
           </li>
           <li className="font-display text-sm uppercase tracking-wide before:content-['—_']">
+            Licenciado en Actividad Física
+          </li>
+          <li className="font-display text-sm uppercase tracking-wide before:content-['—_']">
             Entrenador internacional FIVB nivel I
+          </li>
+          <li className="font-display text-sm uppercase tracking-wide before:content-['—_']">
+            Especialización en psicología de alto rendimiento deportivo — Barça Innovation Hub
           </li>
         </ul>
       </div>
