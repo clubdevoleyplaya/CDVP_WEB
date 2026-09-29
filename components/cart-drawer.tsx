@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ShoppingBag, X } from "lucide-react";
 import {
   Drawer,
@@ -18,8 +20,19 @@ import { computeDisplayPrice, formatPrice } from "@/lib/price";
 import { getProductBySlug } from "@/lib/products";
 
 export function CartDrawer() {
-  const { cart, removeFromCart, currency, isSubscriber, discountPercent, cartOpen, setCartOpen } =
-    useDemoState();
+  const {
+    cart,
+    removeFromCart,
+    currency,
+    isSubscriber,
+    discountPercent,
+    cartOpen,
+    setCartOpen,
+    session,
+  } = useDemoState();
+  const router = useRouter();
+  const [paying, setPaying] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const lines = cart
     .map((item) => {
@@ -32,6 +45,40 @@ export function CartDrawer() {
 
   const total = lines.reduce((sum, l) => sum + l.lineTotal, 0);
   const itemCount = cart.reduce((n, i) => n + i.qty, 0);
+
+  async function handleCheckout() {
+    if (!session) {
+      setCartOpen(false);
+      router.push("/login");
+      return;
+    }
+    setPaying(true);
+    setError(null);
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/checkout`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          items: cart.map((i) => ({ slug: i.slug, quantity: i.qty })),
+          payment_provider: currency === "USD" ? "paddle" : "mercadopago",
+        }),
+      });
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      if (data.init_point) {
+        window.location.href = data.init_point;
+        return;
+      }
+      setError(data.payment_error ?? "Ya tenés estos productos — revisá tu perfil.");
+    } catch {
+      setError("No se pudo iniciar el pago. Probá de nuevo.");
+    } finally {
+      setPaying(false);
+    }
+  }
 
   return (
     <Drawer open={cartOpen} onOpenChange={setCartOpen} swipeDirection="right">
@@ -57,7 +104,7 @@ export function CartDrawer() {
         <DrawerHeader>
           <DrawerTitle>Tu carrito</DrawerTitle>
           <DrawerDescription>
-            Demo — el resumen no procesa ningún pago real todavía.
+            Revisá tu compra antes de ir a pagar.
           </DrawerDescription>
         </DrawerHeader>
 
@@ -113,12 +160,14 @@ export function CartDrawer() {
               </span>
             </div>
           )}
+          {error && <p className="text-sm text-destructive">{error}</p>}
           <Button
             type="button"
-            disabled={lines.length === 0}
+            onClick={handleCheckout}
+            disabled={lines.length === 0 || paying}
             className="font-display text-xs font-bold tracking-wide uppercase"
           >
-            Ir a pagar
+            {paying ? "Redirigiendo..." : "Ir a pagar"}
           </Button>
         </DrawerFooter>
       </DrawerContent>

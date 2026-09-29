@@ -59,3 +59,4 @@ Sin jerga técnica: se escribe como se le explicaría a Juli.
 - [`spec_16_admin-navegacion-ui.md`](./spec_16_admin-navegacion-ui.md) [implementado] — barra de navegación común a `/admin/*`; `/admin` redirige al panel general.
 - [`spec_17_perfil-ui.md`](./spec_17_perfil-ui.md) [implementado] — subir, cambiar y quitar el banner del perfil con foto propia (máx. 5 MB, solo imágenes).
 - [`spec_18_textos-landing.md`](./spec_18_textos-landing.md) [implementado] — frase del hero sin comillas, "¿Quién soy?" completo (13 años, 2011, Tokio 2021) y los cuatro títulos de Juli.
+- [`spec_19_checkout-ui.md`](./spec_19_checkout-ui.md) [implementado] — "Ir a pagar" del carrito crea la orden con todos los productos y redirige al pago real.
