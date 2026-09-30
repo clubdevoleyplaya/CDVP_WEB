@@ -62,3 +62,5 @@ Sin jerga técnica: se escribe como se le explicaría a Juli.
 - [`spec_19_checkout-ui.md`](./spec_19_checkout-ui.md) [implementado] — "Ir a pagar" del carrito crea la orden con todos los productos y redirige al pago real.
 - [`spec_20_paginas-paddle.md`](./spec_20_paginas-paddle.md) [implementado] — `/pricing`, `/condicionesservicio`, `/politicareembolso` y `/pagar` (abre el pago de Paddle), enlazadas desde el pie; `/privacidad` ya existía.
 - [`spec_21_planes-protegidos-ui.md`](./spec_21_planes-protegidos-ui.md) [implementado] — `/planes/[slug]`: aceptar la cláusula, plan en tablas sin descarga, avisos de acceso y tope diario.
+- [`spec_22_codigos-admin-ui.md`](./spec_22_codigos-admin-ui.md) [implementado] — `/admin/codigos`: crear, apagar y revisar códigos promocionales.
+- [`spec_23_carrito-codigo-ui.md`](./spec_23_carrito-codigo-ui.md) [implementado] — campo de código en el carrito; el servidor aplica el descuento o explica por qué no sirve.
