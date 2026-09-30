@@ -61,3 +61,4 @@ Sin jerga técnica: se escribe como se le explicaría a Juli.
 - [`spec_18_textos-landing.md`](./spec_18_textos-landing.md) [implementado] — frase del hero sin comillas, "¿Quién soy?" completo (13 años, 2011, Tokio 2021) y los cuatro títulos de Juli.
 - [`spec_19_checkout-ui.md`](./spec_19_checkout-ui.md) [implementado] — "Ir a pagar" del carrito crea la orden con todos los productos y redirige al pago real.
 - [`spec_20_paginas-paddle.md`](./spec_20_paginas-paddle.md) [implementado] — `/pricing`, `/condicionesservicio`, `/politicareembolso` y `/pagar` (abre el pago de Paddle), enlazadas desde el pie; `/privacidad` ya existía.
+- [`spec_21_planes-protegidos-ui.md`](./spec_21_planes-protegidos-ui.md) [implementado] — `/planes/[slug]`: aceptar la cláusula, plan en tablas sin descarga, avisos de acceso y tope diario.
