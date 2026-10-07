@@ -189,8 +189,10 @@ export const products: Product[] = [
     shortDescription: "Informe detallado del gesto técnico, pensado para entrenadores.",
     longDescription:
       "Un informe detallado del gesto técnico desde la biomecánica, pensado para entrenadores que quieren entender el porqué detrás de cada corrección.",
-    priceArs: 100000,
-    priceUsd: 100,
+    priceArs: 80000,
+    priceUsd: 80,
+    compareArs: 120000,
+    compareUsd: 120,
     discountable: false,
   },
   {
@@ -256,8 +258,8 @@ export const products: Product[] = [
     longDescription:
       "Los 8 cursos técnicos del club — ataque, defensa, bloqueo, armado, saque, recepción, conceptos generales y mentalidad — en un solo pack, con descuento por volumen.",
     includes: "8 productos",
-    priceArs: 340000,
-    priceUsd: 340,
+    priceArs: 170000,
+    priceUsd: 170,
     compareArs: 400000,
     compareUsd: 400,
     discountable: false,
@@ -275,6 +277,39 @@ export const products: Product[] = [
     compareArs: 150000,
     compareUsd: 150,
     discountable: false,
+  },
+  {
+    slug: "banco-de-120-ejercicios",
+    category: "descargable",
+    title: "Banco de 120 ejercicios de voley playa",
+    shortDescription: "120 ejercicios de voley playa para entrenar por tu cuenta.",
+    longDescription:
+      "Un banco de 120 ejercicios de voley playa. Descripción provisional: Juli completa el texto final.",
+    priceArs: 50000,
+    priceUsd: 50,
+    discountable: false,
+  },
+  {
+    slug: "curso-para-entrenadores",
+    category: "curso",
+    title: "Curso online para entrenadores",
+    shortDescription: "Curso por cohorte para entrenadores de voley playa.",
+    longDescription:
+      "Curso online para entrenadores, por cohorte. Descripción provisional: Juli completa el texto final.",
+    priceArs: 300000,
+    priceUsd: 300,
+    discountable: false,
+  },
+  {
+    slug: "campamento-cerrito",
+    category: "evento",
+    title: "Campamento Cerrito",
+    shortDescription: "Campamento presencial anual de voley playa.",
+    longDescription:
+      "Campamento presencial anual en Cerrito. Descripción provisional: Juli completa fecha y texto final.",
+    priceArs: 200000,
+    priceUsd: 200,
+    discountable: true,
   },
 ];
 

@@ -14,6 +14,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice, formatPrice } from "@/lib/price";
@@ -33,6 +34,7 @@ export function CartDrawer() {
   const router = useRouter();
   const [paying, setPaying] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [promoCode, setPromoCode] = useState("");
 
   const lines = cart
     .map((item) => {
@@ -64,8 +66,14 @@ export function CartDrawer() {
         body: JSON.stringify({
           items: cart.map((i) => ({ slug: i.slug, quantity: i.qty })),
           payment_provider: currency === "USD" ? "paddle" : "mercadopago",
+          promo_code: promoCode.trim() || undefined,
         }),
       });
+      if (res.status === 400) {
+        const body = await res.json().catch(() => null);
+        setError(body?.detail ?? "No se pudo procesar la compra.");
+        return;
+      }
       if (!res.ok) throw new Error();
       const data = await res.json();
       if (data.init_point) {
@@ -158,6 +166,21 @@ export function CartDrawer() {
               <span className="tabular text-lg font-bold">
                 {formatPrice(total, currency)}
               </span>
+            </div>
+          )}
+          {lines.length > 0 && (
+            <div className="flex flex-col gap-1">
+              <Input
+                value={promoCode}
+                onChange={(e) => setPromoCode(e.target.value)}
+                placeholder="¿Tienes un código?"
+                aria-label="Código promocional"
+              />
+              {promoCode.trim() !== "" && (
+                <p className="text-xs text-muted-foreground">
+                  El descuento del código se calcula al pagar.
+                </p>
+              )}
             </div>
           )}
           {error && <p className="text-sm text-destructive">{error}</p>}

@@ -1,0 +1,13 @@
+# Excepciones de OSV-Scanner. Cada una lleva motivo y fecha de vencimiento: al vencer, el
+# escaneo vuelve a marcarla y hay que revisarla de nuevo.
+
+[[IgnoredVulns]]
+id = "GHSA-vfj7-8cjw-p6xm"
+ignoreUntil = 2026-11-30
+reason = """
+braces 3.0.3 (DoS por patrones anidados). Solo llega por el CLI de shadcn
+(shadcn > fast-glob > micromatch > braces): es una dependencia de desarrollo que no se
+despliega, y `npm audit --omit=dev` da 0. 3.0.3 es la última versión publicada y no hay
+arreglo; el único camino de npm es bajar shadcn a 1.0.0 (cambio incompatible).
+Revisar al vencer: si shadcn o braces publican una versión corregida, subirla y quitar esto.
+"""
