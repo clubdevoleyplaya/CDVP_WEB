@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
 import { LoginForm } from "@/components/login-form";
+import { safeNextPath } from "@/lib/safe-redirect";
 
 export default function LoginPage() {
   return (
@@ -19,7 +20,7 @@ function LoginPageContent() {
   const searchParams = useSearchParams();
 
   function handleSuccess() {
-    router.push(searchParams.get("next") ?? "/");
+    router.push(safeNextPath(searchParams.get("next")));
     router.refresh();
   }
 
