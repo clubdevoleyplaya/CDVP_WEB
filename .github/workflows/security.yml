@@ -109,7 +109,13 @@ jobs:
       - name: Levantar app
         run: |
           nohup npm run start -- --port 3000 > web.log 2>&1 &
-          for i in $(seq 1 30); do curl -sf http://127.0.0.1:3000 && break || sleep 1; done
+          for _ in $(seq 1 30); do
+            if curl -sf http://127.0.0.1:3000 >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          echo "La app no arrancó en 30 s:"
+          cat web.log
+          exit 1
       - name: ZAP baseline
         uses: zaproxy/action-baseline@v0.14.0
         with:
