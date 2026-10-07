@@ -8,10 +8,14 @@ permissions:
 
 jobs:
   auto-merge:
-    if: github.actor == 'dependabot[bot]'
+    # El autor del PR, no el actor del evento: el actor se puede falsificar
+    # haciendo que otro usuario dispare el evento sobre una rama de Dependabot.
+    if: >-
+      github.event.pull_request.user.login == 'dependabot[bot]' &&
+      github.repository == github.event.pull_request.base.repo.full_name
     runs-on: ubuntu-latest
     steps:
-      - uses: dependabot/fetch-metadata@v2
+      - uses: dependabot/fetch-metadata@21025c705c08248db411dc16f3619e6b5f9ea21a # v2
         id: metadata
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
