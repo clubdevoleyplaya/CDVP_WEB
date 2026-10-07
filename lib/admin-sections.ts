@@ -4,4 +4,5 @@ export const ADMIN_SECTIONS = [
   { href: "/admin/cuestionarios", label: "Cuestionarios" },
   { href: "/admin/descuentos", label: "Descuentos" },
   { href: "/admin/codigos", label: "Códigos" },
+  { href: "/admin/pagos", label: "Pagos sin acceso" },
 ] as const;
