@@ -24,3 +24,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+
+# Credenciales y respaldos locales: nunca al repo
+secrets/
+client_secret*.json
+drive_token.json
+backup_*.sql
