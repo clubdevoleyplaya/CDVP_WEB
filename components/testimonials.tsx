@@ -96,11 +96,13 @@ export function Testimonials() {
         <section className="mx-auto max-w-7xl px-6 pb-16">
           <h2 className="font-display text-2xl font-bold uppercase">Testimonios por curso</h2>
 
-          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {/* flex + justify-center en vez de grid: la última fila, si queda con 1 o 2 tarjetas,
+              se centra en lugar de pegarse a la izquierda. */}
+          <div className="mt-6 flex flex-wrap justify-center gap-4">
             {TEXT_TESTIMONIALS.map((t) => (
               <blockquote
                 key={`${t.productSlug}-${t.author}`}
-                className="rounded-xl border border-line bg-surface p-5 text-sm italic"
+                className="w-full rounded-xl border border-line bg-surface p-5 text-sm italic sm:w-[calc((100%-1rem)/2)] lg:w-[calc((100%-2rem)/3)]"
               >
                 &ldquo;{t.quote}&rdquo;
                 <footer className="mt-3 font-display text-xs font-bold not-italic uppercase tracking-wide text-blue">

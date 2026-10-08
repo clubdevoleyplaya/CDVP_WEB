@@ -44,7 +44,7 @@ export default function RootLayout({
         <DemoStateProvider>
           <Header />
           <DemoBar />
-          {children}
+          <main className="w-full flex-1">{children}</main>
           <Footer />
         </DemoStateProvider>
       </body>

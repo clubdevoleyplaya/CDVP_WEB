@@ -2,13 +2,13 @@ import Image from "next/image";
 
 export function Bio() {
   return (
-    <section className="mx-auto grid max-w-7xl grid-cols-[auto_1fr] items-start gap-8 px-6 py-16 sm:grid-cols-[150px_1fr]">
-      <div className="relative h-[100px] w-[100px] overflow-hidden rounded-full border border-line sm:h-[150px] sm:w-[150px]">
+    <section className="mx-auto grid max-w-7xl grid-cols-[auto_1fr] items-start gap-8 px-6 py-16 sm:grid-cols-[180px_1fr]">
+      <div className="relative h-[100px] w-[100px] overflow-hidden rounded-full border border-line sm:h-[180px] sm:w-[180px]">
         <Image
           src="/images/juli/headshot.jpg"
           alt="Juli Azaad"
           fill
-          sizes="150px"
+          sizes="180px"
           className="object-cover object-top"
         />
       </div>
@@ -17,17 +17,17 @@ export function Bio() {
           ¿Quién soy?
         </p>
         <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-start">
-          <p className="max-w-[65ch] text-base">
+          <p className="max-w-[85ch] text-base">
             A los 13 años jugué mi primer torneo de beach volley y no me quise ir más de la arena.
             Desde ese día mi carrera se dividió en dos: inviernos de indoor, veranos de playa.
           </p>
-          <figure className="w-full shrink-0 sm:w-48">
+          <figure className="w-full shrink-0 sm:w-56">
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-line">
               <Image
                 src="/images/juli/primer-torneo.jpg"
                 alt="Juli de chico en su primer torneo de voley playa"
                 fill
-                sizes="192px"
+                sizes="224px"
                 className="object-cover"
               />
             </div>
@@ -35,7 +35,7 @@ export function Bio() {
           </figure>
         </div>
         <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-start">
-          <p className="max-w-[65ch] text-base">
+          <p className="max-w-[85ch] text-base">
             Para el año 2011 llegó la propuesta más linda y esperada de mi carrera, empecé a
             formar parte de la <strong>selección argentina</strong>. Ahí empezaron a
             cumplirse los sueños del Juli niño.
@@ -44,13 +44,13 @@ export function Bio() {
             Para el año 2021 pude concretar el gran sueño: participé de los{" "}
             <strong>Juegos Olímpicos de Tokio</strong>.
           </p>
-          <figure className="w-full shrink-0 sm:w-48">
+          <figure className="w-full shrink-0 sm:w-56">
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-line">
               <Image
                 src="/images/juli/jjoo-tokio-2020.jpg"
                 alt="Juli en la Villa Olímpica de Tokio 2020, representando a la selección argentina"
                 fill
-                sizes="192px"
+                sizes="224px"
                 className="object-cover"
               />
             </div>

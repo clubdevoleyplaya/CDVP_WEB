@@ -21,11 +21,8 @@ export default function Home() {
 
   return (
     <>
+      <WelcomePack />
       <Hero />
-
-      <section className="mx-auto max-w-7xl px-6 py-8">
-        <WelcomePack />
-      </section>
 
       <Bio />
       <Why />
