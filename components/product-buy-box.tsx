@@ -6,6 +6,7 @@ import { ShoppingBag } from "lucide-react";
 import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice, formatPrice } from "@/lib/price";
 import type { Product } from "@/lib/products";
+import { USER_MESSAGES } from "@/lib/user-errors";
 
 export function ProductBuyBox({ product }: { product: Product }) {
   const { currency, isSubscriber, discountPercent, addToCart, session } = useDemoState();
@@ -47,7 +48,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
         return;
       }
       if (data.payment_error) {
-        setError(data.payment_error);
+        setError(USER_MESSAGES.paymentLink);
         return;
       }
       setError("Ya tenés este producto — revisá tu perfil.");

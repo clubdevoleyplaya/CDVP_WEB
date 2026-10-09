@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDemoState } from "@/context/demo-state";
 import { formatPrice } from "@/lib/price";
+import { apiErrorMessage } from "@/lib/user-errors";
 
 type Plan = { title: string; description: string; price_ars: number };
 
@@ -41,7 +42,9 @@ export default function SuscripcionPage() {
       });
       if (!res.ok) {
         const body = await res.json().catch(() => null);
-        setError(body?.detail ?? "No se pudo iniciar la suscripción. Probá de nuevo.");
+        setError(
+          apiErrorMessage(res.status, body, "No se pudo iniciar la suscripción. Probá de nuevo."),
+        );
         return;
       }
       const data = await res.json();

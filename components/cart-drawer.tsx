@@ -19,6 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice, formatPrice } from "@/lib/price";
 import { getProductBySlug } from "@/lib/products";
+import { apiErrorMessage, USER_MESSAGES } from "@/lib/user-errors";
 
 export function CartDrawer() {
   const {
@@ -71,7 +72,7 @@ export function CartDrawer() {
       });
       if (res.status === 400) {
         const body = await res.json().catch(() => null);
-        setError(body?.detail ?? "No se pudo procesar la compra.");
+        setError(apiErrorMessage(res.status, body, USER_MESSAGES.checkout));
         return;
       }
       if (!res.ok) throw new Error();
@@ -80,7 +81,9 @@ export function CartDrawer() {
         window.location.href = data.init_point;
         return;
       }
-      setError(data.payment_error ?? "Ya tenés estos productos — revisá tu perfil.");
+      setError(
+        data.payment_error ? USER_MESSAGES.paymentLink : "Ya tenés estos productos — revisá tu perfil.",
+      );
     } catch {
       setError("No se pudo iniciar el pago. Probá de nuevo.");
     } finally {

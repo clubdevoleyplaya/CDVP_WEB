@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { USER_MESSAGES } from "@/lib/user-errors";
 
 export default function ResetPasswordPage() {
   const router = useRouter();
@@ -31,7 +32,7 @@ export default function ResetPasswordPage() {
 
     setLoading(false);
     if (error) {
-      setError(error.message);
+      setError(USER_MESSAGES.resetPassword);
       return;
     }
 
