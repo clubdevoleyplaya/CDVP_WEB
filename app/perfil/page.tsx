@@ -4,7 +4,7 @@ import { useEffect, useState, type ChangeEvent } from "react";
 import Link from "next/link";
 import { Check, ImagePlus, Lock, X } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -263,22 +263,14 @@ export default function PerfilPage() {
           {isSubscriber && <SubscriptionCard onCancel={cancelSubscription} />}
 
           {me?.role === "admin" && (
-            <Card className="font-sans border-blue">
-              <CardHeader>
-                <CardTitle>Panel admin</CardTitle>
-                <CardDescription>
-                  Ventas, visitas y métricas del sitio.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Link
-                  href="/admin/analytics"
-                  className="font-display text-xs font-bold uppercase tracking-wide text-blue underline"
-                >
-                  Ver analíticas
-                </Link>
-              </CardContent>
-            </Card>
+            <Link
+              href="/admin/analytics"
+              className={buttonVariants({
+                className: "w-fit font-display text-xs font-bold uppercase tracking-wide",
+              })}
+            >
+              Panel admin
+            </Link>
           )}
 
           <Button
