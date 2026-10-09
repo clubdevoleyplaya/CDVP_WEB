@@ -18,11 +18,11 @@ import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AuthGuard } from "@/components/auth-guard";
 import { useDemoState } from "@/context/demo-state";
+import type { CourseAccess } from "@/lib/course-access";
 import { createClient } from "@/lib/supabase/client";
 
 const MAX_BANNER_BYTES = 5 * 1024 * 1024;
 
-type CourseAccess = { slug: string; title: string; has_access: boolean };
 
 export default function PerfilPage() {
   const { session, me, isSubscriber, signOut, updateProfile, cancelSubscription } = useDemoState();
