@@ -7,7 +7,9 @@ import { DEFAULT_DISCOUNT_PERCENT, type DiscountPercent } from "@/lib/price";
 import { sessionIsDead } from "@/lib/session-check";
 import { createClient } from "@/lib/supabase/client";
 
-export type Currency = "ARS" | "USD";
+import { CURRENCY_COOKIE, type Currency } from "@/lib/locale";
+
+export type { Currency };
 
 export type CartItem = { slug: string; qty: number };
 
@@ -89,11 +91,24 @@ async function fetchDiscountPercent(): Promise<DiscountPercent | null> {
 
 const DemoStateContext = createContext<DemoState | null>(null);
 
-export function DemoStateProvider({ children }: { children: ReactNode }) {
+export function DemoStateProvider({
+  children,
+  initialCurrency = "ARS",
+}: {
+  children: ReactNode;
+  initialCurrency?: Currency;
+}) {
   const [session, setSession] = useState<Session | null>(null);
   const [discountPercent, setDiscountPercent] = useState<DiscountPercent>(DEFAULT_DISCOUNT_PERCENT);
   const [me, setMe] = useState<Me | null>(null);
-  const [currency, setCurrency] = useState<Currency>("ARS");
+  const [currency, setCurrencyState] = useState<Currency>(initialCurrency);
+  const setCurrency = (next: Currency) => {
+    setCurrencyState(next);
+    // La elección queda en una cookie: gana a la divisa detectada en las próximas visitas.
+    document.cookie = `${CURRENCY_COOKIE}=${next}; path=/; max-age=31536000; samesite=lax${
+      location.protocol === "https:" ? "; secure" : ""
+    }`;
+  };
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
 
