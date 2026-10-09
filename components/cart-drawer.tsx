@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useDemoState } from "@/context/demo-state";
-import { computeDisplayPrice, formatPrice } from "@/lib/price";
+import { computeDisplayPrice, formatPrice, paymentProviderFor } from "@/lib/price";
 import { getProductBySlug } from "@/lib/products";
 import { apiErrorMessage, USER_MESSAGES } from "@/lib/user-errors";
 
@@ -28,6 +28,7 @@ export function CartDrawer() {
     currency,
     isSubscriber,
     discountPercent,
+    eurPrices,
     cartOpen,
     setCartOpen,
     session,
@@ -41,7 +42,7 @@ export function CartDrawer() {
     .map((item) => {
       const product = getProductBySlug(item.slug);
       if (!product) return null;
-      const { now } = computeDisplayPrice(product, currency, isSubscriber, discountPercent);
+      const { now } = computeDisplayPrice(product, currency, isSubscriber, discountPercent, eurPrices);
       return { item, product, lineTotal: now * item.qty };
     })
     .filter((l): l is NonNullable<typeof l> => l !== null);
@@ -66,7 +67,8 @@ export function CartDrawer() {
         },
         body: JSON.stringify({
           items: cart.map((i) => ({ slug: i.slug, quantity: i.qty })),
-          payment_provider: currency === "USD" ? "paddle" : "mercadopago",
+          payment_provider: paymentProviderFor(currency),
+          currency,
           promo_code: promoCode.trim() || undefined,
         }),
       });

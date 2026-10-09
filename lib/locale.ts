@@ -5,7 +5,7 @@
 
 export const LOCALES = ["es", "en", "pt"] as const;
 export type Locale = (typeof LOCALES)[number];
-export type Currency = "ARS" | "USD";
+export type Currency = "ARS" | "USD" | "EUR";
 
 export const LOCALE_COOKIE = "cdvp_locale";
 export const CURRENCY_COOKIE = "cdvp_currency";
@@ -17,7 +17,7 @@ export function isLocale(value: unknown): value is Locale {
 }
 
 export function isCurrency(value: unknown): value is Currency {
-  return value === "ARS" || value === "USD";
+  return value === "ARS" || value === "USD" || value === "EUR";
 }
 
 type Preference = { tag: string; q: number };

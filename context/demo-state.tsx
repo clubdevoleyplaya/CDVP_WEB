@@ -3,7 +3,7 @@
 import type { Session } from "@supabase/supabase-js";
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-import { DEFAULT_DISCOUNT_PERCENT, type DiscountPercent } from "@/lib/price";
+import { DEFAULT_DISCOUNT_PERCENT, type DiscountPercent, type EurPrices } from "@/lib/price";
 import { sessionIsDead } from "@/lib/session-check";
 import { createClient } from "@/lib/supabase/client";
 
@@ -41,6 +41,9 @@ type DemoState = {
   updateProfile: (fields: ProfileFields) => Promise<void>;
   currency: Currency;
   setCurrency: (c: Currency) => void;
+  eurPrices: EurPrices;
+  // El euro se ofrece solo cuando un admin revisó el precio de todo el catálogo.
+  eurReady: boolean;
   cart: CartItem[];
   addToCart: (slug: string) => void;
   removeFromCart: (slug: string) => void;
@@ -89,6 +92,18 @@ async function fetchDiscountPercent(): Promise<DiscountPercent | null> {
   return { ...DEFAULT_DISCOUNT_PERCENT, ...data.descuentos };
 }
 
+async function fetchEurPrices(): Promise<{ prices: EurPrices; complete: boolean } | null> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/precios-eur`);
+  if (!res.ok) return null;
+  const data = await res.json();
+  const prices: EurPrices = {};
+  for (const [slug, p] of Object.entries(data.precios ?? {})) {
+    const { price, compare } = p as { price: number | string; compare: number | string | null };
+    prices[slug] = { price: Number(price), compare: compare == null ? null : Number(compare) };
+  }
+  return { prices, complete: data.completo === true };
+}
+
 const DemoStateContext = createContext<DemoState | null>(null);
 
 export function DemoStateProvider({
@@ -101,7 +116,8 @@ export function DemoStateProvider({
   const [session, setSession] = useState<Session | null>(null);
   const [discountPercent, setDiscountPercent] = useState<DiscountPercent>(DEFAULT_DISCOUNT_PERCENT);
   const [me, setMe] = useState<Me | null>(null);
-  const [currency, setCurrencyState] = useState<Currency>(initialCurrency);
+  const [chosenCurrency, setCurrencyState] = useState<Currency>(initialCurrency);
+  const [eur, setEur] = useState<{ prices: EurPrices; complete: boolean }>({ prices: {}, complete: false });
   const setCurrency = (next: Currency) => {
     setCurrencyState(next);
     // La elección queda en una cookie: gana a la divisa detectada en las próximas visitas.
@@ -124,6 +140,12 @@ export function DemoStateProvider({
     });
 
     return () => subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    fetchEurPrices()
+      .then((result) => result && setEur(result))
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -206,6 +228,9 @@ export function DemoStateProvider({
     setCart((items) => items.filter((i) => i.slug !== slug));
   }
 
+  // Una cookie `EUR` sin precios revisados (o mientras cargan) se muestra y se cobra en dólares.
+  const currency: Currency = chosenCurrency === "EUR" && !eur.complete ? "USD" : chosenCurrency;
+
   const isSubscriber = session ? (me?.isSubscriber ?? false) : false;
 
   return (
@@ -220,6 +245,8 @@ export function DemoStateProvider({
         cancelSubscription,
         currency,
         setCurrency,
+        eurPrices: eur.prices,
+        eurReady: eur.complete,
         cart,
         addToCart,
         removeFromCart,

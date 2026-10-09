@@ -9,8 +9,8 @@ import { computeDisplayPrice, formatPrice } from "@/lib/price";
 import { CATEGORY_LABELS, type Product } from "@/lib/products";
 
 export function ProductCard({ product }: { product: Product }) {
-  const { currency, isSubscriber, discountPercent, addToCart } = useDemoState();
-  const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber, discountPercent);
+  const { currency, isSubscriber, discountPercent, eurPrices, addToCart } = useDemoState();
+  const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber, discountPercent, eurPrices);
 
   return (
     <motion.article

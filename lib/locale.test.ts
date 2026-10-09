@@ -34,11 +34,12 @@ describe("currencyFromCookie", () => {
   it("usa la moneda que la persona eligió", () => {
     expect(currencyFromCookie("USD")).toBe("USD");
     expect(currencyFromCookie("ARS")).toBe("ARS");
+    expect(currencyFromCookie("EUR")).toBe("EUR");
   });
 
   it("sin elección, o con una cookie inválida, son pesos", () => {
     expect(currencyFromCookie(undefined)).toBe("ARS");
     expect(currencyFromCookie(null)).toBe("ARS");
-    expect(currencyFromCookie("EUR")).toBe("ARS");
+    expect(currencyFromCookie("GBP")).toBe("ARS");
   });
 });

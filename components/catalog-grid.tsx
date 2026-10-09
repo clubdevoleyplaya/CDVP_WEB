@@ -34,7 +34,7 @@ const SORT_LABELS: Record<SortBy, string> = {
 };
 
 export function CatalogGrid({ items }: { items: Product[] }) {
-  const { currency, isSubscriber, discountPercent } = useDemoState();
+  const { currency, isSubscriber, discountPercent, eurPrices } = useDemoState();
   const [sortBy, setSortBy] = useState<SortBy>("relevancia");
   const [onlyDiscountable, setOnlyDiscountable] = useState(false);
   const [open, setOpen] = useState(false);
@@ -49,7 +49,7 @@ export function CatalogGrid({ items }: { items: Product[] }) {
     } else if (sortBy === "precio-asc" || sortBy === "precio-desc") {
       const withPrice = result.map((p) => ({
         product: p,
-        price: computeDisplayPrice(p, currency, isSubscriber, discountPercent).now,
+        price: computeDisplayPrice(p, currency, isSubscriber, discountPercent, eurPrices).now,
       }));
       withPrice.sort((a, b) =>
         sortBy === "precio-asc" ? a.price - b.price : b.price - a.price,
@@ -58,7 +58,7 @@ export function CatalogGrid({ items }: { items: Product[] }) {
     }
 
     return result;
-  }, [items, sortBy, onlyDiscountable, currency, isSubscriber, discountPercent]);
+  }, [items, sortBy, onlyDiscountable, currency, isSubscriber, discountPercent, eurPrices]);
 
   const activeFilters =
     (onlyDiscountable ? 1 : 0) + (sortBy !== "relevancia" ? 1 : 0);
