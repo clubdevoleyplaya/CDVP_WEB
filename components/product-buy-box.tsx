@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ShoppingBag } from "lucide-react";
 import { useDemoState } from "@/context/demo-state";
+import { hasCourseAccess, type CourseAccess } from "@/lib/course-access";
 import { computeDisplayPrice, formatPrice } from "@/lib/price";
 import type { Product } from "@/lib/products";
 import { USER_MESSAGES } from "@/lib/user-errors";
@@ -14,6 +16,23 @@ export function ProductBuyBox({ product }: { product: Product }) {
   const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber, discountPercent);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [owned, setOwned] = useState(false);
+
+  useEffect(() => {
+    // Solo los cursos tienen una lista de accesos (/me/courses); el resto confía en el aviso del
+    // checkout ("Ya tenés este producto"). Si la consulta falla, se muestra la caja de compra.
+    if (!session || product.category !== "curso") return;
+    let cancelled = false;
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/me/courses`, {
+      headers: { Authorization: `Bearer ${session.access_token}` },
+    })
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .then((courses: CourseAccess[]) => !cancelled && setOwned(hasCourseAccess(courses, product.slug)))
+      .catch(() => !cancelled && setOwned(false));
+    return () => {
+      cancelled = true;
+    };
+  }, [session, product.category, product.slug]);
 
   const rail =
     currency === "USD"
@@ -57,6 +76,24 @@ export function ProductBuyBox({ product }: { product: Product }) {
     } finally {
       setLoading(false);
     }
+  }
+
+  // Sin sesión (o al cerrarla) `owned` puede venir de una consulta anterior: no se confía en él.
+  if (owned && session && product.category === "curso") {
+    return (
+      <div className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-6">
+        <p className="font-display text-sm font-bold uppercase tracking-wide text-green">
+          Ya tenés este curso
+        </p>
+        <p className="text-xs text-ink-soft">Lo encontrás en tu perfil, dentro de «Mis cursos».</p>
+        <Link
+          href="/perfil"
+          className="w-fit rounded-lg bg-ink px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
+        >
+          Ir a mi perfil
+        </Link>
+      </div>
+    );
   }
 
   return (
