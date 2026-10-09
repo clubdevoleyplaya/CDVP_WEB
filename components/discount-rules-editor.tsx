@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDemoState } from "@/context/demo-state";
-import { DEFAULT_DISCOUNT_PERCENT, formatPrice, type DiscountPercent } from "@/lib/price";
+import { computeDisplayPrice, DEFAULT_DISCOUNT_PERCENT, formatPrice, type DiscountPercent } from "@/lib/price";
 import { CATEGORY_ROUTE_LABELS, CATEGORY_TO_ROUTE, products, type Category } from "@/lib/products";
 
 const CATEGORIES = Object.keys(DEFAULT_DISCOUNT_PERCENT) as Category[];
@@ -28,14 +28,16 @@ function DiscountRow({
   savedPercent: number;
   onSaved: (category: Category, percent: number) => void;
 }) {
-  const { session, currency } = useDemoState();
+  const { session, currency, eurPrices } = useDemoState();
   const [text, setText] = useState(String(savedPercent));
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ kind: "ok" | "error"; text: string } | null>(null);
 
   const percent = parsePercent(text);
   const example = products.find((p) => p.category === category);
-  const base = example ? (currency === "USD" ? example.priceUsd : example.priceArs) : null;
+  const base = example
+    ? computeDisplayPrice(example, currency, false, undefined, eurPrices).now
+    : null;
   const inRange = percent !== null && percent >= 0 && percent <= 100;
   const changed = percent !== savedPercent;
 

@@ -6,14 +6,14 @@ import { useRouter } from "next/navigation";
 import { ShoppingBag } from "lucide-react";
 import { useDemoState } from "@/context/demo-state";
 import { hasCourseAccess, type CourseAccess } from "@/lib/course-access";
-import { computeDisplayPrice, formatPrice } from "@/lib/price";
+import { computeDisplayPrice, formatPrice, paymentProviderFor } from "@/lib/price";
 import type { Product } from "@/lib/products";
 import { USER_MESSAGES } from "@/lib/user-errors";
 
 export function ProductBuyBox({ product }: { product: Product }) {
-  const { currency, isSubscriber, discountPercent, addToCart, session } = useDemoState();
+  const { currency, isSubscriber, discountPercent, eurPrices, addToCart, session } = useDemoState();
   const router = useRouter();
-  const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber, discountPercent);
+  const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber, discountPercent, eurPrices);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [owned, setOwned] = useState(false);
@@ -35,9 +35,9 @@ export function ProductBuyBox({ product }: { product: Product }) {
   }, [session, product.slug]);
 
   const rail =
-    currency === "USD"
-      ? "Pago internacional vía Paddle (Merchant of Record)"
-      : "Pago en Argentina vía MercadoPago";
+    currency === "ARS"
+      ? "Pago en Argentina vía MercadoPago"
+      : "Pago internacional vía Paddle (Merchant of Record)";
 
   async function handleBuy() {
     if (!session) {
@@ -56,7 +56,8 @@ export function ProductBuyBox({ product }: { product: Product }) {
         },
         body: JSON.stringify({
           items: [{ slug: product.slug, quantity: 1 }],
-          payment_provider: currency === "USD" ? "paddle" : "mercadopago",
+          payment_provider: paymentProviderFor(currency),
+          currency,
         }),
       });
       if (!res.ok) throw new Error();

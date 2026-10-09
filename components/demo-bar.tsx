@@ -8,10 +8,11 @@ import { useDemoState, Currency } from "@/context/demo-state";
 const CURRENCIES: { code: Currency; label: string }[] = [
   { code: "ARS", label: "🇦🇷 ARS" },
   { code: "USD", label: "🌎 USD" },
+  { code: "EUR", label: "🇪🇺 EUR" },
 ];
 
 export function DemoBar() {
-  const { isSubscriber, discountPercent, currency, setCurrency } = useDemoState();
+  const { isSubscriber, discountPercent, currency, setCurrency, eurReady } = useDemoState();
 
   return (
     <div className="flex flex-wrap items-center gap-5 bg-band px-6 py-3 text-sm text-white">
@@ -33,7 +34,7 @@ export function DemoBar() {
         </>
       )}
       <div className="ml-auto flex gap-1" role="group" aria-label="Elegí moneda">
-        {CURRENCIES.map(({ code, label }) => (
+        {CURRENCIES.filter(({ code }) => code !== "EUR" || eurReady).map(({ code, label }) => (
           <button
             key={code}
             type="button"
