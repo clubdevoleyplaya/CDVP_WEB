@@ -2,15 +2,16 @@
 
 import { useEffect, useState } from "react";
 
-import { VimeoPlayer } from "@/components/vimeo-player";
+import { VideoPlayer } from "@/components/video-player";
 import { useDemoState } from "@/context/demo-state";
 import type { Category } from "@/lib/products";
+import type { VideoProvider } from "@/lib/video-link";
 
 type ProductVideoSectionProps = { slug: string; category: Category };
 
 export function ProductVideoSection({ slug, category }: ProductVideoSectionProps) {
   const { session } = useDemoState();
-  const [videoId, setVideoId] = useState<string | null | undefined>(undefined);
+  const [video, setVideo] = useState<{ provider: VideoProvider | null; videoId: string | null } | undefined>(undefined);
 
   useEffect(() => {
     if (!session || category !== "curso") return;
@@ -19,15 +20,15 @@ export function ProductVideoSection({ slug, category }: ProductVideoSectionProps
       headers: { Authorization: `Bearer ${session.access_token}` },
     })
       .then((res) => (res.ok ? res.json() : Promise.reject()))
-      .then((data) => setVideoId(data.vimeo_video_id))
+      .then((data) => setVideo({ provider: data.provider ?? null, videoId: data.video_id ?? null }))
       .catch(() => {});
   }, [session, category, slug]);
 
-  if (videoId === undefined) return null;
+  if (video === undefined) return null;
 
   return (
     <div className="mt-8 max-w-2xl">
-      <VimeoPlayer videoId={videoId} />
+      <VideoPlayer provider={video.provider} videoId={video.videoId} watermark={session?.user.email} />
     </div>
   );
 }
