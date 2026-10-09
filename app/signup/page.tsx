@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { USER_MESSAGES } from "@/lib/user-errors";
 
 export default function SignupPage() {
   const [fullName, setFullName] = useState("");
@@ -33,7 +34,7 @@ export default function SignupPage() {
 
     setLoading(false);
     if (error) {
-      setError(error.message);
+      setError(USER_MESSAGES.signup);
       return;
     }
 

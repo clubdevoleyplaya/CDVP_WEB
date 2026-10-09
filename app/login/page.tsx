@@ -6,6 +6,7 @@ import { Suspense } from "react";
 
 import { LoginForm } from "@/components/login-form";
 import { safeNextPath } from "@/lib/safe-redirect";
+import { USER_MESSAGES } from "@/lib/user-errors";
 
 export default function LoginPage() {
   return (
@@ -27,6 +28,13 @@ function LoginPageContent() {
   return (
     <section className="mx-auto max-w-md px-6 py-16">
       <h1 className="font-display text-2xl font-bold uppercase">Iniciar sesión</h1>
+
+      {searchParams.get("error") && (
+        // Cualquier valor de `error` muestra el mismo texto fijo: el parámetro no se refleja.
+        <p role="alert" className="mt-4 text-sm text-red-600">
+          {USER_MESSAGES.invalidLink}
+        </p>
+      )}
 
       <LoginForm onSuccess={handleSuccess} className="mt-8" />
 
