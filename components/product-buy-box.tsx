@@ -19,11 +19,11 @@ export function ProductBuyBox({ product }: { product: Product }) {
   const [owned, setOwned] = useState(false);
 
   useEffect(() => {
-    // Solo los cursos tienen una lista de accesos (/me/courses); el resto confía en el aviso del
-    // checkout ("Ya tenés este producto"). Si la consulta falla, se muestra la caja de compra.
-    if (!session || product.category !== "curso") return;
+    // /me/products trae el acceso a todas las categorías. Si la consulta falla, se muestra la caja
+    // de compra y el checkout avisa igual ("Ya tenés este producto").
+    if (!session) return;
     let cancelled = false;
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/me/courses`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/me/products`, {
       headers: { Authorization: `Bearer ${session.access_token}` },
     })
       .then((res) => (res.ok ? res.json() : Promise.reject()))
@@ -32,7 +32,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
     return () => {
       cancelled = true;
     };
-  }, [session, product.category, product.slug]);
+  }, [session, product.slug]);
 
   const rail =
     currency === "USD"
@@ -79,13 +79,16 @@ export function ProductBuyBox({ product }: { product: Product }) {
   }
 
   // Sin sesión (o al cerrarla) `owned` puede venir de una consulta anterior: no se confía en él.
-  if (owned && session && product.category === "curso") {
+  if (owned && session) {
+    const isCourse = product.category === "curso";
     return (
       <div className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-6">
         <p className="font-display text-sm font-bold uppercase tracking-wide text-green">
-          Ya tenés este curso
+          {isCourse ? "Ya tenés este curso" : "Ya tenés este producto"}
         </p>
-        <p className="text-xs text-ink-soft">Lo encontrás en tu perfil, dentro de «Mis cursos».</p>
+        <p className="text-xs text-ink-soft">
+          {isCourse ? "Lo encontrás en tu perfil, dentro de «Mis cursos»." : "Lo encontrás en tu perfil."}
+        </p>
         <Link
           href="/perfil"
           className="w-fit rounded-lg bg-ink px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
