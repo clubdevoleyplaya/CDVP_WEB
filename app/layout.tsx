@@ -6,7 +6,7 @@ import { Header } from "@/components/header";
 import { DemoBar } from "@/components/demo-bar";
 import { Footer } from "@/components/footer";
 import "./globals.css";
-import { CURRENCY_COOKIE, detectCurrency } from "@/lib/locale";
+import { CURRENCY_COOKIE, currencyFromCookie } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -36,7 +36,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cookieStore = await cookies();
-  const currency = detectCurrency({ currencyCookie: cookieStore.get(CURRENCY_COOKIE)?.value });
+  const currency = currencyFromCookie(cookieStore.get(CURRENCY_COOKIE)?.value);
 
   return (
     <html

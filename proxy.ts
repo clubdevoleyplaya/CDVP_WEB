@@ -1,14 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-import {
-  CURRENCY_COOKIE,
-  LOCALE_COOKIE,
-  detectCurrency,
-  detectLocale,
-  isCurrency,
-  isLocale,
-} from "@/lib/locale";
+import { LOCALE_COOKIE, detectLocale, isLocale } from "@/lib/locale";
 
 const PREFERENCE_COOKIE_OPTIONS = {
   path: "/",
@@ -17,21 +10,15 @@ const PREFERENCE_COOKIE_OPTIONS = {
   secure: process.env.NODE_ENV === "production",
 };
 
-// Primera visita: se decide idioma y divisa y se guardan en cookies (también en la request, para
-// que el layout las lea en esta misma carga). Lo que la persona elija después las reemplaza.
+// Primera visita: se detecta el idioma del navegador y se guarda en una cookie (también en la
+// request, para que el layout la lea en esta misma carga). Lo que la persona elija la reemplaza.
+// La moneda no se detecta: la elige la persona (cookie `cdvp_currency`, la guarda el selector).
 function ensurePreferenceCookies(request: NextRequest): { name: string; value: string }[] {
-  const input = {
-    localeCookie: request.cookies.get(LOCALE_COOKIE)?.value,
-    currencyCookie: request.cookies.get(CURRENCY_COOKIE)?.value,
-    acceptLanguage: request.headers.get("accept-language"),
-    country: request.headers.get("cf-ipcountry") ?? request.headers.get("x-vercel-ip-country"),
-  };
-  const missing: { name: string; value: string }[] = [];
-  if (!isLocale(input.localeCookie)) missing.push({ name: LOCALE_COOKIE, value: detectLocale(input) });
-  if (!isCurrency(input.currencyCookie))
-    missing.push({ name: CURRENCY_COOKIE, value: detectCurrency(input) });
-  missing.forEach(({ name, value }) => request.cookies.set(name, value));
-  return missing;
+  const localeCookie = request.cookies.get(LOCALE_COOKIE)?.value;
+  if (isLocale(localeCookie)) return [];
+  const value = detectLocale({ acceptLanguage: request.headers.get("accept-language") });
+  request.cookies.set(LOCALE_COOKIE, value);
+  return [{ name: LOCALE_COOKIE, value }];
 }
 
 export async function proxy(request: NextRequest) {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { detectCurrency, detectLocale, localeFromAcceptLanguage } from "./locale";
+import { currencyFromCookie, detectLocale, localeFromAcceptLanguage } from "./locale";
 
 describe("detectLocale", () => {
   it("la cookie gana a Accept-Language", () => {
@@ -30,32 +30,15 @@ describe("detectLocale", () => {
   });
 });
 
-describe("detectCurrency", () => {
-  it("la cookie gana a todo", () => {
-    expect(detectCurrency({ currencyCookie: "USD", country: "AR", acceptLanguage: "es-AR" })).toBe("USD");
-    expect(detectCurrency({ currencyCookie: "ARS", country: "US" })).toBe("ARS");
+describe("currencyFromCookie", () => {
+  it("usa la moneda que la persona eligió", () => {
+    expect(currencyFromCookie("USD")).toBe("USD");
+    expect(currencyFromCookie("ARS")).toBe("ARS");
   });
 
-  it("el país manda sobre el idioma: Argentina paga en pesos y el resto en dólares", () => {
-    expect(detectCurrency({ country: "AR", acceptLanguage: "en-US" })).toBe("ARS");
-    expect(detectCurrency({ country: "cl", acceptLanguage: "es-AR" })).toBe("USD");
-    expect(detectCurrency({ country: "BR" })).toBe("USD");
-  });
-
-  it("sin país, la región de Accept-Language: es-AR → ARS, otra región → USD", () => {
-    expect(detectCurrency({ acceptLanguage: "es-AR,es;q=0.9" })).toBe("ARS");
-    expect(detectCurrency({ acceptLanguage: "en-US,en;q=0.9" })).toBe("USD");
-    expect(detectCurrency({ acceptLanguage: "pt-BR" })).toBe("USD");
-  });
-
-  it("sin ninguna señal usa pesos, como hasta ahora", () => {
-    expect(detectCurrency({})).toBe("ARS");
-    expect(detectCurrency({ acceptLanguage: "es" })).toBe("ARS");
-  });
-
-  it("ignora países de relleno o inválidos", () => {
-    expect(detectCurrency({ country: "XX", acceptLanguage: "es-AR" })).toBe("ARS");
-    expect(detectCurrency({ country: "T1", acceptLanguage: "en-US" })).toBe("USD");
-    expect(detectCurrency({ country: "ARG" })).toBe("ARS");
+  it("sin elección, o con una cookie inválida, son pesos", () => {
+    expect(currencyFromCookie(undefined)).toBe("ARS");
+    expect(currencyFromCookie(null)).toBe("ARS");
+    expect(currencyFromCookie("EUR")).toBe("ARS");
   });
 });

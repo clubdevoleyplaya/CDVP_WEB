@@ -1,6 +1,7 @@
-// Idioma y divisa por defecto de una visita. Función pura: la usa `proxy.ts` y se prueba aparte.
-// Orden: lo que la persona eligió (cookie) → señal del navegador o del país → español y pesos.
-// No se consulta ningún servicio externo de geolocalización: la IP de cada visita no sale de acá.
+// Idioma por defecto de una visita. Función pura: la usa `proxy.ts` y se prueba aparte.
+// Orden: lo que la persona eligió (cookie) → idioma del navegador (`Accept-Language`) → español.
+// La moneda NO se detecta: la elige la persona con el selector y, mientras no elija, son pesos.
+// Así no hace falta saber el país de la visita ni poner un servicio (Cloudflare) delante.
 
 export const LOCALES = ["es", "en", "pt"] as const;
 export type Locale = (typeof LOCALES)[number];
@@ -43,28 +44,9 @@ export function localeFromAcceptLanguage(header: string | null | undefined): Loc
   return DEFAULT_LOCALE;
 }
 
-// Región (`AR` en `es-AR`) de la primera preferencia que traiga una.
-function regionFromAcceptLanguage(header: string | null | undefined): string | null {
-  for (const { tag } of parseAcceptLanguage(header)) {
-    const region = tag.split("-")[1];
-    if (region && /^[a-z]{2}$/.test(region)) return region.toUpperCase();
-  }
-  return null;
-}
-
-export function currencyFromCountry(country: string | null | undefined): Currency | null {
-  const code = country?.trim().toUpperCase();
-  // `XX` y `T1` son valores de relleno de Cloudflare (país desconocido, Tor).
-  if (!code || !/^[A-Z]{2}$/.test(code) || code === "XX" || code === "T1") return null;
-  return code === "AR" ? "ARS" : "USD";
-}
-
 export type DetectInput = {
   localeCookie?: string | null;
-  currencyCookie?: string | null;
   acceptLanguage?: string | null;
-  // Encabezado de país que agrega un proxy delante (Cloudflare, Vercel). Railway no lo agrega.
-  country?: string | null;
 };
 
 export function detectLocale({ localeCookie, acceptLanguage }: DetectInput): Locale {
@@ -72,15 +54,6 @@ export function detectLocale({ localeCookie, acceptLanguage }: DetectInput): Loc
   return localeFromAcceptLanguage(acceptLanguage);
 }
 
-export function detectCurrency({
-  currencyCookie,
-  acceptLanguage,
-  country,
-}: DetectInput): Currency {
-  if (isCurrency(currencyCookie)) return currencyCookie;
-  const fromCountry = currencyFromCountry(country);
-  if (fromCountry) return fromCountry;
-  const region = regionFromAcceptLanguage(acceptLanguage);
-  if (region) return region === "AR" ? "ARS" : "USD";
-  return DEFAULT_CURRENCY;
+export function currencyFromCookie(value: string | null | undefined): Currency {
+  return isCurrency(value) ? value : DEFAULT_CURRENCY;
 }
