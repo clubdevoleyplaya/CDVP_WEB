@@ -1,10 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { VimeoPlayer } from "@/components/vimeo-player";
+import { VideoPlayer } from "@/components/video-player";
 import { detectVideoProvider } from "@/lib/video-link";
 
 import type { ExerciseFormValues } from "@/components/exercise-form";
-
-const YOUTUBE_ID_RE = /^[A-Za-z0-9_-]+$/;
 
 function parseVideo(videoUrl: string): { provider: "vimeo" | "youtube"; videoId: string } | null {
   if (!videoUrl.trim()) return null;
@@ -17,23 +15,7 @@ function parseVideo(videoUrl: string): { provider: "vimeo" | "youtube"; videoId:
 
 function VideoPreview({ videoUrl }: { videoUrl: string }) {
   const parsed = parseVideo(videoUrl);
-
-  if (parsed?.provider === "youtube" && YOUTUBE_ID_RE.test(parsed.videoId)) {
-    return (
-      <div className="aspect-video w-full overflow-hidden rounded-xl border border-line bg-surface">
-        <iframe
-          className="h-full w-full"
-          src={`https://www.youtube.com/embed/${parsed.videoId}`}
-          title="Video del ejercicio"
-          loading="lazy"
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-          allowFullScreen
-        />
-      </div>
-    );
-  }
-
-  return <VimeoPlayer videoId={parsed?.provider === "vimeo" ? parsed.videoId : null} />;
+  return <VideoPlayer provider={parsed?.provider ?? null} videoId={parsed?.videoId ?? null} />;
 }
 
 export function ExercisePreview({ values }: { values: ExerciseFormValues }) {
