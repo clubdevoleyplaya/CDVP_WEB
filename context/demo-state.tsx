@@ -4,6 +4,7 @@ import type { Session } from "@supabase/supabase-js";
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 import { DEFAULT_DISCOUNT_PERCENT, type DiscountPercent } from "@/lib/price";
+import { sessionIsDead } from "@/lib/session-check";
 import { createClient } from "@/lib/supabase/client";
 
 export type Currency = "ARS" | "USD";
@@ -68,10 +69,13 @@ function mapMe(data: {
   };
 }
 
+class SessionRejected extends Error {}
+
 async function fetchMe(accessToken: string): Promise<Me | null> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/me`, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
+  if (res.status === 401) throw new SessionRejected();
   if (!res.ok) return null;
   return mapMe(await res.json());
 }
@@ -118,7 +122,20 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
     // `me` solo se lee cuando hay session (ver el cálculo de isSubscriber más abajo),
     // así que no hace falta resetearlo acá si session es null.
     if (!session) return;
-    fetchMe(session.access_token).then(setMe).catch(() => setMe(null));
+    fetchMe(session.access_token)
+      .then(setMe)
+      .catch(async (error) => {
+        setMe(null);
+        if (!(error instanceof SessionRejected)) return;
+        // La API rechazó el token: si la cuenta ya no existe (o la sesión murió), se cierra la
+        // sesión local para no quedar "logueado" viendo errores. `scope: local` porque en el
+        // servidor ya no hay nada que revocar.
+        const supabase = createClient();
+        if (await sessionIsDead(() => supabase.auth.getUser())) {
+          await supabase.auth.signOut({ scope: "local" });
+          setSession(null);
+        }
+      });
   }, [session]);
 
   async function signOut() {
