@@ -4,6 +4,11 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      # eslint-config-next 16 y sus plugins (import, jsx-a11y, react) solo soportan ESLint 9.
+      # Revisar cuando Next publique una config compatible con ESLint 10.
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
