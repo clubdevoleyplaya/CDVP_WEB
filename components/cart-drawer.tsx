@@ -32,11 +32,13 @@ export function CartDrawer() {
     cartOpen,
     setCartOpen,
     session,
+    me,
   } = useDemoState();
   const router = useRouter();
   const [paying, setPaying] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [promoCode, setPromoCode] = useState("");
+  const [testPayment, setTestPayment] = useState(false);
 
   const lines = cart
     .map((item) => {
@@ -70,6 +72,7 @@ export function CartDrawer() {
           payment_provider: paymentProviderFor(currency),
           currency,
           promo_code: promoCode.trim() || undefined,
+          test_payment: testPayment || undefined,
         }),
       });
       if (res.status === 400) {
@@ -187,6 +190,16 @@ export function CartDrawer() {
                 </p>
               )}
             </div>
+          )}
+          {lines.length > 0 && me?.role === "admin" && (
+            <label className="flex items-center gap-2 text-xs text-muted-foreground">
+              <input
+                type="checkbox"
+                checked={testPayment}
+                onChange={(e) => setTestPayment(e.target.checked)}
+              />
+              Pago de prueba (solo admin)
+            </label>
           )}
           {error && <p className="text-sm text-destructive">{error}</p>}
           <Button
