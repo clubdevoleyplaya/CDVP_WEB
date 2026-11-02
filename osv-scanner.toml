@@ -11,3 +11,22 @@ despliega, y `npm audit --omit=dev` da 0. 3.0.3 es la última versión publicada
 arreglo; el único camino de npm es bajar shadcn a 1.0.0 (cambio incompatible).
 Revisar al vencer: si shadcn o braces publican una versión corregida, subirla y quitar esto.
 """
+
+[[IgnoredVulns]]
+id = "GHSA-gcqx-w48m-w2h4"
+ignoreUntil = 2026-11-30
+reason = """
+deepmerge 4.3.1, solo por el CLI de shadcn (dependencia de desarrollo que no se despliega;
+`npm ls --omit=dev` no la incluye). No hay versión corregida publicada.
+Revisar al vencer: si sale un arreglo, subirlo y quitar esto.
+"""
+
+[[IgnoredVulns]]
+id = "GHSA-g3hv-75wg-m249"
+ignoreUntil = 2026-11-30
+reason = """
+minimatch 3.1.5 y 10.2.6, solo por eslint y sus plugins (desarrollo, no se despliega;
+`npm ls --omit=dev` no la incluye). El arreglo exige minimatch 11, que rompe los plugins de
+eslint actuales.
+Revisar al vencer: si eslint o sus plugins aceptan minimatch 11, subirlo y quitar esto.
+"""
