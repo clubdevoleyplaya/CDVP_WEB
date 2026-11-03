@@ -34,6 +34,12 @@ export function ProductBuyBox({ product }: { product: Product }) {
     };
   }, [session, product.slug]);
 
+  // La página del producto es para comprar: con el curso ya comprado, se entra al aula.
+  const goesToClassroom = owned && !!session && product.category === "curso";
+  useEffect(() => {
+    if (goesToClassroom) router.replace(`/curso/${product.slug}`);
+  }, [goesToClassroom, router, product.slug]);
+
   const rail =
     currency === "ARS"
       ? "Pago en Argentina vía MercadoPago"
@@ -80,15 +86,16 @@ export function ProductBuyBox({ product }: { product: Product }) {
   }
 
   // Sin sesión (o al cerrarla) `owned` puede venir de una consulta anterior: no se confía en él.
+  if (goesToClassroom) return <p className="text-sm text-ink-soft">Abriendo tu curso...</p>;
+
   if (owned && session) {
-    const isCourse = product.category === "curso";
     return (
       <div className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-6">
         <p className="font-display text-sm font-bold uppercase tracking-wide text-green">
-          {isCourse ? "Ya tenés este curso" : "Ya tenés este producto"}
+          Ya tenés este producto
         </p>
         <p className="text-xs text-ink-soft">
-          {isCourse ? "Lo encontrás en tu perfil, dentro de «Mis cursos»." : "Lo encontrás en tu perfil."}
+          Lo encontrás en tu perfil.
         </p>
         <Link
           href="/perfil"

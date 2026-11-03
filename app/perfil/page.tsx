@@ -248,7 +248,7 @@ export default function PerfilPage() {
                   return (
                     <Link
                       key={course.slug}
-                      href={`/producto/${course.slug}`}
+                      href={course.has_access ? `/curso/${course.slug}` : `/producto/${course.slug}`}
                       className="flex items-center gap-3 rounded-md p-1 text-sm hover:bg-surface"
                     >
                       {image && (
