@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -8,11 +9,13 @@ import { NavDrawer } from "@/components/nav-drawer";
 import { CartDrawer } from "@/components/cart-drawer";
 import { CATEGORY_ROUTE_LABELS } from "@/lib/products";
 import { useDemoState } from "@/context/demo-state";
+import { loginHref } from "@/lib/safe-redirect";
 
 const NAV_ROUTES = ["cursos", "descargables", "combos", "eventos"] as const;
 
 export function Header() {
   const { session, me } = useDemoState();
+  const pathname = usePathname();
   const displayName = me?.nickname || session?.user.email;
   const initial = (displayName ?? "?").charAt(0).toUpperCase();
 
@@ -53,7 +56,7 @@ export function Header() {
         ) : (
           <>
             <Link
-              href="/login"
+              href={loginHref(pathname)}
               className="hidden rounded-lg border border-ink px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide md:inline-flex"
             >
               Iniciar sesión

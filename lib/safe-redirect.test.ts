@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { safeNextPath } from "./safe-redirect";
+import { loginHref, safeNextPath } from "./safe-redirect";
 
 describe("safeNextPath", () => {
   it.each([
@@ -40,5 +40,17 @@ describe("safeNextPath", () => {
 
   it("acepta otro destino por defecto", () => {
     expect(safeNextPath("https://sitio-malo.com", "/login")).toBe("/login");
+  });
+});
+
+describe("loginHref", () => {
+  it("vuelve a la página de origen", () => {
+    expect(loginHref("/curso/armado")).toBe("/login?next=%2Fcurso%2Farmado");
+  });
+  it("sin origen o con origen peligroso va al login simple", () => {
+    expect(loginHref("/")).toBe("/login");
+    expect(loginHref(null)).toBe("/login");
+    expect(loginHref("//evil.com")).toBe("/login");
+    expect(loginHref("/login?next=/x")).toBe("/login");
   });
 });

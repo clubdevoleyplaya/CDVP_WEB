@@ -8,6 +8,7 @@ import { useDemoState } from "@/context/demo-state";
 import { hasCourseAccess, type CourseAccess } from "@/lib/course-access";
 import { computeDisplayPrice, formatPrice, paymentProviderFor } from "@/lib/price";
 import type { Product } from "@/lib/products";
+import { loginHref } from "@/lib/safe-redirect";
 import { USER_MESSAGES } from "@/lib/user-errors";
 
 export function ProductBuyBox({ product }: { product: Product }) {
@@ -34,12 +35,6 @@ export function ProductBuyBox({ product }: { product: Product }) {
     };
   }, [session, product.slug]);
 
-  // La página del producto es para comprar: con el curso ya comprado, se entra al aula.
-  const goesToClassroom = owned && !!session && product.category === "curso";
-  useEffect(() => {
-    if (goesToClassroom) router.replace(`/curso/${product.slug}`);
-  }, [goesToClassroom, router, product.slug]);
-
   const rail =
     currency === "ARS"
       ? "Pago en Argentina vía MercadoPago"
@@ -47,7 +42,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
 
   async function handleBuy() {
     if (!session) {
-      router.push("/login");
+      router.push(loginHref(`/producto/${product.slug}`));
       return;
     }
 
@@ -86,22 +81,18 @@ export function ProductBuyBox({ product }: { product: Product }) {
   }
 
   // Sin sesión (o al cerrarla) `owned` puede venir de una consulta anterior: no se confía en él.
-  if (goesToClassroom) return <p className="text-sm text-ink-soft">Abriendo tu curso...</p>;
-
   if (owned && session) {
+    const isCourse = product.category === "curso";
     return (
       <div className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-6">
         <p className="font-display text-sm font-bold uppercase tracking-wide text-green">
-          Ya tenés este producto
-        </p>
-        <p className="text-xs text-ink-soft">
-          Lo encontrás en tu perfil.
+          {isCourse ? "Ya tenés este curso" : "Ya tenés este producto"}
         </p>
         <Link
-          href="/perfil"
+          href={isCourse ? `/curso/${product.slug}` : "/perfil"}
           className="w-fit rounded-lg bg-ink px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
         >
-          Ir a mi perfil
+          {isCourse ? "Ir al curso" : "Ir a mi perfil"}
         </Link>
       </div>
     );
