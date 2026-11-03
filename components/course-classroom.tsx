@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Check, ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { Check, ChevronLeft, ChevronRight, Play, PartyPopper } from "lucide-react";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
@@ -67,29 +67,42 @@ export function CourseClassroom({ slug, title, description }: Props) {
   );
 }
 
+const GENERATED_MODULE = /^Módulo \d+$/;
+
 function Viewer({ slug, lessons, description, email }: { slug: string; lessons: Lesson[]; description: string; email?: string }) {
-  const storageKey = `cdvp-seen:${slug}`;
-  const [seen, setSeen] = useState<number[]>(() => {
+  const storageKey = `cdvp-seen:${slug}`; // misma clave de siempre: no se pierde el avance guardado
+  const [completed, setCompleted] = useState<number[]>(() => {
     try {
       return JSON.parse(localStorage.getItem(storageKey) ?? "[]");
     } catch {
       return [];
     }
   });
-  // Retoma en la primera clase sin ver.
-  const [current, setCurrent] = useState(() => Math.max(0, lessons.findIndex((l) => !seen.includes(l.position))));
+  // Retoma en la primera clase sin completar.
+  const [current, setCurrent] = useState(() => Math.max(0, lessons.findIndex((l) => !completed.includes(l.position))));
   const sectionOf = (l: Lesson) => l.section ?? NO_SECTION;
   const [open, setOpen] = useState<string[]>(() => [sectionOf(lessons[current])]);
 
+  const lesson = lessons[current];
+  const isDone = (l: Lesson) => completed.includes(l.position);
+  const last = current === lessons.length - 1;
+  const finished = completed.length === lessons.length;
+  const percent = Math.round((completed.length / lessons.length) * 100);
+  // Acordeón solo si Juli nombró las secciones; los «Módulo N» generados van en lista continua.
+  const named = lessons.some((l) => l.section && !GENERATED_MODULE.test(l.section));
+  const sections = [...new Set(lessons.map(sectionOf))];
+
   function go(i: number) {
+    if (i < 0 || i >= lessons.length) return;
     setCurrent(i);
     setOpen((o) => (o.includes(sectionOf(lessons[i])) ? o : [...o, sectionOf(lessons[i])]));
   }
 
-  function markSeen(position: number) {
-    setSeen((prev) => {
-      if (prev.includes(position)) return prev;
-      const next = [...prev, position];
+  function toggleCompleted(position: number, value?: boolean) {
+    setCompleted((prev) => {
+      const has = prev.includes(position);
+      if (value === has) return prev;
+      const next = has ? prev.filter((p) => p !== position) : [...prev, position];
       try {
         localStorage.setItem(storageKey, JSON.stringify(next));
       } catch {}
@@ -97,91 +110,133 @@ function Viewer({ slug, lessons, description, email }: { slug: string; lessons: 
     });
   }
 
-  const lesson = lessons[current];
-  const sections = [...new Set(lessons.map(sectionOf))];
-  const percent = Math.round((seen.length / lessons.length) * 100);
+  useEffect(() => {
+    document.querySelector(`[data-lesson="${current}"]`)?.scrollIntoView({ block: "nearest" });
+  }, [current]);
 
-  const list = (name: string) => (
-    <ol className="flex flex-col gap-0.5">
-      {lessons.map((l, i) =>
-        sectionOf(l) !== name ? null : (
-          <li key={l.position}>
-            <button
-              type="button"
-              onClick={() => go(i)}
-              aria-current={i === current ? "true" : undefined}
-              className={`flex w-full items-start gap-3 rounded-lg px-3 py-2.5 text-left text-base leading-snug ${
-                i === current ? "bg-blue/15 font-semibold" : "hover:bg-surface"
-              }`}
-            >
-              <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center text-xs text-ink-soft">
-                {i === current ? (
-                  <Play className="size-4 fill-current text-blue" />
-                ) : seen.includes(l.position) ? (
-                  <Check className="size-4 text-green" />
-                ) : (
-                  i + 1
-                )}
-              </span>
-              {l.title}
-            </button>
-          </li>
-        ),
-      )}
-    </ol>
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.target instanceof HTMLElement && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+      if (e.key === "ArrowLeft") go(current - 1);
+      if (e.key === "ArrowRight") go(current + 1);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [current]);
+
+  const row = (l: Lesson, i: number) => (
+    <li key={l.position} data-lesson={i}>
+      <button
+        type="button"
+        onClick={() => go(i)}
+        aria-current={i === current ? "true" : undefined}
+        className={`flex w-full items-start gap-3 border-l-2 px-3 py-2.5 text-left text-base leading-snug ${
+          i === current ? "border-blue bg-blue/10 font-semibold" : "border-transparent hover:bg-surface"
+        }`}
+      >
+        <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center text-xs text-ink-soft">
+          {isDone(l) ? <Check className="size-4 text-green" /> : i === current ? <Play className="size-4 fill-current text-blue" /> : i + 1}
+        </span>
+        {l.title}
+      </button>
+    </li>
   );
+
+  const continuous = () => {
+    const count = (name: string | null) => lessons.filter((l) => l.section === name).length;
+    return (
+      <ol className="flex flex-col">
+        {lessons.map((l, i) => (
+          <Fragment key={l.position}>
+            {l.section && l.section !== lessons[i - 1]?.section && count(l.section) > 1 && (
+              <li className="mt-3 border-b border-line px-3 pb-1 font-display text-xs font-bold uppercase tracking-wide text-ink-soft first:mt-0">
+                {l.section}
+              </li>
+            )}
+            {row(l, i)}
+          </Fragment>
+        ))}
+      </ol>
+    );
+  };
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_380px]">
       <div className="flex min-w-0 flex-col gap-4">
-        <VideoPlayer provider={lesson.provider} videoId={lesson.video_id} watermark={email} />
+        <div className="overflow-hidden rounded-xl shadow-lg">
+          <VideoPlayer provider={lesson.provider} videoId={lesson.video_id} watermark={email} />
+        </div>
         <div>
           <p className="text-sm text-ink-soft">
+            {lesson.section ? `${lesson.section} · ` : ""}
             Clase {current + 1} de {lessons.length}
-            {lesson.section ? ` · ${lesson.section}` : ""}
           </p>
           <h1 className="font-display text-2xl font-bold">{lesson.title}</h1>
         </div>
-        <div className="flex flex-wrap justify-between gap-2">
+        <div className="flex flex-wrap items-center gap-2 border-y border-line py-3">
           <Button type="button" variant="outline" size="lg" disabled={current === 0} onClick={() => go(current - 1)}>
             <ChevronLeft className="size-4" /> Anterior
           </Button>
           <Button
             type="button"
             size="lg"
-            variant={seen.includes(lesson.position) ? "outline" : "default"}
-            onClick={() => {
-              markSeen(lesson.position);
-              if (current < lessons.length - 1) go(current + 1);
-            }}
+            variant="outline"
+            aria-pressed={isDone(lesson)}
+            className={isDone(lesson) ? "border-green text-green" : ""}
+            onClick={() => toggleCompleted(lesson.position)}
           >
-            {current < lessons.length - 1 ? "Vista, siguiente" : "Marcar como vista"}
-            <ChevronRight className="size-4" />
+            <Check className="size-4" /> {isDone(lesson) ? "Completada" : "Marcar como completada"}
+          </Button>
+          <Button
+            type="button"
+            size="lg"
+            className="ml-auto"
+            onClick={() => (last ? toggleCompleted(lesson.position, true) : go(current + 1))}
+          >
+            {last ? "Terminar curso" : "Siguiente"} <ChevronRight className="size-4" />
           </Button>
         </div>
-        <p className="max-w-[65ch] border-t border-line pt-4 text-sm text-ink-soft">{description}</p>
+        <section>
+          <h2 className="font-display text-sm font-bold uppercase tracking-wide">Descripción</h2>
+          <p className="mt-2 max-w-[65ch] text-sm text-ink-soft">{description}</p>
+        </section>
       </div>
 
       <aside className="flex flex-col gap-3 lg:sticky lg:top-20 lg:self-start">
         <h2 className="font-display text-sm font-bold uppercase tracking-wide">Temario del curso</h2>
-        <Progress value={percent} aria-label="Avance del curso">
-          <span className="text-sm text-ink-soft">
-            {percent}% · {seen.length} de {lessons.length} clases vistas
-          </span>
-        </Progress>
-        <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
-          {sections.length === 1 ? (
-            list(sections[0])
+        {finished ? (
+          <p className="flex items-center gap-2 text-sm font-semibold text-green">
+            <PartyPopper className="size-4" /> ¡Terminaste el curso!
+          </p>
+        ) : (
+          <Progress value={percent} aria-label="Avance del curso">
+            <span className="text-sm text-ink-soft">
+              {percent}% · {completed.length} de {lessons.length} completadas
+            </span>
+          </Progress>
+        )}
+        <div className="max-h-96 overflow-y-auto lg:max-h-[calc(100vh-12rem)]">
+          {!named ? (
+            continuous()
           ) : (
             <Accordion value={open} onValueChange={setOpen} multiple>
-              {sections.map((name) => (
-                <AccordionItem key={name} value={name}>
-                  <AccordionTrigger className="px-3 font-display text-sm font-bold uppercase tracking-wide">
-                    {name}
-                  </AccordionTrigger>
-                  <AccordionContent>{list(name)}</AccordionContent>
-                </AccordionItem>
-              ))}
+              {sections.map((name) => {
+                const inSection = lessons.filter((l) => sectionOf(l) === name);
+                return (
+                  <AccordionItem key={name} value={name}>
+                    <AccordionTrigger className="px-3 font-display text-sm font-bold uppercase tracking-wide">
+                      <span className="flex-1">{name}</span>
+                      <span className="mr-2 font-sans text-xs font-normal normal-case text-ink-soft">
+                        {inSection.filter(isDone).length}/{inSection.length}
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <ol className="flex flex-col">{lessons.map((l, i) => (sectionOf(l) === name ? row(l, i) : null))}</ol>
+                    </AccordionContent>
+                  </AccordionItem>
+                );
+              })}
             </Accordion>
           )}
         </div>
