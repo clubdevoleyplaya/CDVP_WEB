@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useDemoState } from "@/context/demo-state";
 import { buttonVariants } from "@/components/ui/button";
+import { loginHref } from "@/lib/safe-redirect";
 
 type AuthGuardProps = {
   role?: "admin";
@@ -11,6 +13,7 @@ type AuthGuardProps = {
 
 export function AuthGuard({ role, children }: AuthGuardProps) {
   const { session, me } = useDemoState();
+  const pathname = usePathname();
 
   if (!session || (role && me?.role !== role)) {
     return (
@@ -21,7 +24,7 @@ export function AuthGuard({ role, children }: AuthGuardProps) {
             : "Iniciá sesión para ver esto."}
         </p>
         <Link
-          href="/login"
+          href={loginHref(pathname)}
           className={buttonVariants({ className: "mt-6 font-display text-xs font-bold uppercase tracking-wide" })}
         >
           Iniciar sesión

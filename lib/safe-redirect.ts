@@ -16,3 +16,9 @@ export function safeNextPath(next: string | null | undefined, fallback = "/"): s
   }
   return next;
 }
+
+// Enlace al login que, al iniciar sesión, vuelve a la página desde donde se pidió.
+export function loginHref(from: string | null | undefined): string {
+  const next = safeNextPath(from, "/");
+  return next === "/" || next.startsWith("/login") ? "/login" : `/login?next=${encodeURIComponent(next)}`;
+}
