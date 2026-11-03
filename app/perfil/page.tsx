@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ChangeEvent } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Check, ImagePlus, Lock, X } from "lucide-react";
 
@@ -19,6 +20,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { AuthGuard } from "@/components/auth-guard";
 import { useDemoState } from "@/context/demo-state";
 import type { CourseAccess } from "@/lib/course-access";
+import { getProductBySlug } from "@/lib/products";
 import { createClient } from "@/lib/supabase/client";
 
 const MAX_BANNER_BYTES = 5 * 1024 * 1024;
@@ -241,21 +243,28 @@ export default function PerfilPage() {
                   Hubo un error al traer tus cursos. Probá de nuevo más tarde.
                 </p>
               ) : (
-                courses.map((course) => (
-                  <div
-                    key={course.slug}
-                    className="flex items-center justify-between gap-2 text-sm"
-                  >
-                    <span className={course.has_access ? "" : "text-ink-soft"}>
-                      {course.title}
-                    </span>
-                    {course.has_access ? (
-                      <Check className="size-4 text-green" />
-                    ) : (
-                      <Lock className="size-4 text-ink-soft" />
-                    )}
-                  </div>
-                ))
+                courses.map((course) => {
+                  const image = getProductBySlug(course.slug)?.image;
+                  return (
+                    <Link
+                      key={course.slug}
+                      href={`/producto/${course.slug}`}
+                      className="flex items-center gap-3 rounded-md p-1 text-sm hover:bg-surface"
+                    >
+                      {image && (
+                        <Image src={image} alt="" width={48} height={48} className="size-12 shrink-0 rounded-md object-cover" />
+                      )}
+                      <span className={`flex-1 ${course.has_access ? "font-medium" : "text-ink-soft"}`}>
+                        {course.title}
+                      </span>
+                      {course.has_access ? (
+                        <Check className="size-4 text-green" />
+                      ) : (
+                        <Lock className="size-4 text-ink-soft" />
+                      )}
+                    </Link>
+                  );
+                })
               )}
             </CardContent>
           </Card>
