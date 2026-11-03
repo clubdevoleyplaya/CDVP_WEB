@@ -23,7 +23,11 @@ export function ProductCard({ product }: { product: Product }) {
       style={{ WebkitMaskImage: "-webkit-radial-gradient(white, black)" }}
     >
       {product.image ? (
-        <div className="relative aspect-video w-full overflow-hidden rounded-t-xl">
+        <Link
+          href={`/producto/${product.slug}`}
+          aria-label={`Ver ${product.title}`}
+          className="relative block aspect-video w-full overflow-hidden rounded-t-xl"
+        >
           <Image
             src={product.image}
             alt={product.title}
@@ -31,7 +35,7 @@ export function ProductCard({ product }: { product: Product }) {
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             className="object-cover scale-[1.03]"
           />
-        </div>
+        </Link>
       ) : (
         <div className="flex aspect-video w-full items-center justify-center bg-line font-display text-xs font-bold uppercase tracking-wide text-ink-soft">
           Imagen próximamente
@@ -42,7 +46,11 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="w-fit rounded-lg bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">
           {CATEGORY_LABELS[product.category]}
         </p>
-        <h3 className="font-display text-lg font-bold uppercase">{product.title}</h3>
+        <h3 className="font-display text-lg font-bold uppercase">
+          <Link href={`/producto/${product.slug}`} className="transition-colors hover:text-blue">
+            {product.title}
+          </Link>
+        </h3>
         <p className="flex-grow text-sm text-ink-soft">{product.shortDescription}</p>
         {(product.modules || product.rating || product.includes) && (
           <p className="text-xs text-ink-soft">
