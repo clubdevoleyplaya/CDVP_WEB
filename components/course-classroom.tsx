@@ -217,27 +217,44 @@ function Viewer({ slug, lessons, description, email }: { slug: string; lessons: 
           </Progress>
         )}
         <div className="max-h-96 overflow-y-auto lg:max-h-[calc(100vh-12rem)]">
-          {!named ? (
+          {!named || sections.length === 1 ? (
             continuous()
           ) : (
-            <Accordion value={open} onValueChange={setOpen} multiple>
+            <div className="flex flex-col">
               {sections.map((name) => {
                 const inSection = lessons.filter((l) => sectionOf(l) === name);
+                // Un módulo con una sola clase no necesita acordeón: va como una fila más.
+                if (inSection.length === 1) {
+                  return (
+                    <ol key={name} className="border-b border-line">
+                      {row(inSection[0], lessons.indexOf(inSection[0]))}
+                    </ol>
+                  );
+                }
                 return (
-                  <AccordionItem key={name} value={name}>
-                    <AccordionTrigger className="px-3 font-display text-sm font-bold uppercase tracking-wide">
-                      <span className="flex-1">{name}</span>
-                      <span className="mr-2 font-sans text-xs font-normal normal-case text-ink-soft">
-                        {inSection.filter(isDone).length}/{inSection.length}
-                      </span>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <ol className="flex flex-col">{lessons.map((l, i) => (sectionOf(l) === name ? row(l, i) : null))}</ol>
-                    </AccordionContent>
-                  </AccordionItem>
+                  <Accordion
+                    key={name}
+                    value={open.includes(name) ? [name] : []}
+                    onValueChange={(v) => setOpen((o) => (v.length ? [...o, name] : o.filter((x) => x !== name)))}
+                    multiple
+                  >
+                    <AccordionItem value={name}>
+                      <AccordionTrigger className="px-3 font-display text-sm font-bold uppercase tracking-wide">
+                        <span className="flex-1">{name}</span>
+                        <span className="mr-2 font-sans text-xs font-normal normal-case text-ink-soft">
+                          {inSection.filter(isDone).length}/{inSection.length}
+                        </span>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <ol className="flex flex-col">
+                          {inSection.map((l) => row(l, lessons.indexOf(l)))}
+                        </ol>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
                 );
               })}
-            </Accordion>
+            </div>
           )}
         </div>
       </aside>
