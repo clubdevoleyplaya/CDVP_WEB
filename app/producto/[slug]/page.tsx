@@ -68,7 +68,7 @@ export default async function ProductPage({
         </p>
       )}
 
-      <div className="mt-8 max-w-sm">
+      <div className="mt-8">
         <ProductBuyBox product={product} />
       </div>
 

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ShoppingBag } from "lucide-react";
+import { CoursePreview } from "@/components/course-preview";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useDemoState } from "@/context/demo-state";
 import { hasCourseAccess, type CourseAccess } from "@/lib/course-access";
 import { computeDisplayPrice, formatPrice, paymentProviderFor } from "@/lib/price";
@@ -17,7 +19,8 @@ export function ProductBuyBox({ product }: { product: Product }) {
   const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber, discountPercent, eurPrices);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [owned, setOwned] = useState(false);
+  // null = todavía no se sabe (con sesión); así no se ve la ficha de compra un instante antes de entrar al curso.
+  const [ownedRaw, setOwned] = useState<boolean | null>(null);
 
   useEffect(() => {
     // /me/products trae el acceso a todas las categorías. Si la consulta falla, se muestra la caja
@@ -34,6 +37,14 @@ export function ProductBuyBox({ product }: { product: Product }) {
       cancelled = true;
     };
   }, [session, product.slug]);
+
+  // Sin sesión no hay nada que consultar: no tiene el producto.
+  const owned = session ? ownedRaw : false;
+  const isCourse = product.category === "curso";
+  const goesToClassroom = owned === true && !!session && isCourse;
+  useEffect(() => {
+    if (goesToClassroom) router.replace(`/curso/${product.slug}`);
+  }, [goesToClassroom, router, product.slug]);
 
   const rail =
     currency === "ARS"
@@ -80,26 +91,35 @@ export function ProductBuyBox({ product }: { product: Product }) {
     }
   }
 
+  // Con sesión y sin respuesta aún, o ya con el curso, se muestra una carga (no la ficha de compra).
+  if (session && (owned === null || goesToClassroom)) {
+    return (
+      <div className="flex max-w-sm flex-col gap-3 rounded-xl border border-line bg-surface p-6" aria-busy="true">
+        <Skeleton className="h-8 w-32" />
+        <Skeleton className="h-10 w-40" />
+        {goesToClassroom && <p className="text-xs text-ink-soft">Abriendo tu curso...</p>}
+      </div>
+    );
+  }
+
   // Sin sesión (o al cerrarla) `owned` puede venir de una consulta anterior: no se confía en él.
   if (owned && session) {
-    const isCourse = product.category === "curso";
     return (
-      <div className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-6">
-        <p className="font-display text-sm font-bold uppercase tracking-wide text-green">
-          {isCourse ? "Ya tenés este curso" : "Ya tenés este producto"}
-        </p>
+      <div className="flex max-w-sm flex-col gap-3 rounded-xl border border-line bg-surface p-6">
+        <p className="font-display text-sm font-bold uppercase tracking-wide text-green">Ya tenés este producto</p>
         <Link
-          href={isCourse ? `/curso/${product.slug}` : "/perfil"}
+          href="/perfil"
           className="w-fit rounded-lg bg-ink px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
         >
-          {isCourse ? "Ir al curso" : "Ir a mi perfil"}
+          Ir a mi perfil
         </Link>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-6">
+    <>
+    <div className="flex max-w-sm flex-col gap-3 rounded-xl border border-line bg-surface p-6">
       <div className="flex items-baseline gap-2">
         {showOld && (
           <span className="tabular text-base text-ink-soft line-through">
@@ -130,5 +150,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
 
       {error && <p className="text-sm text-destructive">{error}</p>}
     </div>
+    {isCourse && <CoursePreview product={product} />}
+    </>
   );
 }
