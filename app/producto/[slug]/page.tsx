@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { CoursePreview } from "@/components/course-preview";
 import { ProductBuyBox } from "@/components/product-buy-box";
 import { ProductCard } from "@/components/product-card";
 import { QuizSection } from "@/components/quiz-section";
@@ -29,7 +30,7 @@ export default async function ProductPage({
     .slice(0, 3);
 
   return (
-    <section className="mx-auto max-w-4xl px-6 py-16">
+    <section className="mx-auto max-w-[90rem] px-6 py-16 lg:px-10">
       <Link
         href={`/catalogo/${CATEGORY_TO_ROUTE[product.category]}`}
         className="font-display text-xs font-bold uppercase tracking-wide text-blue hover:underline"
@@ -37,46 +38,58 @@ export default async function ProductPage({
         ← {CATEGORY_ROUTE_LABELS[CATEGORY_TO_ROUTE[product.category]]}
       </Link>
 
-      <p className="mt-6 w-fit rounded-lg bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">
-        {CATEGORY_LABELS[product.category]}
-      </p>
-      <h1 className="mt-2 font-display text-4xl font-bold uppercase">{product.title}</h1>
-      <p className="mt-4 max-w-[65ch] text-base text-ink-soft">{product.longDescription}</p>
+      <div className="mt-6 grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
+        <div>
+          <p className="w-fit rounded-lg bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">
+            {CATEGORY_LABELS[product.category]}
+          </p>
+          <h1 className="mt-2 font-display text-4xl font-bold uppercase">
+            {product.title}
+          </h1>
+          <p className="mt-4 max-w-[65ch] text-base text-ink-soft">
+            {product.longDescription}
+          </p>
 
-      {product.chips && (
-        <ul className="mt-4 flex flex-wrap gap-2">
-          {product.chips.map((chip) => (
-            <li
-              key={chip}
-              className="rounded-lg border border-line font-display text-xs uppercase tracking-wide text-ink-soft px-2 py-1"
-            >
-              {chip}
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {(product.modules || product.rating || product.includes) && (
-        <p className="mt-4 text-sm text-ink-soft">
-          {product.modules && <>Módulos: {product.modules} · </>}
-          {product.rating && (
-            <>
-              {product.rating.value}★ ({product.rating.count} valoraciones) ·{" "}
-            </>
+          {product.chips && (
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {product.chips.map((chip) => (
+                <li
+                  key={chip}
+                  className="rounded-lg border border-line font-display text-xs uppercase tracking-wide text-ink-soft px-2 py-1"
+                >
+                  {chip}
+                </li>
+              ))}
+            </ul>
           )}
-          {product.includes && <>Incluye: {product.includes}</>}
-        </p>
-      )}
 
-      <div className="mt-8">
-        <ProductBuyBox product={product} />
+          {(product.modules || product.rating || product.includes) && (
+            <p className="mt-4 text-sm text-ink-soft">
+              {product.modules && <>Módulos: {product.modules} · </>}
+              {product.rating && (
+                <>
+                  {product.rating.value}★ ({product.rating.count} valoraciones)
+                  {product.includes && " · "}
+                </>
+              )}
+              {product.includes && <>Incluye: {product.includes}</>}
+            </p>
+          )}
+        </div>
+        <div className="lg:sticky lg:top-24">
+          <ProductBuyBox product={product} />
+        </div>
       </div>
+
+      {product.category === "curso" && <CoursePreview product={product} />}
 
       <QuizSection slug={product.slug} category={product.category} />
 
       {product.testimonials && product.testimonials.length > 0 && (
         <div className="mt-16">
-          <h2 className="font-display text-xl font-bold uppercase">Lo que dicen los alumnos</h2>
+          <h2 className="font-display text-xl font-bold uppercase">
+            Lo que dicen los alumnos
+          </h2>
           <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {product.testimonials.map((t) => (
               <blockquote
@@ -95,7 +108,9 @@ export default async function ProductPage({
 
       {related.length > 0 && (
         <div className="mt-16">
-          <h2 className="font-display text-xl font-bold uppercase">Más productos relacionados</h2>
+          <h2 className="font-display text-xl font-bold uppercase">
+            Más productos relacionados
+          </h2>
           <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
             {related.map((p) => (
               <ProductCard key={p.slug} product={p} />
