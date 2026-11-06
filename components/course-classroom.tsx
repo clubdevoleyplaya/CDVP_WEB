@@ -11,16 +11,16 @@ import { Progress } from "@/components/ui/progress";
 import { CourseTestimonials } from "@/components/course-testimonials";
 import { VideoPlayer } from "@/components/video-player";
 import { useDemoState } from "@/context/demo-state";
-import type { Testimonial } from "@/lib/products";
+import type { Product, Testimonial } from "@/lib/products";
 import type { VideoProvider } from "@/lib/video-link";
 
 export type Lesson = { position: number; section: string | null; title: string; provider: VideoProvider; video_id: string };
-type Props = { slug: string; title: string; description: string; testimonials?: Testimonial[] };
+type Props = { slug: string; title: string; description: string; testimonials?: Testimonial[]; rating?: Product["rating"] };
 
 const NO_SECTION = "Clases";
 const API = process.env.NEXT_PUBLIC_API_URL;
 
-export function CourseClassroom({ slug, title, description, testimonials }: Props) {
+export function CourseClassroom({ slug, title, description, testimonials, rating }: Props) {
   const { session } = useDemoState();
   const router = useRouter();
   const [lessons, setLessons] = useState<Lesson[] | null>(null);
@@ -58,7 +58,7 @@ export function CourseClassroom({ slug, title, description, testimonials }: Prop
         <span className="text-ink">{title}</span>
       </nav>
       {lessons.length > 0 ? (
-        <Viewer slug={slug} lessons={lessons} description={description} testimonials={testimonials} email={session?.user.email} />
+        <Viewer slug={slug} lessons={lessons} description={description} testimonials={testimonials} rating={rating} email={session?.user.email} />
       ) : (
         <div className="max-w-3xl">
           <VideoPlayer provider={video?.provider ?? null} videoId={video?.videoId ?? null} watermark={session?.user.email} />
@@ -71,7 +71,7 @@ export function CourseClassroom({ slug, title, description, testimonials }: Prop
 
 const GENERATED_MODULE = /^Módulo \d+$/;
 
-function Viewer({ slug, lessons, description, testimonials, email }: { slug: string; lessons: Lesson[]; description: string; testimonials?: Testimonial[]; email?: string }) {
+function Viewer({ slug, lessons, description, testimonials, rating, email }: { slug: string; lessons: Lesson[]; description: string; testimonials?: Testimonial[]; rating?: Product["rating"]; email?: string }) {
   const storageKey = `cdvp-seen:${slug}`; // misma clave de siempre: no se pierde el avance guardado
   const [completed, setCompleted] = useState<number[]>(() => {
     try {
@@ -199,7 +199,7 @@ function Viewer({ slug, lessons, description, testimonials, email }: { slug: str
             {last ? "Terminar curso" : "Siguiente"} <ChevronRight className="size-4" />
           </Button>
         </div>
-        <CourseTestimonials items={testimonials} />
+        <CourseTestimonials items={testimonials} rating={rating} />
         <section>
           <h2 className="font-display text-sm font-bold uppercase tracking-wide">Descripción</h2>
           <p className="mt-2 max-w-[65ch] text-sm text-ink-soft">{description}</p>

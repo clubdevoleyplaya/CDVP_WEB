@@ -18,6 +18,8 @@ export interface Product {
   discountable: boolean;
   includes?: string;
   testimonials?: Testimonial[];
+  // Video de venta (Vimeo) del curso; se muestra solo en su ficha.
+  vslVimeoId?: string;
 }
 
 // Texto, imagen (captura) o ambos; los videos no van aquí.
@@ -64,9 +66,7 @@ export const products: Product[] = [
     chips: ["Pies", "Brazos", "Impacto", "Errores frecuentes", "Tips"],
     modules: 5,
     rating: { value: 5.0, count: 9 },
-    priceArs: 50000,
-    priceUsd: 50,
-    discountable: true,
+    vslVimeoId: "1244394563",
     testimonials: [
       {
         quote:
@@ -75,10 +75,33 @@ export const products: Product[] = [
       },
       {
         quote:
+          "Solo decirte gracias Juli por explicar fácil lo que puede ser difícil de entender. Es una gran ayuda de tu parte brindarnos tanta calidad de contenido.",
+        author: "Diego Huicy",
+      },
+      {
+        quote:
+          "Desde Side Out Volleyball Club en Venezuela recomendamos este curso, muy práctico, dinámico y fluido el facilitador con muchos conocimientos.",
+        author: "Lenhil Linares",
+      },
+      {
+        quote:
           "Muy buen desglose de las formas de ataque, entrada, shot, la carrera de entrada y la forma de golpear el balón.",
         author: "Hugo Morgado",
       },
+      {
+        quote:
+          "Muy bueno Juli como siempre. Mucha info que no conocía. Aprendo cada día más con tus cursos.",
+        author: "Cecilia Melgarejo",
+      },
+      {
+        quote:
+          "Muy buen curso, bastante completo para jugadores amateurs o semi-pro para ir corrigiendo pequeños detalles.",
+        author: "Alejandro Dominguez",
+      },
     ],
+    priceArs: 50000,
+    priceUsd: 50,
+    discountable: true,
   },
   {
     slug: "mentalidad-deportiva",
@@ -134,7 +157,8 @@ export const products: Product[] = [
     longDescription:
       "Mejorá tu defensa con toda la información exclusiva del club: posicionamiento, lectura del ataque rival y los ajustes finos que marcan la diferencia en la arena.",
     modules: 1,
-    rating: { value: 5.0, count: 7 },
+    rating: { value: 5.0, count: 8 },
+    vslVimeoId: "1244394560",
     testimonials: [
       {
         quote:
@@ -164,6 +188,15 @@ export const products: Product[] = [
     shortDescription: "Técnica de bloqueo individual y lectura del ataque rival.",
     longDescription:
       "Fundamentos del bloqueo individual en voley playa: posicionamiento, timing y lectura del ataque rival para cerrar bien los espacios.",
+    rating: { value: 5.0, count: 4 },
+    vslVimeoId: "1244394565",
+    testimonials: [
+      {
+        quote:
+          "Súper bien explicado, se entiende a la perfección lo que se está enseñando. Muchas gracias por el curso.",
+        author: "Hugo Morgado",
+      },
+    ],
     priceArs: 50000,
     priceUsd: 50,
     discountable: true,
@@ -176,6 +209,25 @@ export const products: Product[] = [
     shortDescription: "Fundamentos de armado para dominar todos los ritmos de ataque.",
     longDescription:
       "Los fundamentos del armado en la arena: manejo de ritmos, variantes de colocación y cómo darle opciones claras a tu atacante.",
+    rating: { value: 4.88, count: 8 },
+    vslVimeoId: "1244394561",
+    testimonials: [
+      {
+        quote:
+          "Realicé el curso de recepción del Club de Voley Playa y continué con el de armado. Lo valoro con 5 estrellas porque enseña fundamentos técnicos detalladamente, analiza situaciones posibles de juego y usa la herramienta de colores para marcar trayectorias de pelota y lugares de la cancha. Lo recomiendo, es muy didáctico.",
+        author: "Fernando Ariel Mezzera",
+      },
+      {
+        quote:
+          "Muy buen curso, explica sobre todo la toma de decisiones en cuanto al armado según las circunstancias del juego.",
+        author: "Iver Leal Miranda",
+      },
+      {
+        quote:
+          "Me gustó demasiado, aprendí muchas técnicas que no sabía y mejoré mi nivel de armado en cancha.",
+        author: "Leonardo Vasquez",
+      },
+    ],
     priceArs: 50000,
     priceUsd: 50,
     discountable: true,
@@ -188,6 +240,8 @@ export const products: Product[] = [
     shortDescription: "Técnica y variantes de saque para presionar la recepción rival.",
     longDescription:
       "Técnica de saque y sus variantes para presionar la recepción rival desde el primer contacto del punto.",
+    rating: { value: 5.0, count: 3 },
+    vslVimeoId: "1244394676",
     priceArs: 50000,
     priceUsd: 50,
     discountable: true,
@@ -200,6 +254,24 @@ export const products: Product[] = [
     shortDescription: "Las bases del voley playa antes de meterte en la técnica de cada gesto.",
     longDescription:
       "Las bases del voley playa: reglas, dinámica de juego y los conceptos generales que necesitás entender antes de meterte en la técnica de cada gesto.",
+    rating: { value: 4.8, count: 10 },
+    testimonials: [
+      {
+        quote:
+          "Excelente información, muchas gracias.",
+        author: "Andres Moraila Quintero",
+      },
+      {
+        quote:
+          "¡Muy completo e interactivo!",
+        author: "Leandro Fogel Fogel",
+      },
+      {
+        quote:
+          "¡Súper completo!",
+        author: "Joaquin Ceballos",
+      },
+    ],
     priceArs: 50000,
     priceUsd: 50,
     discountable: true,
@@ -212,6 +284,30 @@ export const products: Product[] = [
     shortDescription: "Posicionamiento y lectura de saque para una recepción más consistente.",
     longDescription:
       "Posicionamiento, lectura de saque y ajustes de recepción para llegar más consistente al primer contacto.",
+    rating: { value: 4.93, count: 30 },
+    vslVimeoId: "1244394665",
+    testimonials: [
+      {
+        quote:
+          "El fundamento de la recepción y sus variables con respecto a los saques, el clima y el compañero es muy específico. Analiza cada acción desde un proceso metodológico muy claro. Lo recomiendo para jugadores y entrenadores.",
+        author: "Fernando Ariel Mezzera",
+      },
+      {
+        quote:
+          "Es un curso bastante completo y con indicaciones muy claras y precisas. Muy recomendable.",
+        author: "Miriam Amaya Keller",
+      },
+      {
+        quote:
+          "Muy bueno, para jugadores que están arrancando a jugar en arena. ¡Queremos más Juli! Gracias.",
+        author: "Claudia Elisabet Ceccani",
+      },
+      {
+        quote:
+          "Buen curso, me solucionó bastantes dudas que tenía con respecto a la recepción.",
+        author: "Alan José Soltys",
+      },
+    ],
     priceArs: 50000,
     priceUsd: 50,
     discountable: true,
@@ -292,8 +388,8 @@ export const products: Product[] = [
     longDescription:
       "Los 8 cursos técnicos del club — ataque, defensa, bloqueo, armado, saque, recepción, conceptos generales y mentalidad — en un solo pack, con descuento por volumen.",
     includes: "8 productos",
-    priceArs: 170000,
-    priceUsd: 170,
+    priceArs: 350000,
+    priceUsd: 350,
     compareArs: 400000,
     compareUsd: 400,
     discountable: false,
