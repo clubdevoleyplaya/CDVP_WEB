@@ -395,6 +395,20 @@ export const products: Product[] = [
     discountable: false,
   },
   {
+    slug: "combo-k1-recepcion-armado-ataque",
+    category: "combo",
+    title: "Combo K1 — Recepción, Armado, Ataque",
+    shortDescription: "Los 3 fundamentos de la técnica con balón en un solo pack.",
+    longDescription:
+      "Recepción, armado y ataque — los tres fundamentos que construyen la jugada con balón — combinados en un solo pack.",
+    includes: "3 productos",
+    priceArs: 135000,
+    priceUsd: 135,
+    compareArs: 150000,
+    compareUsd: 150,
+    discountable: false,
+  },
+  {
     slug: "copia-de-combo-k1-recepcion-armado-ataque",
     category: "combo",
     title: "Combo K2 — Saque, Defensa, Bloqueo",
