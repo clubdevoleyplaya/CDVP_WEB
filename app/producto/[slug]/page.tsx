@@ -4,6 +4,7 @@ import { CourseTestimonials } from "@/components/course-testimonials";
 import { CoursePreview } from "@/components/course-preview";
 import { ProductBuyBox } from "@/components/product-buy-box";
 import { ProductCard } from "@/components/product-card";
+import { VideoPlayer } from "@/components/video-player";
 import { QuizSection } from "@/components/quiz-section";
 import {
   CATEGORY_LABELS,
@@ -64,17 +65,13 @@ export default async function ProductPage({
             </ul>
           )}
 
-          {(product.modules || product.rating || product.includes) && (
-            <p className="mt-4 text-sm text-ink-soft">
-              {product.modules && <>Módulos: {product.modules} · </>}
-              {product.rating && (
-                <>
-                  {product.rating.value}★ ({product.rating.count} valoraciones)
-                  {product.includes && " · "}
-                </>
-              )}
-              {product.includes && <>Incluye: {product.includes}</>}
-            </p>
+          {product.includes && (
+            <p className="mt-4 text-sm text-ink-soft">Incluye: {product.includes}</p>
+          )}
+          {product.vslVimeoId && (
+            <div className="mt-6 max-w-2xl">
+              <VideoPlayer provider="vimeo" videoId={product.vslVimeoId} />
+            </div>
           )}
         </div>
         <div className="lg:sticky lg:top-24">
@@ -87,7 +84,7 @@ export default async function ProductPage({
       <QuizSection slug={product.slug} category={product.category} />
 
       <div className="mt-16">
-        <CourseTestimonials items={product.testimonials} />
+        <CourseTestimonials items={product.testimonials} rating={product.rating} />
       </div>
 
       {related.length > 0 && (

@@ -14,7 +14,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
 
   return (
     <AuthGuard>
-      <CourseClassroom slug={product.slug} title={product.title} description={product.longDescription} testimonials={product.testimonials} />
+      <CourseClassroom slug={product.slug} title={product.title} description={product.longDescription} testimonials={product.testimonials} rating={product.rating} />
     </AuthGuard>
   );
 }

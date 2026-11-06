@@ -54,9 +54,8 @@ export function ProductCard({ product }: { product: Product }) {
           </Link>
         </h3>
         <p className="flex-grow text-sm text-ink-soft">{product.shortDescription}</p>
-        {(product.modules || product.rating || product.includes) && (
+        {(product.rating || product.includes) && (
           <p className="flex flex-wrap items-center gap-x-1.5 text-xs text-ink-soft [&>*+*]:before:mr-1.5 [&>*+*]:before:content-['·']">
-            {product.modules && <span>Módulos: {product.modules}</span>}
             {product.rating &&
               (product.testimonials?.length ? (
                 <Popover>
