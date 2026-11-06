@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { TestimonialSlider } from "@/components/testimonial-slider";
 import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice, formatPrice } from "@/lib/price";
 import { CATEGORY_LABELS, type Product } from "@/lib/products";
@@ -53,14 +55,35 @@ export function ProductCard({ product }: { product: Product }) {
         </h3>
         <p className="flex-grow text-sm text-ink-soft">{product.shortDescription}</p>
         {(product.modules || product.rating || product.includes) && (
-          <p className="text-xs text-ink-soft">
-            {product.modules && <>Módulos: {product.modules} · </>}
-            {product.rating && (
-              <>
-                {product.rating.value}★ ({product.rating.count}) ·{" "}
-              </>
-            )}
-            {product.includes && <>Incluye: {product.includes}</>}
+          <p className="flex flex-wrap items-center gap-x-1.5 text-xs text-ink-soft [&>*+*]:before:mr-1.5 [&>*+*]:before:content-['·']">
+            {product.modules && <span>Módulos: {product.modules}</span>}
+            {product.rating &&
+              (product.testimonials?.length ? (
+                <Popover>
+                  <PopoverTrigger
+                    openOnHover
+                    delay={150}
+                    className="underline decoration-dotted underline-offset-2 transition-colors hover:text-blue"
+                    aria-label={`Ver testimonios de ${product.title}`}
+                  >
+                    {product.rating.value}★ ({product.rating.count})
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <TestimonialSlider items={product.testimonials} />
+                    <Link
+                      href={`/producto/${product.slug}`}
+                      className="mt-3 block w-fit rounded-lg bg-ink px-4 py-2 font-display text-xs font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
+                    >
+                      Ver el curso
+                    </Link>
+                  </PopoverContent>
+                </Popover>
+              ) : (
+                <span>
+                  {product.rating.value}★ ({product.rating.count})
+                </span>
+              ))}
+            {product.includes && <span>Incluye: {product.includes}</span>}
           </p>
         )}
         <div className="mt-1 flex items-baseline gap-2">
