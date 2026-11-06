@@ -20,7 +20,7 @@ export type DiscountPercent = Record<Product["category"], number>;
 // Valores iniciales, iguales a los del backend. Se usan mientras llegan (o si no llegan)
 // los porcentajes vigentes desde `GET /descuentos`.
 export const DEFAULT_DISCOUNT_PERCENT: DiscountPercent = {
-  curso: 50,
+  curso: 15,
   evento: 10,
   combo: 0,
   descargable: 0,

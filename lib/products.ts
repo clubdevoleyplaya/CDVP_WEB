@@ -388,8 +388,8 @@ export const products: Product[] = [
     longDescription:
       "Los 8 cursos técnicos del club — ataque, defensa, bloqueo, armado, saque, recepción, conceptos generales y mentalidad — en un solo pack, con descuento por volumen.",
     includes: "8 productos",
-    priceArs: 170000,
-    priceUsd: 170,
+    priceArs: 350000,
+    priceUsd: 350,
     compareArs: 400000,
     compareUsd: 400,
     discountable: false,
