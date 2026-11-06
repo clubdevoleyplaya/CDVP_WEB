@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { CourseTestimonials } from "@/components/course-testimonials";
 import { CoursePreview } from "@/components/course-preview";
 import { ProductBuyBox } from "@/components/product-buy-box";
 import { ProductCard } from "@/components/product-card";
@@ -85,26 +86,9 @@ export default async function ProductPage({
 
       <QuizSection slug={product.slug} category={product.category} />
 
-      {product.testimonials && product.testimonials.length > 0 && (
-        <div className="mt-16">
-          <h2 className="font-display text-xl font-bold uppercase">
-            Lo que dicen los alumnos
-          </h2>
-          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {product.testimonials.map((t) => (
-              <blockquote
-                key={t.author}
-                className="rounded-xl border border-line bg-surface p-5 text-sm italic"
-              >
-                &ldquo;{t.quote}&rdquo;
-                <footer className="mt-3 font-display text-xs font-bold not-italic uppercase tracking-wide text-blue">
-                  {t.author} · ★5
-                </footer>
-              </blockquote>
-            ))}
-          </div>
-        </div>
-      )}
+      <div className="mt-16">
+        <CourseTestimonials items={product.testimonials} />
+      </div>
 
       {related.length > 0 && (
         <div className="mt-16">

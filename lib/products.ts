@@ -17,8 +17,11 @@ export interface Product {
   compareUsd?: number;
   discountable: boolean;
   includes?: string;
-  testimonials?: { quote: string; author: string }[];
+  testimonials?: Testimonial[];
 }
+
+// Texto, imagen (captura) o ambos; los videos no van aquí.
+export type Testimonial = { quote?: string; author: string; image?: string };
 
 export const CATEGORY_ROUTES: Record<CategoryRoute, Category> = {
   cursos: "curso",
