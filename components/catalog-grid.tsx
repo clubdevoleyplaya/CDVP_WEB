@@ -1,24 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { SlidersHorizontal } from "lucide-react";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { ProductCard } from "@/components/product-card";
 import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice } from "@/lib/price";
@@ -28,8 +10,8 @@ type SortBy = "relevancia" | "precio-asc" | "precio-desc" | "mejor-valorados";
 
 const SORT_LABELS: Record<SortBy, string> = {
   relevancia: "Relevancia",
-  "precio-asc": "Precio: menor a mayor",
-  "precio-desc": "Precio: mayor a menor",
+  "precio-asc": "Precio ↑",
+  "precio-desc": "Precio ↓",
   "mejor-valorados": "Mejor valorados",
 };
 
@@ -37,7 +19,6 @@ export function CatalogGrid({ items }: { items: Product[] }) {
   const { currency, isSubscriber, discountPercent, eurPrices } = useDemoState();
   const [sortBy, setSortBy] = useState<SortBy>("relevancia");
   const [onlyDiscountable, setOnlyDiscountable] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const visible = useMemo(() => {
     let result = onlyDiscountable ? items.filter((p) => p.discountable) : items;
@@ -60,86 +41,46 @@ export function CatalogGrid({ items }: { items: Product[] }) {
     return result;
   }, [items, sortBy, onlyDiscountable, currency, isSubscriber, discountPercent, eurPrices]);
 
-  const activeFilters =
-    (onlyDiscountable ? 1 : 0) + (sortBy !== "relevancia" ? 1 : 0);
+  const chip = (active: boolean) =>
+    `rounded-full border px-3 py-1.5 font-display text-xs font-bold uppercase tracking-wide transition-colors ${
+      active
+        ? "border-ink bg-ink text-bg"
+        : "border-line text-ink-soft hover:border-blue hover:text-blue"
+    }`;
 
   return (
     <div>
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
         <p className="text-sm text-ink-soft">
           {visible.length} {visible.length === 1 ? "producto" : "productos"}
         </p>
-        <Drawer open={open} onOpenChange={setOpen} swipeDirection="right">
-          <DrawerTrigger
-            render={
-              <Button
-                type="button"
-                variant="outline"
-                className="font-sans gap-2"
-              >
-                <SlidersHorizontal className="size-4" />
-                Filtros y orden
-                {activeFilters > 0 && (
-                  <span className="tabular flex size-4 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground">
-                    {activeFilters}
-                  </span>
-                )}
-              </Button>
-            }
-          />
-          <DrawerContent className="font-sans sm:max-w-xs">
-            <DrawerHeader>
-              <DrawerTitle>Filtros y orden</DrawerTitle>
-            </DrawerHeader>
-            <div className="flex flex-col gap-6 px-4">
-              <div className="flex flex-col gap-2">
-                <span className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-                  Ordenar por
-                </span>
-                <Select
-                  items={SORT_LABELS}
-                  value={sortBy}
-                  onValueChange={(value) => setSortBy(value as SortBy)}
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {(Object.keys(SORT_LABELS) as SortBy[]).map((key) => (
-                      <SelectItem key={key} value={key}>
-                        {SORT_LABELS[key]}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <label className="flex items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  checked={onlyDiscountable}
-                  onChange={(e) => setOnlyDiscountable(e.target.checked)}
-                  className="size-4 accent-blue"
-                />
-                Solo con descuento para suscriptores
-              </label>
-            </div>
-            <DrawerFooter>
-              <DrawerClose
-                render={
-                  <Button
-                    type="button"
-                    className="font-display text-xs font-bold tracking-wide uppercase"
-                  >
-                    Ver resultados
-                  </Button>
-                }
-              />
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer>
+        <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Ordenar por">
+          <span className="font-display text-xs font-bold uppercase tracking-wide text-ink-soft">
+            Ordenar
+          </span>
+          {(Object.keys(SORT_LABELS) as SortBy[]).map((key) => (
+            <button
+              key={key}
+              type="button"
+              aria-pressed={sortBy === key}
+              onClick={() => setSortBy(key)}
+              className={chip(sortBy === key)}
+            >
+              {SORT_LABELS[key]}
+            </button>
+          ))}
+        </div>
+        <button
+          type="button"
+          aria-pressed={onlyDiscountable}
+          onClick={() => setOnlyDiscountable((v) => !v)}
+          className={chip(onlyDiscountable)}
+        >
+          Con descuento para suscriptores
+        </button>
       </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {visible.map((product) => (
           <ProductCard key={product.slug} product={product} />
         ))}
