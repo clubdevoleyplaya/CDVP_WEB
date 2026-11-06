@@ -91,6 +91,13 @@ export const products: Product[] = [
       "Trabaja la cabeza tanto como el cuerpo: importancia de los objetivos, mentalidad de entrenamientos y partidos, concentración en competencia y la disciplina para sostener el proceso.",
     modules: 1,
     rating: { value: 4.75, count: 4 },
+    testimonials: [
+      {
+        quote:
+          "Excelente curso, recomendable, muy buena explicación de cada concepto.",
+        author: "Sergio Balmaceda",
+      },
+    ],
     priceArs: 50000,
     priceUsd: 50,
     discountable: true,
@@ -106,6 +113,13 @@ export const products: Product[] = [
       "Pensado para entrenadores/as: cómo planificar los aspectos técnicos, físicos y mentales de una sesión, y cómo armar una planificación completa para entrenar y competir mejor.",
     modules: 1,
     rating: { value: 4.67, count: 3 },
+    testimonials: [
+      {
+        quote:
+          "Muy claros y concretos los conceptos! Excelente propuesta.",
+        author: "María Luz Picardo",
+      },
+    ],
     priceArs: 50000,
     priceUsd: 50,
     discountable: true,
@@ -121,6 +135,23 @@ export const products: Product[] = [
       "Mejorá tu defensa con toda la información exclusiva del club: posicionamiento, lectura del ataque rival y los ajustes finos que marcan la diferencia en la arena.",
     modules: 1,
     rating: { value: 5.0, count: 7 },
+    testimonials: [
+      {
+        quote:
+          "Destaco que Juli explica muy bien. Que te hace entender fácil lo que podría ser muy complicado. Y esta es una característica de los buenos entrenadores/profesores.",
+        author: "Diego Huicy",
+      },
+      {
+        quote:
+          "Me sacó muchas dudas acerca de cómo posicionarme en la defensa, ya que juego indoor (armador) y cubro una sola parte de la cancha.",
+        author: "Franccesca Bertuzzi Pelizzari",
+      },
+      {
+        quote:
+          "Poner en práctica lo aprendido el día de hoy, muy bien explicado.",
+        author: "Hugo Morgado",
+      },
+    ],
     priceArs: 50000,
     priceUsd: 50,
     discountable: true,
