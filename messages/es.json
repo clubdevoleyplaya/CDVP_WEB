@@ -92,5 +92,64 @@
     "viewCourse": "Ver el curso",
     "includes": "Incluye: {items}",
     "addToCart": "Agregar {title} al carrito"
+  },
+  "Home": {
+    "featured": "Destacados",
+    "seeCategory": "Ver {category} →"
+  },
+  "Hero": {
+    "kicker": "Academia asincrónica de voley playa",
+    "title1": "Club de",
+    "title2": "Voley Playa",
+    "tagline": "Hoy mismo podés empezar a convertirte en un atleta profesional de voley playa.",
+    "cta": "Ver productos",
+    "ballAlt": "Pelota de voley playa — Club de Voley Playa"
+  },
+  "Why": {
+    "kicker": "¿Por qué hago esto?",
+    "quote": "Los trofeos hay que guardarlos en una caja: el mejor premio es lo que aprendemos, y eso en algún momento hay que transmitirlo.",
+    "quoteBy": "— un entrenador de Juli",
+    "text": "Hace años que Juli le da vueltas a esta idea: un espacio virtual donde cualquiera pueda aprender voley playa — técnica, físico y cabeza — desde lo más básico hasta los detalles que solo se aprenden compitiendo. Hoy podés empezar a convertirte en un <b>jugador profesional</b>."
+  },
+  "Bio": {
+    "kicker": "¿Quién soy?",
+    "headshotAlt": "Juli Azaad",
+    "p1": "A los 13 años jugué mi primer torneo de beach volley y no me quise ir más de la arena. Desde ese día mi carrera se dividió en dos: inviernos de indoor, veranos de playa.",
+    "firstTournamentAlt": "Juli de chico en su primer torneo de voley playa",
+    "firstTournamentCaption": "Primer torneo, 13 años",
+    "p2": "Para el año 2011 llegó la propuesta más linda y esperada de mi carrera, empecé a formar parte de la <b>selección argentina</b>. Ahí empezaron a cumplirse los sueños del Juli niño.",
+    "p3": "Para el año 2021 pude concretar el gran sueño: participé de los <b>Juegos Olímpicos de Tokio</b>.",
+    "tokyoAlt": "Juli en la Villa Olímpica de Tokio 2020, representando a la selección argentina",
+    "tokyoCaption": "Tokio 2020 — Selección Argentina",
+    "cred1": "Profesor de Educación Física",
+    "cred2": "Licenciado en Actividad Física",
+    "cred3": "Entrenador internacional FIVB nivel I",
+    "cred4": "Especialización en psicología de alto rendimiento deportivo — Barça Innovation Hub"
+  },
+  "WelcomePack": {
+    "label": "Pack de Bienvenida",
+    "benefit": "Beneficio de suscripción",
+    "name": "Pack de Bienvenida",
+    "description": "Acceso completo al pack de bienvenida como parte de tu suscripción mensual.",
+    "unlocked": "✅ Desbloqueado — bienvenido al club",
+    "lockedSubscribe": "🔒 Bloqueado — sumate a la suscripción",
+    "lockedLogin": "🔒 Bloqueado — iniciá sesión para ver el contenido",
+    "close": "Cerrar aviso"
+  },
+  "CourseTestimonials": {
+    "label": "Testimonios",
+    "heading": "Lo que dicen los alumnos",
+    "ratings": "{count, plural, one {# valoración} other {# valoraciones}}"
+  },
+  "CoursePreview": {
+    "label": "Contenido del curso",
+    "heading": "Qué hay adentro",
+    "unlocked": "{count} clases desbloqueadas. Elige por dónde seguir.",
+    "locked": "{count} clases, listas para ti apenas lo tengas.",
+    "goCourse": "Ir al curso"
+  },
+  "ProductPage": {
+    "includes": "Incluye: {items}",
+    "related": "Más productos relacionados"
   }
 }

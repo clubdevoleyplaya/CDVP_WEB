@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { CourseTestimonials } from "@/components/course-testimonials";
 import { CoursePreview } from "@/components/course-preview";
 import { ProductBuyBox } from "@/components/product-buy-box";
@@ -7,8 +8,6 @@ import { ProductCard } from "@/components/product-card";
 import { VideoPlayer } from "@/components/video-player";
 import { QuizSection } from "@/components/quiz-section";
 import {
-  CATEGORY_LABELS,
-  CATEGORY_ROUTE_LABELS,
   CATEGORY_TO_ROUTE,
   getProductBySlug,
   products,
@@ -24,6 +23,9 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const t = await getTranslations("ProductPage");
+  const tr = await getTranslations("Categories.routes");
+  const ts = await getTranslations("Categories.single");
   const product = getProductBySlug(slug);
   if (!product) notFound();
 
@@ -37,13 +39,13 @@ export default async function ProductPage({
         href={`/catalogo/${CATEGORY_TO_ROUTE[product.category]}`}
         className="font-display text-xs font-bold uppercase tracking-wide text-blue hover:underline"
       >
-        ← {CATEGORY_ROUTE_LABELS[CATEGORY_TO_ROUTE[product.category]]}
+        ← {tr(CATEGORY_TO_ROUTE[product.category])}
       </Link>
 
       <div className="mt-6 grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <div>
           <p className="w-fit rounded-lg bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">
-            {CATEGORY_LABELS[product.category]}
+            {ts(product.category)}
           </p>
           <h1 className="mt-2 font-display text-4xl font-bold uppercase">
             {product.title}
@@ -66,7 +68,7 @@ export default async function ProductPage({
           )}
 
           {product.includes && (
-            <p className="mt-4 text-sm text-ink-soft">Incluye: {product.includes}</p>
+            <p className="mt-4 text-sm text-ink-soft">{t("includes", { items: product.includes })}</p>
           )}
           {product.vslVimeoId && (
             <div className="mt-6 max-w-2xl">
@@ -90,7 +92,7 @@ export default async function ProductPage({
       {related.length > 0 && (
         <div className="mt-16">
           <h2 className="font-display text-xl font-bold uppercase">
-            Más productos relacionados
+            {t("related")}
           </h2>
           <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
             {related.map((p) => (

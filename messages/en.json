@@ -92,5 +92,64 @@
     "viewCourse": "View the course",
     "includes": "Includes: {items}",
     "addToCart": "Add {title} to cart"
+  },
+  "Home": {
+    "featured": "Featured",
+    "seeCategory": "See {category} →"
+  },
+  "Hero": {
+    "kicker": "Asynchronous beach volleyball academy",
+    "title1": "Club de",
+    "title2": "Voley Playa",
+    "tagline": "Start today on your way to becoming a professional beach volleyball athlete.",
+    "cta": "See products",
+    "ballAlt": "Beach volleyball — Club de Voley Playa"
+  },
+  "Why": {
+    "kicker": "Why am I doing this?",
+    "quote": "Trophies belong in a box: the best prize is what we learn, and sooner or later that has to be passed on.",
+    "quoteBy": "— one of Juli's coaches",
+    "text": "For years Juli has been turning this idea over: a virtual space where anyone can learn beach volleyball — technique, fitness and mindset — from the very basics to the details you only learn by competing. Today you can start becoming a <b>professional player</b>."
+  },
+  "Bio": {
+    "kicker": "Who am I?",
+    "headshotAlt": "Juli Azaad",
+    "p1": "At 13 I played my first beach volleyball tournament and never wanted to leave the sand. From that day my career split in two: indoor in winter, beach in summer.",
+    "firstTournamentAlt": "Juli as a kid at their first beach volleyball tournament",
+    "firstTournamentCaption": "First tournament, age 13",
+    "p2": "In 2011 the best and most awaited offer of my career arrived: I joined the <b>Argentine national team</b>. That's when the dreams of little Juli began to come true.",
+    "p3": "In 2021 I achieved the big dream: I competed at the <b>Tokyo Olympic Games</b>.",
+    "tokyoAlt": "Juli at the Tokyo 2020 Olympic Village, representing the Argentine national team",
+    "tokyoCaption": "Tokyo 2020 — Argentine National Team",
+    "cred1": "Physical Education teacher",
+    "cred2": "Degree in Physical Activity",
+    "cred3": "FIVB International Coach, Level I",
+    "cred4": "Specialization in high-performance sports psychology — Barça Innovation Hub"
+  },
+  "WelcomePack": {
+    "label": "Welcome Pack",
+    "benefit": "Subscription benefit",
+    "name": "Welcome Pack",
+    "description": "Full access to the welcome pack as part of your monthly subscription.",
+    "unlocked": "✅ Unlocked — welcome to the club",
+    "lockedSubscribe": "🔒 Locked — join the subscription",
+    "lockedLogin": "🔒 Locked — log in to see the content",
+    "close": "Close notice"
+  },
+  "CourseTestimonials": {
+    "label": "Testimonials",
+    "heading": "What students say",
+    "ratings": "{count, plural, one {# rating} other {# ratings}}"
+  },
+  "CoursePreview": {
+    "label": "Course content",
+    "heading": "What's inside",
+    "unlocked": "{count} lessons unlocked. Pick where to continue.",
+    "locked": "{count} lessons, ready for you as soon as you own it.",
+    "goCourse": "Go to the course"
+  },
+  "ProductPage": {
+    "includes": "Includes: {items}",
+    "related": "Related products"
   }
 }

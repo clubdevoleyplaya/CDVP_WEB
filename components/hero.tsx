@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 
 export function Hero() {
+  const t = useTranslations("Hero");
   return (
     <section className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 py-16 md:grid-cols-[1.1fr_0.9fr] md:py-24">
       <motion.div
@@ -12,22 +14,21 @@ export function Hero() {
         transition={{ duration: 0.5 }}
       >
         <p className="font-display text-xs font-bold uppercase tracking-[0.14em] text-blue">
-          Academia asincrónica de voley playa
+          {t("kicker")}
         </p>
         <h1 className="font-display text-5xl font-bold uppercase leading-[0.95] md:text-7xl">
-          Club de
+          {t("title1")}
           <br />
-          Voley Playa
+          {t("title2")}
         </h1>
         <p className="mt-5 max-w-[38ch] text-lg italic text-ink-soft">
-          Hoy mismo podés empezar a convertirte en un atleta profesional de voley
-          playa.
+          {t("tagline")}
         </p>
         <a
           href="#destacados"
           className="mt-8 inline-block rounded-lg bg-blue px-7 py-3 font-display text-sm font-bold uppercase tracking-wide text-white transition-colors hover:brightness-110"
         >
-          Ver productos
+          {t("cta")}
         </a>
       </motion.div>
       <motion.div
@@ -38,7 +39,7 @@ export function Hero() {
       >
         <Image
           src="/brand/ball.png"
-          alt="Pelota de voley playa — Club de Voley Playa"
+          alt={t("ballAlt")}
           width={650}
           height={648}
           preload
