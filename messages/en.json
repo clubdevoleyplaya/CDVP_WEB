@@ -295,5 +295,132 @@
   },
   "Quiz": {
     "saveError": "We couldn't save your answer. Please try again."
+  },
+  "Clause": {
+    "s1": {
+      "title": "1. Purpose of the program",
+      "p": [
+        "The training programs and plans offered under the trade name Club de Voley Playa are exclusively for educational, informational and general physical conditioning purposes.",
+        "The content does not constitute medical advice, diagnosis, treatment or personalized medical prescription. The exercises and recommendations do not replace the evaluation, supervision or instructions of a doctor, physical therapist, physiotherapist or other duly qualified health professional.",
+        "Before starting any program, especially if you have any medical condition, previous injury, symptoms, physical limitation or any other health-related concern, it is recommended that you consult a health professional and obtain the corresponding clearance to engage in physical activity."
+      ]
+    },
+    "s2": {
+      "title": "2. Acceptance and assumption of risk",
+      "p": [
+        "By purchasing, accessing or using any of the training programs, you acknowledge and accept that physical and sports activity involves inherent risks, even when the exercises are performed correctly.",
+        "These risks may include, among others, muscle injuries, tendinitis, sprains, strains, joint injuries, falls, fractures, aggravation of pre-existing injuries or conditions and, in exceptional cases, cardiovascular complications or other health problems.",
+        "By voluntarily participating in the program, you accept responsibility for performing the exercises according to your own abilities, physical limits and health conditions."
+      ]
+    },
+    "s3": {
+      "title": "3. User responsibility",
+      "p": [
+        "It is the user's responsibility to assess their own physical and health conditions before starting and while following the program.",
+        "The exercises must be performed following the indicated technique and adapting them, when necessary, to the individual level of fitness, experience and abilities.",
+        "If during any exercise you experience pain, dizziness, difficulty breathing, discomfort, weakness or other unusual symptoms, you must stop the activity immediately and, where appropriate, consult a health professional."
+      ]
+    },
+    "s4": {
+      "title": "4. Limitation of liability",
+      "p": [
+        "To the extent permitted by applicable law, Julian Azaad, as holder of the trade name Club de Voley Playa, will not be liable for injuries, damages or losses that may result from the use of the training programs, except in those cases where such liability cannot be legally excluded or limited.",
+        "The user acknowledges that the programs are provided as a general training tool and that results may vary significantly from one person to another.",
+        "Nothing in this clause is intended to exclude or limit any liability that, under applicable law, cannot be excluded or limited."
+      ]
+    },
+    "s5": {
+      "title": "5. No substitute for professional advice",
+      "p": [
+        "The information contained in the programs must not be used to diagnose, treat or prevent diseases, injuries or other medical conditions.",
+        "If you have doubts about your health, your ability to perform certain exercises or whether it is advisable to start a training program, you must first consult a qualified health professional."
+      ]
+    },
+    "s6": {
+      "title": "6. Personal use and prohibition on distribution",
+      "p": [
+        "The training programs purchased are for the buyer's personal, individual use.",
+        "It is prohibited to copy, reproduce, modify, publish, distribute, resell, share, assign or provide access to the program, in whole or in part, to third parties, except with the express written authorization of Julian Azaad."
+      ]
+    },
+    "s7": {
+      "title": "7. Adaptations and modifications",
+      "p": [
+        "The user acknowledges that each person has different levels of fitness, experience, mobility, strength and recovery capacity.",
+        "For this reason, it may be necessary to modify, reduce or suspend certain exercises or activities. Any adaptation must be made according to your own abilities and, where appropriate, with the guidance of a qualified professional.",
+        "Performing the exercises is the user's responsibility."
+      ]
+    },
+    "s8": {
+      "title": "8. Results",
+      "p": [
+        "The training programs do not guarantee specific results in performance, body composition, weight loss, muscle gain, strength, endurance or other goals.",
+        "Results depend on multiple individual factors, including, among others, initial fitness level, adherence to the program, diet, rest, sports background and individual characteristics."
+      ]
+    },
+    "s9": {
+      "title": "9. Acceptance of the terms",
+      "p": [
+        "By purchasing, accessing or using a Club de Voley Playa training program, you declare that you have read, understood and accepted these terms of use and that you are responsible for determining, with the appropriate professional advice, whether the program is suitable for you.",
+        "If you do not agree with these terms, you must refrain from using the program."
+      ]
+    }
+  },
+  "Legal": {
+    "languageNote": "This is a courtesy translation. In case of any difference, the Spanish version prevails.",
+    "clauseHeading": "Terms of service and disclaimer of liability",
+    "terms": {
+      "metaTitle": "Terms of service — Club de Voley Playa",
+      "ownerTitle": "Owner",
+      "ownerBody": "Owner: Julian Azaad. Trade name: Club de Voley Playa. Payments in dollars are processed by Paddle, which acts as the official reseller (Merchant of Record) of the products."
+    },
+    "refund": {
+      "metaTitle": "Refund policy — Club de Voley Playa",
+      "title": "Refund policy",
+      "draft": "Draft — the refund period is still to be confirmed by Club de Voley Playa.",
+      "howTitle": "How to request a refund",
+      "howBody": "Write to us at <mail>{email}</mail> from the same email address you used to purchase, stating what you bought and the reason for the request. We reply by the same means.",
+      "digitalTitle": "Digital products",
+      "digitalBody": "Courses, plans and guides are digital content with immediate access. Each refund request is reviewed according to the period stated below and the use made of the content.",
+      "membershipTitle": "Membership",
+      "membershipBody": "You can cancel the membership at any time from your profile. You keep access while the paid period is in effect and no new periods are charged.",
+      "usdTitle": "Payments in dollars",
+      "usdBody": "Payments in dollars are processed by Paddle as the official reseller (Merchant of Record). Refunds, when applicable, are returned to the same payment method.",
+      "termTitle": "Period",
+      "termBody": "Refund period: to be confirmed."
+    },
+    "privacy": {
+      "metaTitle": "Privacy policy — Club de Voley Playa",
+      "title": "Privacy policy",
+      "draft": "Draft — pending legal review before a formal launch.",
+      "dataTitle": "What data we keep",
+      "dataBody": "When you create an account we keep your name and email. When you buy a course or bundle, we keep what you bought and when, so we can give you access to that content. We do not keep your card or payment method data — that is processed directly by Mercado Pago.",
+      "shareTitle": "Who we share data with",
+      "share": [
+        "An external authentication and database provider, where your account and access data are stored.",
+        "An external payment processor, which processes the payment when you buy a course or bundle.",
+        "The site's videos are embedded from an external video platform — when you play them, that platform may record your IP address according to its own policies."
+      ],
+      "noAi": "We do not use artificial intelligence anywhere on the site.",
+      "deleteTitle": "Ask us to delete your data",
+      "deleteBody": "If you want to close your account or have us delete your data, write to us at <mail>{email}</mail> from the same email you registered with."
+    }
+  },
+  "PlanViewer": {
+    "beforeOpen": "Before opening the plan",
+    "beforeOpenText": "Read and accept the disclaimer of liability to view the plan. We only ask once.",
+    "saving": "Saving...",
+    "accept": "I accept the clause",
+    "soon": "This plan will be available soon.",
+    "noAccessTitle": "You don't have access to this plan",
+    "noAccessText": "It is included with the membership or with the purchase of the plan.",
+    "seeMembership": "See the membership",
+    "limitTitle": "You've reached today's limit",
+    "limitText": "You can open a maximum number of different plans per day. Come back tomorrow to see another.",
+    "notFoundTitle": "We couldn't find this plan",
+    "notFoundText": "Check the link and try again.",
+    "errorTitle": "We couldn't load the plan",
+    "errorText": "Please try again in a moment.",
+    "retry": "Retry"
   }
 }

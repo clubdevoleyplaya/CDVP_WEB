@@ -2,8 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { AuthGuard } from "@/components/auth-guard";
-import { CLAUSULA_SECTIONS } from "@/components/clausula-exencion";
+import { useClauseSections } from "@/components/clausula-exencion";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDemoState } from "@/context/demo-state";
@@ -93,6 +94,8 @@ function Contenido({
   aceptando: boolean;
   onReintentar: () => void;
 }) {
+  const t = useTranslations("PlanViewer");
+  const clauseSections = useClauseSections();
   switch (estado.tipo) {
     case "cargando":
       return (
@@ -105,14 +108,13 @@ function Contenido({
       return (
         <div>
           <h1 className="font-display text-2xl font-bold uppercase">
-            Antes de abrir el plan
+            {t("beforeOpen")}
           </h1>
           <p className="mt-2 text-sm text-ink-soft">
-            Lee y acepta la cláusula de exención de responsabilidad para ver el plan. Solo te la
-            pedimos una vez.
+            {t("beforeOpenText")}
           </p>
           <div className="mt-6 max-h-96 space-y-6 overflow-y-auto rounded-xl border border-line p-5 text-sm text-ink-soft">
-            {CLAUSULA_SECTIONS.map((section) => (
+            {clauseSections.map((section) => (
               <div key={section.title}>
                 <h2 className="font-display text-sm font-bold uppercase text-ink">
                   {section.title}
@@ -127,39 +129,39 @@ function Contenido({
             disabled={aceptando}
             className="mt-6 font-display text-xs font-bold uppercase tracking-wide"
           >
-            {aceptando ? "Guardando..." : "Acepto la cláusula"}
+            {aceptando ? t("saving") : t("accept")}
           </Button>
         </div>
       );
     case "plan":
       return estado.plan.status === "proximamente" ? (
-        <Mensaje titulo={estado.plan.title} texto="Este plan estará disponible próximamente." />
+        <Mensaje titulo={estado.plan.title} texto={t("soon")} />
       ) : (
         <PlanTablas plan={estado.plan} />
       );
     case "sin-acceso":
       return (
         <Mensaje
-          titulo="No tienes acceso a este plan"
-          texto="Se incluye con la membresía o con la compra del plan."
-          enlace={{ href: "/suscripcion", texto: "Ver la membresía" }}
+          titulo={t("noAccessTitle")}
+          texto={t("noAccessText")}
+          enlace={{ href: "/suscripcion", texto: t("seeMembership") }}
         />
       );
     case "tope":
       return (
         <Mensaje
-          titulo="Llegaste al límite de hoy"
-          texto="Por día puedes abrir un máximo de planes distintos. Vuelve mañana para ver otro."
+          titulo={t("limitTitle")}
+          texto={t("limitText")}
         />
       );
     case "no-existe":
-      return <Mensaje titulo="No encontramos este plan" texto="Revisa el enlace e inténtalo de nuevo." />;
+      return <Mensaje titulo={t("notFoundTitle")} texto={t("notFoundText")} />;
     case "error":
       return (
         <div>
-          <Mensaje titulo="No pudimos cargar el plan" texto="Inténtalo de nuevo en un momento." />
+          <Mensaje titulo={t("errorTitle")} texto={t("errorText")} />
           <Button type="button" variant="outline" onClick={onReintentar} className="mt-4">
-            Reintentar
+            {t("retry")}
           </Button>
         </div>
       );

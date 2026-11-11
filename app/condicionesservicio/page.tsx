@@ -1,27 +1,23 @@
 import type { Metadata } from "next";
-import { CLAUSULA_SECTIONS } from "@/components/clausula-exencion";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { useClauseSections } from "@/components/clausula-exencion";
 import { LegalPage } from "@/components/legal-page";
 
-export const metadata: Metadata = {
-  title: "Condiciones de servicio — Club de Voley Playa",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("Legal.terms");
+  return { title: t("metaTitle") };
+}
 
 export default function CondicionesServicioPage() {
+  const t = useTranslations("Legal");
+  const clauseSections = useClauseSections();
   return (
     <LegalPage
-      title="Condiciones de servicio y cláusula de exención de responsabilidad"
+      title={t("clauseHeading")}
       sections={[
-        {
-          title: "Titular",
-          body: (
-            <p>
-              Titular: Julian Azaad. Nombre comercial: Club de Voley Playa. Los
-              pagos en dólares los procesa Paddle, que actúa como revendedor
-              oficial (Merchant of Record) de los productos.
-            </p>
-          ),
-        },
-        ...CLAUSULA_SECTIONS,
+        { title: t("terms.ownerTitle"), body: <p>{t("terms.ownerBody")}</p> },
+        ...clauseSections,
       ]}
     />
   );

@@ -295,5 +295,132 @@
   },
   "Quiz": {
     "saveError": "Não foi possível salvar sua resposta. Tente novamente."
+  },
+  "Clause": {
+    "s1": {
+      "title": "1. Finalidade do programa",
+      "p": [
+        "Os programas e planos de treinamento oferecidos sob o nome comercial Club de Voley Playa têm fins exclusivamente educativos, informativos e de condicionamento físico geral.",
+        "O conteúdo não constitui aconselhamento médico, diagnóstico, tratamento nem prescrição médica personalizada. Os exercícios e recomendações não substituem a avaliação, a supervisão nem as indicações de um médico, fisioterapeuta ou outro profissional de saúde devidamente qualificado.",
+        "Antes de começar qualquer programa, especialmente se você tiver alguma condição médica, lesão prévia, sintomas, limitação física ou qualquer outra preocupação relacionada à sua saúde, recomenda-se consultar um profissional de saúde e obter a autorização correspondente para praticar atividade física."
+      ]
+    },
+    "s2": {
+      "title": "2. Aceitação e assunção de riscos",
+      "p": [
+        "Ao adquirir, acessar ou utilizar qualquer um dos programas de treinamento, você reconhece e aceita que a prática de atividade física e esportiva implica riscos inerentes, mesmo quando os exercícios são realizados corretamente.",
+        "Esses riscos podem incluir, entre outros, lesões musculares, tendinites, entorses, distensões, lesões articulares, quedas, fraturas, agravamento de lesões ou condições preexistentes e, em casos excepcionais, complicações cardiovasculares ou outros problemas de saúde.",
+        "Ao participar voluntariamente do programa, você aceita a responsabilidade de realizar os exercícios de acordo com suas próprias capacidades, limites físicos e condições de saúde."
+      ]
+    },
+    "s3": {
+      "title": "3. Responsabilidade do usuário",
+      "p": [
+        "É responsabilidade do usuário avaliar suas próprias condições físicas e de saúde antes de começar e durante a realização do programa.",
+        "Os exercícios devem ser executados respeitando a técnica indicada e adaptando-os, quando necessário, ao nível de condicionamento físico, à experiência e às capacidades individuais.",
+        "Se durante a realização de qualquer exercício você sentir dor, tontura, dificuldade para respirar, mal-estar, fraqueza ou outros sintomas incomuns, deve interromper imediatamente a atividade e, quando apropriado, consultar um profissional de saúde."
+      ]
+    },
+    "s4": {
+      "title": "4. Limitação de responsabilidade",
+      "p": [
+        "Na medida permitida pela legislação aplicável, Julian Azaad, como titular do nome comercial Club de Voley Playa, não será responsável por lesões, danos ou prejuízos que possam ocorrer em consequência do uso dos programas de treinamento, exceto nos casos em que essa responsabilidade não possa ser excluída ou limitada legalmente.",
+        "O usuário reconhece que os programas são fornecidos como uma ferramenta geral de treinamento e que os resultados podem variar significativamente de uma pessoa para outra.",
+        "Nada do estabelecido nesta cláusula pretende excluir ou limitar responsabilidades que, de acordo com a legislação aplicável, não possam ser objeto de exclusão ou limitação."
+      ]
+    },
+    "s5": {
+      "title": "5. Não substituição do aconselhamento profissional",
+      "p": [
+        "As informações contidas nos programas não devem ser utilizadas para diagnosticar, tratar ou prevenir doenças, lesões ou outras condições médicas.",
+        "Se você tiver dúvidas sobre seu estado de saúde, sua capacidade de realizar determinados exercícios ou a conveniência de iniciar um programa de treinamento, deve consultar previamente um profissional de saúde qualificado."
+      ]
+    },
+    "s6": {
+      "title": "6. Uso pessoal e proibição de distribuição",
+      "p": [
+        "Os programas de treinamento adquiridos são para uso pessoal e individual do comprador.",
+        "É proibido copiar, reproduzir, modificar, publicar, distribuir, revender, compartilhar, ceder ou facilitar o acesso ao programa, total ou parcialmente, a terceiros, salvo autorização expressa e por escrito de Julian Azaad."
+      ]
+    },
+    "s7": {
+      "title": "7. Adaptações e modificações",
+      "p": [
+        "O usuário reconhece que cada pessoa apresenta diferentes níveis de condicionamento físico, experiência, mobilidade, força e capacidade de recuperação.",
+        "Por esse motivo, pode ser necessário modificar, reduzir ou suspender determinados exercícios ou atividades. Qualquer adaptação deverá ser feita de acordo com as próprias capacidades e, quando apropriado, com a orientação de um profissional qualificado.",
+        "A realização dos exercícios é de responsabilidade do usuário."
+      ]
+    },
+    "s8": {
+      "title": "8. Resultados",
+      "p": [
+        "Os programas de treinamento não garantem resultados específicos de desempenho, composição corporal, perda de peso, ganho de massa muscular, força, resistência ou outros objetivos.",
+        "Os resultados dependem de múltiplos fatores individuais, incluindo, entre outros, condição física inicial, adesão ao programa, alimentação, descanso, histórico esportivo e características individuais."
+      ]
+    },
+    "s9": {
+      "title": "9. Aceitação dos termos",
+      "p": [
+        "Ao adquirir, acessar ou utilizar um programa de treinamento do Club de Voley Playa, você declara que leu, compreendeu e aceitou estas condições de uso e que é responsável por determinar, com a orientação profissional adequada, se o programa é apropriado para você.",
+        "Se você não concordar com estas condições, deve se abster de utilizar o programa."
+      ]
+    }
+  },
+  "Legal": {
+    "languageNote": "Esta é uma tradução de cortesia. Em caso de diferença, prevalece a versão em espanhol.",
+    "clauseHeading": "Condições de serviço e cláusula de isenção de responsabilidade",
+    "terms": {
+      "metaTitle": "Condições de serviço — Club de Voley Playa",
+      "ownerTitle": "Titular",
+      "ownerBody": "Titular: Julian Azaad. Nome comercial: Club de Voley Playa. Os pagamentos em dólares são processados pela Paddle, que atua como revendedora oficial (Merchant of Record) dos produtos."
+    },
+    "refund": {
+      "metaTitle": "Política de reembolso — Club de Voley Playa",
+      "title": "Política de reembolso",
+      "draft": "Rascunho — o prazo de reembolso ainda deve ser confirmado pelo Club de Voley Playa.",
+      "howTitle": "Como pedir um reembolso",
+      "howBody": "Escreva para <mail>{email}</mail> a partir do mesmo e-mail com o qual fez a compra, informando o que comprou e o motivo do pedido. Respondemos pelo mesmo meio.",
+      "digitalTitle": "Produtos digitais",
+      "digitalBody": "Os cursos, planos e guias são conteúdo digital de acesso imediato. Cada pedido de reembolso é analisado de acordo com o prazo indicado abaixo e o uso que foi feito do conteúdo.",
+      "membershipTitle": "Assinatura",
+      "membershipBody": "Você pode cancelar a assinatura quando quiser, pelo seu perfil. Você mantém o acesso enquanto o período pago estiver vigente e não são cobrados novos períodos.",
+      "usdTitle": "Pagamentos em dólares",
+      "usdBody": "Os pagamentos em dólares são processados pela Paddle como revendedora oficial (Merchant of Record). O reembolso, quando cabível, é devolvido ao mesmo meio de pagamento.",
+      "termTitle": "Prazo",
+      "termBody": "Prazo de reembolso: a confirmar."
+    },
+    "privacy": {
+      "metaTitle": "Política de privacidade — Club de Voley Playa",
+      "title": "Política de privacidade",
+      "draft": "Rascunho — pendente de revisão jurídica antes de um lançamento formal.",
+      "dataTitle": "Quais dados guardamos",
+      "dataBody": "Quando você cria uma conta, guardamos seu nome e seu e-mail. Quando você compra um curso ou combo, guardamos o que comprou e quando, para poder dar acesso a esse conteúdo. Não guardamos dados do seu cartão nem do seu meio de pagamento — isso é processado diretamente pelo Mercado Pago.",
+      "shareTitle": "Com quem compartilhamos dados",
+      "share": [
+        "Um provedor externo de autenticação e banco de dados, onde ficam sua conta e seus dados de acesso.",
+        "Um processador de pagamentos externo, que processa o pagamento quando você compra um curso ou combo.",
+        "Os vídeos do site são incorporados de uma plataforma de vídeo externa — ao reproduzi-los, essa plataforma pode registrar seu IP conforme suas próprias políticas."
+      ],
+      "noAi": "Não usamos inteligência artificial em nenhuma parte do site.",
+      "deleteTitle": "Pedir que apaguemos seus dados",
+      "deleteBody": "Se quiser encerrar sua conta ou que apaguemos seus dados, escreva para <mail>{email}</mail> a partir do mesmo e-mail com o qual se cadastrou."
+    }
+  },
+  "PlanViewer": {
+    "beforeOpen": "Antes de abrir o plano",
+    "beforeOpenText": "Leia e aceite a cláusula de isenção de responsabilidade para ver o plano. Pedimos apenas uma vez.",
+    "saving": "Salvando...",
+    "accept": "Aceito a cláusula",
+    "soon": "Este plano estará disponível em breve.",
+    "noAccessTitle": "Você não tem acesso a este plano",
+    "noAccessText": "Está incluído na assinatura ou na compra do plano.",
+    "seeMembership": "Ver a assinatura",
+    "limitTitle": "Você atingiu o limite de hoje",
+    "limitText": "Por dia você pode abrir um número máximo de planos diferentes. Volte amanhã para ver outro.",
+    "notFoundTitle": "Não encontramos este plano",
+    "notFoundText": "Confira o link e tente novamente.",
+    "errorTitle": "Não foi possível carregar o plano",
+    "errorText": "Tente novamente em instantes.",
+    "retry": "Tentar novamente"
   }
 }
