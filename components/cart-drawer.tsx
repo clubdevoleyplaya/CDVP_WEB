@@ -19,11 +19,13 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice, formatPrice, paymentProviderFor } from "@/lib/price";
+import { useLocalizeProduct } from "@/lib/localize-product";
 import { getProductBySlug } from "@/lib/products";
 import { apiErrorMessage } from "@/lib/user-errors";
 
 export function CartDrawer() {
   const t = useTranslations("Cart");
+  const localize = useLocalizeProduct();
   const te = useTranslations("Errors");
   const {
     cart,
@@ -45,8 +47,9 @@ export function CartDrawer() {
 
   const lines = cart
     .map((item) => {
-      const product = getProductBySlug(item.slug);
-      if (!product) return null;
+      const base = getProductBySlug(item.slug);
+      if (!base) return null;
+      const product = localize(base);
       const { now } = computeDisplayPrice(product, currency, isSubscriber, discountPercent, eurPrices);
       return { item, product, lineTotal: now * item.qty };
     })

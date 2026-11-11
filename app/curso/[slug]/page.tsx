@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { AuthGuard } from "@/components/auth-guard";
 import { CourseClassroom } from "@/components/course-classroom";
+import { getLocalizeProduct } from "@/lib/localize-product-server";
 import { getProductBySlug, products } from "@/lib/products";
 
 export function generateStaticParams() {
@@ -9,8 +10,9 @@ export function generateStaticParams() {
 
 export default async function CoursePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
-  if (!product || product.category !== "curso") notFound();
+  const base = getProductBySlug(slug);
+  if (!base || base.category !== "curso") notFound();
+  const product = (await getLocalizeProduct())(base);
 
   return (
     <AuthGuard>

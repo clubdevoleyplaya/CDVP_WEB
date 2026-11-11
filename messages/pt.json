@@ -422,5 +422,130 @@
     "errorTitle": "Não foi possível carregar o plano",
     "errorText": "Tente novamente em instantes.",
     "retry": "Tentar novamente"
+  },
+  "Products": {
+    "ataque": {
+      "title": "Ataque",
+      "shortDescription": "Aproximação, braços, contato com a bola e os erros que mais custam a um atacante amador.",
+      "longDescription": "Um percurso completo pelo gesto do ataque: aproximação, coordenação dos braços, ponto de contato com a bola e os erros mais frequentes que travam um atacante amador. Inclui dicas pontuais para subir de nível rápido.",
+      "chips": [
+        "Pés",
+        "Braços",
+        "Contato",
+        "Erros frequentes",
+        "Dicas"
+      ]
+    },
+    "mentalidad-deportiva": {
+      "title": "Mentalidade para vôlei de praia",
+      "shortDescription": "Objetivos, mentalidade de treino e de jogo, concentração e disciplina.",
+      "longDescription": "Trabalhe a cabeça tanto quanto o corpo: a importância dos objetivos, a mentalidade de treinos e jogos, a concentração em competição e a disciplina para sustentar o processo."
+    },
+    "planificacion": {
+      "title": "Planejamento para treinadores/as",
+      "shortDescription": "Planeje os aspectos técnicos, físicos e mentais de uma sessão de treino.",
+      "longDescription": "Pensado para treinadores/as: como planejar os aspectos técnicos, físicos e mentais de uma sessão e como montar um planejamento completo para treinar e competir melhor."
+    },
+    "defensa": {
+      "title": "Defesa",
+      "shortDescription": "Toda a informação exclusiva do clube para melhorar seu posicionamento e leitura na defesa.",
+      "longDescription": "Melhore sua defesa com toda a informação exclusiva do clube: posicionamento, leitura do ataque adversário e os ajustes finos que fazem a diferença na areia."
+    },
+    "bloqueo": {
+      "title": "Bloqueio",
+      "shortDescription": "Técnica de bloqueio individual e leitura do ataque adversário.",
+      "longDescription": "Fundamentos do bloqueio individual no vôlei de praia: posicionamento, timing e leitura do ataque adversário para fechar bem os espaços."
+    },
+    "armado": {
+      "title": "Levantamento",
+      "shortDescription": "Fundamentos de levantamento para dominar todos os ritmos de ataque.",
+      "longDescription": "Os fundamentos do levantamento na areia: controle de ritmos, variações de colocação e como dar opções claras ao seu atacante."
+    },
+    "saque": {
+      "title": "Saque",
+      "shortDescription": "Técnica e variações de saque para pressionar a recepção adversária.",
+      "longDescription": "Técnica de saque e suas variações para pressionar a recepção adversária desde o primeiro contato do ponto."
+    },
+    "conceptos-generales": {
+      "title": "Conceitos gerais",
+      "shortDescription": "As bases do vôlei de praia antes de entrar na técnica de cada gesto.",
+      "longDescription": "As bases do vôlei de praia: regras, dinâmica de jogo e os conceitos gerais que você precisa entender antes de entrar na técnica de cada gesto."
+    },
+    "recepcion": {
+      "title": "Recepção",
+      "shortDescription": "Posicionamento e leitura do saque para uma recepção mais consistente.",
+      "longDescription": "Posicionamento, leitura do saque e ajustes de recepção para chegar com mais consistência ao primeiro contato."
+    },
+    "analisis-tecnico-biomecanico": {
+      "title": "Análise técnico-biomecânica",
+      "shortDescription": "Relatório detalhado do gesto técnico, pensado para treinadores.",
+      "longDescription": "Um relatório detalhado do gesto técnico a partir da biomecânica, pensado para treinadores que querem entender o porquê de cada correção."
+    },
+    "plan-de-movilidad-21-dias": {
+      "title": "Plano de mobilidade — 21 dias",
+      "shortDescription": "Rotina progressiva de mobilidade para sustentar o volume de treino.",
+      "longDescription": "Uma rotina progressiva de 21 dias para ganhar e manter a mobilidade que o volume de treino na areia exige."
+    },
+    "guia-nutricional-para-torneos-y-entrenamientos": {
+      "title": "Guia nutricional para torneios e treinos",
+      "shortDescription": "Orientações de alimentação para competir e treinar sem baixar o nível.",
+      "longDescription": "Orientações práticas de alimentação para sustentar o nível de treino e chegar bem aos torneios, sem planos impossíveis de seguir."
+    },
+    "planificacion-de-entrenamientos-en-cancha": {
+      "title": "Planejamento de treinos em quadra",
+      "shortDescription": "Estrutura de sessões de quadra pronta para aplicar com seu grupo.",
+      "longDescription": "Uma estrutura de sessões de quadra pronta para aplicar com seu grupo, pensada para treinadores que precisam organizar a semana."
+    },
+    "plan-de-gimnasio-para-mejorar-el-salto": {
+      "title": "Plano de academia PRO",
+      "shortDescription": "Rotina de academia voltada à potência de salto e prevenção de lesões.",
+      "longDescription": "Rotina de academia voltada à potência de salto e à prevenção de lesões, para complementar o trabalho de quadra."
+    },
+    "plan-aerobico-pro": {
+      "title": "Plano aeróbico PRO",
+      "shortDescription": "Base aeróbica para sustentar o ritmo de jogo na areia.",
+      "longDescription": "Uma base aeróbica pensada especificamente para sustentar o ritmo de jogo que exige jogar na areia."
+    },
+    "todos-los-cursos": {
+      "title": "Todos os cursos",
+      "shortDescription": "Os 8 cursos técnicos do clube em um único pacote, com desconto por volume.",
+      "longDescription": "Os 8 cursos técnicos do clube — ataque, defesa, bloqueio, levantamento, saque, recepção, conceitos gerais e mentalidade — em um único pacote, com desconto por volume.",
+      "includes": "8 produtos"
+    },
+    "combo-k1-recepcion-armado-ataque": {
+      "title": "Combo K1 — Recepção, Levantamento, Ataque",
+      "shortDescription": "Os 3 fundamentos da técnica com bola em um único pacote.",
+      "longDescription": "Recepção, levantamento e ataque — os três fundamentos que constroem a jogada com a bola — combinados em um único pacote.",
+      "includes": "3 produtos"
+    },
+    "combo-k2-saque-defensa-bloqueo": {
+      "title": "Combo K2 — Saque, Defesa, Bloqueio",
+      "shortDescription": "Os 3 fundamentos defensivos e de saque em um único pacote.",
+      "longDescription": "Saque, defesa e bloqueio — os três fundamentos que sustentam o ponto pelo lado defensivo — combinados em um único pacote.",
+      "includes": "3 produtos"
+    },
+    "banco-de-120-ejercicios": {
+      "title": "Banco de 120 exercícios de vôlei de praia",
+      "shortDescription": "120 exercícios de vôlei de praia para treinar por conta própria.",
+      "longDescription": "Um banco de 120 exercícios de vôlei de praia. Descrição provisória: Juli completa o texto final."
+    },
+    "curso-para-entrenadores": {
+      "title": "Curso online para treinadores",
+      "shortDescription": "Curso por turma para treinadores de vôlei de praia.",
+      "longDescription": "Curso online para treinadores, por turma. Descrição provisória: Juli completa o texto final."
+    },
+    "campamento-cerrito": {
+      "title": "Acampamento Cerrito",
+      "shortDescription": "Acampamento presencial anual de vôlei de praia.",
+      "longDescription": "Acampamento presencial anual em Cerrito. Descrição provisória: Juli completa a data e o texto final."
+    }
+  },
+  "Testimonials": {
+    "heading": "O que dizem os alunos",
+    "campHeading": "Acampamento de treinamento",
+    "camp": "Acampamento",
+    "byCourse": "Depoimentos por curso",
+    "videoTitle": "Depoimento — {context}",
+    "videoSoon": "Vídeo em breve"
   }
 }

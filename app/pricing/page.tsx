@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { CATEGORY_TO_ROUTE, products, type Category, type Product } from "@/lib/products";
+import { getLocalizeProduct } from "@/lib/localize-product-server";
 import { formatPrice } from "@/lib/price";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -26,6 +27,7 @@ function ProductRow({ product }: { product: Product }) {
 export default async function PricingPage() {
   const t = await getTranslations("Pricing");
   const tc = await getTranslations("Categories.routes");
+  const localize = await getLocalizeProduct();
   return (
     <section className="mx-auto max-w-2xl px-6 py-16">
       <h1 className="font-display text-2xl font-bold uppercase">{t("title")}</h1>
@@ -58,7 +60,7 @@ export default async function PricingPage() {
             </h2>
             <ul className="mt-2 text-sm">
               {items.map((product) => (
-                <ProductRow key={product.slug} product={product} />
+                <ProductRow key={product.slug} product={localize(product)} />
               ))}
             </ul>
             <Link

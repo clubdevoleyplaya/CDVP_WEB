@@ -7,6 +7,7 @@ import { ProductBuyBox } from "@/components/product-buy-box";
 import { ProductCard } from "@/components/product-card";
 import { VideoPlayer } from "@/components/video-player";
 import { QuizSection } from "@/components/quiz-section";
+import { getLocalizeProduct } from "@/lib/localize-product-server";
 import {
   CATEGORY_TO_ROUTE,
   getProductBySlug,
@@ -26,8 +27,10 @@ export default async function ProductPage({
   const t = await getTranslations("ProductPage");
   const tr = await getTranslations("Categories.routes");
   const ts = await getTranslations("Categories.single");
-  const product = getProductBySlug(slug);
-  if (!product) notFound();
+  const base = getProductBySlug(slug);
+  if (!base) notFound();
+  const localize = await getLocalizeProduct();
+  const product = localize(base);
 
   const related = products
     .filter((p) => p.category === product.category && p.slug !== product.slug)

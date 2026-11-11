@@ -7,11 +7,13 @@ import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { TestimonialSlider } from "@/components/testimonial-slider";
+import { useLocalizeProduct } from "@/lib/localize-product";
 import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice, formatPrice } from "@/lib/price";
 import type { Product } from "@/lib/products";
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product: base }: { product: Product }) {
+  const product = useLocalizeProduct()(base);
   const t = useTranslations("ProductCard");
   const tc = useTranslations("Categories.single");
   const { currency, isSubscriber, discountPercent, eurPrices, addToCart } = useDemoState();
