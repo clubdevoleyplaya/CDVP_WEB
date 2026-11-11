@@ -3,6 +3,7 @@
 import { Fragment, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Check, ChevronLeft, ChevronRight, Play, PartyPopper } from "lucide-react";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -21,6 +22,7 @@ const NO_SECTION = "Clases";
 const API = process.env.NEXT_PUBLIC_API_URL;
 
 export function CourseClassroom({ slug, title, description, testimonials, rating }: Props) {
+  const t = useTranslations("Classroom");
   const { session } = useDemoState();
   const router = useRouter();
   const [lessons, setLessons] = useState<Lesson[] | null>(null);
@@ -46,13 +48,13 @@ export function CourseClassroom({ slug, title, description, testimonials, rating
       .catch(toShop);
   }, [session, slug, router]);
 
-  if (lessons === null) return <p className="px-4 py-16 text-center text-sm text-ink-soft">Cargando tu curso...</p>;
+  if (lessons === null) return <p className="px-4 py-16 text-center text-sm text-ink-soft">{t("loading")}</p>;
 
   return (
     <div className="mx-auto max-w-[1400px] px-4 py-8">
-      <nav aria-label="Migas" className="mb-4 flex items-center gap-1 text-sm text-ink-soft">
+      <nav aria-label={t("breadcrumbs")} className="mb-4 flex items-center gap-1 text-sm text-ink-soft">
         <Link href="/perfil" className="hover:text-blue">
-          Mis cursos
+          {t("myCourses")}
         </Link>
         <ChevronRight className="size-3.5" />
         <span className="text-ink">{title}</span>
@@ -72,6 +74,7 @@ export function CourseClassroom({ slug, title, description, testimonials, rating
 const GENERATED_MODULE = /^Módulo \d+$/;
 
 function Viewer({ slug, lessons, description, testimonials, rating, email }: { slug: string; lessons: Lesson[]; description: string; testimonials?: Testimonial[]; rating?: Product["rating"]; email?: string }) {
+  const t = useTranslations("Classroom");
   const storageKey = `cdvp-seen:${slug}`; // misma clave de siempre: no se pierde el avance guardado
   const [completed, setCompleted] = useState<number[]>(() => {
     try {
@@ -172,13 +175,13 @@ function Viewer({ slug, lessons, description, testimonials, rating, email }: { s
         <div>
           <p className="text-sm text-ink-soft">
             {lesson.section ? `${lesson.section} · ` : ""}
-            Clase {current + 1} de {lessons.length}
+            {t("lessonOf", { current: current + 1, total: lessons.length })}
           </p>
           <h1 className="font-display text-2xl font-bold">{lesson.title}</h1>
         </div>
         <div className="flex flex-wrap items-center gap-2 border-y border-line py-3">
           <Button type="button" variant="outline" size="lg" disabled={current === 0} onClick={() => go(current - 1)}>
-            <ChevronLeft className="size-4" /> Anterior
+            <ChevronLeft className="size-4" /> {t("previous")}
           </Button>
           <Button
             type="button"
@@ -188,7 +191,7 @@ function Viewer({ slug, lessons, description, testimonials, rating, email }: { s
             className={isDone(lesson) ? "border-green text-green" : ""}
             onClick={() => toggleCompleted(lesson.position)}
           >
-            <Check className="size-4" /> {isDone(lesson) ? "Completada" : "Marcar como completada"}
+            <Check className="size-4" /> {isDone(lesson) ? t("completed") : t("markCompleted")}
           </Button>
           <Button
             type="button"
@@ -196,26 +199,26 @@ function Viewer({ slug, lessons, description, testimonials, rating, email }: { s
             className="ml-auto"
             onClick={() => (last ? toggleCompleted(lesson.position, true) : go(current + 1))}
           >
-            {last ? "Terminar curso" : "Siguiente"} <ChevronRight className="size-4" />
+            {last ? t("finish") : t("next")} <ChevronRight className="size-4" />
           </Button>
         </div>
         <CourseTestimonials items={testimonials} rating={rating} />
         <section>
-          <h2 className="font-display text-sm font-bold uppercase tracking-wide">Descripción</h2>
+          <h2 className="font-display text-sm font-bold uppercase tracking-wide">{t("description")}</h2>
           <p className="mt-2 max-w-[65ch] text-sm text-ink-soft">{description}</p>
         </section>
       </div>
 
       <aside className="flex flex-col gap-3 lg:sticky lg:top-20 lg:self-start">
-        <h2 className="font-display text-sm font-bold uppercase tracking-wide">Temario del curso</h2>
+        <h2 className="font-display text-sm font-bold uppercase tracking-wide">{t("syllabus")}</h2>
         {finished ? (
           <p className="flex items-center gap-2 text-sm font-semibold text-green">
-            <PartyPopper className="size-4" /> ¡Terminaste el curso!
+            <PartyPopper className="size-4" /> {t("courseDone")}
           </p>
         ) : (
-          <Progress value={percent} aria-label="Avance del curso">
+          <Progress value={percent} aria-label={t("progressLabel")}>
             <span className="text-sm text-ink-soft">
-              {percent}% · {completed.length} de {lessons.length} completadas
+              {t("progress", { percent, done: completed.length, total: lessons.length })}
             </span>
           </Progress>
         )}
@@ -243,7 +246,7 @@ function Viewer({ slug, lessons, description, testimonials, rating, email }: { s
                   >
                     <AccordionItem value={name}>
                       <AccordionTrigger className="px-3 font-display text-sm font-bold uppercase tracking-wide">
-                        <span className="flex-1">{name}</span>
+                        <span className="flex-1">{name === NO_SECTION ? t("noSection") : name}</span>
                         <span className="mr-2 font-sans text-xs font-normal normal-case text-ink-soft">
                           {inSection.filter(isDone).length}/{inSection.length}
                         </span>

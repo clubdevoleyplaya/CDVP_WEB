@@ -261,5 +261,39 @@
     "bioPlaceholder": "Conte um pouco sobre você",
     "saving": "Salvando...",
     "save": "Salvar"
+  },
+  "Classroom": {
+    "loading": "Carregando seu curso...",
+    "breadcrumbs": "Navegação",
+    "myCourses": "Meus cursos",
+    "noSection": "Aulas",
+    "lessonOf": "Aula {current} de {total}",
+    "previous": "Anterior",
+    "completed": "Concluída",
+    "markCompleted": "Marcar como concluída",
+    "finish": "Concluir curso",
+    "next": "Próxima",
+    "description": "Descrição",
+    "syllabus": "Conteúdo do curso",
+    "courseDone": "Você concluiu o curso!",
+    "progressLabel": "Progresso do curso",
+    "progress": "{percent}% · {done} de {total} concluídas"
+  },
+  "AuthGuard": {
+    "needAdmin": "Você precisa de uma conta de administrador para ver isto.",
+    "needLogin": "Entre para ver isto.",
+    "login": "Entrar"
+  },
+  "Video": {
+    "soon": "Vídeo em breve",
+    "title": "Vídeo do curso"
+  },
+  "TestimonialSlider": {
+    "imageAlt": "Depoimento de {author}",
+    "choose": "Escolher depoimento",
+    "item": "Depoimento {index} de {total}"
+  },
+  "Quiz": {
+    "saveError": "Não foi possível salvar sua resposta. Tente novamente."
   }
 }

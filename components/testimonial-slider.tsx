@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import type { Testimonial } from "@/lib/products";
 
@@ -16,6 +17,7 @@ export function TestimonialSlider({
   items: Item[];
   className?: string;
 }) {
+  const tt = useTranslations("TestimonialSlider");
   const track = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
 
@@ -39,7 +41,7 @@ export function TestimonialSlider({
             {t.image && (
               <Image
                 src={t.image}
-                alt={`Testimonio de ${t.author}`}
+                alt={tt("imageAlt", { author: t.author })}
                 width={640}
                 height={400}
                 className="mb-3 h-auto w-full rounded-lg border border-line"
@@ -61,12 +63,12 @@ export function TestimonialSlider({
         ))}
       </div>
       {items.length > 1 && (
-        <div className="mt-3 flex justify-center gap-2" role="group" aria-label="Elegir testimonio">
+        <div className="mt-3 flex justify-center gap-2" role="group" aria-label={tt("choose")}>
           {items.map((t, i) => (
             <button
               key={`${t.author}-${i}`}
               type="button"
-              aria-label={`Testimonio ${i + 1} de ${items.length}`}
+              aria-label={tt("item", { index: i + 1, total: items.length })}
               aria-current={i === active}
               onClick={() => goTo(i)}
               className={`h-2 rounded-full transition-all ${i === active ? "w-6 bg-blue" : "w-2 bg-line"}`}

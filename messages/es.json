@@ -261,5 +261,39 @@
     "bioPlaceholder": "Contanos un poco de vos",
     "saving": "Guardando...",
     "save": "Guardar"
+  },
+  "Classroom": {
+    "loading": "Cargando tu curso...",
+    "breadcrumbs": "Migas",
+    "myCourses": "Mis cursos",
+    "noSection": "Clases",
+    "lessonOf": "Clase {current} de {total}",
+    "previous": "Anterior",
+    "completed": "Completada",
+    "markCompleted": "Marcar como completada",
+    "finish": "Terminar curso",
+    "next": "Siguiente",
+    "description": "Descripción",
+    "syllabus": "Temario del curso",
+    "courseDone": "¡Terminaste el curso!",
+    "progressLabel": "Avance del curso",
+    "progress": "{percent}% · {done} de {total} completadas"
+  },
+  "AuthGuard": {
+    "needAdmin": "Necesitás una cuenta de administrador para ver esto.",
+    "needLogin": "Iniciá sesión para ver esto.",
+    "login": "Iniciar sesión"
+  },
+  "Video": {
+    "soon": "Video próximamente",
+    "title": "Video del curso"
+  },
+  "TestimonialSlider": {
+    "imageAlt": "Testimonio de {author}",
+    "choose": "Elegir testimonio",
+    "item": "Testimonio {index} de {total}"
+  },
+  "Quiz": {
+    "saveError": "No se pudo guardar tu respuesta. Probá de nuevo."
   }
 }

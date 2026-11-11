@@ -261,5 +261,39 @@
     "bioPlaceholder": "Tell us a little about yourself",
     "saving": "Saving...",
     "save": "Save"
+  },
+  "Classroom": {
+    "loading": "Loading your course...",
+    "breadcrumbs": "Breadcrumbs",
+    "myCourses": "My courses",
+    "noSection": "Lessons",
+    "lessonOf": "Lesson {current} of {total}",
+    "previous": "Previous",
+    "completed": "Completed",
+    "markCompleted": "Mark as completed",
+    "finish": "Finish course",
+    "next": "Next",
+    "description": "Description",
+    "syllabus": "Course syllabus",
+    "courseDone": "You finished the course!",
+    "progressLabel": "Course progress",
+    "progress": "{percent}% · {done} of {total} completed"
+  },
+  "AuthGuard": {
+    "needAdmin": "You need an administrator account to see this.",
+    "needLogin": "Log in to see this.",
+    "login": "Log in"
+  },
+  "Video": {
+    "soon": "Video coming soon",
+    "title": "Course video"
+  },
+  "TestimonialSlider": {
+    "imageAlt": "Testimonial from {author}",
+    "choose": "Choose testimonial",
+    "item": "Testimonial {index} of {total}"
+  },
+  "Quiz": {
+    "saveError": "We couldn't save your answer. Please try again."
   }
 }

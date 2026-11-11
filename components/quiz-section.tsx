@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { useDemoState } from "@/context/demo-state";
 import type { Category } from "@/lib/products";
@@ -11,6 +12,7 @@ type Quiz = { id: string; title: string; questions: Question[] };
 type QuizSectionProps = { slug: string; category: Category };
 
 export function QuizSection({ slug, category }: QuizSectionProps) {
+  const t = useTranslations("Quiz");
   const { session } = useDemoState();
   const [quiz, setQuiz] = useState<Quiz | null | undefined>(undefined);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -58,7 +60,7 @@ export function QuizSection({ slug, category }: QuizSectionProps) {
     } catch {
       setErrorByQuestion((prev) => ({
         ...prev,
-        [questionId]: "No se pudo guardar tu respuesta. Probá de nuevo.",
+        [questionId]: t("saveError"),
       }));
     }
   }
