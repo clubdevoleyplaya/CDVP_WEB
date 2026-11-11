@@ -3,6 +3,7 @@
 import { useEffect, useState, type ChangeEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Check, ImagePlus, Lock, X } from "lucide-react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -27,6 +28,7 @@ const MAX_BANNER_BYTES = 5 * 1024 * 1024;
 
 
 export default function PerfilPage() {
+  const t = useTranslations("Profile");
   const { session, me, isSubscriber, signOut, updateProfile, cancelSubscription } = useDemoState();
 
   const [courses, setCourses] = useState<CourseAccess[]>([]);
@@ -81,12 +83,12 @@ export default function PerfilPage() {
     if (!file || !session) return;
     setBannerError(null);
     if (!file.type.startsWith("image/")) {
-      setBannerError("El archivo tiene que ser una imagen (JPG, PNG o WebP).");
+      setBannerError(t("bannerNotImage"));
       e.target.value = "";
       return;
     }
     if (file.size > MAX_BANNER_BYTES) {
-      setBannerError("La imagen pesa más de 5 MB. Elegí una más liviana.");
+      setBannerError(t("bannerTooBig"));
       e.target.value = "";
       return;
     }
@@ -101,7 +103,7 @@ export default function PerfilPage() {
       const { data } = supabase.storage.from("banners").getPublicUrl(path);
       await updateProfile({ bannerUrl: data.publicUrl });
     } catch {
-      setBannerError("No se pudo subir el banner. Probá de nuevo.");
+      setBannerError(t("bannerUploadError"));
     } finally {
       setBannerUploading(false);
       e.target.value = "";
@@ -113,7 +115,7 @@ export default function PerfilPage() {
     try {
       await updateProfile({ bannerUrl: null });
     } catch {
-      setBannerError("No se pudo quitar el banner. Probá de nuevo.");
+      setBannerError(t("bannerRemoveError"));
     }
   }
 
@@ -133,10 +135,10 @@ export default function PerfilPage() {
             <label className="flex cursor-pointer items-center gap-1.5 rounded-full bg-black/50 px-3 py-1.5 font-display text-[10px] font-bold uppercase tracking-wide text-white hover:bg-black/70">
               <ImagePlus className="size-3.5" />
               {bannerUploading
-                ? "Subiendo..."
+                ? t("uploading")
                 : me?.bannerUrl
-                  ? "Cambiar banner"
-                  : "Subir banner"}
+                  ? t("changeBanner")
+                  : t("uploadBanner")}
               <input
                 type="file"
                 accept="image/*"
@@ -149,7 +151,7 @@ export default function PerfilPage() {
               <button
                 type="button"
                 onClick={handleBannerRemove}
-                aria-label="Quitar banner"
+                aria-label={t("removeBanner")}
                 className="flex items-center rounded-full bg-black/50 px-2 text-white hover:bg-black/70"
               >
                 <X className="size-3.5" />
@@ -175,7 +177,7 @@ export default function PerfilPage() {
               className="hidden"
             />
             <span className="absolute inset-0 hidden items-center justify-center bg-black/40 text-[10px] font-bold uppercase text-white group-hover:flex">
-              {uploading ? "..." : "Cambiar"}
+              {uploading ? "..." : t("change")}
             </span>
           </label>
         </div>
@@ -187,7 +189,7 @@ export default function PerfilPage() {
         <div className="flex flex-wrap items-center justify-between gap-4 bg-surface px-8 pt-16 pb-8">
           <div>
             <h1 className="font-display text-3xl font-bold uppercase">
-              {displayName || "Sin apodo"}
+              {displayName || t("noNickname")}
             </h1>
             {me?.team && (
               <p className="mt-1 text-sm text-ink-soft">{me.team}</p>
@@ -202,7 +204,7 @@ export default function PerfilPage() {
                 : "border-yellow bg-yellow text-white hover:opacity-90"
             }
           >
-            {isSubscriber ? "Suscriptor" : "Sin suscripción"}
+            {isSubscriber ? t("subscriber") : t("noSubscription")}
           </Badge>
         </div>
       </div>
@@ -213,8 +215,8 @@ export default function PerfilPage() {
         ) : (
           <Card className="font-sans">
             <CardHeader>
-              <CardTitle>Sobre mí</CardTitle>
-              <CardDescription>Cargando...</CardDescription>
+              <CardTitle>{t("aboutMe")}</CardTitle>
+              <CardDescription>{t("loading")}</CardDescription>
             </CardHeader>
           </Card>
         )}
@@ -222,13 +224,13 @@ export default function PerfilPage() {
         <div className="flex flex-col gap-4">
           <Card className="font-sans">
             <CardHeader>
-              <CardTitle>Mis cursos</CardTitle>
+              <CardTitle>{t("myCourses")}</CardTitle>
               <CardDescription>
                 {coursesLoading
-                  ? "Cargando..."
+                  ? t("loading")
                   : coursesError
-                    ? "No se pudieron cargar tus cursos."
-                    : `${accessCount} de ${courses.length} con acceso`}
+                    ? t("coursesError")
+                    : t("coursesCount", { access: accessCount, total: courses.length })}
               </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-2">
@@ -240,7 +242,7 @@ export default function PerfilPage() {
                 </>
               ) : coursesError ? (
                 <p className="text-sm text-ink-soft">
-                  Hubo un error al traer tus cursos. Probá de nuevo más tarde.
+                  {t("coursesErrorLong")}
                 </p>
               ) : (
                 courses.map((course) => {
@@ -278,7 +280,7 @@ export default function PerfilPage() {
                 className: "w-fit font-display text-xs font-bold uppercase tracking-wide",
               })}
             >
-              Panel admin
+              {t("adminPanel")}
             </Link>
           )}
 
@@ -288,7 +290,7 @@ export default function PerfilPage() {
             onClick={() => signOut()}
             className="w-fit font-display text-xs font-bold uppercase tracking-wide"
           >
-            Cerrar sesión
+            {t("signOut")}
           </Button>
         </div>
       </div>
@@ -297,17 +299,18 @@ export default function PerfilPage() {
 }
 
 function SubscriptionCard({ onCancel }: { onCancel: () => Promise<void> }) {
+  const t = useTranslations("Profile");
   const [canceling, setCanceling] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function handleCancel() {
-    if (!window.confirm("¿Seguro que querés cancelar tu suscripción?")) return;
+    if (!window.confirm(t("cancelConfirm"))) return;
     setCanceling(true);
     setError(null);
     try {
       await onCancel();
     } catch {
-      setError("No se pudo cancelar la suscripción. Probá de nuevo.");
+      setError(t("cancelError"));
     } finally {
       setCanceling(false);
     }
@@ -316,8 +319,8 @@ function SubscriptionCard({ onCancel }: { onCancel: () => Promise<void> }) {
   return (
     <Card className="font-sans">
       <CardHeader>
-        <CardTitle>Suscripción</CardTitle>
-        <CardDescription>Estás suscripto al club.</CardDescription>
+        <CardTitle>{t("subscription")}</CardTitle>
+        <CardDescription>{t("subscribedToClub")}</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-2">
         <Button
@@ -327,7 +330,7 @@ function SubscriptionCard({ onCancel }: { onCancel: () => Promise<void> }) {
           disabled={canceling}
           className="w-fit font-display text-xs font-bold uppercase tracking-wide text-destructive hover:border-destructive"
         >
-          {canceling ? "Cancelando..." : "Cancelar suscripción"}
+          {canceling ? t("canceling") : t("cancel")}
         </Button>
         {error && <p className="text-sm text-destructive">{error}</p>}
       </CardContent>
@@ -346,6 +349,7 @@ function ProfileForm({
     bio: string;
   }) => Promise<void>;
 }) {
+  const t = useTranslations("Profile");
   const [nickname, setNickname] = useState(me.nickname ?? "");
   const [team, setTeam] = useState(me.team ?? "");
   const [bio, setBio] = useState(me.bio ?? "");
@@ -363,38 +367,36 @@ function ProfileForm({
   return (
     <Card className="font-sans">
       <CardHeader>
-        <CardTitle>Sobre mí</CardTitle>
-        <CardDescription>
-          Equipo, apodo y biografía visibles en tu perfil.
-        </CardDescription>
+        <CardTitle>{t("aboutMe")}</CardTitle>
+        <CardDescription>{t("aboutMeDescription")}</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div className="flex flex-col gap-1.5">
-          <Label htmlFor="team">Equipo</Label>
+          <Label htmlFor="team">{t("team")}</Label>
           <Input
             id="team"
             value={team}
             onChange={(e) => setTeam(e.target.value)}
-            placeholder="Ej. Beach Volley Lab"
+            placeholder={t("teamPlaceholder")}
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <Label htmlFor="nickname">Apodo (opcional)</Label>
+          <Label htmlFor="nickname">{t("nickname")}</Label>
           <Input
             id="nickname"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
-            placeholder="Cómo te dicen en la cancha"
+            placeholder={t("nicknamePlaceholder")}
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <Label htmlFor="bio">Biografía</Label>
+          <Label htmlFor="bio">{t("bio")}</Label>
           <textarea
             id="bio"
             value={bio}
             onChange={(e) => setBio(e.target.value)}
             rows={4}
-            placeholder="Contanos un poco de vos"
+            placeholder={t("bioPlaceholder")}
             className="w-full rounded-lg border border-input bg-transparent px-2.5 py-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
           />
         </div>
@@ -404,7 +406,7 @@ function ProfileForm({
           disabled={saving}
           className="w-fit font-display text-xs font-bold uppercase tracking-wide"
         >
-          {saving ? "Guardando..." : "Guardar"}
+          {saving ? t("saving") : t("save")}
         </Button>
       </CardContent>
     </Card>
