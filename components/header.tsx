@@ -10,13 +10,13 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { NavDrawer } from "@/components/nav-drawer";
 import { CartDrawer } from "@/components/cart-drawer";
 import { useDemoState } from "@/context/demo-state";
+import { MENU_ITEMS } from "@/lib/menu";
 import { loginHref } from "@/lib/safe-redirect";
 
-const NAV_ROUTES = ["cursos", "descargables", "combos", "eventos"] as const;
 
 export function Header() {
   const t = useTranslations("Header");
-  const tc = useTranslations("Categories.routes");
+  const tm = useTranslations("Menu");
   const { session, me } = useDemoState();
   const pathname = usePathname();
   const displayName = me?.nickname || session?.user.email;
@@ -32,13 +32,13 @@ export function Header() {
         </span>
       </Link>
       <nav className="ml-4 hidden flex-wrap gap-5 md:flex">
-        {NAV_ROUTES.map((route) => (
+        {MENU_ITEMS.map((item) => (
           <Link
-            key={route}
-            href={`/catalogo/${route}`}
+            key={item.key}
+            href={item.href}
             className="font-display text-xs font-bold uppercase tracking-wide hover:text-blue"
           >
-            {tc(route)}
+            {tm(item.key)}
           </Link>
         ))}
       </nav>

@@ -2,14 +2,16 @@
   "Header": {
     "login": "Entrar",
     "signup": "Cadastre-se",
-    "toggleTheme": "Alternar tema claro/escuro"
+    "toggleTheme": "Alternar tema claro/escuro",
+    "signOut": "Sair"
   },
   "Footer": {
     "brand": "Club de Voley Playa — Juli Azaad",
     "pricing": "Preços",
     "terms": "Termos de serviço",
     "refund": "Política de reembolso",
-    "privacy": "Política de privacidade"
+    "privacy": "Política de privacidade",
+    "contact": "Contato"
   },
   "NavDrawer": {
     "open": "Abrir menu",
@@ -553,5 +555,46 @@
     "subscription_active": "Você já tem uma assinatura ativa.",
     "clause_not_accepted": "Antes de abrir o plano, você precisa aceitar a cláusula.",
     "too_many_requests": "Muitas tentativas. Aguarde um momento e tente novamente."
+  },
+  "Menu": {
+    "membership": "Assinatura",
+    "players": "Jogadores/as",
+    "coaches": "Coaches",
+    "events": "Eventos",
+    "custom": "Personalizado",
+    "contact": "Contato"
+  },
+  "CategoryPage": {
+    "players": {
+      "intro": "Cursos, planos e exercícios para melhorar seu jogo na areia: técnica, físico e mente."
+    },
+    "coaches": {
+      "intro": "Formação e recursos para treinadores/as de vôlei de praia."
+    },
+    "events": {
+      "intro": "Eventos presenciais organizados pelo Club de Voley Playa."
+    },
+    "custom": {
+      "intro": "Trabalho personalizado com Juli Azaad."
+    },
+    "services": {
+      "beachVolleyLab": {
+        "title": "Beach Volley Lab — análise biomecânica com Juli Azaad",
+        "text": "Análise biomecânica personalizada do seu jogo. As vagas são limitadas."
+      },
+      "personalTraining": {
+        "title": "Treinamento físico personalizado com Juli Azaad",
+        "text": "Treinamento físico sob medida, com acompanhamento pessoal. Você se candidata e é aprovado antes de começar."
+      },
+      "cta": "Consultar pelo Contato"
+    }
+  },
+  "Contact": {
+    "metaTitle": "Contato — Club de Voley Playa",
+    "title": "Contato",
+    "intro": "Dúvidas, consultas ou um serviço personalizado? Escreva para nós pelo meio que preferir.",
+    "emailTitle": "E-mail",
+    "whatsappCta": "Falar pelo WhatsApp",
+    "socialTitle": "Redes"
   }
 }

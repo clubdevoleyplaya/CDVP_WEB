@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 
 const LINKS = [
   { href: "/pricing", key: "pricing" },
+  { href: "/contacto", key: "contact" },
   { href: "/condicionesservicio", key: "terms" },
   { href: "/politicareembolso", key: "refund" },
   { href: "/privacidad", key: "privacy" },

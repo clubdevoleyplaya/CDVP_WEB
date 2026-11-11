@@ -2,14 +2,16 @@
   "Header": {
     "login": "Iniciar sesión",
     "signup": "Registrate",
-    "toggleTheme": "Cambiar tema claro/oscuro"
+    "toggleTheme": "Cambiar tema claro/oscuro",
+    "signOut": "Cerrar sesión"
   },
   "Footer": {
     "brand": "Club de Voley Playa — Juli Azaad",
     "pricing": "Precios",
     "terms": "Condiciones de servicio",
     "refund": "Política de reembolso",
-    "privacy": "Política de privacidad"
+    "privacy": "Política de privacidad",
+    "contact": "Contacto"
   },
   "NavDrawer": {
     "open": "Abrir menú",
@@ -553,5 +555,46 @@
     "subscription_active": "Ya tenés una suscripción activa.",
     "clause_not_accepted": "Antes de abrir el plan tienes que aceptar la cláusula.",
     "too_many_requests": "Demasiados intentos. Esperá un momento y volvé a intentar."
+  },
+  "Menu": {
+    "membership": "Membresía",
+    "players": "Jugadores/as",
+    "coaches": "Coaches",
+    "events": "Eventos",
+    "custom": "Personalizado",
+    "contact": "Contacto"
+  },
+  "CategoryPage": {
+    "players": {
+      "intro": "Cursos, planes y ejercicios para mejorar tu juego en la arena: técnica, físico y cabeza."
+    },
+    "coaches": {
+      "intro": "Formación y recursos para entrenadores/as de voley playa."
+    },
+    "events": {
+      "intro": "Eventos presenciales organizados por el Club de Voley Playa."
+    },
+    "custom": {
+      "intro": "Trabajo personalizado con Juli Azaad."
+    },
+    "services": {
+      "beachVolleyLab": {
+        "title": "Beach Volley Lab — análisis biomecánico con Juli Azaad",
+        "text": "Análisis biomecánico personalizado de tu juego. Los cupos son limitados."
+      },
+      "personalTraining": {
+        "title": "Entrenamiento físico personalizado con Juli Azaad",
+        "text": "Entrenamiento físico a tu medida, con seguimiento personal. Se aplica y se aprueba antes de empezar."
+      },
+      "cta": "Consultar por Contacto"
+    }
+  },
+  "Contact": {
+    "metaTitle": "Contacto — Club de Voley Playa",
+    "title": "Contacto",
+    "intro": "¿Dudas, consultas o un servicio personalizado? Escríbenos por el medio que prefieras.",
+    "emailTitle": "Email",
+    "whatsappCta": "Escribir por WhatsApp",
+    "socialTitle": "Redes"
   }
 }

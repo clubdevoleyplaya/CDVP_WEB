@@ -2,14 +2,16 @@
   "Header": {
     "login": "Log in",
     "signup": "Sign up",
-    "toggleTheme": "Switch light/dark theme"
+    "toggleTheme": "Switch light/dark theme",
+    "signOut": "Log out"
   },
   "Footer": {
     "brand": "Club de Voley Playa — Juli Azaad",
     "pricing": "Pricing",
     "terms": "Terms of service",
     "refund": "Refund policy",
-    "privacy": "Privacy policy"
+    "privacy": "Privacy policy",
+    "contact": "Contact"
   },
   "NavDrawer": {
     "open": "Open menu",
@@ -553,5 +555,46 @@
     "subscription_active": "You already have an active subscription.",
     "clause_not_accepted": "You must accept the clause before opening the plan.",
     "too_many_requests": "Too many attempts. Wait a moment and try again."
+  },
+  "Menu": {
+    "membership": "Membership",
+    "players": "Players",
+    "coaches": "Coaches",
+    "events": "Events",
+    "custom": "Personalized",
+    "contact": "Contact"
+  },
+  "CategoryPage": {
+    "players": {
+      "intro": "Courses, plans and exercises to improve your game on the sand: technique, fitness and mindset."
+    },
+    "coaches": {
+      "intro": "Training and resources for beach volleyball coaches."
+    },
+    "events": {
+      "intro": "In-person events organized by Club de Voley Playa."
+    },
+    "custom": {
+      "intro": "Personalized work with Juli Azaad."
+    },
+    "services": {
+      "beachVolleyLab": {
+        "title": "Beach Volley Lab — biomechanical analysis with Juli Azaad",
+        "text": "Personalized biomechanical analysis of your game. Spots are limited."
+      },
+      "personalTraining": {
+        "title": "Personalized physical training with Juli Azaad",
+        "text": "Physical training tailored to you, with personal follow-up. You apply and are approved before starting."
+      },
+      "cta": "Inquire via Contact"
+    }
+  },
+  "Contact": {
+    "metaTitle": "Contact — Club de Voley Playa",
+    "title": "Contact",
+    "intro": "Questions, inquiries or a personalized service? Write to us whichever way you prefer.",
+    "emailTitle": "Email",
+    "whatsappCta": "Message on WhatsApp",
+    "socialTitle": "Social media"
   }
 }
