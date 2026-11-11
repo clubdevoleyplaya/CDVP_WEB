@@ -151,5 +151,51 @@
   "ProductPage": {
     "includes": "Incluye: {items}",
     "related": "Más productos relacionados"
+  },
+  "Auth": {
+    "email": "Email",
+    "password": "Contraseña",
+    "name": "Nombre",
+    "login": {
+      "title": "Iniciar sesión",
+      "wrongCredentials": "Email o contraseña incorrectos.",
+      "forgot": "¿Olvidaste tu contraseña?",
+      "submit": "Ingresar",
+      "submitting": "Ingresando…",
+      "noAccount": "¿No tenés cuenta?",
+      "signupLink": "Registrate"
+    },
+    "signup": {
+      "title": "Registrate",
+      "submit": "Crear cuenta",
+      "submitting": "Creando cuenta…",
+      "haveAccount": "¿Ya tenés cuenta?",
+      "loginLink": "Iniciar sesión",
+      "checkTitle": "Revisá tu email",
+      "checkBody": "Te mandamos un link de confirmación a <b>{email}</b>. Hacé clic ahí para activar tu cuenta."
+    },
+    "forgot": {
+      "title": "Olvidé mi contraseña",
+      "intro": "Ingresá tu email y te mandamos un link para elegir una nueva contraseña.",
+      "submit": "Enviar link",
+      "submitting": "Enviando…",
+      "back": "Volver a iniciar sesión",
+      "checkTitle": "Revisá tu email",
+      "checkBody": "Si <b>{email}</b> tiene una cuenta, te mandamos un link para elegir una nueva contraseña."
+    },
+    "reset": {
+      "title": "Elegí una nueva contraseña",
+      "newPassword": "Nueva contraseña",
+      "confirm": "Confirmar contraseña",
+      "mismatch": "Las contraseñas no coinciden.",
+      "submit": "Guardar contraseña",
+      "submitting": "Guardando…"
+    },
+    "errors": {
+      "signup": "No pudimos crear la cuenta. Revisá los datos y probá de nuevo.",
+      "forgotPassword": "No pudimos procesar el pedido. Probá de nuevo en unos minutos.",
+      "resetPassword": "No pudimos cambiar la contraseña. Es posible que el enlace haya vencido: pedí uno nuevo.",
+      "invalidLink": "El enlace no es válido o ya venció. Pedí uno nuevo e intentá de nuevo."
+    }
   }
 }

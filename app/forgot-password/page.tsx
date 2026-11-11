@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
+import { useTranslations } from "next-intl";
 
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { USER_MESSAGES } from "@/lib/user-errors";
 
 export default function ForgotPasswordPage() {
+  const t = useTranslations("Auth");
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -27,7 +28,7 @@ export default function ForgotPasswordPage() {
 
     setLoading(false);
     if (error) {
-      setError(USER_MESSAGES.forgotPassword);
+      setError(t("errors.forgotPassword"));
       return;
     }
 
@@ -37,10 +38,9 @@ export default function ForgotPasswordPage() {
   if (sent) {
     return (
       <section className="mx-auto max-w-md px-6 py-16">
-        <h1 className="font-display text-2xl font-bold uppercase">Revisá tu email</h1>
+        <h1 className="font-display text-2xl font-bold uppercase">{t("forgot.checkTitle")}</h1>
         <p className="mt-4 text-sm">
-          Si <strong>{email}</strong> tiene una cuenta, te mandamos un link para elegir una
-          nueva contraseña.
+          {t.rich("forgot.checkBody", { email, ...{ b: (chunks) => <strong>{chunks}</strong> } })}
         </p>
       </section>
     );
@@ -48,14 +48,14 @@ export default function ForgotPasswordPage() {
 
   return (
     <section className="mx-auto max-w-md px-6 py-16">
-      <h1 className="font-display text-2xl font-bold uppercase">Olvidé mi contraseña</h1>
+      <h1 className="font-display text-2xl font-bold uppercase">{t("forgot.title")}</h1>
       <p className="mt-2 text-sm text-ink-soft">
-        Ingresá tu email y te mandamos un link para elegir una nueva contraseña.
+        {t("forgot.intro")}
       </p>
 
       <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
         <div className="flex flex-col gap-1.5">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">{t("email")}</Label>
           <Input
             id="email"
             type="email"
@@ -72,13 +72,13 @@ export default function ForgotPasswordPage() {
           disabled={loading}
           className="mt-2 font-display text-xs font-bold uppercase tracking-wide"
         >
-          {loading ? "Enviando…" : "Enviar link"}
+          {loading ? t("forgot.submitting") : t("forgot.submit")}
         </Button>
       </form>
 
       <p className="mt-6 text-sm">
         <Link href="/login" className="font-bold text-blue underline">
-          Volver a iniciar sesión
+          {t("forgot.back")}
         </Link>
       </p>
     </section>

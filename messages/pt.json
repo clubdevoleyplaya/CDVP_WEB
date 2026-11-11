@@ -151,5 +151,51 @@
   "ProductPage": {
     "includes": "Inclui: {items}",
     "related": "Produtos relacionados"
+  },
+  "Auth": {
+    "email": "E-mail",
+    "password": "Senha",
+    "name": "Nome",
+    "login": {
+      "title": "Entrar",
+      "wrongCredentials": "E-mail ou senha incorretos.",
+      "forgot": "Esqueceu sua senha?",
+      "submit": "Entrar",
+      "submitting": "Entrando…",
+      "noAccount": "Não tem conta?",
+      "signupLink": "Cadastre-se"
+    },
+    "signup": {
+      "title": "Cadastre-se",
+      "submit": "Criar conta",
+      "submitting": "Criando conta…",
+      "haveAccount": "Já tem conta?",
+      "loginLink": "Entrar",
+      "checkTitle": "Confira seu e-mail",
+      "checkBody": "Enviamos um link de confirmação para <b>{email}</b>. Clique nele para ativar sua conta."
+    },
+    "forgot": {
+      "title": "Esqueci minha senha",
+      "intro": "Informe seu e-mail e enviaremos um link para escolher uma nova senha.",
+      "submit": "Enviar link",
+      "submitting": "Enviando…",
+      "back": "Voltar para o login",
+      "checkTitle": "Confira seu e-mail",
+      "checkBody": "Se <b>{email}</b> tiver uma conta, enviamos um link para escolher uma nova senha."
+    },
+    "reset": {
+      "title": "Escolha uma nova senha",
+      "newPassword": "Nova senha",
+      "confirm": "Confirmar senha",
+      "mismatch": "As senhas não coincidem.",
+      "submit": "Salvar senha",
+      "submitting": "Salvando…"
+    },
+    "errors": {
+      "signup": "Não foi possível criar a conta. Confira os dados e tente novamente.",
+      "forgotPassword": "Não foi possível processar o pedido. Tente novamente em alguns minutos.",
+      "resetPassword": "Não foi possível alterar a senha. O link pode ter expirado: peça um novo.",
+      "invalidLink": "O link não é válido ou já expirou. Peça um novo e tente novamente."
+    }
   }
 }

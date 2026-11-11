@@ -151,5 +151,51 @@
   "ProductPage": {
     "includes": "Includes: {items}",
     "related": "Related products"
+  },
+  "Auth": {
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "login": {
+      "title": "Log in",
+      "wrongCredentials": "Incorrect email or password.",
+      "forgot": "Forgot your password?",
+      "submit": "Log in",
+      "submitting": "Logging in…",
+      "noAccount": "Don't have an account?",
+      "signupLink": "Sign up"
+    },
+    "signup": {
+      "title": "Sign up",
+      "submit": "Create account",
+      "submitting": "Creating account…",
+      "haveAccount": "Already have an account?",
+      "loginLink": "Log in",
+      "checkTitle": "Check your email",
+      "checkBody": "We sent a confirmation link to <b>{email}</b>. Click it to activate your account."
+    },
+    "forgot": {
+      "title": "Forgot my password",
+      "intro": "Enter your email and we'll send you a link to choose a new password.",
+      "submit": "Send link",
+      "submitting": "Sending…",
+      "back": "Back to log in",
+      "checkTitle": "Check your email",
+      "checkBody": "If <b>{email}</b> has an account, we sent a link to choose a new password."
+    },
+    "reset": {
+      "title": "Choose a new password",
+      "newPassword": "New password",
+      "confirm": "Confirm password",
+      "mismatch": "The passwords don't match.",
+      "submit": "Save password",
+      "submitting": "Saving…"
+    },
+    "errors": {
+      "signup": "We couldn't create the account. Check your details and try again.",
+      "forgotPassword": "We couldn't process the request. Please try again in a few minutes.",
+      "resetPassword": "We couldn't change the password. The link may have expired: request a new one.",
+      "invalidLink": "The link is invalid or has expired. Request a new one and try again."
+    }
   }
 }
