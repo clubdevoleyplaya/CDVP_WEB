@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import Script from "next/script";
 import { useSearchParams } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 
 type PaddleGlobal = {
   Environment: { set: (env: "sandbox") => void };
   Initialize: (options: { token: string }) => void;
-  Checkout: { open: (options: { transactionId: string }) => void };
+  Checkout: { open: (options: { transactionId: string; settings?: { locale?: string } }) => void };
 };
 
 declare global {
@@ -19,6 +20,8 @@ declare global {
 const CLIENT_TOKEN = process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN;
 
 export function PaddleCheckout() {
+  const t = useTranslations("Pay");
+  const locale = useLocale();
   const transactionId = useSearchParams().get("_ptxn");
   const [loaded, setLoaded] = useState(false);
 
@@ -26,13 +29,13 @@ export function PaddleCheckout() {
     if (!loaded || !transactionId || !CLIENT_TOKEN || !window.Paddle) return;
     if (CLIENT_TOKEN.startsWith("test_")) window.Paddle.Environment.set("sandbox");
     window.Paddle.Initialize({ token: CLIENT_TOKEN });
-    window.Paddle.Checkout.open({ transactionId });
-  }, [loaded, transactionId]);
+    window.Paddle.Checkout.open({ transactionId, settings: { locale } });
+  }, [loaded, transactionId, locale]);
 
   if (!CLIENT_TOKEN) {
     return (
       <p className="mt-4 text-sm text-ink-soft">
-        El pago en dólares todavía no está disponible. Vuelve a intentarlo más tarde.
+        {t("unavailable")}
       </p>
     );
   }
@@ -40,7 +43,7 @@ export function PaddleCheckout() {
   if (!transactionId) {
     return (
       <p className="mt-4 text-sm text-ink-soft">
-        No encontramos tu compra. Vuelve al carrito y toca &ldquo;Ir a pagar&rdquo; de nuevo.
+        {t("notFound")}
       </p>
     );
   }
@@ -52,7 +55,7 @@ export function PaddleCheckout() {
         strategy="afterInteractive"
         onLoad={() => setLoaded(true)}
       />
-      <p className="mt-4 text-sm text-ink-soft">Abriendo el pago seguro de Paddle...</p>
+      <p className="mt-4 text-sm text-ink-soft">{t("opening")}</p>
     </>
   );
 }

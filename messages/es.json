@@ -217,5 +217,12 @@
     "subscribe": "Suscribirme",
     "loginToSubscribe": "Iniciar sesión para suscribirme",
     "startError": "No se pudo iniciar la suscripción. Probá de nuevo."
+  },
+  "Pay": {
+    "metaTitle": "Pagar — Club de Voley Playa",
+    "title": "Finalizar compra",
+    "unavailable": "El pago en dólares todavía no está disponible. Vuelve a intentarlo más tarde.",
+    "notFound": "No encontramos tu compra. Vuelve al carrito y toca “Ir a pagar” de nuevo.",
+    "opening": "Abriendo el pago seguro de Paddle..."
   }
 }
