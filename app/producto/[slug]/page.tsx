@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { CourseTestimonials } from "@/components/course-testimonials";
 import { CoursePreview } from "@/components/course-preview";
+import { HideWhenOwned } from "@/components/hide-when-owned";
 import { ProductBuyBox } from "@/components/product-buy-box";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { ProductCard } from "@/components/product-card";
@@ -89,9 +90,11 @@ export default async function ProductPage({
 
       <QuizSection slug={product.slug} category={product.category} />
 
-      <div className="mt-16">
-        <CourseTestimonials items={product.testimonials} rating={product.rating} />
-      </div>
+      <HideWhenOwned slug={product.slug}>
+        <div className="mt-16">
+          <CourseTestimonials items={product.testimonials} rating={product.rating} />
+        </div>
+      </HideWhenOwned>
 
       {related.length > 0 && (
         <div className="mt-16">
