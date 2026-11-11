@@ -2,15 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { TestimonialSlider } from "@/components/testimonial-slider";
 import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice, formatPrice } from "@/lib/price";
-import { CATEGORY_LABELS, type Product } from "@/lib/products";
+import type { Product } from "@/lib/products";
 
 export function ProductCard({ product }: { product: Product }) {
+  const t = useTranslations("ProductCard");
+  const tc = useTranslations("Categories.single");
   const { currency, isSubscriber, discountPercent, eurPrices, addToCart } = useDemoState();
   const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber, discountPercent, eurPrices);
 
@@ -27,7 +30,7 @@ export function ProductCard({ product }: { product: Product }) {
       {product.image ? (
         <Link
           href={`/producto/${product.slug}`}
-          aria-label={`Ver ${product.title}`}
+          aria-label={t("view", { title: product.title })}
           className="relative block aspect-video w-full overflow-hidden rounded-t-xl"
         >
           <Image
@@ -40,13 +43,13 @@ export function ProductCard({ product }: { product: Product }) {
         </Link>
       ) : (
         <div className="flex aspect-video w-full items-center justify-center bg-line font-display text-xs font-bold uppercase tracking-wide text-ink-soft">
-          Imagen próximamente
+          {t("imageSoon")}
         </div>
       )}
 
       <div className="flex flex-1 flex-col gap-2 p-5">
         <p className="w-fit rounded-lg bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">
-          {CATEGORY_LABELS[product.category]}
+          {tc(product.category)}
         </p>
         <h3 className="font-display text-lg font-bold uppercase">
           <Link href={`/producto/${product.slug}`} className="transition-colors hover:text-blue">
@@ -63,7 +66,7 @@ export function ProductCard({ product }: { product: Product }) {
                     openOnHover
                     delay={150}
                     className="underline decoration-dotted underline-offset-2 transition-colors hover:text-blue"
-                    aria-label={`Ver testimonios de ${product.title}`}
+                    aria-label={t("viewTestimonials", { title: product.title })}
                   >
                     {product.rating.value}★ ({product.rating.count})
                   </PopoverTrigger>
@@ -73,7 +76,7 @@ export function ProductCard({ product }: { product: Product }) {
                       href={`/producto/${product.slug}`}
                       className="mt-3 block w-fit rounded-lg bg-ink px-4 py-2 font-display text-xs font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
                     >
-                      Ver el curso
+                      {t("viewCourse")}
                     </Link>
                   </PopoverContent>
                 </Popover>
@@ -82,7 +85,7 @@ export function ProductCard({ product }: { product: Product }) {
                   {product.rating.value}★ ({product.rating.count})
                 </span>
               ))}
-            {product.includes && <span>Incluye: {product.includes}</span>}
+            {product.includes && <span>{t("includes", { items: product.includes })}</span>}
           </p>
         )}
         <div className="mt-1 flex items-baseline gap-2">
@@ -100,12 +103,12 @@ export function ProductCard({ product }: { product: Product }) {
             href={`/producto/${product.slug}`}
             className="w-fit rounded-lg bg-ink px-4 py-2 font-display text-xs font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
           >
-            Ver detalle
+            {t("viewDetail")}
           </Link>
           <button
             type="button"
             onClick={() => addToCart(product.slug)}
-            aria-label={`Agregar ${product.title} al carrito`}
+            aria-label={t("addToCart", { title: product.title })}
             className="rounded-lg border border-line p-2 text-ink-soft transition-colors hover:border-blue hover:text-blue"
           >
             <ShoppingBag className="size-4" />

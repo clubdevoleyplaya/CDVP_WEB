@@ -17,5 +17,80 @@
   },
   "LanguageSelector": {
     "label": "Idioma"
+  },
+  "Categories": {
+    "routes": {
+      "cursos": "Cursos",
+      "descargables": "Guías y planes",
+      "combos": "Combos",
+      "eventos": "Eventos"
+    },
+    "single": {
+      "curso": "Curso",
+      "descargable": "Guía y plan",
+      "combo": "Combo",
+      "evento": "Evento"
+    }
+  },
+  "Errors": {
+    "paymentLink": "No se pudo generar el link de pago. Probá de nuevo en unos minutos.",
+    "checkout": "No se pudo procesar la compra. Probá de nuevo.",
+    "buyStart": "No se pudo iniciar la compra. Probá de nuevo.",
+    "payStart": "No se pudo iniciar el pago. Probá de nuevo.",
+    "alreadyOwned": "Ya tenés este producto — revisá tu perfil.",
+    "alreadyOwnedMany": "Ya tenés estos productos — revisá tu perfil."
+  },
+  "BuyBox": {
+    "railArs": "Pago en Argentina vía MercadoPago",
+    "railIntl": "Pago internacional vía Paddle (Merchant of Record)",
+    "ownedCourse": "Ya tenés este curso",
+    "ownedProduct": "Ya tenés este producto",
+    "goCourse": "Ir al curso",
+    "goProfile": "Ir a mi perfil",
+    "redirecting": "Redirigiendo...",
+    "buy": "Comprar",
+    "loginToBuy": "Iniciar sesión para comprar",
+    "addToCart": "Agregar al carrito"
+  },
+  "Cart": {
+    "view": "Ver carrito",
+    "title": "Tu carrito",
+    "description": "Revisá tu compra antes de ir a pagar.",
+    "empty": "Todavía no agregaste nada al carrito.",
+    "quantity": "Cantidad: {count}",
+    "remove": "Quitar {title} del carrito",
+    "total": "Total",
+    "promoPlaceholder": "¿Tienes un código?",
+    "promoLabel": "Código promocional",
+    "promoNote": "El descuento del código se calcula al pagar.",
+    "testPayment": "Pago de prueba (solo admin)",
+    "redirecting": "Redirigiendo...",
+    "pay": "Ir a pagar"
+  },
+  "DemoBar": {
+    "activeSub": "Suscripción activa (Pack de Bienvenida{percent, plural, =0 {} other { + #% OFF en cursos}})",
+    "noSub": "Sin suscripción activa",
+    "subscribeCta": "Suscribite y conseguí el Pack de Bienvenida{percent, plural, =0 {} other { + #% OFF en cursos}}",
+    "currencyLabel": "Elegí moneda"
+  },
+  "Catalog": {
+    "count": "{count, plural, one {# producto} other {# productos}}",
+    "sortBy": "Ordenar por",
+    "sort": "Ordenar",
+    "relevance": "Relevancia",
+    "priceAsc": "Precio ↑",
+    "priceDesc": "Precio ↓",
+    "topRated": "Mejor valorados",
+    "onlyDiscount": "Con descuento para suscriptores",
+    "subscriberOff": "{percent}% OFF para suscriptores"
+  },
+  "ProductCard": {
+    "viewDetail": "Ver detalle",
+    "view": "Ver {title}",
+    "imageSoon": "Imagen próximamente",
+    "viewTestimonials": "Ver testimonios de {title}",
+    "viewCourse": "Ver el curso",
+    "includes": "Incluye: {items}",
+    "addToCart": "Agregar {title} al carrito"
   }
 }

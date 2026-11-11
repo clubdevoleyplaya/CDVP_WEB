@@ -17,5 +17,80 @@
   },
   "LanguageSelector": {
     "label": "Idioma"
+  },
+  "Categories": {
+    "routes": {
+      "cursos": "Cursos",
+      "descargables": "Guias e planos",
+      "combos": "Combos",
+      "eventos": "Eventos"
+    },
+    "single": {
+      "curso": "Curso",
+      "descargable": "Guia e plano",
+      "combo": "Combo",
+      "evento": "Evento"
+    }
+  },
+  "Errors": {
+    "paymentLink": "Não foi possível gerar o link de pagamento. Tente novamente em alguns minutos.",
+    "checkout": "Não foi possível processar a compra. Tente novamente.",
+    "buyStart": "Não foi possível iniciar a compra. Tente novamente.",
+    "payStart": "Não foi possível iniciar o pagamento. Tente novamente.",
+    "alreadyOwned": "Você já tem este produto — confira seu perfil.",
+    "alreadyOwnedMany": "Você já tem estes produtos — confira seu perfil."
+  },
+  "BuyBox": {
+    "railArs": "Pagamento na Argentina via MercadoPago",
+    "railIntl": "Pagamento internacional via Paddle (Merchant of Record)",
+    "ownedCourse": "Você já tem este curso",
+    "ownedProduct": "Você já tem este produto",
+    "goCourse": "Ir para o curso",
+    "goProfile": "Ir para meu perfil",
+    "redirecting": "Redirecionando...",
+    "buy": "Comprar",
+    "loginToBuy": "Entre para comprar",
+    "addToCart": "Adicionar ao carrinho"
+  },
+  "Cart": {
+    "view": "Ver carrinho",
+    "title": "Seu carrinho",
+    "description": "Revise sua compra antes de pagar.",
+    "empty": "Você ainda não adicionou nada ao carrinho.",
+    "quantity": "Quantidade: {count}",
+    "remove": "Remover {title} do carrinho",
+    "total": "Total",
+    "promoPlaceholder": "Tem um código?",
+    "promoLabel": "Código promocional",
+    "promoNote": "O desconto do código é calculado no pagamento.",
+    "testPayment": "Pagamento de teste (apenas admin)",
+    "redirecting": "Redirecionando...",
+    "pay": "Ir para o pagamento"
+  },
+  "DemoBar": {
+    "activeSub": "Assinatura ativa (Pack de Boas-vindas{percent, plural, =0 {} other { + #% OFF em cursos}})",
+    "noSub": "Sem assinatura ativa",
+    "subscribeCta": "Assine e ganhe o Pack de Boas-vindas{percent, plural, =0 {} other { + #% OFF em cursos}}",
+    "currencyLabel": "Escolha a moeda"
+  },
+  "Catalog": {
+    "count": "{count, plural, one {# produto} other {# produtos}}",
+    "sortBy": "Ordenar por",
+    "sort": "Ordenar",
+    "relevance": "Relevância",
+    "priceAsc": "Preço ↑",
+    "priceDesc": "Preço ↓",
+    "topRated": "Mais bem avaliados",
+    "onlyDiscount": "Com desconto para assinantes",
+    "subscriberOff": "{percent}% OFF para assinantes"
+  },
+  "ProductCard": {
+    "viewDetail": "Ver detalhes",
+    "view": "Ver {title}",
+    "imageSoon": "Imagem em breve",
+    "viewTestimonials": "Ver depoimentos de {title}",
+    "viewCourse": "Ver o curso",
+    "includes": "Inclui: {items}",
+    "addToCart": "Adicionar {title} ao carrinho"
   }
 }

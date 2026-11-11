@@ -9,7 +9,6 @@ import { LanguageSelector } from "@/components/language-selector";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { NavDrawer } from "@/components/nav-drawer";
 import { CartDrawer } from "@/components/cart-drawer";
-import { CATEGORY_ROUTE_LABELS } from "@/lib/products";
 import { useDemoState } from "@/context/demo-state";
 import { loginHref } from "@/lib/safe-redirect";
 
@@ -17,6 +16,7 @@ const NAV_ROUTES = ["cursos", "descargables", "combos", "eventos"] as const;
 
 export function Header() {
   const t = useTranslations("Header");
+  const tc = useTranslations("Categories.routes");
   const { session, me } = useDemoState();
   const pathname = usePathname();
   const displayName = me?.nickname || session?.user.email;
@@ -38,7 +38,7 @@ export function Header() {
             href={`/catalogo/${route}`}
             className="font-display text-xs font-bold uppercase tracking-wide hover:text-blue"
           >
-            {CATEGORY_ROUTE_LABELS[route]}
+            {tc(route)}
           </Link>
         ))}
       </nav>

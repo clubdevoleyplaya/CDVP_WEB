@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/drawer";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { CATEGORY_ROUTE_LABELS, type CategoryRoute } from "@/lib/products";
+import { type CategoryRoute } from "@/lib/products";
 import { useDemoState } from "@/context/demo-state";
 
 const NAV_ROUTES = [
@@ -26,6 +26,7 @@ const NAV_ROUTES = [
 
 export function NavDrawer() {
   const t = useTranslations("NavDrawer");
+  const tc = useTranslations("Categories.routes");
   const [open, setOpen] = useState(false);
   const { session, me, signOut } = useDemoState();
   const displayName = me?.nickname || session?.user.email;
@@ -60,7 +61,7 @@ export function NavDrawer() {
                   href={`/catalogo/${route}`}
                   className="font-display rounded-md px-2 py-2.5 text-sm font-bold tracking-wide uppercase hover:bg-accent"
                 >
-                  {CATEGORY_ROUTE_LABELS[route]}
+                  {tc(route)}
                 </Link>
               }
             />

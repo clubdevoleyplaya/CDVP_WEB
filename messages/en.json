@@ -17,5 +17,80 @@
   },
   "LanguageSelector": {
     "label": "Language"
+  },
+  "Categories": {
+    "routes": {
+      "cursos": "Courses",
+      "descargables": "Guides & plans",
+      "combos": "Bundles",
+      "eventos": "Events"
+    },
+    "single": {
+      "curso": "Course",
+      "descargable": "Guide & plan",
+      "combo": "Bundle",
+      "evento": "Event"
+    }
+  },
+  "Errors": {
+    "paymentLink": "We couldn't generate the payment link. Please try again in a few minutes.",
+    "checkout": "We couldn't process your purchase. Please try again.",
+    "buyStart": "We couldn't start the purchase. Please try again.",
+    "payStart": "We couldn't start the payment. Please try again.",
+    "alreadyOwned": "You already own this product — check your profile.",
+    "alreadyOwnedMany": "You already own these products — check your profile."
+  },
+  "BuyBox": {
+    "railArs": "Payment in Argentina via MercadoPago",
+    "railIntl": "International payment via Paddle (Merchant of Record)",
+    "ownedCourse": "You already own this course",
+    "ownedProduct": "You already own this product",
+    "goCourse": "Go to the course",
+    "goProfile": "Go to my profile",
+    "redirecting": "Redirecting...",
+    "buy": "Buy",
+    "loginToBuy": "Log in to buy",
+    "addToCart": "Add to cart"
+  },
+  "Cart": {
+    "view": "View cart",
+    "title": "Your cart",
+    "description": "Review your purchase before paying.",
+    "empty": "You haven't added anything to your cart yet.",
+    "quantity": "Quantity: {count}",
+    "remove": "Remove {title} from cart",
+    "total": "Total",
+    "promoPlaceholder": "Have a code?",
+    "promoLabel": "Promo code",
+    "promoNote": "The code's discount is calculated at checkout.",
+    "testPayment": "Test payment (admin only)",
+    "redirecting": "Redirecting...",
+    "pay": "Go to payment"
+  },
+  "DemoBar": {
+    "activeSub": "Active subscription (Welcome Pack{percent, plural, =0 {} other { + #% OFF on courses}})",
+    "noSub": "No active subscription",
+    "subscribeCta": "Subscribe and get the Welcome Pack{percent, plural, =0 {} other { + #% OFF on courses}}",
+    "currencyLabel": "Choose currency"
+  },
+  "Catalog": {
+    "count": "{count, plural, one {# product} other {# products}}",
+    "sortBy": "Sort by",
+    "sort": "Sort",
+    "relevance": "Relevance",
+    "priceAsc": "Price ↑",
+    "priceDesc": "Price ↓",
+    "topRated": "Top rated",
+    "onlyDiscount": "Subscriber discount only",
+    "subscriberOff": "{percent}% OFF for subscribers"
+  },
+  "ProductCard": {
+    "viewDetail": "View details",
+    "view": "View {title}",
+    "imageSoon": "Image coming soon",
+    "viewTestimonials": "See testimonials for {title}",
+    "viewCourse": "View the course",
+    "includes": "Includes: {items}",
+    "addToCart": "Add {title} to cart"
   }
 }

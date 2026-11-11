@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { ProductCard } from "@/components/product-card";
 import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice } from "@/lib/price";
@@ -8,14 +9,15 @@ import type { Product } from "@/lib/products";
 
 type SortBy = "relevancia" | "precio-asc" | "precio-desc" | "mejor-valorados";
 
-const SORT_LABELS: Record<SortBy, string> = {
-  relevancia: "Relevancia",
-  "precio-asc": "Precio ↑",
-  "precio-desc": "Precio ↓",
-  "mejor-valorados": "Mejor valorados",
+const SORT_KEYS: Record<SortBy, "relevance" | "priceAsc" | "priceDesc" | "topRated"> = {
+  relevancia: "relevance",
+  "precio-asc": "priceAsc",
+  "precio-desc": "priceDesc",
+  "mejor-valorados": "topRated",
 };
 
 export function CatalogGrid({ items }: { items: Product[] }) {
+  const t = useTranslations("Catalog");
   const { currency, isSubscriber, discountPercent, eurPrices } = useDemoState();
   const [sortBy, setSortBy] = useState<SortBy>("relevancia");
   const [onlyDiscountable, setOnlyDiscountable] = useState(false);
@@ -52,13 +54,13 @@ export function CatalogGrid({ items }: { items: Product[] }) {
     <div>
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
         <p className="text-sm text-ink-soft">
-          {visible.length} {visible.length === 1 ? "producto" : "productos"}
+          {t("count", { count: visible.length })}
         </p>
-        <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Ordenar por">
+        <div className="flex flex-wrap items-center gap-2" role="group" aria-label={t("sortBy")}>
           <span className="font-display text-xs font-bold uppercase tracking-wide text-ink-soft">
-            Ordenar
+            {t("sort")}
           </span>
-          {(Object.keys(SORT_LABELS) as SortBy[]).map((key) => (
+          {(Object.keys(SORT_KEYS) as SortBy[]).map((key) => (
             <button
               key={key}
               type="button"
@@ -66,7 +68,7 @@ export function CatalogGrid({ items }: { items: Product[] }) {
               onClick={() => setSortBy(key)}
               className={chip(sortBy === key)}
             >
-              {SORT_LABELS[key]}
+              {t(SORT_KEYS[key])}
             </button>
           ))}
         </div>
@@ -76,7 +78,7 @@ export function CatalogGrid({ items }: { items: Product[] }) {
           onClick={() => setOnlyDiscountable((v) => !v)}
           className={chip(onlyDiscountable)}
         >
-          Con descuento para suscriptores
+          {t("onlyDiscount")}
         </button>
       </div>
 
