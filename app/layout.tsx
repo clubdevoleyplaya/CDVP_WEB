@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
 import { Oswald, Source_Serif_4, Geist } from "next/font/google";
 import { DemoStateProvider } from "@/context/demo-state";
 import { Header } from "@/components/header";
@@ -36,23 +38,25 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cookieStore = await cookies();
+  const locale = await getLocale();
   const currency = currencyFromCookie(cookieStore.get(CURRENCY_COOKIE)?.value);
 
   return (
     <html
-      // Los textos todavía están solo en español: `lang` sigue fijo hasta traducir la interfaz.
-      lang="es"
+      lang={locale}
       suppressHydrationWarning
       className={cn("h-full", oswald.variable, sourceSerif.variable, "font-sans", geist.variable)}
     >
       <body className="flex min-h-full flex-col antialiased">
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH_THEME_SCRIPT }} />
+        <NextIntlClientProvider>
         <DemoStateProvider initialCurrency={currency}>
           <Header />
           <DemoBar />
           <main className="w-full flex-1">{children}</main>
           <Footer />
         </DemoStateProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

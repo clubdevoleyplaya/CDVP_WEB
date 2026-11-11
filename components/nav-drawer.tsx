@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu } from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   Drawer,
   DrawerClose,
@@ -24,6 +25,7 @@ const NAV_ROUTES = [
 ] as const satisfies readonly CategoryRoute[];
 
 export function NavDrawer() {
+  const t = useTranslations("NavDrawer");
   const [open, setOpen] = useState(false);
   const { session, me, signOut } = useDemoState();
   const displayName = me?.nickname || session?.user.email;
@@ -38,7 +40,7 @@ export function NavDrawer() {
             variant="outline"
             size="icon"
             className="font-sans md:hidden"
-            aria-label="Abrir menú"
+            aria-label={t("open")}
           >
             <Menu className="size-4" />
           </Button>
@@ -46,7 +48,7 @@ export function NavDrawer() {
       />
       <DrawerContent className="font-sans sm:max-w-xs">
         <DrawerHeader>
-          <DrawerTitle>Menú</DrawerTitle>
+          <DrawerTitle>{t("title")}</DrawerTitle>
         </DrawerHeader>
         <nav className="flex flex-col gap-1 px-4">
           {NAV_ROUTES.map((route) => (

@@ -1,10 +1,12 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
+  const t = useTranslations("Header");
   function toggle() {
     const root = document.documentElement;
     const current = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
@@ -23,7 +25,7 @@ export function ThemeToggle() {
       variant="outline"
       size="icon"
       onClick={toggle}
-      aria-label="Cambiar tema claro/oscuro"
+      aria-label={t("toggleTheme")}
       className="relative border-ink/20 hover:border-blue hover:text-blue"
     >
       <Sun className="scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />

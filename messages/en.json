@@ -1,0 +1,21 @@
+{
+  "Header": {
+    "login": "Log in",
+    "signup": "Sign up",
+    "toggleTheme": "Switch light/dark theme"
+  },
+  "Footer": {
+    "brand": "Club de Voley Playa — Juli Azaad",
+    "pricing": "Pricing",
+    "terms": "Terms of service",
+    "refund": "Refund policy",
+    "privacy": "Privacy policy"
+  },
+  "NavDrawer": {
+    "open": "Open menu",
+    "title": "Menu"
+  },
+  "LanguageSelector": {
+    "label": "Language"
+  }
+}

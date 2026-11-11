@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { LanguageSelector } from "@/components/language-selector";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { NavDrawer } from "@/components/nav-drawer";
 import { CartDrawer } from "@/components/cart-drawer";
@@ -14,6 +16,7 @@ import { loginHref } from "@/lib/safe-redirect";
 const NAV_ROUTES = ["cursos", "descargables", "combos", "eventos"] as const;
 
 export function Header() {
+  const t = useTranslations("Header");
   const { session, me } = useDemoState();
   const pathname = usePathname();
   const displayName = me?.nickname || session?.user.email;
@@ -40,6 +43,7 @@ export function Header() {
         ))}
       </nav>
       <div className="ml-auto flex items-center gap-2">
+        <LanguageSelector />
         <ThemeToggle />
         <CartDrawer />
         {session ? (
@@ -59,13 +63,13 @@ export function Header() {
               href={loginHref(pathname)}
               className="hidden rounded-lg border border-ink px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide md:inline-flex"
             >
-              Iniciar sesión
+              {t("login")}
             </Link>
             <Link
               href="/signup"
               className="hidden rounded-lg border border-blue bg-blue px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide text-white md:inline-flex"
             >
-              Registrate
+              {t("signup")}
             </Link>
           </>
         )}
