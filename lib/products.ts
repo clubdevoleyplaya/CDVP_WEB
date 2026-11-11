@@ -409,7 +409,7 @@ export const products: Product[] = [
     discountable: false,
   },
   {
-    slug: "copia-de-combo-k1-recepcion-armado-ataque",
+    slug: "combo-k2-saque-defensa-bloqueo",
     category: "combo",
     title: "Combo K2 — Saque, Defensa, Bloqueo",
     shortDescription: "Los 3 fundamentos defensivos y de saque en un solo pack.",
