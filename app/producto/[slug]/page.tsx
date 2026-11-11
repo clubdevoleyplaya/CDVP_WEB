@@ -64,11 +64,13 @@ export default async function ProductPage({
             <p className="mt-4 text-sm text-ink-soft">{t("includes", { items: product.includes })}</p>
           )}
         </div>
-        <HideWhenOwned slug={product.slug}>
-          <CourseTestimonials items={product.testimonials} rating={product.rating} />
-        </HideWhenOwned>
-        <div className="lg:w-72 lg:shrink-0">
-          {product.waitlist ? <WaitlistForm slug={product.slug} /> : <ProductBuyBox product={product} />}
+        <div className="flex flex-col gap-6 lg:shrink-0 lg:flex-row lg:items-stretch">
+          <HideWhenOwned slug={product.slug}>
+            <CourseTestimonials items={product.testimonials} rating={product.rating} />
+          </HideWhenOwned>
+          <div className="lg:flex lg:w-72 lg:shrink-0 [&>*]:w-full">
+            {product.waitlist ? <WaitlistForm slug={product.slug} /> : <ProductBuyBox product={product} />}
+          </div>
         </div>
       </div>
 
