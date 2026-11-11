@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { CourseTestimonials } from "@/components/course-testimonials";
 import { CoursePreview } from "@/components/course-preview";
 import { ProductBuyBox } from "@/components/product-buy-box";
+import { WaitlistForm } from "@/components/waitlist-form";
 import { ProductCard } from "@/components/product-card";
 import { VideoPlayer } from "@/components/video-player";
 import { QuizSection } from "@/components/quiz-section";
@@ -80,7 +81,7 @@ export default async function ProductPage({
           )}
         </div>
         <div className="lg:sticky lg:top-24">
-          <ProductBuyBox product={product} />
+          {product.waitlist ? <WaitlistForm slug={product.slug} /> : <ProductBuyBox product={product} />}
         </div>
       </div>
 

@@ -554,7 +554,8 @@
     "promo_code_invalid": "El código no es válido o ya no está disponible.",
     "subscription_active": "Ya tenés una suscripción activa.",
     "clause_not_accepted": "Antes de abrir el plan tienes que aceptar la cláusula.",
-    "too_many_requests": "Demasiados intentos. Esperá un momento y volvé a intentar."
+    "too_many_requests": "Demasiados intentos. Esperá un momento y volvé a intentar.",
+    "email_invalid": "El email no es válido."
   },
   "Menu": {
     "membership": "Membresía",
@@ -596,5 +597,14 @@
     "emailTitle": "Email",
     "whatsappCta": "Escribir por WhatsApp",
     "socialTitle": "Redes"
+  },
+  "Waitlist": {
+    "title": "Lista de espera",
+    "text": "El curso se dicta por cohorte y todavía no hay fecha de inicio. Deja tu email y te avisamos apenas abra la próxima.",
+    "email": "Tu email",
+    "submit": "Anotarme",
+    "submitting": "Anotando...",
+    "done": "¡Listo! Te anotamos. Te escribiremos cuando abra la próxima cohorte.",
+    "error": "No pudimos anotarte. Probá de nuevo en unos minutos."
   }
 }

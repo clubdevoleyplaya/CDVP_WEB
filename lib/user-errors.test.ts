@@ -8,6 +8,7 @@ describe("publicErrorCode", () => {
     [409, "subscription_active"],
     [409, "clause_not_accepted"],
     [429, "too_many_requests"],
+    [400, "email_invalid"],
   ])("devuelve el código conocido de un %s", (status, code) => {
     expect(publicErrorCode(status, { detail: "x", code })).toBe(code);
   });
@@ -30,7 +31,7 @@ describe("publicErrorCode", () => {
 
   it("la lista pública coincide con los códigos de PublicError de la API", () => {
     expect([...PUBLIC_ERROR_CODES].sort()).toEqual(
-      ["clause_not_accepted", "promo_code_invalid", "subscription_active", "too_many_requests"],
+      ["clause_not_accepted", "email_invalid", "promo_code_invalid", "subscription_active", "too_many_requests"],
     );
   });
 });

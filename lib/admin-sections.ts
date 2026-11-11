@@ -7,4 +7,5 @@ export const ADMIN_SECTIONS = [
   { href: "/admin/pagos", label: "Pagos sin acceso" },
   { href: "/admin/accesos", label: "Accesos sospechosos" },
   { href: "/admin/precios-eur", label: "Precios en euros" },
+  { href: "/admin/lista-espera", label: "Lista de espera" },
 ] as const;

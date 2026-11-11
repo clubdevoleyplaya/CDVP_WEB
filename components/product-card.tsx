@@ -107,14 +107,16 @@ export function ProductCard({ product: base }: { product: Product }) {
           >
             {t("viewDetail")}
           </Link>
-          <button
-            type="button"
-            onClick={() => addToCart(product.slug)}
-            aria-label={t("addToCart", { title: product.title })}
-            className="rounded-lg border border-line p-2 text-ink-soft transition-colors hover:border-blue hover:text-blue"
-          >
-            <ShoppingBag className="size-4" />
-          </button>
+          {!product.waitlist && (
+            <button
+              type="button"
+              onClick={() => addToCart(product.slug)}
+              aria-label={t("addToCart", { title: product.title })}
+              className="rounded-lg border border-line p-2 text-ink-soft transition-colors hover:border-blue hover:text-blue"
+            >
+              <ShoppingBag className="size-4" />
+            </button>
+          )}
         </div>
       </div>
     </motion.article>

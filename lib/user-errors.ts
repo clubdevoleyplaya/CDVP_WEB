@@ -10,6 +10,7 @@ export const PUBLIC_ERROR_CODES = [
   "subscription_active",
   "clause_not_accepted",
   "too_many_requests",
+  "email_invalid",
 ] as const;
 export type PublicErrorCode = (typeof PUBLIC_ERROR_CODES)[number];
 

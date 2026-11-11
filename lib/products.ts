@@ -20,6 +20,8 @@ export interface Product {
   testimonials?: Testimonial[];
   // Video de venta (Vimeo) del curso; se muestra solo en su ficha.
   vslVimeoId?: string;
+  // Se vende por cohorte: en vez de comprar, la persona se anota en la lista de espera.
+  waitlist?: boolean;
 }
 
 // Texto, imagen (captura) o ambos; los videos no van aquí.
@@ -442,6 +444,7 @@ export const products: Product[] = [
       "Curso online para entrenadores, por cohorte. Descripción provisional: Juli completa el texto final.",
     priceArs: 300000,
     priceUsd: 300,
+    waitlist: true,
     discountable: false,
   },
   {
