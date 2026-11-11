@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 
 import { LoginForm } from "@/components/login-form";
 import { safeNextPath } from "@/lib/safe-redirect";
-import { USER_MESSAGES } from "@/lib/user-errors";
 
 export default function LoginPage() {
   return (
@@ -17,6 +17,7 @@ export default function LoginPage() {
 }
 
 function LoginPageContent() {
+  const t = useTranslations("Auth");
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -27,21 +28,21 @@ function LoginPageContent() {
 
   return (
     <section className="mx-auto max-w-md px-6 py-16">
-      <h1 className="font-display text-2xl font-bold uppercase">Iniciar sesión</h1>
+      <h1 className="font-display text-2xl font-bold uppercase">{t("login.title")}</h1>
 
       {searchParams.get("error") && (
         // Cualquier valor de `error` muestra el mismo texto fijo: el parámetro no se refleja.
         <p role="alert" className="mt-4 text-sm text-red-600">
-          {USER_MESSAGES.invalidLink}
+          {t("errors.invalidLink")}
         </p>
       )}
 
       <LoginForm onSuccess={handleSuccess} className="mt-8" />
 
       <p className="mt-6 text-sm">
-        ¿No tenés cuenta?{" "}
+        {t("login.noAccount")}{" "}
         <Link href="/signup" className="font-bold text-blue underline">
-          Registrate
+          {t("login.signupLink")}
         </Link>
       </p>
     </section>

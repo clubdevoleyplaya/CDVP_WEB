@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu } from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   Drawer,
   DrawerClose,
@@ -13,17 +14,13 @@ import {
 } from "@/components/ui/drawer";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { CATEGORY_ROUTE_LABELS, type CategoryRoute } from "@/lib/products";
+import { MENU_ITEMS } from "@/lib/menu";
 import { useDemoState } from "@/context/demo-state";
 
-const NAV_ROUTES = [
-  "cursos",
-  "descargables",
-  "combos",
-  "eventos",
-] as const satisfies readonly CategoryRoute[];
-
 export function NavDrawer() {
+  const t = useTranslations("NavDrawer");
+  const tm = useTranslations("Menu");
+  const th = useTranslations("Header");
   const [open, setOpen] = useState(false);
   const { session, me, signOut } = useDemoState();
   const displayName = me?.nickname || session?.user.email;
@@ -38,7 +35,7 @@ export function NavDrawer() {
             variant="outline"
             size="icon"
             className="font-sans md:hidden"
-            aria-label="Abrir menú"
+            aria-label={t("open")}
           >
             <Menu className="size-4" />
           </Button>
@@ -46,19 +43,19 @@ export function NavDrawer() {
       />
       <DrawerContent className="font-sans sm:max-w-xs">
         <DrawerHeader>
-          <DrawerTitle>Menú</DrawerTitle>
+          <DrawerTitle>{t("title")}</DrawerTitle>
         </DrawerHeader>
         <nav className="flex flex-col gap-1 px-4">
-          {NAV_ROUTES.map((route) => (
+          {MENU_ITEMS.map((item) => (
             <DrawerClose
-              key={route}
+              key={item.key}
               nativeButton={false}
               render={
                 <Link
-                  href={`/catalogo/${route}`}
+                  href={item.href}
                   className="font-display rounded-md px-2 py-2.5 text-sm font-bold tracking-wide uppercase hover:bg-accent"
                 >
-                  {CATEGORY_ROUTE_LABELS[route]}
+                  {tm(item.key)}
                 </Link>
               }
             />
@@ -93,7 +90,7 @@ export function NavDrawer() {
                   signOut();
                 }}
               >
-                Cerrar sesión
+                {th("signOut")}
               </Button>
             </>
           ) : (
@@ -108,7 +105,7 @@ export function NavDrawer() {
                       className: "font-display text-xs font-bold tracking-wide uppercase",
                     })}
                   >
-                    Iniciar sesión
+                    {th("login")}
                   </Link>
                 }
               />
@@ -119,7 +116,7 @@ export function NavDrawer() {
                     href="/signup"
                     className="rounded-lg border border-blue bg-blue px-4 py-2 text-center font-display text-xs font-bold uppercase tracking-wide text-white"
                   >
-                    Registrate
+                    {th("signup")}
                   </Link>
                 }
               />

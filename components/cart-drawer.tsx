@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { ShoppingBag, X } from "lucide-react";
 import {
   Drawer,
@@ -18,10 +19,15 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice, formatPrice, paymentProviderFor } from "@/lib/price";
+import { useLocalizeProduct } from "@/lib/localize-product";
 import { getProductBySlug } from "@/lib/products";
-import { apiErrorMessage, USER_MESSAGES } from "@/lib/user-errors";
+import { useApiErrorMessage } from "@/lib/use-api-error";
 
 export function CartDrawer() {
+  const t = useTranslations("Cart");
+  const localize = useLocalizeProduct();
+  const apiError = useApiErrorMessage();
+  const te = useTranslations("Errors");
   const {
     cart,
     removeFromCart,
@@ -42,8 +48,9 @@ export function CartDrawer() {
 
   const lines = cart
     .map((item) => {
-      const product = getProductBySlug(item.slug);
-      if (!product) return null;
+      const base = getProductBySlug(item.slug);
+      if (!base) return null;
+      const product = localize(base);
       const { now } = computeDisplayPrice(product, currency, isSubscriber, discountPercent, eurPrices);
       return { item, product, lineTotal: now * item.qty };
     })
@@ -77,7 +84,7 @@ export function CartDrawer() {
       });
       if (res.status === 400) {
         const body = await res.json().catch(() => null);
-        setError(apiErrorMessage(res.status, body, USER_MESSAGES.checkout));
+        setError(apiError(res.status, body, te("checkout")));
         return;
       }
       if (!res.ok) throw new Error();
@@ -87,10 +94,10 @@ export function CartDrawer() {
         return;
       }
       setError(
-        data.payment_error ? USER_MESSAGES.paymentLink : "Ya tenés estos productos — revisá tu perfil.",
+        data.payment_error ? te("paymentLink") : te("alreadyOwnedMany"),
       );
     } catch {
-      setError("No se pudo iniciar el pago. Probá de nuevo.");
+      setError(te("payStart"));
     } finally {
       setPaying(false);
     }
@@ -105,7 +112,7 @@ export function CartDrawer() {
             variant="outline"
             size="icon"
             className="relative font-sans"
-            aria-label="Ver carrito"
+            aria-label={t("view")}
           >
             <ShoppingBag className="size-4" />
             {itemCount > 0 && (
@@ -118,16 +125,16 @@ export function CartDrawer() {
       />
       <DrawerContent className="font-sans sm:max-w-sm">
         <DrawerHeader>
-          <DrawerTitle>Tu carrito</DrawerTitle>
+          <DrawerTitle>{t("title")}</DrawerTitle>
           <DrawerDescription>
-            Revisá tu compra antes de ir a pagar.
+            {t("description")}
           </DrawerDescription>
         </DrawerHeader>
 
         <div className="flex-1 overflow-y-auto px-4">
           {lines.length === 0 ? (
             <p className="py-6 text-sm text-muted-foreground">
-              Todavía no agregaste nada al carrito.
+              {t("empty")}
             </p>
           ) : (
             <ul className="flex flex-col gap-3 py-2">
@@ -145,7 +152,7 @@ export function CartDrawer() {
                       {product.title}
                     </Link>
                     <span className="text-xs text-muted-foreground">
-                      Cantidad: {item.qty}
+                      {t("quantity", { count: item.qty })}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -155,7 +162,7 @@ export function CartDrawer() {
                     <button
                       type="button"
                       onClick={() => removeFromCart(item.slug)}
-                      aria-label={`Quitar ${product.title} del carrito`}
+                      aria-label={t("remove", { title: product.title })}
                       className="text-muted-foreground hover:text-destructive"
                     >
                       <X className="size-3.5" />
@@ -170,7 +177,7 @@ export function CartDrawer() {
         <DrawerFooter>
           {lines.length > 0 && (
             <div className="flex items-baseline justify-between">
-              <span className="text-sm text-muted-foreground">Total</span>
+              <span className="text-sm text-muted-foreground">{t("total")}</span>
               <span className="tabular text-lg font-bold">
                 {formatPrice(total, currency)}
               </span>
@@ -181,12 +188,12 @@ export function CartDrawer() {
               <Input
                 value={promoCode}
                 onChange={(e) => setPromoCode(e.target.value)}
-                placeholder="¿Tienes un código?"
-                aria-label="Código promocional"
+                placeholder={t("promoPlaceholder")}
+                aria-label={t("promoLabel")}
               />
               {promoCode.trim() !== "" && (
                 <p className="text-xs text-muted-foreground">
-                  El descuento del código se calcula al pagar.
+                  {t("promoNote")}
                 </p>
               )}
             </div>
@@ -198,7 +205,7 @@ export function CartDrawer() {
                 checked={testPayment}
                 onChange={(e) => setTestPayment(e.target.checked)}
               />
-              Pago de prueba (solo admin)
+              {t("testPayment")}
             </label>
           )}
           {error && <p className="text-sm text-destructive">{error}</p>}
@@ -208,7 +215,7 @@ export function CartDrawer() {
             disabled={lines.length === 0 || paying}
             className="font-display text-xs font-bold tracking-wide uppercase"
           >
-            {paying ? "Redirigiendo..." : "Ir a pagar"}
+            {paying ? t("redirecting") : t("pay")}
           </Button>
         </DrawerFooter>
       </DrawerContent>

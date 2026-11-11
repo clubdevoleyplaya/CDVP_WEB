@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import type { VideoProvider } from "@/lib/video-link";
 
 const VIDEO_ID_RE = /^[A-Za-z0-9_-]+$/;
@@ -17,12 +18,13 @@ type VideoPlayerProps = {
 };
 
 export function VideoPlayer({ provider, videoId, watermark }: VideoPlayerProps) {
+  const t = useTranslations("Video");
   const src = provider && videoId ? videoEmbedUrl(provider, videoId) : null;
 
   if (!src) {
     return (
       <div className="flex aspect-video w-full items-center justify-center rounded-xl border border-line bg-surface font-display text-xs font-bold uppercase tracking-wide text-ink-soft">
-        Video próximamente
+        {t("soon")}
       </div>
     );
   }
@@ -32,7 +34,7 @@ export function VideoPlayer({ provider, videoId, watermark }: VideoPlayerProps) 
       <iframe
         className="h-full w-full"
         src={src}
-        title="Video del curso"
+        title={t("title")}
         loading="lazy"
         referrerPolicy="strict-origin-when-cross-origin"
         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"

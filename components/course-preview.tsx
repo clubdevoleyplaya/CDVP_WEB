@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Lock, PlayCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import type { Product } from "@/lib/products";
 import { useOwnedProduct } from "@/lib/use-owned-product";
@@ -13,6 +14,7 @@ type Lesson = { position: number; section: string | null; title: string };
 // Temario del curso en la ficha: bloqueado y borroso sin el curso; con el curso se "desbloquea" aquí mismo
 // y cada clase entra al aula.
 export function CoursePreview({ product }: { product: Product }) {
+  const t = useTranslations("CoursePreview");
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const owned = useOwnedProduct(product.slug) === true;
   const Icon = owned ? PlayCircle : Lock;
@@ -41,7 +43,7 @@ export function CoursePreview({ product }: { product: Product }) {
 
   return (
     <section
-      aria-label="Contenido del curso"
+      aria-label={t("label")}
       className="mt-10 overflow-hidden rounded-xl border border-line bg-surface"
     >
       <div className="relative h-28 bg-surface">
@@ -60,12 +62,12 @@ export function CoursePreview({ product }: { product: Product }) {
           </span>
           <div>
             <h2 className="font-display text-xl font-bold uppercase">
-              Qué hay adentro
+              {t("heading")}
             </h2>
             <p className="text-sm">
               {owned
-                ? `${lessons.length} clases desbloqueadas. Elige por dónde seguir.`
-                : `${lessons.length} clases, listas para ti apenas lo tengas.`}
+                ? t("unlocked", { count: lessons.length })
+                : t("locked", { count: lessons.length })}
             </p>
           </div>
           {owned && (
@@ -73,7 +75,7 @@ export function CoursePreview({ product }: { product: Product }) {
               href={`/curso/${product.slug}`}
               className="ml-auto rounded-lg bg-bg px-5 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-ink transition-colors hover:bg-yellow"
             >
-              Ir al curso
+              {t("goCourse")}
             </Link>
           )}
         </div>

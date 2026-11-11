@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
+import { useTranslations } from "next-intl";
 
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ export function LoginForm({
   onSuccess?: () => void;
   className?: string;
 }) {
+  const t = useTranslations("Auth");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -31,7 +33,7 @@ export function LoginForm({
 
     setLoading(false);
     if (error) {
-      setError("Email o contraseña incorrectos.");
+      setError(t("login.wrongCredentials"));
       return;
     }
 
@@ -41,7 +43,7 @@ export function LoginForm({
   return (
     <form onSubmit={handleSubmit} className={cn("flex flex-col gap-4", className)}>
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email">{t("email")}</Label>
         <Input
           id="email"
           type="email"
@@ -52,7 +54,7 @@ export function LoginForm({
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="password">Contraseña</Label>
+        <Label htmlFor="password">{t("password")}</Label>
         <Input
           id="password"
           type="password"
@@ -63,7 +65,7 @@ export function LoginForm({
       </div>
 
       <Link href="/forgot-password" className="self-end text-xs font-bold text-blue underline">
-        ¿Olvidaste tu contraseña?
+        {t("login.forgot")}
       </Link>
 
       {error && <p className="text-sm text-red-600">{error}</p>}
@@ -73,7 +75,7 @@ export function LoginForm({
         disabled={loading}
         className="mt-2 font-display text-xs font-bold uppercase tracking-wide"
       >
-        {loading ? "Ingresando…" : "Ingresar"}
+        {loading ? t("login.submitting") : t("login.submit")}
       </Button>
     </form>
   );

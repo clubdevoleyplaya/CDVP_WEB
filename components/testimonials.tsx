@@ -1,5 +1,7 @@
+import { useTranslations } from "next-intl";
 import { TestimonialSlider } from "@/components/testimonial-slider";
-import { products } from "@/lib/products";
+import { useLocalizeProduct } from "@/lib/localize-product";
+import { getProductBySlug, products } from "@/lib/products";
 
 // Testimonios en texto: el dato vive en `lib/products.ts` (campo
 // `testimonials` de cada producto, fuente única) y se muestra tanto acá
@@ -41,6 +43,7 @@ const VIDEO_TESTIMONIALS: { context: string; videoId: string | null }[] = [
 ];
 
 function VideoCard({ context, videoId }: { context: string; videoId: string | null }) {
+  const t = useTranslations("Testimonials");
   return (
     <figure className="overflow-hidden rounded-xl border border-line bg-surface">
       {videoId ? (
@@ -48,7 +51,7 @@ function VideoCard({ context, videoId }: { context: string; videoId: string | nu
           <iframe
             className="h-full w-full"
             src={`https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&controls=0`}
-            title={`Testimonio — ${context}`}
+            title={t("videoTitle", { context })}
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -56,7 +59,7 @@ function VideoCard({ context, videoId }: { context: string; videoId: string | nu
         </div>
       ) : (
         <div className="flex aspect-[9/16] w-full items-center justify-center bg-line font-display text-xs font-bold uppercase tracking-wide text-ink-soft">
-          Video próximamente
+          {t("videoSoon")}
         </div>
       )}
       <figcaption className="p-3 font-display text-xs font-bold uppercase tracking-wide text-blue">
@@ -67,10 +70,16 @@ function VideoCard({ context, videoId }: { context: string; videoId: string | nu
 }
 
 export function Testimonials() {
+  const t = useTranslations("Testimonials");
+  const localize = useLocalizeProduct();
+  const textTestimonials = TEXT_TESTIMONIALS.map((item) => {
+    const product = getProductBySlug(item.productSlug);
+    return product ? { ...item, productTitle: localize(product).title } : item;
+  });
   return (
     <>
       <section className="mx-auto max-w-7xl px-6 py-16">
-        <h2 className="font-display text-2xl font-bold uppercase">Lo que dicen los alumnos</h2>
+        <h2 className="font-display text-2xl font-bold uppercase">{t("heading")}</h2>
 
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {VIDEO_TESTIMONIALS.map((v, i) => (
@@ -82,20 +91,20 @@ export function Testimonials() {
       {/* Sección propia de Campamento: nunca mezclada con Campus (spec_00_testimonios-landing.md).
           Implementada como bloque del mismo landing, no ruta propia — confirmar con el usuario. */}
       <section className="mx-auto max-w-7xl px-6 pb-16">
-        <h2 className="font-display text-2xl font-bold uppercase">Campamento de entrenamiento</h2>
+        <h2 className="font-display text-2xl font-bold uppercase">{t("campHeading")}</h2>
 
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {CAMPAMENTO_VIDEO_IDS.map((videoId) => (
-            <VideoCard key={videoId} context="Campamento" videoId={videoId} />
+            <VideoCard key={videoId} context={t("camp")} videoId={videoId} />
           ))}
         </div>
       </section>
 
-      {TEXT_TESTIMONIALS.length > 0 && (
+      {textTestimonials.length > 0 && (
         <section className="mx-auto max-w-3xl px-6 pb-16">
-          <h2 className="font-display text-2xl font-bold uppercase">Testimonios por curso</h2>
+          <h2 className="font-display text-2xl font-bold uppercase">{t("byCourse")}</h2>
           <div className="mt-6 rounded-xl border border-line bg-surface p-6">
-            <TestimonialSlider items={TEXT_TESTIMONIALS} />
+            <TestimonialSlider items={textTestimonials} />
           </div>
         </section>
       )}

@@ -8,7 +8,6 @@ export interface Product {
   shortDescription: string;
   longDescription: string;
   image?: string;
-  chips?: string[];
   modules?: number;
   rating?: { value: number; count: number };
   priceArs: number;
@@ -20,6 +19,8 @@ export interface Product {
   testimonials?: Testimonial[];
   // Video de venta (Vimeo) del curso; se muestra solo en su ficha.
   vslVimeoId?: string;
+  // Se vende por cohorte: en vez de comprar, la persona se anota en la lista de espera.
+  waitlist?: boolean;
 }
 
 // Texto, imagen (captura) o ambos; los videos no van aquí.
@@ -63,7 +64,6 @@ export const products: Product[] = [
       "Entrada de ataque, brazos, impacto de pelota y los errores que más le cuestan a un atacante amateur.",
     longDescription:
       "Un recorrido completo por el gesto de ataque: entrada, coordinación de brazos, punto de impacto de la pelota y los errores más frecuentes que frenan a un atacante amateur. Incluye tips puntuales para subir de nivel rápido.",
-    chips: ["Pies", "Brazos", "Impacto", "Errores frecuentes", "Tips"],
     modules: 5,
     rating: { value: 5.0, count: 9 },
     vslVimeoId: "1244394563",
@@ -409,7 +409,7 @@ export const products: Product[] = [
     discountable: false,
   },
   {
-    slug: "copia-de-combo-k1-recepcion-armado-ataque",
+    slug: "combo-k2-saque-defensa-bloqueo",
     category: "combo",
     title: "Combo K2 — Saque, Defensa, Bloqueo",
     shortDescription: "Los 3 fundamentos defensivos y de saque en un solo pack.",
@@ -442,6 +442,7 @@ export const products: Product[] = [
       "Curso online para entrenadores, por cohorte. Descripción provisional: Juli completa el texto final.",
     priceArs: 300000,
     priceUsd: 300,
+    waitlist: true,
     discountable: false,
   },
   {

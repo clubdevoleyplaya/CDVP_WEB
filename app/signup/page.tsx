@@ -2,14 +2,16 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { USER_MESSAGES } from "@/lib/user-errors";
 
 export default function SignupPage() {
+  const t = useTranslations("Auth");
+  const locale = useLocale();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,14 +29,14 @@ export default function SignupPage() {
       email,
       password,
       options: {
-        data: { full_name: fullName },
+        data: { full_name: fullName, locale },
         emailRedirectTo: `${window.location.origin}/auth/confirm`,
       },
     });
 
     setLoading(false);
     if (error) {
-      setError(USER_MESSAGES.signup);
+      setError(t("errors.signup"));
       return;
     }
 
@@ -44,10 +46,9 @@ export default function SignupPage() {
   if (sent) {
     return (
       <section className="mx-auto max-w-md px-6 py-16">
-        <h1 className="font-display text-2xl font-bold uppercase">Revisá tu email</h1>
+        <h1 className="font-display text-2xl font-bold uppercase">{t("signup.checkTitle")}</h1>
         <p className="mt-4 text-sm">
-          Te mandamos un link de confirmación a <strong>{email}</strong>. Hacé clic ahí para
-          activar tu cuenta.
+          {t.rich("signup.checkBody", { email, ...{ b: (chunks) => <strong>{chunks}</strong> } })}
         </p>
       </section>
     );
@@ -55,11 +56,11 @@ export default function SignupPage() {
 
   return (
     <section className="mx-auto max-w-md px-6 py-16">
-      <h1 className="font-display text-2xl font-bold uppercase">Registrate</h1>
+      <h1 className="font-display text-2xl font-bold uppercase">{t("signup.title")}</h1>
 
       <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
         <div className="flex flex-col gap-1.5">
-          <Label htmlFor="fullName">Nombre</Label>
+          <Label htmlFor="fullName">{t("name")}</Label>
           <Input
             id="fullName"
             type="text"
@@ -70,7 +71,7 @@ export default function SignupPage() {
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">{t("email")}</Label>
           <Input
             id="email"
             type="email"
@@ -81,7 +82,7 @@ export default function SignupPage() {
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <Label htmlFor="password">Contraseña</Label>
+          <Label htmlFor="password">{t("password")}</Label>
           <Input
             id="password"
             type="password"
@@ -99,14 +100,14 @@ export default function SignupPage() {
           disabled={loading}
           className="mt-2 font-display text-xs font-bold uppercase tracking-wide"
         >
-          {loading ? "Creando cuenta…" : "Crear cuenta"}
+          {loading ? t("signup.submitting") : t("signup.submit")}
         </Button>
       </form>
 
       <p className="mt-6 text-sm">
-        ¿Ya tenés cuenta?{" "}
+        {t("signup.haveAccount")}{" "}
         <Link href="/login" className="font-bold text-blue underline">
-          Iniciar sesión
+          {t("signup.loginLink")}
         </Link>
       </p>
     </section>

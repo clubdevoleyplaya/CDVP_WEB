@@ -1,14 +1,16 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { CourseTestimonials } from "@/components/course-testimonials";
 import { CoursePreview } from "@/components/course-preview";
+import { HideWhenOwned } from "@/components/hide-when-owned";
 import { ProductBuyBox } from "@/components/product-buy-box";
+import { WaitlistForm } from "@/components/waitlist-form";
 import { ProductCard } from "@/components/product-card";
 import { VideoPlayer } from "@/components/video-player";
 import { QuizSection } from "@/components/quiz-section";
+import { getLocalizeProduct } from "@/lib/localize-product-server";
 import {
-  CATEGORY_LABELS,
-  CATEGORY_ROUTE_LABELS,
   CATEGORY_TO_ROUTE,
   getProductBySlug,
   products,
@@ -24,8 +26,13 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
-  if (!product) notFound();
+  const t = await getTranslations("ProductPage");
+  const tr = await getTranslations("Categories.routes");
+  const ts = await getTranslations("Categories.single");
+  const base = getProductBySlug(slug);
+  if (!base) notFound();
+  const localize = await getLocalizeProduct();
+  const product = localize(base);
 
   const related = products
     .filter((p) => p.category === product.category && p.slug !== product.slug)
@@ -37,45 +44,33 @@ export default async function ProductPage({
         href={`/catalogo/${CATEGORY_TO_ROUTE[product.category]}`}
         className="font-display text-xs font-bold uppercase tracking-wide text-blue hover:underline"
       >
-        ← {CATEGORY_ROUTE_LABELS[CATEGORY_TO_ROUTE[product.category]]}
+        ← {tr(CATEGORY_TO_ROUTE[product.category])}
       </Link>
 
-      <div className="mt-6 grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
-        <div>
-          <p className="w-fit rounded-lg bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">
-            {CATEGORY_LABELS[product.category]}
-          </p>
-          <h1 className="mt-2 font-display text-4xl font-bold uppercase">
-            {product.title}
-          </h1>
-          <p className="mt-4 max-w-[65ch] text-base text-ink-soft">
-            {product.longDescription}
-          </p>
+      <p className="mt-6 w-fit rounded-lg bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">
+        {ts(product.category)}
+      </p>
+      <h1 className="mt-2 font-display text-4xl font-bold uppercase">{product.title}</h1>
 
-          {product.chips && (
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {product.chips.map((chip) => (
-                <li
-                  key={chip}
-                  className="rounded-lg border border-line font-display text-xs uppercase tracking-wide text-ink-soft px-2 py-1"
-                >
-                  {chip}
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {product.includes && (
-            <p className="mt-4 text-sm text-ink-soft">Incluye: {product.includes}</p>
-          )}
+      <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-start">
+        <div className="min-w-0 lg:flex-1">
           {product.vslVimeoId && (
-            <div className="mt-6 max-w-2xl">
+            <div className="max-w-3xl">
               <VideoPlayer provider="vimeo" videoId={product.vslVimeoId} />
             </div>
           )}
+          <p className="mt-4 max-w-[65ch] text-base text-ink-soft">{product.longDescription}</p>
+          {product.includes && (
+            <p className="mt-4 text-sm text-ink-soft">{t("includes", { items: product.includes })}</p>
+          )}
         </div>
-        <div className="lg:sticky lg:top-24">
-          <ProductBuyBox product={product} />
+        <div className="flex flex-col gap-6 lg:shrink-0 lg:flex-row lg:items-stretch">
+          <HideWhenOwned slug={product.slug}>
+            <CourseTestimonials items={product.testimonials} rating={product.rating} />
+          </HideWhenOwned>
+          <div className="lg:flex lg:w-72 lg:shrink-0 [&>*]:w-full">
+            {product.waitlist ? <WaitlistForm slug={product.slug} /> : <ProductBuyBox product={product} />}
+          </div>
         </div>
       </div>
 
@@ -83,14 +78,10 @@ export default async function ProductPage({
 
       <QuizSection slug={product.slug} category={product.category} />
 
-      <div className="mt-16">
-        <CourseTestimonials items={product.testimonials} rating={product.rating} />
-      </div>
-
       {related.length > 0 && (
         <div className="mt-16">
           <h2 className="font-display text-xl font-bold uppercase">
-            Más productos relacionados
+            {t("related")}
           </h2>
           <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
             {related.map((p) => (

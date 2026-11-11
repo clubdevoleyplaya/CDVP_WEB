@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { ShoppingBag } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDemoState } from "@/context/demo-state";
@@ -10,9 +11,10 @@ import { computeDisplayPrice, formatPrice, paymentProviderFor } from "@/lib/pric
 import type { Product } from "@/lib/products";
 import { loginHref } from "@/lib/safe-redirect";
 import { useOwnedProduct } from "@/lib/use-owned-product";
-import { USER_MESSAGES } from "@/lib/user-errors";
 
 export function ProductBuyBox({ product }: { product: Product }) {
+  const t = useTranslations("BuyBox");
+  const te = useTranslations("Errors");
   const { currency, isSubscriber, discountPercent, eurPrices, addToCart, session } = useDemoState();
   const router = useRouter();
   const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber, discountPercent, eurPrices);
@@ -23,8 +25,8 @@ export function ProductBuyBox({ product }: { product: Product }) {
 
   const rail =
     currency === "ARS"
-      ? "Pago en Argentina vía MercadoPago"
-      : "Pago internacional vía Paddle (Merchant of Record)";
+      ? t("railArs")
+      : t("railIntl");
 
   async function handleBuy() {
     if (!session) {
@@ -55,12 +57,12 @@ export function ProductBuyBox({ product }: { product: Product }) {
         return;
       }
       if (data.payment_error) {
-        setError(USER_MESSAGES.paymentLink);
+        setError(te("paymentLink"));
         return;
       }
-      setError("Ya tenés este producto — revisá tu perfil.");
+      setError(te("alreadyOwned"));
     } catch {
-      setError("No se pudo iniciar la compra. Probá de nuevo.");
+      setError(te("buyStart"));
     } finally {
       setLoading(false);
     }
@@ -80,13 +82,13 @@ export function ProductBuyBox({ product }: { product: Product }) {
     return (
       <div className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-6">
         <p className="font-display text-sm font-bold uppercase tracking-wide text-green">
-          {isCourse ? "Ya tenés este curso" : "Ya tenés este producto"}
+          {isCourse ? t("ownedCourse") : t("ownedProduct")}
         </p>
         <Link
           href={isCourse ? `/curso/${product.slug}` : "/perfil"}
           className="w-fit rounded-lg bg-ink px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
         >
-          {isCourse ? "Ir al curso" : "Ir a mi perfil"}
+          {isCourse ? t("goCourse") : t("goProfile")}
         </Link>
       </div>
     );
@@ -110,7 +112,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
           disabled={loading}
           className="w-fit rounded-lg bg-ink px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue disabled:opacity-50"
         >
-          {loading ? "Redirigiendo..." : session ? "Comprar" : "Iniciar sesión para comprar"}
+          {loading ? t("redirecting") : session ? t("buy") : t("loginToBuy")}
         </button>
         <button
           type="button"
@@ -118,7 +120,7 @@ export function ProductBuyBox({ product }: { product: Product }) {
           className="flex w-fit items-center gap-2 rounded-lg border border-line px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide transition-colors hover:border-blue hover:text-blue"
         >
           <ShoppingBag className="size-4" />
-          Agregar al carrito
+          {t("addToCart")}
         </button>
       </div>
 

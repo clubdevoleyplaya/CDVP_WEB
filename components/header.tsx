@@ -2,44 +2,48 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { LanguageSelector } from "@/components/language-selector";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { NavDrawer } from "@/components/nav-drawer";
 import { CartDrawer } from "@/components/cart-drawer";
-import { CATEGORY_ROUTE_LABELS } from "@/lib/products";
 import { useDemoState } from "@/context/demo-state";
+import { MENU_ITEMS } from "@/lib/menu";
 import { loginHref } from "@/lib/safe-redirect";
 
-const NAV_ROUTES = ["cursos", "descargables", "combos", "eventos"] as const;
 
 export function Header() {
+  const t = useTranslations("Header");
+  const tm = useTranslations("Menu");
   const { session, me } = useDemoState();
   const pathname = usePathname();
   const displayName = me?.nickname || session?.user.email;
   const initial = (displayName ?? "?").charAt(0).toUpperCase();
 
   return (
-    <header className="sticky top-0 z-20 flex flex-wrap items-center gap-4 border-b border-line bg-bg/90 px-6 py-3 backdrop-blur">
+    <header className="sticky top-0 z-20 flex flex-nowrap items-center gap-2 border-b border-line bg-bg/90 px-4 py-3 backdrop-blur sm:gap-4 sm:px-6 md:flex-wrap">
       <NavDrawer />
-      <Link href="/" className="flex items-center gap-2">
-        <Image src="/brand/ball.png" alt="" width={32} height={32} className="h-8 w-8" />
-        <span className="font-display text-lg font-bold uppercase tracking-wide">
+      <Link href="/" className="flex min-w-0 items-center gap-2">
+        <Image src="/brand/ball.png" alt="" width={32} height={32} className="h-8 w-8 shrink-0" />
+        <span className="font-display text-sm font-bold uppercase leading-tight tracking-wide sm:text-lg">
           Club de Voley Playa
         </span>
       </Link>
       <nav className="ml-4 hidden flex-wrap gap-5 md:flex">
-        {NAV_ROUTES.map((route) => (
+        {MENU_ITEMS.map((item) => (
           <Link
-            key={route}
-            href={`/catalogo/${route}`}
+            key={item.key}
+            href={item.href}
             className="font-display text-xs font-bold uppercase tracking-wide hover:text-blue"
           >
-            {CATEGORY_ROUTE_LABELS[route]}
+            {tm(item.key)}
           </Link>
         ))}
       </nav>
-      <div className="ml-auto flex items-center gap-2">
+      <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
+        <LanguageSelector />
         <ThemeToggle />
         <CartDrawer />
         {session ? (
@@ -59,13 +63,13 @@ export function Header() {
               href={loginHref(pathname)}
               className="hidden rounded-lg border border-ink px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide md:inline-flex"
             >
-              Iniciar sesión
+              {t("login")}
             </Link>
             <Link
               href="/signup"
               className="hidden rounded-lg border border-blue bg-blue px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide text-white md:inline-flex"
             >
-              Registrate
+              {t("signup")}
             </Link>
           </>
         )}

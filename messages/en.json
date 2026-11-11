@@ -1,0 +1,603 @@
+{
+  "Header": {
+    "login": "Log in",
+    "signup": "Sign up",
+    "toggleTheme": "Switch light/dark theme",
+    "signOut": "Log out"
+  },
+  "Footer": {
+    "brand": "Club de Voley Playa — Juli Azaad",
+    "pricing": "Pricing",
+    "terms": "Terms of service",
+    "refund": "Refund policy",
+    "privacy": "Privacy policy",
+    "contact": "Contact"
+  },
+  "NavDrawer": {
+    "open": "Open menu",
+    "title": "Menu"
+  },
+  "LanguageSelector": {
+    "label": "Language"
+  },
+  "Categories": {
+    "routes": {
+      "cursos": "Courses",
+      "descargables": "Guides & plans",
+      "combos": "Bundles",
+      "eventos": "Events"
+    },
+    "single": {
+      "curso": "Course",
+      "descargable": "Guide & plan",
+      "combo": "Bundle",
+      "evento": "Event"
+    }
+  },
+  "Errors": {
+    "paymentLink": "We couldn't generate the payment link. Please try again in a few minutes.",
+    "checkout": "We couldn't process your purchase. Please try again.",
+    "buyStart": "We couldn't start the purchase. Please try again.",
+    "payStart": "We couldn't start the payment. Please try again.",
+    "alreadyOwned": "You already own this product — check your profile.",
+    "alreadyOwnedMany": "You already own these products — check your profile."
+  },
+  "BuyBox": {
+    "railArs": "Payment in Argentina via MercadoPago",
+    "railIntl": "International payment via Paddle (Merchant of Record)",
+    "ownedCourse": "You already own this course",
+    "ownedProduct": "You already own this product",
+    "goCourse": "Go to the course",
+    "goProfile": "Go to my profile",
+    "redirecting": "Redirecting...",
+    "buy": "Buy",
+    "loginToBuy": "Log in to buy",
+    "addToCart": "Add to cart"
+  },
+  "Cart": {
+    "view": "View cart",
+    "title": "Your cart",
+    "description": "Review your purchase before paying.",
+    "empty": "You haven't added anything to your cart yet.",
+    "quantity": "Quantity: {count}",
+    "remove": "Remove {title} from cart",
+    "total": "Total",
+    "promoPlaceholder": "Have a code?",
+    "promoLabel": "Promo code",
+    "promoNote": "The code's discount is calculated at checkout.",
+    "testPayment": "Test payment (admin only)",
+    "redirecting": "Redirecting...",
+    "pay": "Go to payment"
+  },
+  "DemoBar": {
+    "activeSub": "Active subscription (Welcome Pack{percent, plural, =0 {} other { + #% OFF on courses}})",
+    "noSub": "No active subscription",
+    "subscribeCta": "Subscribe and get the Welcome Pack{percent, plural, =0 {} other { + #% OFF on courses}}",
+    "currencyLabel": "Choose currency"
+  },
+  "Catalog": {
+    "count": "{count, plural, one {# product} other {# products}}",
+    "sortBy": "Sort by",
+    "sort": "Sort",
+    "relevance": "Relevance",
+    "priceAsc": "Price ↑",
+    "priceDesc": "Price ↓",
+    "topRated": "Top rated",
+    "onlyDiscount": "Subscriber discount only",
+    "subscriberOff": "{percent}% OFF for subscribers"
+  },
+  "ProductCard": {
+    "viewDetail": "View details",
+    "view": "View {title}",
+    "imageSoon": "Image coming soon",
+    "viewTestimonials": "See testimonials for {title}",
+    "viewCourse": "View the course",
+    "includes": "Includes: {items}",
+    "addToCart": "Add {title} to cart"
+  },
+  "Home": {
+    "featured": "Featured",
+    "seeCategory": "See {category} →"
+  },
+  "Hero": {
+    "kicker": "Asynchronous beach volleyball academy",
+    "title1": "Club de",
+    "title2": "Voley Playa",
+    "tagline": "Start today on your way to becoming a professional beach volleyball athlete.",
+    "cta": "See products",
+    "ballAlt": "Beach volleyball — Club de Voley Playa"
+  },
+  "Why": {
+    "kicker": "Why am I doing this?",
+    "quote": "Trophies belong in a box: the best prize is what we learn, and sooner or later that has to be passed on.",
+    "quoteBy": "— one of Juli's coaches",
+    "text": "For years Juli has been turning this idea over: a virtual space where anyone can learn beach volleyball — technique, fitness and mindset — from the very basics to the details you only learn by competing. Today you can start becoming a <b>professional player</b>."
+  },
+  "Bio": {
+    "kicker": "Who am I?",
+    "headshotAlt": "Juli Azaad",
+    "p1": "At 13 I played my first beach volleyball tournament and never wanted to leave the sand. From that day my career split in two: indoor in winter, beach in summer.",
+    "firstTournamentAlt": "Juli as a kid at their first beach volleyball tournament",
+    "firstTournamentCaption": "First tournament, age 13",
+    "p2": "In 2011 the best and most awaited offer of my career arrived: I joined the <b>Argentine national team</b>. That's when the dreams of little Juli began to come true.",
+    "p3": "In 2021 I achieved the big dream: I competed at the <b>Tokyo Olympic Games</b>.",
+    "tokyoAlt": "Juli at the Tokyo 2020 Olympic Village, representing the Argentine national team",
+    "tokyoCaption": "Tokyo 2020 — Argentine National Team",
+    "cred1": "Physical Education teacher",
+    "cred2": "Degree in Physical Activity",
+    "cred3": "FIVB International Coach, Level I",
+    "cred4": "Specialization in high-performance sports psychology — Barça Innovation Hub"
+  },
+  "WelcomePack": {
+    "label": "Welcome Pack",
+    "benefit": "Subscription benefit",
+    "name": "Welcome Pack",
+    "description": "Full access to the welcome pack as part of your monthly subscription.",
+    "unlocked": "✅ Unlocked — welcome to the club",
+    "lockedSubscribe": "🔒 Locked — join the subscription",
+    "lockedLogin": "🔒 Locked — log in to see the content",
+    "close": "Close notice"
+  },
+  "CourseTestimonials": {
+    "label": "Testimonials",
+    "heading": "What students say",
+    "ratings": "{count, plural, one {# rating} other {# ratings}}"
+  },
+  "CoursePreview": {
+    "label": "Course content",
+    "heading": "What's inside",
+    "unlocked": "{count} lessons unlocked. Pick where to continue.",
+    "locked": "{count} lessons, ready for you as soon as you own it.",
+    "goCourse": "Go to the course"
+  },
+  "ProductPage": {
+    "includes": "Includes: {items}",
+    "related": "Related products"
+  },
+  "Auth": {
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "login": {
+      "title": "Log in",
+      "wrongCredentials": "Incorrect email or password.",
+      "forgot": "Forgot your password?",
+      "submit": "Log in",
+      "submitting": "Logging in…",
+      "noAccount": "Don't have an account?",
+      "signupLink": "Sign up"
+    },
+    "signup": {
+      "title": "Sign up",
+      "submit": "Create account",
+      "submitting": "Creating account…",
+      "haveAccount": "Already have an account?",
+      "loginLink": "Log in",
+      "checkTitle": "Check your email",
+      "checkBody": "We sent a confirmation link to <b>{email}</b>. Click it to activate your account."
+    },
+    "forgot": {
+      "title": "Forgot my password",
+      "intro": "Enter your email and we'll send you a link to choose a new password.",
+      "submit": "Send link",
+      "submitting": "Sending…",
+      "back": "Back to log in",
+      "checkTitle": "Check your email",
+      "checkBody": "If <b>{email}</b> has an account, we sent a link to choose a new password."
+    },
+    "reset": {
+      "title": "Choose a new password",
+      "newPassword": "New password",
+      "confirm": "Confirm password",
+      "mismatch": "The passwords don't match.",
+      "submit": "Save password",
+      "submitting": "Saving…"
+    },
+    "errors": {
+      "signup": "We couldn't create the account. Check your details and try again.",
+      "forgotPassword": "We couldn't process the request. Please try again in a few minutes.",
+      "resetPassword": "We couldn't change the password. The link may have expired: request a new one.",
+      "invalidLink": "The link is invalid or has expired. Request a new one and try again."
+    }
+  },
+  "Pricing": {
+    "metaTitle": "Pricing — Club de Voley Playa",
+    "title": "Pricing",
+    "intro": "All prices are in US dollars (USD). One-time payment, except the membership, which is monthly.",
+    "membership": "Membership",
+    "perMonth": "per month",
+    "membershipText": "Includes the Welcome Pack, the exercises released every month, and discounts on courses and events while your subscription is up to date. Cancel anytime.",
+    "seeMembership": "See the membership",
+    "seeCatalog": "See catalog"
+  },
+  "Subscription": {
+    "title": "Subscribe",
+    "planError": "We couldn't load the subscription details. Please try again later.",
+    "perMonth": " / month",
+    "already": "✅ You're subscribed — thanks for being part of the club",
+    "redirecting": "Redirecting...",
+    "subscribe": "Subscribe",
+    "loginToSubscribe": "Log in to subscribe",
+    "startError": "We couldn't start the subscription. Please try again."
+  },
+  "Pay": {
+    "metaTitle": "Pay — Club de Voley Playa",
+    "title": "Checkout",
+    "unavailable": "Payment in dollars isn't available yet. Please try again later.",
+    "notFound": "We couldn't find your purchase. Go back to the cart and tap “Go to payment” again.",
+    "opening": "Opening Paddle's secure payment..."
+  },
+  "Profile": {
+    "bannerNotImage": "The file must be an image (JPG, PNG or WebP).",
+    "bannerTooBig": "The image is larger than 5 MB. Choose a lighter one.",
+    "bannerUploadError": "We couldn't upload the banner. Please try again.",
+    "bannerRemoveError": "We couldn't remove the banner. Please try again.",
+    "uploading": "Uploading...",
+    "changeBanner": "Change banner",
+    "uploadBanner": "Upload banner",
+    "removeBanner": "Remove banner",
+    "change": "Change",
+    "noNickname": "No nickname",
+    "subscriber": "Subscriber",
+    "noSubscription": "No subscription",
+    "aboutMe": "About me",
+    "loading": "Loading...",
+    "myCourses": "My courses",
+    "coursesError": "We couldn't load your courses.",
+    "coursesCount": "{access} of {total} with access",
+    "coursesErrorLong": "There was an error fetching your courses. Please try again later.",
+    "adminPanel": "Admin panel",
+    "signOut": "Log out",
+    "subscription": "Subscription",
+    "subscribedToClub": "You're subscribed to the club.",
+    "cancelConfirm": "Are you sure you want to cancel your subscription?",
+    "cancelError": "We couldn't cancel the subscription. Please try again.",
+    "canceling": "Canceling...",
+    "cancel": "Cancel subscription",
+    "aboutMeDescription": "Team, nickname and bio shown on your profile.",
+    "team": "Team",
+    "teamPlaceholder": "E.g. Beach Volley Lab",
+    "nickname": "Nickname (optional)",
+    "nicknamePlaceholder": "What they call you on the court",
+    "bio": "Bio",
+    "bioPlaceholder": "Tell us a little about yourself",
+    "saving": "Saving...",
+    "save": "Save"
+  },
+  "Classroom": {
+    "loading": "Loading your course...",
+    "breadcrumbs": "Breadcrumbs",
+    "myCourses": "My courses",
+    "noSection": "Lessons",
+    "lessonOf": "Lesson {current} of {total}",
+    "previous": "Previous",
+    "completed": "Completed",
+    "markCompleted": "Mark as completed",
+    "finish": "Finish course",
+    "next": "Next",
+    "description": "Description",
+    "syllabus": "Course syllabus",
+    "courseDone": "You finished the course!",
+    "progressLabel": "Course progress",
+    "progress": "{percent}% · {done} of {total} completed"
+  },
+  "AuthGuard": {
+    "needAdmin": "You need an administrator account to see this.",
+    "needLogin": "Log in to see this.",
+    "login": "Log in"
+  },
+  "Video": {
+    "soon": "Video coming soon",
+    "title": "Course video"
+  },
+  "TestimonialSlider": {
+    "imageAlt": "Testimonial from {author}",
+    "choose": "Choose testimonial",
+    "item": "Testimonial {index} of {total}"
+  },
+  "Quiz": {
+    "saveError": "We couldn't save your answer. Please try again."
+  },
+  "Clause": {
+    "s1": {
+      "title": "1. Purpose of the program",
+      "p": [
+        "The training programs and plans offered under the trade name Club de Voley Playa are exclusively for educational, informational and general physical conditioning purposes.",
+        "The content does not constitute medical advice, diagnosis, treatment or personalized medical prescription. The exercises and recommendations do not replace the evaluation, supervision or instructions of a doctor, physical therapist, physiotherapist or other duly qualified health professional.",
+        "Before starting any program, especially if you have any medical condition, previous injury, symptoms, physical limitation or any other health-related concern, it is recommended that you consult a health professional and obtain the corresponding clearance to engage in physical activity."
+      ]
+    },
+    "s2": {
+      "title": "2. Acceptance and assumption of risk",
+      "p": [
+        "By purchasing, accessing or using any of the training programs, you acknowledge and accept that physical and sports activity involves inherent risks, even when the exercises are performed correctly.",
+        "These risks may include, among others, muscle injuries, tendinitis, sprains, strains, joint injuries, falls, fractures, aggravation of pre-existing injuries or conditions and, in exceptional cases, cardiovascular complications or other health problems.",
+        "By voluntarily participating in the program, you accept responsibility for performing the exercises according to your own abilities, physical limits and health conditions."
+      ]
+    },
+    "s3": {
+      "title": "3. User responsibility",
+      "p": [
+        "It is the user's responsibility to assess their own physical and health conditions before starting and while following the program.",
+        "The exercises must be performed following the indicated technique and adapting them, when necessary, to the individual level of fitness, experience and abilities.",
+        "If during any exercise you experience pain, dizziness, difficulty breathing, discomfort, weakness or other unusual symptoms, you must stop the activity immediately and, where appropriate, consult a health professional."
+      ]
+    },
+    "s4": {
+      "title": "4. Limitation of liability",
+      "p": [
+        "To the extent permitted by applicable law, Julian Azaad, as holder of the trade name Club de Voley Playa, will not be liable for injuries, damages or losses that may result from the use of the training programs, except in those cases where such liability cannot be legally excluded or limited.",
+        "The user acknowledges that the programs are provided as a general training tool and that results may vary significantly from one person to another.",
+        "Nothing in this clause is intended to exclude or limit any liability that, under applicable law, cannot be excluded or limited."
+      ]
+    },
+    "s5": {
+      "title": "5. No substitute for professional advice",
+      "p": [
+        "The information contained in the programs must not be used to diagnose, treat or prevent diseases, injuries or other medical conditions.",
+        "If you have doubts about your health, your ability to perform certain exercises or whether it is advisable to start a training program, you must first consult a qualified health professional."
+      ]
+    },
+    "s6": {
+      "title": "6. Personal use and prohibition on distribution",
+      "p": [
+        "The training programs purchased are for the buyer's personal, individual use.",
+        "It is prohibited to copy, reproduce, modify, publish, distribute, resell, share, assign or provide access to the program, in whole or in part, to third parties, except with the express written authorization of Julian Azaad."
+      ]
+    },
+    "s7": {
+      "title": "7. Adaptations and modifications",
+      "p": [
+        "The user acknowledges that each person has different levels of fitness, experience, mobility, strength and recovery capacity.",
+        "For this reason, it may be necessary to modify, reduce or suspend certain exercises or activities. Any adaptation must be made according to your own abilities and, where appropriate, with the guidance of a qualified professional.",
+        "Performing the exercises is the user's responsibility."
+      ]
+    },
+    "s8": {
+      "title": "8. Results",
+      "p": [
+        "The training programs do not guarantee specific results in performance, body composition, weight loss, muscle gain, strength, endurance or other goals.",
+        "Results depend on multiple individual factors, including, among others, initial fitness level, adherence to the program, diet, rest, sports background and individual characteristics."
+      ]
+    },
+    "s9": {
+      "title": "9. Acceptance of the terms",
+      "p": [
+        "By purchasing, accessing or using a Club de Voley Playa training program, you declare that you have read, understood and accepted these terms of use and that you are responsible for determining, with the appropriate professional advice, whether the program is suitable for you.",
+        "If you do not agree with these terms, you must refrain from using the program."
+      ]
+    }
+  },
+  "Legal": {
+    "languageNote": "This is a courtesy translation. In case of any difference, the Spanish version prevails.",
+    "clauseHeading": "Terms of service and disclaimer of liability",
+    "terms": {
+      "metaTitle": "Terms of service — Club de Voley Playa",
+      "ownerTitle": "Owner",
+      "ownerBody": "Owner: Julian Azaad. Trade name: Club de Voley Playa. Payments in dollars are processed by Paddle, which acts as the official reseller (Merchant of Record) of the products."
+    },
+    "refund": {
+      "metaTitle": "Refund policy — Club de Voley Playa",
+      "title": "Refund policy",
+      "draft": "Draft — the refund period is still to be confirmed by Club de Voley Playa.",
+      "howTitle": "How to request a refund",
+      "howBody": "Write to us at <mail>{email}</mail> from the same email address you used to purchase, stating what you bought and the reason for the request. We reply by the same means.",
+      "digitalTitle": "Digital products",
+      "digitalBody": "Courses, plans and guides are digital content with immediate access. Each refund request is reviewed according to the period stated below and the use made of the content.",
+      "membershipTitle": "Membership",
+      "membershipBody": "You can cancel the membership at any time from your profile. You keep access while the paid period is in effect and no new periods are charged.",
+      "usdTitle": "Payments in dollars",
+      "usdBody": "Payments in dollars are processed by Paddle as the official reseller (Merchant of Record). Refunds, when applicable, are returned to the same payment method.",
+      "termTitle": "Period",
+      "termBody": "Refund period: to be confirmed."
+    },
+    "privacy": {
+      "metaTitle": "Privacy policy — Club de Voley Playa",
+      "title": "Privacy policy",
+      "draft": "Draft — pending legal review before a formal launch.",
+      "dataTitle": "What data we keep",
+      "dataBody": "When you create an account we keep your name and email. When you buy a course or bundle, we keep what you bought and when, so we can give you access to that content. We do not keep your card or payment method data — that is processed directly by Mercado Pago.",
+      "shareTitle": "Who we share data with",
+      "share": [
+        "An external authentication and database provider, where your account and access data are stored.",
+        "An external payment processor, which processes the payment when you buy a course or bundle.",
+        "The site's videos are embedded from an external video platform — when you play them, that platform may record your IP address according to its own policies."
+      ],
+      "noAi": "We do not use artificial intelligence anywhere on the site.",
+      "deleteTitle": "Ask us to delete your data",
+      "deleteBody": "If you want to close your account or have us delete your data, write to us at <mail>{email}</mail> from the same email you registered with."
+    }
+  },
+  "PlanViewer": {
+    "beforeOpen": "Before opening the plan",
+    "beforeOpenText": "Read and accept the disclaimer of liability to view the plan. We only ask once.",
+    "saving": "Saving...",
+    "accept": "I accept the clause",
+    "soon": "This plan will be available soon.",
+    "noAccessTitle": "You don't have access to this plan",
+    "noAccessText": "It is included with the membership or with the purchase of the plan.",
+    "seeMembership": "See the membership",
+    "limitTitle": "You've reached today's limit",
+    "limitText": "You can open a maximum number of different plans per day. Come back tomorrow to see another.",
+    "notFoundTitle": "We couldn't find this plan",
+    "notFoundText": "Check the link and try again.",
+    "errorTitle": "We couldn't load the plan",
+    "errorText": "Please try again in a moment.",
+    "retry": "Retry"
+  },
+  "Products": {
+    "ataque": {
+      "title": "Attack",
+      "shortDescription": "Approach, arms, ball contact and the mistakes that cost an amateur attacker the most.",
+      "longDescription": "A complete walkthrough of the attack motion: approach, arm coordination, ball contact point and the most frequent mistakes that hold amateur attackers back. Includes specific tips to level up quickly."
+    },
+    "mentalidad-deportiva": {
+      "title": "Mindset for beach volleyball",
+      "shortDescription": "Goals, training and match mindset, focus and discipline.",
+      "longDescription": "Work the mind as much as the body: the importance of goals, training and match mindset, focus in competition and the discipline to sustain the process."
+    },
+    "planificacion": {
+      "title": "Planning for coaches",
+      "shortDescription": "Plan the technical, physical and mental aspects of a training session.",
+      "longDescription": "Designed for coaches: how to plan the technical, physical and mental aspects of a session, and how to build a complete plan to train and compete better."
+    },
+    "defensa": {
+      "title": "Defense",
+      "shortDescription": "All the club's exclusive information to improve your positioning and reading in defense.",
+      "longDescription": "Improve your defense with all the club's exclusive information: positioning, reading the opponent's attack and the fine adjustments that make the difference on the sand."
+    },
+    "bloqueo": {
+      "title": "Blocking",
+      "shortDescription": "Individual blocking technique and reading the opponent's attack.",
+      "longDescription": "Fundamentals of individual blocking in beach volleyball: positioning, timing and reading the opponent's attack to close the spaces well."
+    },
+    "armado": {
+      "title": "Setting",
+      "shortDescription": "Setting fundamentals to master every attack tempo.",
+      "longDescription": "The fundamentals of setting on the sand: tempo management, placement variations and how to give your attacker clear options."
+    },
+    "saque": {
+      "title": "Serve",
+      "shortDescription": "Serve technique and variations to pressure the opponent's reception.",
+      "longDescription": "Serve technique and its variations to pressure the opponent's reception from the very first contact of the point."
+    },
+    "conceptos-generales": {
+      "title": "General concepts",
+      "shortDescription": "The basics of beach volleyball before getting into the technique of each skill.",
+      "longDescription": "The basics of beach volleyball: rules, game dynamics and the general concepts you need to understand before getting into the technique of each skill."
+    },
+    "recepcion": {
+      "title": "Reception",
+      "shortDescription": "Positioning and serve reading for more consistent reception.",
+      "longDescription": "Positioning, serve reading and reception adjustments to arrive more consistently at the first contact."
+    },
+    "analisis-tecnico-biomecanico": {
+      "title": "Technical-biomechanical analysis",
+      "shortDescription": "Detailed report of the technical movement, designed for coaches.",
+      "longDescription": "A detailed report of the technical movement from a biomechanics perspective, designed for coaches who want to understand the why behind each correction."
+    },
+    "plan-de-movilidad-21-dias": {
+      "title": "Mobility plan — 21 days",
+      "shortDescription": "Progressive mobility routine to sustain training volume.",
+      "longDescription": "A progressive 21-day routine to gain and sustain the mobility demanded by the training volume on the sand."
+    },
+    "guia-nutricional-para-torneos-y-entrenamientos": {
+      "title": "Nutrition guide for tournaments and training",
+      "shortDescription": "Eating guidelines to compete and train without dropping your level.",
+      "longDescription": "Practical eating guidelines to sustain your training level and arrive well at tournaments, without impossible-to-follow plans."
+    },
+    "planificacion-de-entrenamientos-en-cancha": {
+      "title": "Court training planning",
+      "shortDescription": "Court session structure ready to apply with your group.",
+      "longDescription": "A court session structure ready to apply with your group, designed for coaches who need to organize their week."
+    },
+    "plan-de-gimnasio-para-mejorar-el-salto": {
+      "title": "PRO gym plan",
+      "shortDescription": "Gym routine focused on jump power and injury prevention.",
+      "longDescription": "A gym routine focused on jump power and injury prevention, to complement court work."
+    },
+    "plan-aerobico-pro": {
+      "title": "PRO aerobic plan",
+      "shortDescription": "Aerobic base to sustain match pace on the sand.",
+      "longDescription": "An aerobic base designed specifically to sustain the match pace demanded by playing on sand."
+    },
+    "todos-los-cursos": {
+      "title": "All courses",
+      "shortDescription": "The club's 8 technical courses in a single bundle, with a volume discount.",
+      "longDescription": "The club's 8 technical courses — attack, defense, blocking, setting, serve, reception, general concepts and mindset — in a single bundle, with a volume discount.",
+      "includes": "8 products"
+    },
+    "combo-k1-recepcion-armado-ataque": {
+      "title": "Bundle K1 — Reception, Setting, Attack",
+      "shortDescription": "The 3 fundamentals of ball technique in a single bundle.",
+      "longDescription": "Reception, setting and attack — the three fundamentals that build the play with the ball — combined in a single bundle.",
+      "includes": "3 products"
+    },
+    "combo-k2-saque-defensa-bloqueo": {
+      "title": "Bundle K2 — Serve, Defense, Blocking",
+      "shortDescription": "The 3 defensive and serving fundamentals in a single bundle.",
+      "longDescription": "Serve, defense and blocking — the three fundamentals that sustain the point from the defensive side — combined in a single bundle.",
+      "includes": "3 products"
+    },
+    "banco-de-120-ejercicios": {
+      "title": "Bank of 120 beach volleyball exercises",
+      "shortDescription": "120 beach volleyball exercises to train on your own.",
+      "longDescription": "A bank of 120 beach volleyball exercises. Provisional description: Juli will complete the final text."
+    },
+    "curso-para-entrenadores": {
+      "title": "Online course for coaches",
+      "shortDescription": "Cohort-based course for beach volleyball coaches.",
+      "longDescription": "Online course for coaches, by cohort. Provisional description: Juli will complete the final text."
+    },
+    "campamento-cerrito": {
+      "title": "Cerrito Camp",
+      "shortDescription": "Annual in-person beach volleyball camp.",
+      "longDescription": "Annual in-person camp in Cerrito. Provisional description: Juli will complete the date and final text."
+    }
+  },
+  "Testimonials": {
+    "heading": "What students say",
+    "campHeading": "Training camp",
+    "camp": "Camp",
+    "byCourse": "Testimonials by course",
+    "videoTitle": "Testimonial — {context}",
+    "videoSoon": "Video coming soon"
+  },
+  "ApiErrors": {
+    "promo_code_invalid": "The code is not valid or is no longer available.",
+    "subscription_active": "You already have an active subscription.",
+    "clause_not_accepted": "You must accept the clause before opening the plan.",
+    "too_many_requests": "Too many attempts. Wait a moment and try again.",
+    "email_invalid": "The email is not valid."
+  },
+  "Menu": {
+    "membership": "Membership",
+    "players": "Players",
+    "coaches": "Coaches",
+    "events": "Events",
+    "custom": "Personalized",
+    "contact": "Contact"
+  },
+  "CategoryPage": {
+    "players": {
+      "intro": "Courses, plans and exercises to improve your game on the sand: technique, fitness and mindset."
+    },
+    "coaches": {
+      "intro": "Training and resources for beach volleyball coaches."
+    },
+    "events": {
+      "intro": "In-person events organized by Club de Voley Playa."
+    },
+    "custom": {
+      "intro": "Personalized work with Juli Azaad."
+    },
+    "services": {
+      "beachVolleyLab": {
+        "title": "Beach Volley Lab — biomechanical analysis with Juli Azaad",
+        "text": "Personalized biomechanical analysis of your game. Spots are limited."
+      },
+      "personalTraining": {
+        "title": "Personalized physical training with Juli Azaad",
+        "text": "Physical training tailored to you, with personal follow-up. You apply and are approved before starting."
+      },
+      "cta": "Inquire via Contact"
+    }
+  },
+  "Contact": {
+    "metaTitle": "Contact — Club de Voley Playa",
+    "title": "Contact",
+    "intro": "Questions, inquiries or a personalized service? Write to us whichever way you prefer.",
+    "emailTitle": "Email",
+    "whatsappCta": "Message on WhatsApp",
+    "socialTitle": "Social media"
+  },
+  "Waitlist": {
+    "title": "Waitlist",
+    "text": "The course runs in cohorts and there is no start date yet. Leave your email and we'll let you know as soon as the next one opens.",
+    "email": "Your email",
+    "submit": "Join the waitlist",
+    "submitting": "Joining...",
+    "done": "Done! You're on the list. We'll write to you when the next cohort opens.",
+    "error": "We couldn't add you. Please try again in a few minutes."
+  }
+}

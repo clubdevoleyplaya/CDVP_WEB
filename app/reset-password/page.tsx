@@ -2,14 +2,15 @@
 
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
+import { useTranslations } from "next-intl";
 
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { USER_MESSAGES } from "@/lib/user-errors";
 
 export default function ResetPasswordPage() {
+  const t = useTranslations("Auth");
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,7 +21,7 @@ export default function ResetPasswordPage() {
     event.preventDefault();
 
     if (password !== confirmPassword) {
-      setError("Las contraseñas no coinciden.");
+      setError(t("reset.mismatch"));
       return;
     }
 
@@ -32,7 +33,7 @@ export default function ResetPasswordPage() {
 
     setLoading(false);
     if (error) {
-      setError(USER_MESSAGES.resetPassword);
+      setError(t("errors.resetPassword"));
       return;
     }
 
@@ -42,11 +43,11 @@ export default function ResetPasswordPage() {
 
   return (
     <section className="mx-auto max-w-md px-6 py-16">
-      <h1 className="font-display text-2xl font-bold uppercase">Elegí una nueva contraseña</h1>
+      <h1 className="font-display text-2xl font-bold uppercase">{t("reset.title")}</h1>
 
       <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
         <div className="flex flex-col gap-1.5">
-          <Label htmlFor="password">Nueva contraseña</Label>
+          <Label htmlFor="password">{t("reset.newPassword")}</Label>
           <Input
             id="password"
             type="password"
@@ -58,7 +59,7 @@ export default function ResetPasswordPage() {
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <Label htmlFor="confirmPassword">Confirmar contraseña</Label>
+          <Label htmlFor="confirmPassword">{t("reset.confirm")}</Label>
           <Input
             id="confirmPassword"
             type="password"
@@ -76,7 +77,7 @@ export default function ResetPasswordPage() {
           disabled={loading}
           className="mt-2 font-display text-xs font-bold uppercase tracking-wide"
         >
-          {loading ? "Guardando…" : "Guardar contraseña"}
+          {loading ? t("reset.submitting") : t("reset.submit")}
         </Button>
       </form>
     </section>
