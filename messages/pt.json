@@ -429,14 +429,7 @@
     "ataque": {
       "title": "Ataque",
       "shortDescription": "Aproximação, braços, contato com a bola e os erros que mais custam a um atacante amador.",
-      "longDescription": "Um percurso completo pelo gesto do ataque: aproximação, coordenação dos braços, ponto de contato com a bola e os erros mais frequentes que travam um atacante amador. Inclui dicas pontuais para subir de nível rápido.",
-      "chips": [
-        "Pés",
-        "Braços",
-        "Contato",
-        "Erros frequentes",
-        "Dicas"
-      ]
+      "longDescription": "Um percurso completo pelo gesto do ataque: aproximação, coordenação dos braços, ponto de contato com a bola e os erros mais frequentes que travam um atacante amador. Inclui dicas pontuais para subir de nível rápido."
     },
     "mentalidad-deportiva": {
       "title": "Mentalidade para vôlei de praia",

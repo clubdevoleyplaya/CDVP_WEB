@@ -35,7 +35,6 @@ describe("mensajes", () => {
       expect(entry.shortDescription, product.slug).toBeTruthy();
       expect(entry.longDescription, product.slug).toBeTruthy();
       if (product.includes) expect(entry.includes, product.slug).toBeTruthy();
-      if (product.chips) expect(entry.chips, product.slug).toHaveLength(product.chips.length);
     }
   });
   it("el español de Products coincide con lib/products.ts", () => {

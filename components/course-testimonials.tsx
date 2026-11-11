@@ -2,7 +2,8 @@ import { useTranslations } from "next-intl";
 import { TestimonialSlider } from "@/components/testimonial-slider";
 import type { Product, Testimonial } from "@/lib/products";
 
-// Sección propia de valoración y testimonios del curso (ficha y aula). Sin nada que mostrar, no aparece.
+// Tarjeta de valoración y testimonios en la ficha del curso, con carrusel automático. Sin nada que
+// mostrar, no aparece.
 export function CourseTestimonials({
   items,
   rating,
@@ -17,9 +18,9 @@ export function CourseTestimonials({
   return (
     <section
       aria-label={t("label")}
-      className="rounded-xl border border-line bg-surface p-5 sm:p-6"
+      className="rounded-xl border border-line bg-surface p-5 lg:w-72 lg:shrink-0"
     >
-      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+      <div className="flex flex-col gap-1">
         <h2 className="font-display text-sm font-bold uppercase tracking-wide text-blue">
           {t("heading")}
         </h2>
@@ -30,7 +31,7 @@ export function CourseTestimonials({
           </p>
         )}
       </div>
-      {hasItems && <TestimonialSlider items={items} className="mt-4" />}
+      {hasItems && <TestimonialSlider items={items} autoPlay className="mt-4" />}
     </section>
   );
 }

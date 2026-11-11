@@ -23,11 +23,11 @@ export function Header() {
   const initial = (displayName ?? "?").charAt(0).toUpperCase();
 
   return (
-    <header className="sticky top-0 z-20 flex flex-wrap items-center gap-4 border-b border-line bg-bg/90 px-6 py-3 backdrop-blur">
+    <header className="sticky top-0 z-20 flex flex-nowrap items-center gap-2 border-b border-line bg-bg/90 px-4 py-3 backdrop-blur sm:gap-4 sm:px-6 md:flex-wrap">
       <NavDrawer />
-      <Link href="/" className="flex items-center gap-2">
-        <Image src="/brand/ball.png" alt="" width={32} height={32} className="h-8 w-8" />
-        <span className="font-display text-lg font-bold uppercase tracking-wide">
+      <Link href="/" className="flex min-w-0 items-center gap-2">
+        <Image src="/brand/ball.png" alt="" width={32} height={32} className="h-8 w-8 shrink-0" />
+        <span className="font-display text-sm font-bold uppercase leading-tight tracking-wide sm:text-lg">
           Club de Voley Playa
         </span>
       </Link>
@@ -42,7 +42,7 @@ export function Header() {
           </Link>
         ))}
       </nav>
-      <div className="ml-auto flex items-center gap-2">
+      <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
         <LanguageSelector />
         <ThemeToggle />
         <CartDrawer />

@@ -429,14 +429,7 @@
     "ataque": {
       "title": "Attack",
       "shortDescription": "Approach, arms, ball contact and the mistakes that cost an amateur attacker the most.",
-      "longDescription": "A complete walkthrough of the attack motion: approach, arm coordination, ball contact point and the most frequent mistakes that hold amateur attackers back. Includes specific tips to level up quickly.",
-      "chips": [
-        "Footwork",
-        "Arms",
-        "Contact",
-        "Common mistakes",
-        "Tips"
-      ]
+      "longDescription": "A complete walkthrough of the attack motion: approach, arm coordination, ball contact point and the most frequent mistakes that hold amateur attackers back. Includes specific tips to level up quickly."
     },
     "mentalidad-deportiva": {
       "title": "Mindset for beach volleyball",

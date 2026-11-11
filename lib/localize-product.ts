@@ -7,7 +7,6 @@ import type { Product } from "@/lib/products";
 type Translator = {
   (key: string): string;
   has: (key: string) => boolean;
-  raw: (key: string) => unknown;
 };
 
 export function localizeProduct(product: Product, t: Translator): Product {
@@ -15,14 +14,12 @@ export function localizeProduct(product: Product, t: Translator): Product {
     const key = `${product.slug}.${field}`;
     return t.has(key) ? t(key) : fallback;
   };
-  const chipsKey = `${product.slug}.chips`;
   return {
     ...product,
     title: text("title", product.title),
     shortDescription: text("shortDescription", product.shortDescription),
     longDescription: text("longDescription", product.longDescription),
     includes: product.includes ? text("includes", product.includes) : product.includes,
-    chips: product.chips && t.has(chipsKey) ? (t.raw(chipsKey) as string[]) : product.chips,
   };
 }
 

@@ -8,7 +8,6 @@ export interface Product {
   shortDescription: string;
   longDescription: string;
   image?: string;
-  chips?: string[];
   modules?: number;
   rating?: { value: number; count: number };
   priceArs: number;
@@ -65,7 +64,6 @@ export const products: Product[] = [
       "Entrada de ataque, brazos, impacto de pelota y los errores que más le cuestan a un atacante amateur.",
     longDescription:
       "Un recorrido completo por el gesto de ataque: entrada, coordinación de brazos, punto de impacto de la pelota y los errores más frecuentes que frenan a un atacante amateur. Incluye tips puntuales para subir de nivel rápido.",
-    chips: ["Pies", "Brazos", "Impacto", "Errores frecuentes", "Tips"],
     modules: 5,
     rating: { value: 5.0, count: 9 },
     vslVimeoId: "1244394563",

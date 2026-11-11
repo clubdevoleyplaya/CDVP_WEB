@@ -47,41 +47,27 @@ export default async function ProductPage({
         ← {tr(CATEGORY_TO_ROUTE[product.category])}
       </Link>
 
-      <div className="mt-6 grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
-        <div>
-          <p className="w-fit rounded-lg bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">
-            {ts(product.category)}
-          </p>
-          <h1 className="mt-2 font-display text-4xl font-bold uppercase">
-            {product.title}
-          </h1>
-          <p className="mt-4 max-w-[65ch] text-base text-ink-soft">
-            {product.longDescription}
-          </p>
+      <p className="mt-6 w-fit rounded-lg bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">
+        {ts(product.category)}
+      </p>
+      <h1 className="mt-2 font-display text-4xl font-bold uppercase">{product.title}</h1>
 
-          {product.chips && (
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {product.chips.map((chip) => (
-                <li
-                  key={chip}
-                  className="rounded-lg border border-line font-display text-xs uppercase tracking-wide text-ink-soft px-2 py-1"
-                >
-                  {chip}
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {product.includes && (
-            <p className="mt-4 text-sm text-ink-soft">{t("includes", { items: product.includes })}</p>
-          )}
+      <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-start">
+        <div className="min-w-0 lg:flex-1">
           {product.vslVimeoId && (
-            <div className="mt-6 max-w-2xl">
+            <div className="max-w-3xl">
               <VideoPlayer provider="vimeo" videoId={product.vslVimeoId} />
             </div>
           )}
+          <p className="mt-4 max-w-[65ch] text-base text-ink-soft">{product.longDescription}</p>
+          {product.includes && (
+            <p className="mt-4 text-sm text-ink-soft">{t("includes", { items: product.includes })}</p>
+          )}
         </div>
-        <div className="lg:sticky lg:top-24">
+        <HideWhenOwned slug={product.slug}>
+          <CourseTestimonials items={product.testimonials} rating={product.rating} />
+        </HideWhenOwned>
+        <div className="lg:w-72 lg:shrink-0">
           {product.waitlist ? <WaitlistForm slug={product.slug} /> : <ProductBuyBox product={product} />}
         </div>
       </div>
@@ -89,12 +75,6 @@ export default async function ProductPage({
       {product.category === "curso" && <CoursePreview product={product} />}
 
       <QuizSection slug={product.slug} category={product.category} />
-
-      <HideWhenOwned slug={product.slug}>
-        <div className="mt-16">
-          <CourseTestimonials items={product.testimonials} rating={product.rating} />
-        </div>
-      </HideWhenOwned>
 
       {related.length > 0 && (
         <div className="mt-16">
