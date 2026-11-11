@@ -547,5 +547,11 @@
     "byCourse": "Depoimentos por curso",
     "videoTitle": "Depoimento — {context}",
     "videoSoon": "Vídeo em breve"
+  },
+  "ApiErrors": {
+    "promo_code_invalid": "O código não é válido ou não está mais disponível.",
+    "subscription_active": "Você já tem uma assinatura ativa.",
+    "clause_not_accepted": "Antes de abrir o plano, você precisa aceitar a cláusula.",
+    "too_many_requests": "Muitas tentativas. Aguarde um momento e tente novamente."
   }
 }

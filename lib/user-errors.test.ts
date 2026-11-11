@@ -1,32 +1,36 @@
 import { describe, expect, it } from "vitest";
 
-import { apiErrorMessage } from "./user-errors";
+import { PUBLIC_ERROR_CODES, publicErrorCode } from "./user-errors";
 
-const FALLBACK = "genérico";
-
-describe("apiErrorMessage", () => {
-  it.each([400, 409, 429])("muestra el mensaje del API en un %s", (status) => {
-    expect(apiErrorMessage(status, { detail: "El código no es válido." }, FALLBACK)).toBe(
-      "El código no es válido.",
-    );
+describe("publicErrorCode", () => {
+  it.each([
+    [400, "promo_code_invalid"],
+    [409, "subscription_active"],
+    [409, "clause_not_accepted"],
+    [429, "too_many_requests"],
+  ])("devuelve el código conocido de un %s", (status, code) => {
+    expect(publicErrorCode(status, { detail: "x", code })).toBe(code);
   });
 
-  it.each([401, 403, 404, 422, 500, 502, 503])("nunca muestra el detalle en un %s", (status) => {
-    expect(apiErrorMessage(status, { detail: "mercadopago no configurado" }, FALLBACK)).toBe(FALLBACK);
+  it.each([401, 403, 404, 422, 500, 502, 503])("nunca devuelve código en un %s", (status) => {
+    expect(publicErrorCode(status, { code: "promo_code_invalid" })).toBeNull();
   });
 
   it.each([
     [null],
     [undefined],
     [{}],
-    [{ detail: 42 }],
-    [{ detail: ["lista"] }],
-    [{ detail: "" }],
-    [{ detail: "   " }],
-    [{ detail: "x".repeat(500) }],
-    [{ detail: "<script>alert(1)</script>" }],
-    [{ detail: "línea\nconsalto" }],
-  ])("cae en el texto propio con %j", (body) => {
-    expect(apiErrorMessage(400, body, FALLBACK)).toBe(FALLBACK);
+    [{ code: 42 }],
+    [{ code: "bad_request" }],
+    [{ code: "<script>alert(1)</script>" }],
+    [{ detail: "El código no es válido." }],
+  ])("ignora lo que no es un código público: %j", (body) => {
+    expect(publicErrorCode(400, body)).toBeNull();
+  });
+
+  it("la lista pública coincide con los códigos de PublicError de la API", () => {
+    expect([...PUBLIC_ERROR_CODES].sort()).toEqual(
+      ["clause_not_accepted", "promo_code_invalid", "subscription_active", "too_many_requests"],
+    );
   });
 });

@@ -8,12 +8,13 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDemoState } from "@/context/demo-state";
 import { formatPrice } from "@/lib/price";
-import { apiErrorMessage } from "@/lib/user-errors";
+import { useApiErrorMessage } from "@/lib/use-api-error";
 
 type Plan = { title: string; description: string; price_ars: number };
 
 export default function SuscripcionPage() {
   const t = useTranslations("Subscription");
+  const apiError = useApiErrorMessage();
   const { session, isSubscriber } = useDemoState();
   const router = useRouter();
 
@@ -45,7 +46,7 @@ export default function SuscripcionPage() {
       if (!res.ok) {
         const body = await res.json().catch(() => null);
         setError(
-          apiErrorMessage(res.status, body, t("startError")),
+          apiError(res.status, body, t("startError")),
         );
         return;
       }

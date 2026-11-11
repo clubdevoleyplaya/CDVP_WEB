@@ -21,11 +21,12 @@ import { useDemoState } from "@/context/demo-state";
 import { computeDisplayPrice, formatPrice, paymentProviderFor } from "@/lib/price";
 import { useLocalizeProduct } from "@/lib/localize-product";
 import { getProductBySlug } from "@/lib/products";
-import { apiErrorMessage } from "@/lib/user-errors";
+import { useApiErrorMessage } from "@/lib/use-api-error";
 
 export function CartDrawer() {
   const t = useTranslations("Cart");
   const localize = useLocalizeProduct();
+  const apiError = useApiErrorMessage();
   const te = useTranslations("Errors");
   const {
     cart,
@@ -83,7 +84,7 @@ export function CartDrawer() {
       });
       if (res.status === 400) {
         const body = await res.json().catch(() => null);
-        setError(apiErrorMessage(res.status, body, te("checkout")));
+        setError(apiError(res.status, body, te("checkout")));
         return;
       }
       if (!res.ok) throw new Error();

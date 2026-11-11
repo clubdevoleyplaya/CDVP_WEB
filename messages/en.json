@@ -547,5 +547,11 @@
     "byCourse": "Testimonials by course",
     "videoTitle": "Testimonial — {context}",
     "videoSoon": "Video coming soon"
+  },
+  "ApiErrors": {
+    "promo_code_invalid": "The code is not valid or is no longer available.",
+    "subscription_active": "You already have an active subscription.",
+    "clause_not_accepted": "You must accept the clause before opening the plan.",
+    "too_many_requests": "Too many attempts. Wait a moment and try again."
   }
 }
