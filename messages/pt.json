@@ -197,5 +197,25 @@
       "resetPassword": "Não foi possível alterar a senha. O link pode ter expirado: peça um novo.",
       "invalidLink": "O link não é válido ou já expirou. Peça um novo e tente novamente."
     }
+  },
+  "Pricing": {
+    "metaTitle": "Preços — Club de Voley Playa",
+    "title": "Preços",
+    "intro": "Todos os preços estão em dólares (USD). Pagamento único, exceto a assinatura, que é mensal.",
+    "membership": "Assinatura",
+    "perMonth": "por mês",
+    "membershipText": "Inclui o Pack de Boas-vindas, os exercícios liberados a cada mês e descontos em cursos e eventos enquanto a assinatura estiver em dia. Cancele quando quiser.",
+    "seeMembership": "Ver a assinatura",
+    "seeCatalog": "Ver catálogo"
+  },
+  "Subscription": {
+    "title": "Assine",
+    "planError": "Não foi possível carregar os detalhes da assinatura. Tente novamente mais tarde.",
+    "perMonth": " / mês",
+    "already": "✅ Você já é assinante — obrigado por fazer parte do clube",
+    "redirecting": "Redirecionando...",
+    "subscribe": "Assinar",
+    "loginToSubscribe": "Entre para assinar",
+    "startError": "Não foi possível iniciar a assinatura. Tente novamente."
   }
 }
