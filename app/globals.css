@@ -13,7 +13,13 @@
   --blue: #0b1b33;
   --yellow: #c9920a;
   --green: #2f9e5b;
-  --band: #0b1b33;
+  --band: #f4f7fb;
+  --band-ink: #0b1b33;
+  --band-ink-soft: #4a5568;
+  --band-line: rgba(11, 27, 51, 0.4);
+  --band-border: #0b1b33;
+  --band-accent: #9a6b00;
+  --navy: #0b1b33;
   --sun: #f7b733;
   --card-bg: #ffffff;
 
@@ -64,6 +70,11 @@
   --yellow: #f7b733;
   --green: #5fcb90;
   --band: #0e2545;
+  --band-ink: #f4f1e8;
+  --band-ink-soft: #a9b4c8;
+  --band-line: rgba(255, 255, 255, 0.25);
+  --band-border: rgba(255, 255, 255, 0.12);
+  --band-accent: #f7b733;
   --card-bg: #0e2545;
   --primary-foreground: #0b1b33;
   --sidebar-primary-foreground: #0b1b33;
@@ -79,6 +90,12 @@
   --color-yellow: var(--yellow);
   --color-green: var(--green);
   --color-band: var(--band);
+  --color-band-ink: var(--band-ink);
+  --color-band-ink-soft: var(--band-ink-soft);
+  --color-band-line: var(--band-line);
+  --color-band-border: var(--band-border);
+  --color-band-accent: var(--band-accent);
+  --color-navy: var(--navy);
   --color-sun: var(--sun);
   --color-card-bg: var(--card-bg);
   --font-display: var(--font-barlow-condensed);

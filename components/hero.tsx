@@ -11,7 +11,7 @@ export function Hero() {
   const t = useTranslations("Hero");
   const tc = useTranslations("Categories.routes");
   return (
-    <section className="overflow-hidden bg-band text-white">
+    <section className="overflow-hidden bg-band text-band-ink">
       <div className="mx-auto grid min-h-[min(80vh,720px)] max-w-7xl grid-cols-1 items-center gap-8 px-6 pt-12 md:grid-cols-[0.95fr_1.05fr] md:gap-12 md:pt-20">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -34,35 +34,35 @@ export function Hero() {
           transition={{ duration: 0.5 }}
           className="pb-12 md:pb-20"
         >
-          <p className="inline-block border-l-4 border-sun bg-white/10 px-3 py-1 font-display text-sm font-semibold uppercase tracking-[0.18em] text-sun">
+          <p className="inline-block border-l-4 border-band-accent bg-band-ink/10 px-3 py-1 font-display text-sm font-semibold uppercase tracking-[0.18em] text-band-accent">
             {t("kicker")}
           </p>
           <h1 className="mt-6 font-display text-6xl font-bold uppercase leading-[0.9] md:text-8xl">
             {t("title1")}
             <br />
-            <span className="text-sun">{t("title2")}</span>
+            <span className="text-band-accent">{t("title2")}</span>
           </h1>
-          <p className="mt-6 max-w-[40ch] text-xl text-white/80">{t("tagline")}</p>
+          <p className="mt-6 max-w-[40ch] text-xl text-band-ink-soft">{t("tagline")}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
               href="#destacados"
-              className="inline-block rounded-lg bg-sun px-8 py-3.5 font-display text-lg font-bold uppercase tracking-wide text-band transition-colors hover:brightness-110"
+              className="inline-block rounded-lg bg-sun px-8 py-3.5 font-display text-lg font-bold uppercase tracking-wide text-navy transition-colors hover:brightness-110"
             >
               {t("cta")}
             </a>
             <Link
               href="/categoria/cursos"
-              className="inline-block rounded-lg border border-white/60 px-8 py-3.5 font-display text-lg font-bold uppercase tracking-wide text-white transition-colors hover:bg-white/10"
+              className="inline-block rounded-lg border border-band-ink/50 px-8 py-3.5 font-display text-lg font-bold uppercase tracking-wide text-band-ink transition-colors hover:bg-band-ink/10"
             >
               {t("cta2")}
             </Link>
           </div>
-          <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/20 pt-5">
+          <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-band-line pt-5">
             {CHIPS.map((route) => (
               <li key={route}>
                 <Link
                   href={`/catalogo/${route}`}
-                  className="font-display text-base font-semibold uppercase tracking-wide text-white/70 hover:text-sun"
+                  className="font-display text-base font-semibold uppercase tracking-wide text-band-ink-soft hover:text-band-accent"
                 >
                   {tc(route)}
                 </Link>

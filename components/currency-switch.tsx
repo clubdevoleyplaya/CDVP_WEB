@@ -17,7 +17,7 @@ export function CurrencySwitch({ className = "" }: { className?: string }) {
     <div
       role="group"
       aria-label={t("currencyLabel")}
-      className={`flex gap-0.5 rounded-full border border-white/25 p-0.5 ${className}`}
+      className={`flex gap-0.5 rounded-full border border-band-line p-0.5 ${className}`}
     >
       {CURRENCIES.filter(({ code }) => code !== "EUR" || eurReady).map(({ code, label }) => (
         <button
@@ -26,7 +26,7 @@ export function CurrencySwitch({ className = "" }: { className?: string }) {
           onClick={() => setCurrency(code)}
           aria-pressed={currency === code}
           className={`rounded-full px-3 py-1 font-display text-xs font-bold tracking-wide transition-colors ${
-            currency === code ? "bg-sun text-band" : "text-white/80 hover:text-white"
+            currency === code ? "bg-sun text-navy" : "text-band-ink-soft hover:text-band-ink"
           }`}
         >
           {label}

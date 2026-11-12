@@ -201,7 +201,7 @@ export default function PerfilPage() {
             className={
               isSubscriber
                 ? undefined
-                : "border-yellow bg-yellow text-band hover:opacity-90"
+                : "border-yellow bg-yellow text-navy hover:opacity-90"
             }
           >
             {isSubscriber ? t("subscriber") : t("noSubscription")}
