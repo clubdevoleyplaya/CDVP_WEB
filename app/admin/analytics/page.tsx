@@ -22,20 +22,20 @@ import {
 
 const BRAND = {
   light: {
-    blue: "#1F4FA0",
+    blue: "#0B1B33",
     yellow: "#C9920A",
     green: "#2F9E5B",
-    ink: "#2B2166",
-    inkSoft: "#4B4A78",
-    line: "#DBDEEF",
+    ink: "#0B1B33",
+    inkSoft: "#4A5568",
+    line: "#E2DCCB",
   },
   dark: {
-    blue: "#6FA3E0",
+    blue: "#F7B733",
     yellow: "#F7B733",
     green: "#5FCB90",
-    ink: "#F4F6FB",
-    inkSoft: "#B7B6DE",
-    line: "#4A3F8F",
+    ink: "#F4F1E8",
+    inkSoft: "#A9B4C8",
+    line: "#2A3F61",
   },
 };
 
@@ -125,7 +125,7 @@ export default function AdminAnalyticsPage() {
           radius: ["45%", "70%"],
           center: ["36%", "50%"],
           itemStyle: {
-            borderColor: theme === "dark" ? "#362b7a" : "#ffffff",
+            borderColor: theme === "dark" ? "#0e2545" : "#faf7f0",
             borderWidth: 2,
           },
           label: { show: false },

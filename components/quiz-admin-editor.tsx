@@ -215,7 +215,7 @@ export function QuizAdminEditor({ slug }: QuizAdminEditorProps) {
             className="mt-1 w-full rounded-lg border border-input bg-transparent px-2.5 py-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
           />
         </label>
-        {saveError && <p className="text-sm text-red-500">{saveError}</p>}
+        {saveError && <p className="text-sm text-destructive">{saveError}</p>}
         <Button type="submit" disabled={saving || !newTitle.trim()} className="w-fit">
           Crear cuestionario
         </Button>
@@ -311,7 +311,7 @@ export function QuizAdminEditor({ slug }: QuizAdminEditorProps) {
             className="mt-1 w-full rounded-lg border border-input bg-transparent px-2.5 py-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
           />
         </label>
-        {saveError && <p className="text-sm text-red-500">{saveError}</p>}
+        {saveError && <p className="text-sm text-destructive">{saveError}</p>}
         <Button type="submit" disabled={saving || !newQuestionText.trim()} className="w-fit">
           Agregar pregunta
         </Button>

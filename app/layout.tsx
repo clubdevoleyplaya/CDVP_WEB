@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
-import { Oswald, Source_Serif_4, Geist } from "next/font/google";
+import { Barlow, Barlow_Condensed } from "next/font/google";
 import { DemoStateProvider } from "@/context/demo-state";
 import { Header } from "@/components/header";
 import { DemoBar } from "@/components/demo-bar";
@@ -11,19 +11,19 @@ import "./globals.css";
 import { CURRENCY_COOKIE, currencyFromCookie } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-const oswald = Oswald({
-  variable: "--font-oswald",
+const barlowCondensed = Barlow_Condensed({
+  variable: "--font-barlow-condensed",
   subsets: ["latin"],
-  weight: ["500", "700"],
+  weight: ["500", "600", "700"],
 });
 
-const sourceSerif = Source_Serif_4({
-  variable: "--font-source-serif",
+const barlow = Barlow({
+  variable: "--font-barlow",
   subsets: ["latin"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700"],
 });
+
+export const viewport = { themeColor: "#0b1b33" };
 
 export const metadata: Metadata = {
   title: "Club de Voley Playa",
@@ -45,7 +45,7 @@ export default async function RootLayout({
     <html
       lang={locale}
       suppressHydrationWarning
-      className={cn("h-full", oswald.variable, sourceSerif.variable, "font-sans", geist.variable)}
+      className={cn("h-full", barlowCondensed.variable, barlow.variable, "font-sans")}
     >
       <body className="flex min-h-full flex-col antialiased">
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH_THEME_SCRIPT }} />

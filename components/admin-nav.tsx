@@ -19,7 +19,7 @@ export function AdminNav() {
                 href={href}
                 aria-current={active ? "page" : undefined}
                 className={`inline-flex rounded-lg px-3 py-1.5 font-display text-xs font-bold uppercase tracking-wide transition-colors ${
-                  active ? "bg-blue text-white" : "text-ink hover:text-blue"
+                  active ? "bg-blue text-primary-foreground" : "text-ink hover:text-blue"
                 }`}
               >
                 {label}

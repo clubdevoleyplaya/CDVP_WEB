@@ -100,7 +100,7 @@ function DiscountRow({
           </p>
         )}
         {percent !== null && !inRange && (
-          <p role="alert" className="text-sm text-red-600">
+          <p role="alert" className="text-sm text-destructive">
             El porcentaje tiene que estar entre 0 y 100.
           </p>
         )}
@@ -111,7 +111,7 @@ function DiscountRow({
           {message && (
             <span
               role={message.kind === "error" ? "alert" : "status"}
-              className={message.kind === "error" ? "text-sm text-red-600" : "text-sm text-green"}
+              className={message.kind === "error" ? "text-sm text-destructive" : "text-sm text-green"}
             >
               {message.text}
             </span>
@@ -133,7 +133,7 @@ export function DiscountRulesEditor() {
       .catch(() => setError("No se pudieron cargar los descuentos."));
   }, []);
 
-  if (error) return <p role="alert" className="text-sm text-red-600">{error}</p>;
+  if (error) return <p role="alert" className="text-sm text-destructive">{error}</p>;
   if (!rules) {
     return (
       <div className="grid gap-4 md:grid-cols-2">

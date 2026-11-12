@@ -79,7 +79,7 @@ export function Testimonials() {
   return (
     <>
       <section className="mx-auto max-w-7xl px-6 py-16">
-        <h2 className="font-display text-2xl font-bold uppercase">{t("heading")}</h2>
+        <h2 className="font-display text-4xl font-bold uppercase">{t("heading")}</h2>
 
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {VIDEO_TESTIMONIALS.map((v, i) => (
@@ -91,7 +91,7 @@ export function Testimonials() {
       {/* Sección propia de Campamento: nunca mezclada con Campus (spec_00_testimonios-landing.md).
           Implementada como bloque del mismo landing, no ruta propia — confirmar con el usuario. */}
       <section className="mx-auto max-w-7xl px-6 pb-16">
-        <h2 className="font-display text-2xl font-bold uppercase">{t("campHeading")}</h2>
+        <h2 className="font-display text-4xl font-bold uppercase">{t("campHeading")}</h2>
 
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {CAMPAMENTO_VIDEO_IDS.map((videoId) => (
@@ -102,7 +102,7 @@ export function Testimonials() {
 
       {textTestimonials.length > 0 && (
         <section className="mx-auto max-w-3xl px-6 pb-16">
-          <h2 className="font-display text-2xl font-bold uppercase">{t("byCourse")}</h2>
+          <h2 className="font-display text-4xl font-bold uppercase">{t("byCourse")}</h2>
           <div className="mt-6 rounded-xl border border-line bg-surface p-6">
             <TestimonialSlider items={textTestimonials} />
           </div>
