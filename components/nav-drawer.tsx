@@ -53,7 +53,7 @@ export function NavDrawer() {
               render={
                 <Link
                   href={item.href}
-                  className="font-display rounded-md px-2 py-2.5 text-sm font-bold tracking-wide uppercase hover:bg-accent"
+                  className="font-display rounded-md px-2 py-3 text-lg font-bold tracking-wide uppercase hover:bg-accent"
                 >
                   {tm(item.key)}
                 </Link>
@@ -69,7 +69,7 @@ export function NavDrawer() {
                 render={
                   <Link
                     href="/perfil"
-                    className="flex items-center gap-2 rounded-lg border border-ink px-3 py-2 font-display text-xs font-bold uppercase tracking-wide"
+                    className="flex items-center gap-2 rounded-lg border border-ink px-3 py-2 font-display text-base font-bold uppercase tracking-wide"
                   >
                     <Avatar size="sm">
                       {me?.avatarUrl ? (
@@ -84,7 +84,7 @@ export function NavDrawer() {
               <Button
                 type="button"
                 variant="outline"
-                className="font-display text-xs font-bold tracking-wide uppercase"
+                className="font-display text-base font-bold tracking-wide uppercase"
                 onClick={() => {
                   setOpen(false);
                   signOut();
@@ -102,7 +102,7 @@ export function NavDrawer() {
                     href="/login"
                     className={buttonVariants({
                       variant: "outline",
-                      className: "font-display text-xs font-bold tracking-wide uppercase",
+                      className: "font-display text-base font-bold tracking-wide uppercase",
                     })}
                   >
                     {th("login")}
@@ -114,7 +114,7 @@ export function NavDrawer() {
                 render={
                   <Link
                     href="/signup"
-                    className="rounded-lg border border-blue bg-blue px-4 py-2 text-center font-display text-xs font-bold uppercase tracking-wide text-white"
+                    className="rounded-lg border border-blue bg-blue px-4 py-2 text-center font-display text-base font-bold uppercase tracking-wide text-primary-foreground"
                   >
                     {th("signup")}
                   </Link>

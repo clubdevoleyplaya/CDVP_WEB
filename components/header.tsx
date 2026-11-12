@@ -36,7 +36,7 @@ export function Header() {
           <Link
             key={item.key}
             href={item.href}
-            className="font-display text-xs font-bold uppercase tracking-wide hover:text-blue"
+            className="font-display text-base font-bold uppercase tracking-wide hover:text-blue"
           >
             {tm(item.key)}
           </Link>
@@ -67,7 +67,7 @@ export function Header() {
             </Link>
             <Link
               href="/signup"
-              className="hidden rounded-lg border border-blue bg-blue px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide text-white md:inline-flex"
+              className="hidden rounded-lg border border-blue bg-blue px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide text-primary-foreground md:inline-flex"
             >
               {t("signup")}
             </Link>

@@ -70,9 +70,9 @@
     "pay": "Ir a pagar"
   },
   "DemoBar": {
-    "activeSub": "Suscripción activa (Pack de Bienvenida{percent, plural, =0 {} other { + #% OFF en cursos}})",
-    "noSub": "Sin suscripción activa",
-    "subscribeCta": "Suscribite y conseguí el Pack de Bienvenida{percent, plural, =0 {} other { + #% OFF en cursos}}",
+    "activeSub": "Suscripción activa: Pack de Bienvenida desbloqueado{percent, plural, =0 {} other { · #% OFF en cursos}}",
+    "subscribeCta": "Suscríbete y llévate el Pack de Bienvenida{percent, plural, =0 {} other { + #% OFF en cursos}}",
+    "subscribeButton": "Quiero suscribirme →",
     "currencyLabel": "Elegí moneda"
   },
   "Catalog": {
@@ -105,7 +105,9 @@
     "title2": "Voley Playa",
     "tagline": "Hoy mismo podés empezar a convertirte en un atleta profesional de voley playa.",
     "cta": "Ver productos",
-    "ballAlt": "Pelota de voley playa — Club de Voley Playa"
+    "ballAlt": "Pelota de voley playa — Club de Voley Playa",
+    "photoAlt": "Juli Azaad defendiendo en la arena",
+    "cta2": "Ver cursos"
   },
   "Why": {
     "kicker": "¿Por qué hago esto?",
@@ -127,16 +129,6 @@
     "cred2": "Licenciado en Actividad Física",
     "cred3": "Entrenador internacional FIVB nivel I",
     "cred4": "Especialización en psicología de alto rendimiento deportivo — Barça Innovation Hub"
-  },
-  "WelcomePack": {
-    "label": "Pack de Bienvenida",
-    "benefit": "Beneficio de suscripción",
-    "name": "Pack de Bienvenida",
-    "description": "Acceso completo al pack de bienvenida como parte de tu suscripción mensual.",
-    "unlocked": "✅ Desbloqueado — bienvenido al club",
-    "lockedSubscribe": "🔒 Bloqueado — sumate a la suscripción",
-    "lockedLogin": "🔒 Bloqueado — iniciá sesión para ver el contenido",
-    "close": "Cerrar aviso"
   },
   "CourseTestimonials": {
     "label": "Testimonios",
@@ -552,14 +544,14 @@
   },
   "Menu": {
     "membership": "Membresía",
-    "players": "Jugadores/as",
+    "courses": "Cursos",
     "coaches": "Coaches",
     "events": "Eventos",
     "custom": "Personalizado",
     "contact": "Contacto"
   },
   "CategoryPage": {
-    "players": {
+    "courses": {
       "intro": "Cursos, planes y ejercicios para mejorar tu juego en la arena: técnica, físico y cabeza."
     },
     "coaches": {
@@ -570,6 +562,12 @@
     },
     "custom": {
       "intro": "Trabajo personalizado con Juli Azaad."
+    },
+    "groups": {
+      "technique": "Técnica",
+      "physical": "Físico y mentalidad",
+      "exercises": "Ejercicios",
+      "packs": "Packs"
     },
     "services": {
       "beachVolleyLab": {

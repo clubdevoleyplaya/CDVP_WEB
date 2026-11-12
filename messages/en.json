@@ -70,9 +70,9 @@
     "pay": "Go to payment"
   },
   "DemoBar": {
-    "activeSub": "Active subscription (Welcome Pack{percent, plural, =0 {} other { + #% OFF on courses}})",
-    "noSub": "No active subscription",
+    "activeSub": "Active subscription: Welcome Pack unlocked{percent, plural, =0 {} other { · #% OFF on courses}}",
     "subscribeCta": "Subscribe and get the Welcome Pack{percent, plural, =0 {} other { + #% OFF on courses}}",
+    "subscribeButton": "Subscribe now →",
     "currencyLabel": "Choose currency"
   },
   "Catalog": {
@@ -105,7 +105,9 @@
     "title2": "Voley Playa",
     "tagline": "Start today on your way to becoming a professional beach volleyball athlete.",
     "cta": "See products",
-    "ballAlt": "Beach volleyball — Club de Voley Playa"
+    "ballAlt": "Beach volleyball — Club de Voley Playa",
+    "photoAlt": "Juli Azaad digging in the sand",
+    "cta2": "See courses"
   },
   "Why": {
     "kicker": "Why am I doing this?",
@@ -127,16 +129,6 @@
     "cred2": "Degree in Physical Activity",
     "cred3": "FIVB International Coach, Level I",
     "cred4": "Specialization in high-performance sports psychology — Barça Innovation Hub"
-  },
-  "WelcomePack": {
-    "label": "Welcome Pack",
-    "benefit": "Subscription benefit",
-    "name": "Welcome Pack",
-    "description": "Full access to the welcome pack as part of your monthly subscription.",
-    "unlocked": "✅ Unlocked — welcome to the club",
-    "lockedSubscribe": "🔒 Locked — join the subscription",
-    "lockedLogin": "🔒 Locked — log in to see the content",
-    "close": "Close notice"
   },
   "CourseTestimonials": {
     "label": "Testimonials",
@@ -552,14 +544,14 @@
   },
   "Menu": {
     "membership": "Membership",
-    "players": "Players",
+    "courses": "Courses",
     "coaches": "Coaches",
     "events": "Events",
     "custom": "Personalized",
     "contact": "Contact"
   },
   "CategoryPage": {
-    "players": {
+    "courses": {
       "intro": "Courses, plans and exercises to improve your game on the sand: technique, fitness and mindset."
     },
     "coaches": {
@@ -570,6 +562,12 @@
     },
     "custom": {
       "intro": "Personalized work with Juli Azaad."
+    },
+    "groups": {
+      "technique": "Technique",
+      "physical": "Fitness & mindset",
+      "exercises": "Exercises",
+      "packs": "Packs"
     },
     "services": {
       "beachVolleyLab": {

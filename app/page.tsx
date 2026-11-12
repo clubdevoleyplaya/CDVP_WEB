@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { Hero } from "@/components/hero";
-import { WelcomePack } from "@/components/welcome-pack";
 import { Bio } from "@/components/bio";
 import { Why } from "@/components/why";
 import { Testimonials } from "@/components/testimonials";
@@ -24,7 +23,6 @@ export default function Home() {
 
   return (
     <>
-      <WelcomePack />
       <Hero />
 
       <Bio />
@@ -32,13 +30,13 @@ export default function Home() {
 
       <section id="destacados" className="mx-auto max-w-7xl px-6 py-16">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
-          <h2 className="font-display text-2xl font-bold uppercase">{t("featured")}</h2>
+          <h2 className="font-display text-4xl font-bold uppercase">{t("featured")}</h2>
           <div className="flex flex-wrap gap-4">
             {CATEGORY_ROUTES.map((route) => (
               <Link
                 key={route}
                 href={`/catalogo/${route}`}
-                className="font-display text-xs font-bold uppercase tracking-wide text-blue hover:underline"
+                className="font-display text-base font-bold uppercase tracking-wide text-blue hover:underline"
               >
                 {t("seeCategory", { category: tc(route) })}
               </Link>

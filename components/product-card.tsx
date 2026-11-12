@@ -53,12 +53,12 @@ export function ProductCard({ product: base }: { product: Product }) {
         <p className="w-fit rounded-lg bg-blue/10 px-2 py-0.5 font-display text-xs font-bold uppercase tracking-wide text-blue">
           {tc(product.category)}
         </p>
-        <h3 className="font-display text-lg font-bold uppercase">
+        <h3 className="font-display text-2xl font-bold uppercase">
           <Link href={`/producto/${product.slug}`} className="transition-colors hover:text-blue">
             {product.title}
           </Link>
         </h3>
-        <p className="flex-grow text-sm text-ink-soft">{product.shortDescription}</p>
+        <p className="flex-grow text-base text-ink-soft">{product.shortDescription}</p>
         {(product.rating || product.includes) && (
           <p className="flex flex-wrap items-center gap-x-1.5 text-xs text-ink-soft [&>*+*]:before:mr-1.5 [&>*+*]:before:content-['·']">
             {product.rating &&
@@ -76,7 +76,7 @@ export function ProductCard({ product: base }: { product: Product }) {
                     <TestimonialSlider items={product.testimonials} />
                     <Link
                       href={`/producto/${product.slug}`}
-                      className="mt-3 block w-fit rounded-lg bg-ink px-4 py-2 font-display text-xs font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
+                      className="mt-3 block w-fit rounded-lg bg-ink px-4 py-2 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
                     >
                       {t("viewCourse")}
                     </Link>
@@ -103,7 +103,7 @@ export function ProductCard({ product: base }: { product: Product }) {
         <div className="mt-2 flex items-center gap-2">
           <Link
             href={`/producto/${product.slug}`}
-            className="w-fit rounded-lg bg-ink px-4 py-2 font-display text-xs font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
+            className="w-fit rounded-lg bg-ink px-4 py-2 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
           >
             {t("viewDetail")}
           </Link>

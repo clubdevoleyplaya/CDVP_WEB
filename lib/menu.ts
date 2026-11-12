@@ -4,7 +4,7 @@
 
 export const MENU_ITEMS = [
   { key: "membership", href: "/suscripcion" },
-  { key: "players", href: "/categoria/jugadores" },
+  { key: "courses", href: "/categoria/cursos" },
   { key: "coaches", href: "/categoria/coaches" },
   { key: "events", href: "/categoria/eventos" },
   { key: "custom", href: "/categoria/personalizado" },
@@ -13,20 +13,23 @@ export const MENU_ITEMS = [
 export type MenuKey = (typeof MENU_ITEMS)[number]["key"];
 
 export const CATEGORY_PAGES = {
-  jugadores: {
-    key: "players",
-    products: [
-      "banco-de-120-ejercicios",
-      "plan-de-gimnasio-para-mejorar-el-salto",
-      "plan-de-movilidad-21-dias",
-      "mentalidad-deportiva",
-      "recepcion",
-      "armado",
-      "ataque",
-      "defensa",
-      "bloqueo",
-      "saque",
-      "todos-los-cursos",
+  cursos: {
+    key: "courses",
+    groups: [
+      {
+        key: "technique",
+        products: ["recepcion", "armado", "ataque", "defensa", "bloqueo", "saque"],
+      },
+      {
+        key: "physical",
+        products: [
+          "plan-de-gimnasio-para-mejorar-el-salto",
+          "plan-de-movilidad-21-dias",
+          "mentalidad-deportiva",
+        ],
+      },
+      { key: "exercises", products: ["banco-de-120-ejercicios"] },
+      { key: "packs", products: ["todos-los-cursos"] },
     ],
   },
   coaches: {
@@ -47,6 +50,12 @@ export const CATEGORY_PAGES = {
   // Aún no son productos con compra (spec 7): se consultan por Contacto.
   personalizado: { key: "custom", products: [] },
 } as const;
+export function categoryGroups(
+  page: (typeof CATEGORY_PAGES)[keyof typeof CATEGORY_PAGES],
+): { key?: string; products: readonly string[] }[] {
+  return "groups" in page ? [...page.groups] : [{ products: page.products }];
+}
+
 export type CategoryPageSlug = keyof typeof CATEGORY_PAGES;
 
 export function isCategoryPageSlug(value: string): value is CategoryPageSlug {

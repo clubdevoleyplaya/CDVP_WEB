@@ -32,7 +32,7 @@ function LoginPageContent() {
 
       {searchParams.get("error") && (
         // Cualquier valor de `error` muestra el mismo texto fijo: el parámetro no se refleja.
-        <p role="alert" className="mt-4 text-sm text-red-600">
+        <p role="alert" className="mt-4 text-sm text-destructive">
           {t("errors.invalidLink")}
         </p>
       )}
