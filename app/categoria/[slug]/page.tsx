@@ -32,7 +32,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
-      <h1 className="font-display text-3xl font-bold uppercase">{t(page.key)}</h1>
+      <h1 className="font-display text-4xl font-bold uppercase leading-none">{t(page.key)}</h1>
       <p className="mt-3 max-w-[65ch] text-base text-ink-soft">{tc(`${page.key}.intro`)}</p>
 
       {groups.map((group) => {
@@ -58,7 +58,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         <>
           <ul className="mt-8 grid gap-5 sm:grid-cols-2">
             {CUSTOM_SERVICES.map((service) => (
-              <li key={service} className="rounded-xl border border-line bg-surface p-6">
+              <li key={service} className="rounded-xl border border-line bg-card-bg p-6">
                 <h2 className="font-display text-lg font-bold uppercase">
                   {tc(`services.${service}.title`)}
                 </h2>

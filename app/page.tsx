@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { SectionHeading } from "@/components/section-heading";
 import { Hero } from "@/components/hero";
 import { Bio } from "@/components/bio";
 import { Why } from "@/components/why";
@@ -30,10 +31,10 @@ export default function Home() {
 
       <section id="destacados" className="mx-auto max-w-7xl px-6 py-16">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
-          <h2 className="font-display text-4xl font-bold uppercase">{t("featured")}</h2>
+          <SectionHeading title={t("featured")} />
           <div className="flex flex-wrap gap-4">
             {CATEGORY_ROUTES.map((route) => (
-              <Link
+              <Link prefetch={false}
                 key={route}
                 href={`/catalogo/${route}`}
                 className="font-display text-base font-bold uppercase tracking-wide text-blue hover:underline"

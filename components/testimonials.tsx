@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/section-heading";
 import { useTranslations } from "next-intl";
 import { TestimonialSlider } from "@/components/testimonial-slider";
 import { useLocalizeProduct } from "@/lib/localize-product";
@@ -17,23 +18,23 @@ const TEXT_TESTIMONIALS = products.flatMap((p) =>
   (p.testimonials ?? []).map((t) => ({ ...t, productSlug: p.slug, productTitle: p.title })),
 );
 
-// IDs reales de YouTube Shorts, pasados por Juli el 2026-08-13 (todo el
-// listado de campus/campamento). Formato vertical (9:16), no 16:9.
+// IDs de Vimeo de la planilla de Juli ("Testimonios (videos)", re-subidos el 2026-11-12).
+// Formato vertical (9:16).
 const CAMPUS_VIDEO_IDS = [
-  "v9th5Lzw2pQ", // Phoenix 1
-  "huRWjiSSjmw", // Phoenix 2
-  "2oTx-qDcSSU", // Phoenix 3
-  "o3zQd5TDKcw", // Santiago 1
-  "d0KV5RivCmA", // Santiago 2
-  "QcSAdZamVg0", // Santiago 3
-  "xuLayMj_uQk", // Santiago 4
-  "WzS3a2tjMc0", // Santiago 5
-  "g_7HsWN-aP0", // Guanaqueros 1
-  "xrW2SYuEjhs", // Guanaqueros 2
-  "XAb927TuWpo", // Guanaqueros 3
+  "1246307227", // Phoenix 1
+  "1246307201", // Phoenix 2
+  "1246307200", // Phoenix 3
+  "1246308119", // Santiago 1
+  "1246308062", // Santiago 2
+  "1246308113", // Santiago 3
+  "1246308121", // Santiago 4
+  "1246308138", // Santiago 5
+  "1246307763", // Guanaqueros 1
+  "1246307747", // Guanaqueros 2
+  "1246307756", // Guanaqueros 3
 ];
 
-const CAMPAMENTO_VIDEO_IDS = ["8GQGaKE-Fp0", "l_093rxXi54"];
+const CAMPAMENTO_VIDEO_IDS = ["1246308293", "1246308294"];
 
 // Campus: todos mezclados sin distinción de sede, es el bloque de mayor
 // volumen y contenido general del club (spec_00_testimonios-landing.md).
@@ -45,12 +46,12 @@ const VIDEO_TESTIMONIALS: { context: string; videoId: string | null }[] = [
 function VideoCard({ context, videoId }: { context: string; videoId: string | null }) {
   const t = useTranslations("Testimonials");
   return (
-    <figure className="overflow-hidden rounded-xl border border-line bg-surface">
+    <figure className="overflow-hidden rounded-xl border border-line bg-card-bg">
       {videoId ? (
         <div className="aspect-[9/16] w-full">
           <iframe
             className="h-full w-full"
-            src={`https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&controls=0`}
+            src={`https://player.vimeo.com/video/${videoId}?dnt=1`}
             title={t("videoTitle", { context })}
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -78,20 +79,22 @@ export function Testimonials() {
   });
   return (
     <>
-      <section className="mx-auto max-w-7xl px-6 py-16">
-        <h2 className="font-display text-4xl font-bold uppercase">{t("heading")}</h2>
+      <section className="bg-deep text-white [--ink:#f4f1e8] [--ink-soft:#a9b4c8] [--line:rgba(255,255,255,0.2)] [--blue:#f7b733] [--card-bg:#0e2545]">
+        <div className="mx-auto max-w-7xl px-6 py-16">
+        <SectionHeading title={t("heading")} />
 
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {VIDEO_TESTIMONIALS.map((v, i) => (
             <VideoCard key={`${v.context}-${v.videoId ?? i}`} context={v.context} videoId={v.videoId} />
           ))}
         </div>
+        </div>
       </section>
 
       {/* Sección propia de Campamento: nunca mezclada con Campus (spec_00_testimonios-landing.md).
           Implementada como bloque del mismo landing, no ruta propia — confirmar con el usuario. */}
       <section className="mx-auto max-w-7xl px-6 pb-16">
-        <h2 className="font-display text-4xl font-bold uppercase">{t("campHeading")}</h2>
+        <SectionHeading title={t("campHeading")} />
 
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {CAMPAMENTO_VIDEO_IDS.map((videoId) => (
@@ -102,8 +105,8 @@ export function Testimonials() {
 
       {textTestimonials.length > 0 && (
         <section className="mx-auto max-w-3xl px-6 pb-16">
-          <h2 className="font-display text-4xl font-bold uppercase">{t("byCourse")}</h2>
-          <div className="mt-6 rounded-xl border border-line bg-surface p-6">
+          <SectionHeading title={t("byCourse")} />
+          <div className="mt-6 rounded-xl border border-line bg-card-bg p-6">
             <TestimonialSlider items={textTestimonials} />
           </div>
         </section>

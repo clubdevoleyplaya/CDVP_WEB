@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LanguageSelector } from "@/components/language-selector";
+import { CurrencySwitch } from "@/components/currency-switch";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { NavDrawer } from "@/components/nav-drawer";
 import { CartDrawer } from "@/components/cart-drawer";
@@ -23,17 +24,14 @@ export function Header() {
   const initial = (displayName ?? "?").charAt(0).toUpperCase();
 
   return (
-    <header className="sticky top-0 z-20 flex flex-nowrap items-center gap-2 border-b border-line bg-bg/90 px-4 py-3 backdrop-blur sm:gap-4 sm:px-6 md:flex-wrap">
+    <header className="sticky top-0 z-20 flex flex-nowrap items-center gap-2 border-b border-white/10 bg-deep px-4 py-1.5 text-white [--ink:#f4f1e8] [--ink-soft:#a9b4c8] [--line:rgba(255,255,255,0.2)] [--blue:#f7b733] [--background:rgba(255,255,255,0.08)] [--foreground:#f4f1e8] [--input:rgba(255,255,255,0.25)] [--muted:rgba(255,255,255,0.16)] [--accent:rgba(255,255,255,0.16)] [--accent-foreground:#f4f1e8] [--muted-foreground:#a9b4c8] sm:gap-4 sm:px-6 md:flex-wrap">
       <NavDrawer />
-      <Link href="/" className="flex min-w-0 items-center gap-2">
-        <Image src="/brand/ball.png" alt="" width={32} height={32} className="h-8 w-8 shrink-0" />
-        <span className="font-display text-sm font-bold uppercase leading-tight tracking-wide sm:text-lg">
-          Club de Voley Playa
-        </span>
+      <Link prefetch={false} href="/" aria-label="Club de Voley Playa" className="flex shrink-0 items-center">
+        <Image src="/brand/logo.webp" alt="Club de Voley Playa by Juli Azaad" width={1000} height={769} priority className="h-16 w-auto sm:h-[72px]" />
       </Link>
       <nav className="ml-4 hidden flex-wrap gap-5 md:flex">
         {MENU_ITEMS.map((item) => (
-          <Link
+          <Link prefetch={false}
             key={item.key}
             href={item.href}
             className="font-display text-base font-bold uppercase tracking-wide hover:text-blue"
@@ -43,11 +41,12 @@ export function Header() {
         ))}
       </nav>
       <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
+        <CurrencySwitch className="hidden sm:flex" />
         <LanguageSelector />
         <ThemeToggle />
         <CartDrawer />
         {session ? (
-          <Link
+          <Link prefetch={false}
             href="/perfil"
             className="hidden items-center gap-2 rounded-lg border border-ink px-3 py-1.5 font-display text-xs font-bold uppercase tracking-wide md:inline-flex"
           >
@@ -59,15 +58,15 @@ export function Header() {
           </Link>
         ) : (
           <>
-            <Link
+            <Link prefetch={false}
               href={loginHref(pathname)}
               className="hidden rounded-lg border border-ink px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide md:inline-flex"
             >
               {t("login")}
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/signup"
-              className="hidden rounded-lg border border-blue bg-blue px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide text-primary-foreground md:inline-flex"
+              className="hidden rounded-lg bg-sun px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide text-navy md:inline-flex"
             >
               {t("signup")}
             </Link>

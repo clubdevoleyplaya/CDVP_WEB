@@ -17,7 +17,7 @@ export default function ContactPage() {
 
   return (
     <section className="mx-auto max-w-2xl px-6 py-16">
-      <h1 className="font-display text-3xl font-bold uppercase">{t("title")}</h1>
+      <h1 className="font-display text-4xl font-bold uppercase leading-none">{t("title")}</h1>
       <p className="mt-3 text-base text-ink-soft">{t("intro")}</p>
 
       <div className="mt-8 flex flex-col gap-6 text-sm">

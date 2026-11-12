@@ -30,7 +30,7 @@ export default async function PricingPage() {
   const localize = await getLocalizeProduct();
   return (
     <section className="mx-auto max-w-2xl px-6 py-16">
-      <h1 className="font-display text-2xl font-bold uppercase">{t("title")}</h1>
+      <h1 className="font-display text-4xl font-bold uppercase leading-none">{t("title")}</h1>
       <p className="mt-2 text-sm text-ink-soft">
         {t("intro")}
       </p>

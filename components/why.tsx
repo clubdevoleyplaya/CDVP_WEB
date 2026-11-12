@@ -1,12 +1,11 @@
+import { SectionHeading } from "@/components/section-heading";
 import { useTranslations } from "next-intl";
 
 export function Why() {
   const t = useTranslations("Why");
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
-      <p className="font-display text-base font-bold uppercase tracking-wider text-blue">
-        {t("kicker")}
-      </p>
+      <SectionHeading title={t("kicker")} />
       <div className="mt-3 grid items-start gap-8 lg:grid-cols-2 lg:gap-16">
         <blockquote className="border-l-[3px] border-blue pl-5 text-3xl italic leading-snug">
           &ldquo;{t("quote")}&rdquo;

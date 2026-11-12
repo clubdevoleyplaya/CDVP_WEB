@@ -28,7 +28,7 @@ export default async function CatalogoPage({
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
       <div className="flex flex-wrap items-baseline gap-4">
-        <h1 className="font-display text-3xl font-bold uppercase">
+        <h1 className="font-display text-4xl font-bold uppercase leading-none">
           {tc(route)}
         </h1>
         <CategoryDiscountNote
