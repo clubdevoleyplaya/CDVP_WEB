@@ -34,7 +34,7 @@ export default function Home() {
           <SectionHeading title={t("featured")} />
           <div className="flex flex-wrap gap-4">
             {CATEGORY_ROUTES.map((route) => (
-              <Link
+              <Link prefetch={false}
                 key={route}
                 href={`/catalogo/${route}`}
                 className="font-display text-base font-bold uppercase tracking-wide text-blue hover:underline"

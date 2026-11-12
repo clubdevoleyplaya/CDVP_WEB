@@ -50,7 +50,7 @@ export function Hero() {
             >
               {t("cta")}
             </a>
-            <Link
+            <Link prefetch={false}
               href="/categoria/cursos"
               className="inline-block rounded-lg border border-band-ink/50 px-8 py-3.5 font-display text-lg font-bold uppercase tracking-wide text-band-ink transition-colors hover:bg-band-ink/10"
             >
@@ -60,7 +60,7 @@ export function Hero() {
           <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-band-line pt-5">
             {CHIPS.map((route) => (
               <li key={route}>
-                <Link
+                <Link prefetch={false}
                   href={`/catalogo/${route}`}
                   className="font-display text-base font-semibold uppercase tracking-wide text-band-ink-soft hover:text-band-accent"
                 >

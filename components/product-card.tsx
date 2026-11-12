@@ -30,7 +30,7 @@ export function ProductCard({ product: base }: { product: Product }) {
       style={{ WebkitMaskImage: "-webkit-radial-gradient(white, black)" }}
     >
       {product.image ? (
-        <Link
+        <Link prefetch={false}
           href={`/producto/${product.slug}`}
           aria-label={t("view", { title: product.title })}
           className="relative block aspect-video w-full overflow-hidden rounded-t-xl"
@@ -54,7 +54,7 @@ export function ProductCard({ product: base }: { product: Product }) {
           {tc(product.category)}
         </p>
         <h3 className="font-display text-2xl font-bold uppercase">
-          <Link href={`/producto/${product.slug}`} className="transition-colors hover:text-blue">
+          <Link prefetch={false} href={`/producto/${product.slug}`} className="transition-colors hover:text-blue">
             {product.title}
           </Link>
         </h3>
@@ -74,7 +74,7 @@ export function ProductCard({ product: base }: { product: Product }) {
                   </PopoverTrigger>
                   <PopoverContent>
                     <TestimonialSlider items={product.testimonials} />
-                    <Link
+                    <Link prefetch={false}
                       href={`/producto/${product.slug}`}
                       className="mt-3 block w-fit rounded-lg bg-ink px-4 py-2 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
                     >
@@ -101,7 +101,7 @@ export function ProductCard({ product: base }: { product: Product }) {
           </span>
         </div>
         <div className="mt-2 flex items-center gap-2">
-          <Link
+          <Link prefetch={false}
             href={`/producto/${product.slug}`}
             className="w-fit rounded-lg bg-ink px-4 py-2 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue"
           >
