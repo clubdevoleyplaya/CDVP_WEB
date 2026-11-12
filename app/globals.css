@@ -5,11 +5,11 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 :root {
-  --bg: #faf7f0;
-  --surface: #f1ecdf;
+  --bg: #eaf0f8;
+  --surface: #dde6f2;
   --ink: #0b1b33;
   --ink-soft: #4a5568;
-  --line: #e2dccb;
+  --line: #c3d0e3;
   --blue: #0b1b33;
   --yellow: #c9920a;
   --green: #2f9e5b;
@@ -20,6 +20,7 @@
   --band-border: #0b1b33;
   --band-accent: #9a6b00;
   --navy: #0b1b33;
+  --deep: #0b1b33;
   --sun: #f7b733;
   --card-bg: #ffffff;
 
@@ -33,7 +34,7 @@
   --popover: var(--surface);
   --popover-foreground: var(--ink);
   --primary: var(--blue);
-  --primary-foreground: #faf7f0;
+  --primary-foreground: #f4f7fb;
   --secondary: var(--surface);
   --secondary-foreground: var(--ink);
   --muted: var(--surface);
@@ -53,7 +54,7 @@
   --sidebar: var(--surface);
   --sidebar-foreground: var(--ink);
   --sidebar-primary: var(--blue);
-  --sidebar-primary-foreground: #faf7f0;
+  --sidebar-primary-foreground: #f4f7fb;
   --sidebar-accent: var(--surface);
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: var(--line);
@@ -75,6 +76,7 @@
   --band-line: rgba(255, 255, 255, 0.25);
   --band-border: rgba(255, 255, 255, 0.12);
   --band-accent: #f7b733;
+  --deep: #0e2545;
   --card-bg: #0e2545;
   --primary-foreground: #0b1b33;
   --sidebar-primary-foreground: #0b1b33;
@@ -96,6 +98,7 @@
   --color-band-border: var(--band-border);
   --color-band-accent: var(--band-accent);
   --color-navy: var(--navy);
+  --color-deep: var(--deep);
   --color-sun: var(--sun);
   --color-card-bg: var(--card-bg);
   --font-display: var(--font-barlow-condensed);

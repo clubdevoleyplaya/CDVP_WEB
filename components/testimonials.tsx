@@ -79,7 +79,7 @@ export function Testimonials() {
   });
   return (
     <>
-      <section className="bg-band text-band-ink">
+      <section className="bg-deep text-white [--ink:#f4f1e8] [--ink-soft:#a9b4c8] [--line:rgba(255,255,255,0.2)] [--blue:#f7b733] [--card-bg:#0e2545]">
         <div className="mx-auto max-w-7xl px-6 py-16">
         <SectionHeading title={t("heading")} />
 

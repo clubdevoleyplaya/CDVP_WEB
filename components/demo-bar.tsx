@@ -11,7 +11,7 @@ export function DemoBar() {
   const { isSubscriber, discountPercent } = useDemoState();
 
   return (
-    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-b border-band-border bg-band px-4 py-2 text-sm text-band-ink sm:px-6 sm:py-3">
+    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 bg-deep px-4 py-2 text-sm text-white sm:px-6 sm:py-3">
       {isSubscriber ? (
         <span className="font-semibold">{t("activeSub", { percent: discountPercent.curso })}</span>
       ) : (
