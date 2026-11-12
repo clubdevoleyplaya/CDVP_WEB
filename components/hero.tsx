@@ -12,12 +12,12 @@ export function Hero() {
   const tc = useTranslations("Categories.routes");
   return (
     <section className="overflow-hidden bg-band text-band-ink">
-      <div className="mx-auto grid min-h-[min(80vh,720px)] max-w-7xl grid-cols-1 items-center gap-8 px-6 pt-12 md:grid-cols-[0.95fr_1.05fr] md:gap-12 md:pt-20">
+      <div className="mx-auto grid min-h-[min(70vh,560px)] max-w-7xl grid-cols-1 items-center gap-8 px-6 pt-12 md:grid-cols-[0.95fr_1.05fr] md:gap-12 md:pt-20">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="pb-12 md:pb-20"
+          className="pb-12 md:pb-10"
         >
           <p className="inline-block border-l-4 border-band-accent bg-band-ink/10 px-3 py-1 font-display text-sm font-semibold uppercase tracking-[0.18em] text-band-accent">
             {t("kicker")}
@@ -59,7 +59,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="order-last mx-auto w-full max-w-sm self-end md:order-first md:-mb-32 md:-ml-16 md:w-[calc(100%+4rem)] md:max-w-none"
+          className="order-last mx-auto w-full max-w-sm self-end md:order-first md:-mb-4 md:-ml-24 md:-mt-28 md:w-[calc(100%+8rem)] md:max-w-none"
         >
           <Image
             src="/images/hero/pelota-manos.webp"
