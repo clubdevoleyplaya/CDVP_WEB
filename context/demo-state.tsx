@@ -5,6 +5,7 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 
 import { DEFAULT_DISCOUNT_PERCENT, type DiscountPercent, type EurPrices } from "@/lib/price";
 import { sessionIsDead } from "@/lib/session-check";
+import { cachedJson } from "@/lib/cached-json";
 import { createClient } from "@/lib/supabase/client";
 
 import { CURRENCY_COOKIE, type Currency } from "@/lib/locale";
@@ -86,16 +87,18 @@ async function fetchMe(accessToken: string): Promise<Me | null> {
 }
 
 async function fetchDiscountPercent(): Promise<DiscountPercent | null> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/descuentos`);
-  if (!res.ok) return null;
-  const data = await res.json();
+  const data = await cachedJson<{ descuentos?: Partial<DiscountPercent> }>(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/descuentos`,
+  );
+  if (!data) return null;
   return { ...DEFAULT_DISCOUNT_PERCENT, ...data.descuentos };
 }
 
 async function fetchEurPrices(): Promise<{ prices: EurPrices; complete: boolean } | null> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/precios-eur`);
-  if (!res.ok) return null;
-  const data = await res.json();
+  const data = await cachedJson<{ precios?: Record<string, unknown>; completo?: boolean }>(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/precios-eur`,
+  );
+  if (!data) return null;
   const prices: EurPrices = {};
   for (const [slug, p] of Object.entries(data.precios ?? {})) {
     const { price, compare } = p as { price: number | string; compare: number | string | null };

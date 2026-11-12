@@ -23,6 +23,18 @@ function ensurePreferenceCookies(request: NextRequest): { name: string; value: s
 
 export async function proxy(request: NextRequest) {
   const newPreferenceCookies = ensurePreferenceCookies(request);
+
+  // Solo /admin necesita validar la sesión en el servidor (una llamada a Supabase Auth por visita).
+  // El resto de las páginas no lee la sesión en el servidor: el navegador la maneja y la refresca.
+  // Así una persona con sesión no genera una llamada a Auth por cada página o precarga de enlace.
+  if (!request.nextUrl.pathname.startsWith("/admin")) {
+    const response = NextResponse.next({ request });
+    newPreferenceCookies.forEach(({ name, value }) =>
+      response.cookies.set(name, value, PREFERENCE_COOKIE_OPTIONS),
+    );
+    return response;
+  }
+
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(

@@ -19,12 +19,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AuthGuard } from "@/components/auth-guard";
+import { shrinkImage } from "@/lib/image-resize";
 import { useDemoState } from "@/context/demo-state";
 import type { CourseAccess } from "@/lib/course-access";
 import { getProductBySlug } from "@/lib/products";
 import { createClient } from "@/lib/supabase/client";
 
 const MAX_BANNER_BYTES = 5 * 1024 * 1024;
+const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
+const AVATAR_MAX_SIDE = 256;
+const BANNER_MAX_SIDE = 1280;
+// Cada subida usa un nombre nuevo (fecha), así que el navegador puede guardarla un año.
+const IMAGE_CACHE_SECONDS = "31536000";
 
 
 export default function PerfilPage() {
@@ -62,13 +68,18 @@ export default function PerfilPage() {
   async function handleAvatarUpload(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file || !session) return;
+    if (!file.type.startsWith("image/") || file.size > MAX_AVATAR_BYTES) {
+      e.target.value = "";
+      return;
+    }
     setUploading(true);
     try {
       const supabase = createClient();
-      const path = `${session.user.id}/${Date.now()}-${file.name}`;
+      const small = await shrinkImage(file, AVATAR_MAX_SIDE);
+      const path = `${session.user.id}/${Date.now()}.${small === file ? "jpg" : "webp"}`;
       const { error } = await supabase.storage
         .from("avatars")
-        .upload(path, file, { upsert: true });
+        .upload(path, small, { upsert: true, cacheControl: IMAGE_CACHE_SECONDS });
       if (error) throw error;
       const { data } = supabase.storage.from("avatars").getPublicUrl(path);
       await updateProfile({ avatarUrl: data.publicUrl });
@@ -95,10 +106,11 @@ export default function PerfilPage() {
     setBannerUploading(true);
     try {
       const supabase = createClient();
-      const path = `${session.user.id}/${Date.now()}-${file.name}`;
+      const small = await shrinkImage(file, BANNER_MAX_SIDE);
+      const path = `${session.user.id}/${Date.now()}.${small === file ? "jpg" : "webp"}`;
       const { error } = await supabase.storage
         .from("banners")
-        .upload(path, file, { upsert: true });
+        .upload(path, small, { upsert: true, cacheControl: IMAGE_CACHE_SECONDS });
       if (error) throw error;
       const { data } = supabase.storage.from("banners").getPublicUrl(path);
       await updateProfile({ bannerUrl: data.publicUrl });
