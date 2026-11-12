@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/section-heading";
 import { useTranslations } from "next-intl";
 import { TestimonialSlider } from "@/components/testimonial-slider";
 import { useLocalizeProduct } from "@/lib/localize-product";
@@ -45,7 +46,7 @@ const VIDEO_TESTIMONIALS: { context: string; videoId: string | null }[] = [
 function VideoCard({ context, videoId }: { context: string; videoId: string | null }) {
   const t = useTranslations("Testimonials");
   return (
-    <figure className="overflow-hidden rounded-xl border border-line bg-surface">
+    <figure className="overflow-hidden rounded-xl border border-line bg-card-bg">
       {videoId ? (
         <div className="aspect-[9/16] w-full">
           <iframe
@@ -78,20 +79,22 @@ export function Testimonials() {
   });
   return (
     <>
-      <section className="mx-auto max-w-7xl px-6 py-16">
-        <h2 className="font-display text-4xl font-bold uppercase">{t("heading")}</h2>
+      <section className="bg-band text-white [--ink:#f4f1e8] [--ink-soft:#a9b4c8] [--blue:#f7b733] [--line:rgba(255,255,255,0.2)] [--card-bg:#0e2545]">
+        <div className="mx-auto max-w-7xl px-6 py-16">
+        <SectionHeading title={t("heading")} />
 
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {VIDEO_TESTIMONIALS.map((v, i) => (
             <VideoCard key={`${v.context}-${v.videoId ?? i}`} context={v.context} videoId={v.videoId} />
           ))}
         </div>
+        </div>
       </section>
 
       {/* Sección propia de Campamento: nunca mezclada con Campus (spec_00_testimonios-landing.md).
           Implementada como bloque del mismo landing, no ruta propia — confirmar con el usuario. */}
       <section className="mx-auto max-w-7xl px-6 pb-16">
-        <h2 className="font-display text-4xl font-bold uppercase">{t("campHeading")}</h2>
+        <SectionHeading title={t("campHeading")} />
 
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {CAMPAMENTO_VIDEO_IDS.map((videoId) => (
@@ -102,8 +105,8 @@ export function Testimonials() {
 
       {textTestimonials.length > 0 && (
         <section className="mx-auto max-w-3xl px-6 pb-16">
-          <h2 className="font-display text-4xl font-bold uppercase">{t("byCourse")}</h2>
-          <div className="mt-6 rounded-xl border border-line bg-surface p-6">
+          <SectionHeading title={t("byCourse")} />
+          <div className="mt-6 rounded-xl border border-line bg-card-bg p-6">
             <TestimonialSlider items={textTestimonials} />
           </div>
         </section>

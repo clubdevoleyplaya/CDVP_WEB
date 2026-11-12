@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SectionHeading } from "@/components/section-heading";
 import { useTranslations } from "next-intl";
 
 export function Bio() {
@@ -15,9 +16,7 @@ export function Bio() {
         />
       </div>
       <div>
-        <p className="font-display text-base font-bold uppercase tracking-wider text-blue">
-          {t("kicker")}
-        </p>
+        <SectionHeading title={t("kicker")} />
         <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-start">
           <p className="max-w-[70ch] text-xl leading-relaxed">
             {t("p1")}

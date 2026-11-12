@@ -23,7 +23,7 @@ export function LanguageSelector() {
       aria-label={t("label")}
       value={locale}
       onChange={(e) => change(e.target.value)}
-      className="rounded-lg border border-ink/20 bg-bg px-2 py-1.5 font-display text-xs font-bold uppercase tracking-wide"
+      className="rounded-lg border border-ink/20 bg-transparent px-2 py-1.5 font-display text-xs font-bold uppercase tracking-wide"
     >
       {LOCALES.map((code) => (
         <option key={code} value={code}>

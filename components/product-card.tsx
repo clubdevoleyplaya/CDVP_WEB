@@ -26,7 +26,7 @@ export function ProductCard({ product: base }: { product: Product }) {
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.35 }}
       whileHover={{ y: -3 }}
-      className="flex flex-col overflow-hidden rounded-xl border border-line bg-surface"
+      className="flex flex-col overflow-hidden rounded-xl border border-line bg-card-bg"
       style={{ WebkitMaskImage: "-webkit-radial-gradient(white, black)" }}
     >
       {product.image ? (

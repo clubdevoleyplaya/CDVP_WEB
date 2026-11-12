@@ -15,6 +15,7 @@
   --green: #2f9e5b;
   --band: #0b1b33;
   --sun: #f7b733;
+  --card-bg: #ffffff;
 
   /* Tokens shadcn/ui — alias de la paleta de marca de arriba, no una paleta nueva.
      Al referenciar var(--bg)/var(--ink)/etc. heredan el theming claro/oscuro
@@ -63,6 +64,7 @@
   --yellow: #f7b733;
   --green: #5fcb90;
   --band: #0e2545;
+  --card-bg: #0e2545;
   --primary-foreground: #0b1b33;
   --sidebar-primary-foreground: #0b1b33;
 }
@@ -78,6 +80,7 @@
   --color-green: var(--green);
   --color-band: var(--band);
   --color-sun: var(--sun);
+  --color-card-bg: var(--card-bg);
   --font-display: var(--font-barlow-condensed);
   --font-body: var(--font-barlow);
   --font-heading: var(--font-barlow);
