@@ -18,23 +18,23 @@ const TEXT_TESTIMONIALS = products.flatMap((p) =>
   (p.testimonials ?? []).map((t) => ({ ...t, productSlug: p.slug, productTitle: p.title })),
 );
 
-// IDs reales de YouTube Shorts, pasados por Juli el 2026-08-13 (todo el
-// listado de campus/campamento). Formato vertical (9:16), no 16:9.
+// IDs de Vimeo de la planilla de Juli ("Testimonios (videos)", re-subidos el 2026-11-12).
+// Formato vertical (9:16).
 const CAMPUS_VIDEO_IDS = [
-  "v9th5Lzw2pQ", // Phoenix 1
-  "huRWjiSSjmw", // Phoenix 2
-  "2oTx-qDcSSU", // Phoenix 3
-  "o3zQd5TDKcw", // Santiago 1
-  "d0KV5RivCmA", // Santiago 2
-  "QcSAdZamVg0", // Santiago 3
-  "xuLayMj_uQk", // Santiago 4
-  "WzS3a2tjMc0", // Santiago 5
-  "g_7HsWN-aP0", // Guanaqueros 1
-  "xrW2SYuEjhs", // Guanaqueros 2
-  "XAb927TuWpo", // Guanaqueros 3
+  "1246307227", // Phoenix 1
+  "1246307201", // Phoenix 2
+  "1246307200", // Phoenix 3
+  "1246308119", // Santiago 1
+  "1246308062", // Santiago 2
+  "1246308113", // Santiago 3
+  "1246308121", // Santiago 4
+  "1246308138", // Santiago 5
+  "1246307763", // Guanaqueros 1
+  "1246307747", // Guanaqueros 2
+  "1246307756", // Guanaqueros 3
 ];
 
-const CAMPAMENTO_VIDEO_IDS = ["8GQGaKE-Fp0", "l_093rxXi54"];
+const CAMPAMENTO_VIDEO_IDS = ["1246308293", "1246308294"];
 
 // Campus: todos mezclados sin distinción de sede, es el bloque de mayor
 // volumen y contenido general del club (spec_00_testimonios-landing.md).
@@ -51,7 +51,7 @@ function VideoCard({ context, videoId }: { context: string; videoId: string | nu
         <div className="aspect-[9/16] w-full">
           <iframe
             className="h-full w-full"
-            src={`https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&controls=0`}
+            src={`https://player.vimeo.com/video/${videoId}?dnt=1`}
             title={t("videoTitle", { context })}
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
