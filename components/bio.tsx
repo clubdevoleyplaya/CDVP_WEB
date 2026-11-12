@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 export function Bio() {
   const t = useTranslations("Bio");
   return (
-    <section className="mx-auto grid max-w-7xl grid-cols-[auto_1fr] items-start gap-8 px-6 py-16 sm:grid-cols-[220px_1fr]">
+    <section className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-6 px-6 py-16 sm:gap-8 sm:grid-cols-[220px_1fr]">
       <div className="relative h-[100px] w-[100px] overflow-hidden rounded-full border border-line sm:h-[220px] sm:w-[220px]">
         <Image
           src="/images/juli/headshot.jpg"

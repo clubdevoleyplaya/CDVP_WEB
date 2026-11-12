@@ -14,21 +14,6 @@ export function Hero() {
     <section className="overflow-hidden bg-band text-band-ink">
       <div className="mx-auto grid min-h-[min(80vh,720px)] max-w-7xl grid-cols-1 items-center gap-8 px-6 pt-12 md:grid-cols-[0.95fr_1.05fr] md:gap-12 md:pt-20">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mx-auto w-full max-w-sm self-end md:-mb-32 md:-ml-16 md:w-[calc(100%+4rem)] md:max-w-none"
-        >
-          <Image
-            src="/images/hero/pelota-manos.webp"
-            alt={t("photoAlt")}
-            width={1307}
-            height={1068}
-            preload
-            className="h-auto w-full"
-          />
-        </motion.div>
-        <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -69,6 +54,21 @@ export function Hero() {
               </li>
             ))}
           </ul>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="order-last mx-auto w-full max-w-sm self-end md:order-first md:-mb-32 md:-ml-16 md:w-[calc(100%+4rem)] md:max-w-none"
+        >
+          <Image
+            src="/images/hero/pelota-manos.webp"
+            alt={t("photoAlt")}
+            width={1307}
+            height={1068}
+            preload
+            className="h-auto w-full"
+          />
         </motion.div>
       </div>
     </section>
