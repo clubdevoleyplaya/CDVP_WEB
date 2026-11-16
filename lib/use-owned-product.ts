@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import { hasCourseAccess, type CourseAccess } from "@/lib/course-access";
 
 // null = todavía no se sabe (con sesión). Sin sesión no hay nada que consultar: no lo tiene.
 // Si la consulta falla se asume que no lo tiene y el checkout avisa igual ("Ya tenés este producto").
 export function useOwnedProduct(slug: string): boolean | null {
-  const { session } = useDemoState();
+  const { session } = useAppState();
   const [owned, setOwned] = useState<boolean | null>(null);
 
   useEffect(() => {

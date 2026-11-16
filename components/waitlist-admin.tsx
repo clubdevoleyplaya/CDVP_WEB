@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 
 import { Skeleton } from "@/components/ui/skeleton";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 
 type Entry = { email: string; locale: string; created_at: string; slug: string | null; title: string | null };
 
 const API = process.env.NEXT_PUBLIC_API_URL;
 
 export function WaitlistAdmin() {
-  const { session } = useDemoState();
+  const { session } = useAppState();
   const [entries, setEntries] = useState<Entry[] | null>(null);
   const [loadError, setLoadError] = useState(false);
 

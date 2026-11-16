@@ -10,7 +10,7 @@ import { CurrencySwitch } from "@/components/currency-switch";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { NavDrawer } from "@/components/nav-drawer";
 import { CartDrawer } from "@/components/cart-drawer";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import { MENU_ITEMS } from "@/lib/menu";
 import { loginHref } from "@/lib/safe-redirect";
 
@@ -18,7 +18,7 @@ import { loginHref } from "@/lib/safe-redirect";
 export function Header() {
   const t = useTranslations("Header");
   const tm = useTranslations("Menu");
-  const { session, me } = useDemoState();
+  const { session, me } = useAppState();
   const pathname = usePathname();
   const displayName = me?.nickname || session?.user.email;
   const initial = (displayName ?? "?").charAt(0).toUpperCase();

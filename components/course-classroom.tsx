@@ -10,7 +10,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { VideoPlayer } from "@/components/video-player";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import type { VideoProvider } from "@/lib/video-link";
 
 export type Lesson = { position: number; section: string | null; title: string; provider: VideoProvider; video_id: string };
@@ -21,7 +21,7 @@ const API = process.env.NEXT_PUBLIC_API_URL;
 
 export function CourseClassroom({ slug, title, description }: Props) {
   const t = useTranslations("Classroom");
-  const { session } = useDemoState();
+  const { session } = useAppState();
   const router = useRouter();
   const [lessons, setLessons] = useState<Lesson[] | null>(null);
   const [video, setVideo] = useState<{ provider: VideoProvider | null; videoId: string | null } | null>(null);

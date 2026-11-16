@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import { buttonVariants } from "@/components/ui/button";
 import { loginHref } from "@/lib/safe-redirect";
 
@@ -14,7 +14,7 @@ type AuthGuardProps = {
 
 export function AuthGuard({ role, children }: AuthGuardProps) {
   const t = useTranslations("AuthGuard");
-  const { session, me } = useDemoState();
+  const { session, me } = useAppState();
   const pathname = usePathname();
 
   if (!session || (role && me?.role !== role)) {

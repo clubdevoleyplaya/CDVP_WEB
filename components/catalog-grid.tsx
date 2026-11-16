@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ProductCard } from "@/components/product-card";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import { computeDisplayPrice } from "@/lib/price";
 import type { Product } from "@/lib/products";
 
@@ -18,7 +18,7 @@ const SORT_KEYS: Record<SortBy, "relevance" | "priceAsc" | "priceDesc" | "topRat
 
 export function CatalogGrid({ items }: { items: Product[] }) {
   const t = useTranslations("Catalog");
-  const { currency, isSubscriber, discountPercent, eurPrices } = useDemoState();
+  const { currency, isSubscriber, discountPercent, eurPrices } = useAppState();
   const [sortBy, setSortBy] = useState<SortBy>("relevancia");
   const [onlyDiscountable, setOnlyDiscountable] = useState(false);
 

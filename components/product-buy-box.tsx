@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { ShoppingBag } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import { computeDisplayPrice, formatPrice, paymentProviderFor } from "@/lib/price";
 import type { Product } from "@/lib/products";
 import { loginHref } from "@/lib/safe-redirect";
@@ -15,7 +15,7 @@ import { useOwnedProduct } from "@/lib/use-owned-product";
 export function ProductBuyBox({ product }: { product: Product }) {
   const t = useTranslations("BuyBox");
   const te = useTranslations("Errors");
-  const { currency, isSubscriber, discountPercent, eurPrices, addToCart, session } = useDemoState();
+  const { currency, isSubscriber, discountPercent, eurPrices, addToCart, session } = useAppState();
   const router = useRouter();
   const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber, discountPercent, eurPrices);
   const [loading, setLoading] = useState(false);

@@ -69,7 +69,7 @@
     "redirecting": "Redirecting...",
     "pay": "Go to payment"
   },
-  "DemoBar": {
+  "SubscriptionBar": {
     "activeSub": "Active subscription: Welcome Pack unlocked{percent, plural, =0 {} other { · #% OFF on courses}}",
     "subscribeCta": "Subscribe and get the Welcome Pack{percent, plural, =0 {} other { + #% OFF on courses}}",
     "subscribeButton": "Subscribe now →",

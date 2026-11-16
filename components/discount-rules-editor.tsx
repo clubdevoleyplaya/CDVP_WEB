@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import { computeDisplayPrice, DEFAULT_DISCOUNT_PERCENT, formatPrice, type DiscountPercent } from "@/lib/price";
 import { CATEGORY_ROUTE_LABELS, CATEGORY_TO_ROUTE, products, type Category } from "@/lib/products";
 
@@ -28,7 +28,7 @@ function DiscountRow({
   savedPercent: number;
   onSaved: (category: Category, percent: number) => void;
 }) {
-  const { session, currency, eurPrices } = useDemoState();
+  const { session, currency, eurPrices } = useAppState();
   const [text, setText] = useState(String(savedPercent));
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ kind: "ok" | "error"; text: string } | null>(null);

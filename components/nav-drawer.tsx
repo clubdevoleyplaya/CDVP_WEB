@@ -15,14 +15,14 @@ import {
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MENU_ITEMS } from "@/lib/menu";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 
 export function NavDrawer() {
   const t = useTranslations("NavDrawer");
   const tm = useTranslations("Menu");
   const th = useTranslations("Header");
   const [open, setOpen] = useState(false);
-  const { session, me, signOut } = useDemoState();
+  const { session, me, signOut } = useAppState();
   const displayName = me?.nickname || session?.user.email;
   const initial = (displayName ?? "?").charAt(0).toUpperCase();
 

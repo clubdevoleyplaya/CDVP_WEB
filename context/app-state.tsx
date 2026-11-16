@@ -33,7 +33,7 @@ type ProfileFields = {
   bannerUrl?: string | null;
 };
 
-type DemoState = {
+type AppState = {
   session: Session | null;
   me: Me | null;
   isSubscriber: boolean;
@@ -107,9 +107,9 @@ async function fetchEurPrices(): Promise<{ prices: EurPrices; complete: boolean 
   return { prices, complete: data.completo === true };
 }
 
-const DemoStateContext = createContext<DemoState | null>(null);
+const AppStateContext = createContext<AppState | null>(null);
 
-export function DemoStateProvider({
+export function AppStateProvider({
   children,
   initialCurrency = "ARS",
 }: {
@@ -237,7 +237,7 @@ export function DemoStateProvider({
   const isSubscriber = session ? (me?.isSubscriber ?? false) : false;
 
   return (
-    <DemoStateContext.Provider
+    <AppStateContext.Provider
       value={{
         session,
         me,
@@ -258,12 +258,12 @@ export function DemoStateProvider({
       }}
     >
       {children}
-    </DemoStateContext.Provider>
+    </AppStateContext.Provider>
   );
 }
 
-export function useDemoState() {
-  const ctx = useContext(DemoStateContext);
-  if (!ctx) throw new Error("useDemoState must be used within DemoStateProvider");
+export function useAppState() {
+  const ctx = useContext(AppStateContext);
+  if (!ctx) throw new Error("useAppState must be used within AppStateProvider");
   return ctx;
 }

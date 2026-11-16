@@ -17,7 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import { computeDisplayPrice, formatPrice, paymentProviderFor } from "@/lib/price";
 import { useLocalizeProduct } from "@/lib/localize-product";
 import { getProductBySlug } from "@/lib/products";
@@ -39,7 +39,7 @@ export function CartDrawer() {
     setCartOpen,
     session,
     me,
-  } = useDemoState();
+  } = useAppState();
   const router = useRouter();
   const [paying, setPaying] = useState(false);
   const [error, setError] = useState<string | null>(null);

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useDemoState, Currency } from "@/context/demo-state";
+import { useAppState, Currency } from "@/context/app-state";
 
 const CURRENCIES: { code: Currency; label: string }[] = [
   { code: "ARS", label: "ARS" },
@@ -11,8 +11,8 @@ const CURRENCIES: { code: Currency; label: string }[] = [
 
 // Interruptor de moneda en píldora. Hereda los colores del contenedor (header o barra oscura).
 export function CurrencySwitch({ className = "" }: { className?: string }) {
-  const t = useTranslations("DemoBar");
-  const { currency, setCurrency, eurReady } = useDemoState();
+  const t = useTranslations("SubscriptionBar");
+  const { currency, setCurrency, eurReady } = useAppState();
   return (
     <div
       role="group"

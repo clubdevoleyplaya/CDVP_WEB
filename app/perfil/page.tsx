@@ -20,7 +20,7 @@ import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AuthGuard } from "@/components/auth-guard";
 import { shrinkImage } from "@/lib/image-resize";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import type { CourseAccess } from "@/lib/course-access";
 import { getProductBySlug } from "@/lib/products";
 import { createClient } from "@/lib/supabase/client";
@@ -35,7 +35,7 @@ const IMAGE_CACHE_SECONDS = "31536000";
 
 export default function PerfilPage() {
   const t = useTranslations("Profile");
-  const { session, me, isSubscriber, signOut, updateProfile, cancelSubscription } = useDemoState();
+  const { session, me, isSubscriber, signOut, updateProfile, cancelSubscription } = useAppState();
 
   const [courses, setCourses] = useState<CourseAccess[]>([]);
   const [coursesLoading, setCoursesLoading] = useState(true);

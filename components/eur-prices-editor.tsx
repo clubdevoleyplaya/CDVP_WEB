@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 
 type Row = {
   slug: string;
@@ -28,7 +28,7 @@ function parse(text: string): number | null {
 }
 
 function PriceRow({ row, onSaved }: { row: Row; onSaved: (row: Row) => void }) {
-  const { session } = useDemoState();
+  const { session } = useAppState();
   const [price, setPrice] = useState(row.price_eur == null ? "" : String(Number(row.price_eur)));
   const [compare, setCompare] = useState(row.compare_eur == null ? "" : String(Number(row.compare_eur)));
   const [saving, setSaving] = useState(false);
@@ -107,7 +107,7 @@ function PriceRow({ row, onSaved }: { row: Row; onSaved: (row: Row) => void }) {
 }
 
 export function EurPricesEditor() {
-  const { session } = useDemoState();
+  const { session } = useAppState();
   const [rows, setRows] = useState<Row[] | null>(null);
   const [loadError, setLoadError] = useState(false);
 

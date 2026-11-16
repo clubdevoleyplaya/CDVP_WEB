@@ -69,7 +69,7 @@
     "redirecting": "Redirecionando...",
     "pay": "Ir para o pagamento"
   },
-  "DemoBar": {
+  "SubscriptionBar": {
     "activeSub": "Assinatura ativa: Pack de Boas-vindas desbloqueado{percent, plural, =0 {} other { · #% OFF em cursos}}",
     "subscribeCta": "Assine e leve o Pack de Boas-vindas{percent, plural, =0 {} other { + #% OFF em cursos}}",
     "subscribeButton": "Quero assinar →",

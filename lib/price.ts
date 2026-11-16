@@ -1,4 +1,4 @@
-import type { Currency } from "@/context/demo-state";
+import type { Currency } from "@/context/app-state";
 import type { Product } from "@/lib/products";
 
 export function formatPrice(amount: number, currency: Currency) {
