@@ -46,11 +46,13 @@ export default function PerfilPage() {
 
   useEffect(() => {
     if (!session) return;
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/me/courses`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/me/products`, {
       headers: { Authorization: `Bearer ${session.access_token}` },
     })
       .then((res) => (res.ok ? res.json() : Promise.reject()))
-      .then(setCourses)
+      .then((products: (CourseAccess & { category: string })[]) =>
+        setCourses(products.filter((p) => p.category === "curso")),
+      )
       .catch(() => setCoursesError(true))
       .finally(() => setCoursesLoading(false));
   }, [session]);
