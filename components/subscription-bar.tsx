@@ -4,11 +4,11 @@ import Link from "next/link";
 
 import { useTranslations } from "next-intl";
 import { CurrencySwitch } from "@/components/currency-switch";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 
-export function DemoBar() {
-  const t = useTranslations("DemoBar");
-  const { isSubscriber, discountPercent } = useDemoState();
+export function SubscriptionBar() {
+  const t = useTranslations("SubscriptionBar");
+  const { isSubscriber, discountPercent } = useAppState();
 
   return (
     <div className="flex flex-wrap items-center gap-x-5 gap-y-2 bg-deep px-4 py-2 text-sm text-white sm:px-6 sm:py-3">

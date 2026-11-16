@@ -20,7 +20,7 @@ import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AuthGuard } from "@/components/auth-guard";
 import { shrinkImage } from "@/lib/image-resize";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import type { CourseAccess } from "@/lib/course-access";
 import { getProductBySlug } from "@/lib/products";
 import { createClient } from "@/lib/supabase/client";
@@ -35,7 +35,7 @@ const IMAGE_CACHE_SECONDS = "31536000";
 
 export default function PerfilPage() {
   const t = useTranslations("Profile");
-  const { session, me, isSubscriber, signOut, updateProfile, cancelSubscription } = useDemoState();
+  const { session, me, isSubscriber, signOut, updateProfile, cancelSubscription } = useAppState();
 
   const [courses, setCourses] = useState<CourseAccess[]>([]);
   const [coursesLoading, setCoursesLoading] = useState(true);
@@ -46,11 +46,13 @@ export default function PerfilPage() {
 
   useEffect(() => {
     if (!session) return;
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/me/courses`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/me/products`, {
       headers: { Authorization: `Bearer ${session.access_token}` },
     })
       .then((res) => (res.ok ? res.json() : Promise.reject()))
-      .then(setCourses)
+      .then((products: (CourseAccess & { category: string })[]) =>
+        setCourses(products.filter((p) => p.category === "curso")),
+      )
       .catch(() => setCoursesError(true))
       .finally(() => setCoursesLoading(false));
   }, [session]);
@@ -287,7 +289,7 @@ export default function PerfilPage() {
 
           {me?.role === "admin" && (
             <Link
-              href="/admin/analytics"
+              href="/admin"
               className={buttonVariants({
                 className: "w-fit font-display text-xs font-bold uppercase tracking-wide",
               })}

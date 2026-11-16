@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import { detectVideoProvider } from "@/lib/video-link";
 
 import { ExerciseForm, type ExerciseFormValues } from "@/components/exercise-form";
@@ -30,7 +30,7 @@ function videoUrlFor(ejercicio: Ejercicio): string {
 }
 
 export function GoteoCapsuleEditor() {
-  const { session } = useDemoState();
+  const { session } = useAppState();
 
   const [numeroCapsula, setNumeroCapsula] = useState(1);
   const [ejercicios, setEjercicios] = useState<Ejercicio[]>([]);

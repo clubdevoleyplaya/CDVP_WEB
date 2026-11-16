@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { ShoppingBag } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import { computeDisplayPrice, formatPrice, paymentProviderFor } from "@/lib/price";
 import type { Product } from "@/lib/products";
 import { loginHref } from "@/lib/safe-redirect";
@@ -15,9 +15,9 @@ import { useOwnedProduct } from "@/lib/use-owned-product";
 export function ProductBuyBox({ product }: { product: Product }) {
   const t = useTranslations("BuyBox");
   const te = useTranslations("Errors");
-  const { currency, isSubscriber, discountPercent, eurPrices, addToCart, session } = useDemoState();
+  const { currency, isSubscriber, discountPercent, prices, addToCart, session } = useAppState();
   const router = useRouter();
-  const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber, discountPercent, eurPrices);
+  const price = computeDisplayPrice(product, currency, isSubscriber, discountPercent, prices);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const owned = useOwnedProduct(product.slug);
@@ -97,19 +97,21 @@ export function ProductBuyBox({ product }: { product: Product }) {
   return (
     <div className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-6">
       <div className="flex items-baseline gap-2">
-        {showOld && (
+        {price?.showOld && (
           <span className="tabular text-base text-ink-soft line-through">
-            {formatPrice(old, currency)}
+            {formatPrice(price.old, currency)}
           </span>
         )}
-        <span className="tabular text-3xl font-black text-yellow">{formatPrice(now, currency)}</span>
+        <span className="tabular text-3xl font-black text-yellow">
+          {price ? formatPrice(price.now, currency) : "—"}
+        </span>
       </div>
       <p className="text-xs text-ink-soft">{rail}</p>
       <div className="flex flex-wrap gap-2">
         <button
           type="button"
           onClick={handleBuy}
-          disabled={loading}
+          disabled={loading || !price}
           className="w-fit rounded-lg bg-ink px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-bg transition-colors hover:bg-blue disabled:opacity-50"
         >
           {loading ? t("redirecting") : session ? t("buy") : t("loginToBuy")}

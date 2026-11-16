@@ -7,7 +7,7 @@ import { AuthGuard } from "@/components/auth-guard";
 import { useClauseSections } from "@/components/clausula-exencion";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 
 type Bloque = { titulo?: string; filas: (string | number | null)[][] };
 type Semana = { titulo: string; bloques: Bloque[] };
@@ -30,7 +30,7 @@ type Estado =
 const API = process.env.NEXT_PUBLIC_API_URL;
 
 export function PlanViewer({ slug }: { slug: string }) {
-  const { session } = useDemoState();
+  const { session } = useAppState();
   const [estado, setEstado] = useState<Estado>({ tipo: "cargando" });
   const [aceptando, setAceptando] = useState(false);
 

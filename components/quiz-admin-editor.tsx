@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 
 type Question = { id: string; question_text: string; order_index: number };
 type Quiz = { id: string; title: string; questions: Question[] };
@@ -13,7 +13,7 @@ type Quiz = { id: string; title: string; questions: Question[] };
 type QuizAdminEditorProps = { slug: string };
 
 export function QuizAdminEditor({ slug }: QuizAdminEditorProps) {
-  const { session } = useDemoState();
+  const { session } = useAppState();
 
   const [quiz, setQuiz] = useState<Quiz | null | undefined>(undefined);
   const [loading, setLoading] = useState(true);

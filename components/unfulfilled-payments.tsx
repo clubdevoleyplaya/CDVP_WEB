@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import { describeUnfulfilledReason, formatAmount } from "@/lib/payment-reasons";
 
 type UnfulfilledPayment = {
@@ -21,7 +21,7 @@ const API = process.env.NEXT_PUBLIC_API_URL;
 const PROVIDER_LABEL = { mercadopago: "MercadoPago", paddle: "Paddle" } as const;
 
 export function UnfulfilledPayments() {
-  const { session } = useDemoState();
+  const { session } = useAppState();
   const [payments, setPayments] = useState<UnfulfilledPayment[] | null>(null);
   const [loadError, setLoadError] = useState(false);
 

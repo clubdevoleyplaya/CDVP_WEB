@@ -3,13 +3,14 @@ import { cookies } from "next/headers";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
 import { Barlow, Barlow_Condensed } from "next/font/google";
-import { DemoStateProvider } from "@/context/demo-state";
+import { AppStateProvider } from "@/context/app-state";
 import { Header } from "@/components/header";
-import { DemoBar } from "@/components/demo-bar";
+import { SubscriptionBar } from "@/components/subscription-bar";
 import { Footer } from "@/components/footer";
 import "./globals.css";
 import { CURRENCY_COOKIE, currencyFromCookie } from "@/lib/locale";
 import { cn } from "@/lib/utils";
+import { getPriceCatalog } from "@/lib/prices-server";
 
 const barlowCondensed = Barlow_Condensed({
   variable: "--font-barlow-condensed",
@@ -40,6 +41,7 @@ export default async function RootLayout({
   const cookieStore = await cookies();
   const locale = await getLocale();
   const currency = currencyFromCookie(cookieStore.get(CURRENCY_COOKIE)?.value);
+  const priceCatalog = await getPriceCatalog();
 
   return (
     <html
@@ -50,12 +52,12 @@ export default async function RootLayout({
       <body className="flex min-h-full flex-col antialiased">
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH_THEME_SCRIPT }} />
         <NextIntlClientProvider>
-        <DemoStateProvider initialCurrency={currency}>
+        <AppStateProvider initialCurrency={currency} priceCatalog={priceCatalog}>
           <Header />
-          <DemoBar />
+          <SubscriptionBar />
           <main className="w-full flex-1">{children}</main>
           <Footer />
-        </DemoStateProvider>
+        </AppStateProvider>
         </NextIntlClientProvider>
       </body>
     </html>

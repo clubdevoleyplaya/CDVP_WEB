@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import { CATEGORY_ROUTE_LABELS, CATEGORY_TO_ROUTE, type Category } from "@/lib/products";
 
 type PromoCode = {
@@ -45,7 +45,7 @@ function describeValidity(code: PromoCode) {
 }
 
 export function PromoCodesEditor() {
-  const { session } = useDemoState();
+  const { session } = useAppState();
   const [codes, setCodes] = useState<PromoCode[] | null>(null);
   const [loadError, setLoadError] = useState(false);
 

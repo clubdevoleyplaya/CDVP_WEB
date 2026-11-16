@@ -8,7 +8,7 @@ import { ShoppingBag } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { TestimonialSlider } from "@/components/testimonial-slider";
 import { useLocalizeProduct } from "@/lib/localize-product";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import { computeDisplayPrice, formatPrice } from "@/lib/price";
 import type { Product } from "@/lib/products";
 
@@ -16,8 +16,8 @@ export function ProductCard({ product: base }: { product: Product }) {
   const product = useLocalizeProduct()(base);
   const t = useTranslations("ProductCard");
   const tc = useTranslations("Categories.single");
-  const { currency, isSubscriber, discountPercent, eurPrices, addToCart } = useDemoState();
-  const { now, old, showOld } = computeDisplayPrice(product, currency, isSubscriber, discountPercent, eurPrices);
+  const { currency, isSubscriber, discountPercent, prices, addToCart } = useAppState();
+  const price = computeDisplayPrice(product, currency, isSubscriber, discountPercent, prices);
 
   return (
     <motion.article
@@ -91,13 +91,13 @@ export function ProductCard({ product: base }: { product: Product }) {
           </p>
         )}
         <div className="mt-1 flex items-baseline gap-2">
-          {showOld && (
+          {price?.showOld && (
             <span className="tabular text-sm text-ink-soft line-through">
-              {formatPrice(old, currency)}
+              {formatPrice(price.old, currency)}
             </span>
           )}
           <span className="tabular text-xl font-black text-yellow">
-            {formatPrice(now, currency)}
+            {price ? formatPrice(price.now, currency) : "—"}
           </span>
         </div>
         <div className="mt-2 flex items-center gap-2">

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import type { Category } from "@/lib/products";
 
 type Question = { id: string; question_text: string; order_index: number; answer: string | null };
@@ -13,7 +13,7 @@ type QuizSectionProps = { slug: string; category: Category };
 
 export function QuizSection({ slug, category }: QuizSectionProps) {
   const t = useTranslations("Quiz");
-  const { session } = useDemoState();
+  const { session } = useAppState();
   const [quiz, setQuiz] = useState<Quiz | null | undefined>(undefined);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [errorByQuestion, setErrorByQuestion] = useState<Record<string, string>>({});

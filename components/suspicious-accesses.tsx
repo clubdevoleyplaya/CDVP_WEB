@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 
 type Account = {
   user_id: string;
@@ -47,7 +47,7 @@ function AccountList({ accounts, empty }: { accounts: Account[]; empty: string }
 }
 
 export function SuspiciousAccesses() {
-  const { session } = useDemoState();
+  const { session } = useAppState();
   const [report, setReport] = useState<Report | null>(null);
   const [loadError, setLoadError] = useState(false);
 

@@ -17,7 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { useDemoState } from "@/context/demo-state";
+import { useAppState } from "@/context/app-state";
 import { computeDisplayPrice, formatPrice, paymentProviderFor } from "@/lib/price";
 import { useLocalizeProduct } from "@/lib/localize-product";
 import { getProductBySlug } from "@/lib/products";
@@ -34,12 +34,12 @@ export function CartDrawer() {
     currency,
     isSubscriber,
     discountPercent,
-    eurPrices,
+    prices,
     cartOpen,
     setCartOpen,
     session,
     me,
-  } = useDemoState();
+  } = useAppState();
   const router = useRouter();
   const [paying, setPaying] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -51,8 +51,9 @@ export function CartDrawer() {
       const base = getProductBySlug(item.slug);
       if (!base) return null;
       const product = localize(base);
-      const { now } = computeDisplayPrice(product, currency, isSubscriber, discountPercent, eurPrices);
-      return { item, product, lineTotal: now * item.qty };
+      const price = computeDisplayPrice(product, currency, isSubscriber, discountPercent, prices);
+      if (!price) return null;
+      return { item, product, lineTotal: price.now * item.qty };
     })
     .filter((l): l is NonNullable<typeof l> => l !== null);
 
