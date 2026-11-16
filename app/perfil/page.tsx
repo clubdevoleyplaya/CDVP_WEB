@@ -289,7 +289,7 @@ export default function PerfilPage() {
 
           {me?.role === "admin" && (
             <Link
-              href="/admin/analytics"
+              href="/admin"
               className={buttonVariants({
                 className: "w-fit font-display text-xs font-bold uppercase tracking-wide",
               })}
