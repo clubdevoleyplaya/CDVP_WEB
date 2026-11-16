@@ -10,6 +10,7 @@ import { Footer } from "@/components/footer";
 import "./globals.css";
 import { CURRENCY_COOKIE, currencyFromCookie } from "@/lib/locale";
 import { cn } from "@/lib/utils";
+import { getPriceCatalog } from "@/lib/prices-server";
 
 const barlowCondensed = Barlow_Condensed({
   variable: "--font-barlow-condensed",
@@ -40,6 +41,7 @@ export default async function RootLayout({
   const cookieStore = await cookies();
   const locale = await getLocale();
   const currency = currencyFromCookie(cookieStore.get(CURRENCY_COOKIE)?.value);
+  const priceCatalog = await getPriceCatalog();
 
   return (
     <html
@@ -50,7 +52,7 @@ export default async function RootLayout({
       <body className="flex min-h-full flex-col antialiased">
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH_THEME_SCRIPT }} />
         <NextIntlClientProvider>
-        <AppStateProvider initialCurrency={currency}>
+        <AppStateProvider initialCurrency={currency} priceCatalog={priceCatalog}>
           <Header />
           <SubscriptionBar />
           <main className="w-full flex-1">{children}</main>

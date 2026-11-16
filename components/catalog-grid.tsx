@@ -18,12 +18,12 @@ const SORT_KEYS: Record<SortBy, "relevance" | "priceAsc" | "priceDesc" | "topRat
 
 export function CatalogGrid({ items }: { items: Product[] }) {
   const t = useTranslations("Catalog");
-  const { currency, isSubscriber, discountPercent, eurPrices } = useAppState();
+  const { currency, isSubscriber, discountPercent, prices } = useAppState();
   const [sortBy, setSortBy] = useState<SortBy>("relevancia");
   const [onlyDiscountable, setOnlyDiscountable] = useState(false);
 
   const visible = useMemo(() => {
-    let result = onlyDiscountable ? items.filter((p) => p.discountable) : items;
+    let result = onlyDiscountable ? items.filter((p) => prices[p.slug]?.discountable) : items;
 
     if (sortBy === "mejor-valorados") {
       result = [...result].sort(
@@ -32,7 +32,7 @@ export function CatalogGrid({ items }: { items: Product[] }) {
     } else if (sortBy === "precio-asc" || sortBy === "precio-desc") {
       const withPrice = result.map((p) => ({
         product: p,
-        price: computeDisplayPrice(p, currency, isSubscriber, discountPercent, eurPrices).now,
+        price: computeDisplayPrice(p, currency, isSubscriber, discountPercent, prices)?.now ?? Infinity,
       }));
       withPrice.sort((a, b) =>
         sortBy === "precio-asc" ? a.price - b.price : b.price - a.price,
@@ -41,7 +41,7 @@ export function CatalogGrid({ items }: { items: Product[] }) {
     }
 
     return result;
-  }, [items, sortBy, onlyDiscountable, currency, isSubscriber, discountPercent, eurPrices]);
+  }, [items, sortBy, onlyDiscountable, currency, isSubscriber, discountPercent, prices]);
 
   const chip = (active: boolean) =>
     `rounded-full border px-3 py-1.5 font-display text-xs font-bold uppercase tracking-wide transition-colors ${

@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { CATEGORY_TO_ROUTE, products, type Category, type Product } from "@/lib/products";
 import { getLocalizeProduct } from "@/lib/localize-product-server";
 import { formatPrice } from "@/lib/price";
+import { getPriceCatalog } from "@/lib/prices-server";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Pricing");
@@ -11,14 +12,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const ORDER: Category[] = ["curso", "combo", "descargable", "evento"];
-function ProductRow({ product }: { product: Product }) {
+function ProductRow({ product, usd }: { product: Product; usd: number }) {
   return (
     <li className="flex items-baseline justify-between gap-4 border-b border-line py-3">
       <Link href={`/producto/${product.slug}`} className="font-bold text-ink hover:underline">
         {product.title}
       </Link>
       <span className="tabular whitespace-nowrap font-bold">
-        {formatPrice(product.priceUsd, "USD")}
+        {formatPrice(usd, "USD")}
       </span>
     </li>
   );
@@ -28,6 +29,7 @@ export default async function PricingPage() {
   const t = await getTranslations("Pricing");
   const tc = await getTranslations("Categories.routes");
   const localize = await getLocalizeProduct();
+  const { prices } = await getPriceCatalog();
   return (
     <section className="mx-auto max-w-2xl px-6 py-16">
       <h1 className="font-display text-4xl font-bold uppercase leading-none">{t("title")}</h1>
@@ -59,9 +61,11 @@ export default async function PricingPage() {
               {tc(CATEGORY_TO_ROUTE[category])}
             </h2>
             <ul className="mt-2 text-sm">
-              {items.map((product) => (
-                <ProductRow key={product.slug} product={localize(product)} />
-              ))}
+              {items.map((product) =>
+                prices[product.slug] ? (
+                  <ProductRow key={product.slug} product={localize(product)} usd={prices[product.slug].usd} />
+                ) : null,
+              )}
             </ul>
             <Link
               href={`/catalogo/${CATEGORY_TO_ROUTE[category]}`}

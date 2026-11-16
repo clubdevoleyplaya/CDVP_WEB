@@ -34,7 +34,7 @@ export function CartDrawer() {
     currency,
     isSubscriber,
     discountPercent,
-    eurPrices,
+    prices,
     cartOpen,
     setCartOpen,
     session,
@@ -51,8 +51,9 @@ export function CartDrawer() {
       const base = getProductBySlug(item.slug);
       if (!base) return null;
       const product = localize(base);
-      const { now } = computeDisplayPrice(product, currency, isSubscriber, discountPercent, eurPrices);
-      return { item, product, lineTotal: now * item.qty };
+      const price = computeDisplayPrice(product, currency, isSubscriber, discountPercent, prices);
+      if (!price) return null;
+      return { item, product, lineTotal: price.now * item.qty };
     })
     .filter((l): l is NonNullable<typeof l> => l !== null);
 

@@ -28,7 +28,7 @@ function DiscountRow({
   savedPercent: number;
   onSaved: (category: Category, percent: number) => void;
 }) {
-  const { session, currency, eurPrices } = useAppState();
+  const { session, currency, prices } = useAppState();
   const [text, setText] = useState(String(savedPercent));
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ kind: "ok" | "error"; text: string } | null>(null);
@@ -36,7 +36,7 @@ function DiscountRow({
   const percent = parsePercent(text);
   const example = products.find((p) => p.category === category);
   const base = example
-    ? computeDisplayPrice(example, currency, false, undefined, eurPrices).now
+    ? (computeDisplayPrice(example, currency, false, undefined, prices)?.now ?? null)
     : null;
   const inRange = percent !== null && percent >= 0 && percent <= 100;
   const changed = percent !== savedPercent;

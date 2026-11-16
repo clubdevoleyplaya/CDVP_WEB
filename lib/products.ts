@@ -10,11 +10,6 @@ export interface Product {
   image?: string;
   modules?: number;
   rating?: { value: number; count: number };
-  priceArs: number;
-  priceUsd: number;
-  compareArs?: number;
-  compareUsd?: number;
-  discountable: boolean;
   includes?: string;
   testimonials?: Testimonial[];
   // Video de venta (Vimeo) del curso; se muestra solo en su ficha.
@@ -99,9 +94,6 @@ export const products: Product[] = [
         author: "Alejandro Dominguez",
       },
     ],
-    priceArs: 50000,
-    priceUsd: 50,
-    discountable: true,
   },
   {
     slug: "mentalidad-deportiva",
@@ -121,9 +113,6 @@ export const products: Product[] = [
         author: "Sergio Balmaceda",
       },
     ],
-    priceArs: 50000,
-    priceUsd: 50,
-    discountable: true,
   },
   {
     slug: "planificacion",
@@ -143,9 +132,6 @@ export const products: Product[] = [
         author: "María Luz Picardo",
       },
     ],
-    priceArs: 50000,
-    priceUsd: 50,
-    discountable: true,
   },
   {
     slug: "defensa",
@@ -176,9 +162,6 @@ export const products: Product[] = [
         author: "Hugo Morgado",
       },
     ],
-    priceArs: 50000,
-    priceUsd: 50,
-    discountable: true,
   },
   {
     slug: "bloqueo",
@@ -197,9 +180,6 @@ export const products: Product[] = [
         author: "Hugo Morgado",
       },
     ],
-    priceArs: 50000,
-    priceUsd: 50,
-    discountable: true,
   },
   {
     slug: "armado",
@@ -228,9 +208,6 @@ export const products: Product[] = [
         author: "Leonardo Vasquez",
       },
     ],
-    priceArs: 50000,
-    priceUsd: 50,
-    discountable: true,
   },
   {
     slug: "saque",
@@ -242,9 +219,6 @@ export const products: Product[] = [
       "Técnica de saque y sus variantes para presionar la recepción rival desde el primer contacto del punto.",
     rating: { value: 5.0, count: 3 },
     vslVimeoId: "1244394676",
-    priceArs: 50000,
-    priceUsd: 50,
-    discountable: true,
   },
   {
     slug: "conceptos-generales",
@@ -272,9 +246,6 @@ export const products: Product[] = [
         author: "Joaquin Ceballos",
       },
     ],
-    priceArs: 50000,
-    priceUsd: 50,
-    discountable: true,
   },
   {
     slug: "recepcion",
@@ -308,9 +279,6 @@ export const products: Product[] = [
         author: "Alan José Soltys",
       },
     ],
-    priceArs: 50000,
-    priceUsd: 50,
-    discountable: true,
   },
   {
     slug: "analisis-tecnico-biomecanico",
@@ -319,11 +287,6 @@ export const products: Product[] = [
     shortDescription: "Informe detallado del gesto técnico, pensado para entrenadores.",
     longDescription:
       "Un informe detallado del gesto técnico desde la biomecánica, pensado para entrenadores que quieren entender el porqué detrás de cada corrección.",
-    priceArs: 80000,
-    priceUsd: 80,
-    compareArs: 120000,
-    compareUsd: 120,
-    discountable: false,
   },
   {
     slug: "plan-de-movilidad-21-dias",
@@ -332,9 +295,6 @@ export const products: Product[] = [
     shortDescription: "Rutina progresiva de movilidad para sostener el volumen de entrenamiento.",
     longDescription:
       "Una rutina progresiva de 21 días para ganar y sostener la movilidad que exige el volumen de entrenamiento en la arena.",
-    priceArs: 50000,
-    priceUsd: 50,
-    discountable: false,
   },
   {
     slug: "guia-nutricional-para-torneos-y-entrenamientos",
@@ -343,9 +303,6 @@ export const products: Product[] = [
     shortDescription: "Pautas de alimentación para competir y entrenar sin bajar el nivel.",
     longDescription:
       "Pautas prácticas de alimentación para sostener el nivel de entrenamiento y llegar bien a los torneos, sin planes imposibles de seguir.",
-    priceArs: 30000,
-    priceUsd: 30,
-    discountable: false,
   },
   {
     slug: "planificacion-de-entrenamientos-en-cancha",
@@ -354,9 +311,6 @@ export const products: Product[] = [
     shortDescription: "Estructura de sesiones de cancha lista para aplicar con tu grupo.",
     longDescription:
       "Una estructura de sesiones de cancha lista para aplicar con tu grupo, pensada para entrenadores que necesitan organizar su semana.",
-    priceArs: 50000,
-    priceUsd: 50,
-    discountable: false,
   },
   {
     slug: "plan-de-gimnasio-para-mejorar-el-salto",
@@ -365,9 +319,6 @@ export const products: Product[] = [
     shortDescription: "Rutina de gimnasio orientada a potencia de salto y prevención de lesiones.",
     longDescription:
       "Rutina de gimnasio orientada a potencia de salto y prevención de lesiones, para complementar el trabajo de cancha.",
-    priceArs: 50000,
-    priceUsd: 50,
-    discountable: false,
   },
   {
     slug: "plan-aerobico-pro",
@@ -376,9 +327,6 @@ export const products: Product[] = [
     shortDescription: "Base aeróbica para sostener el ritmo de partido en la arena.",
     longDescription:
       "Una base aeróbica pensada específicamente para sostener el ritmo de partido que exige jugar sobre arena.",
-    priceArs: 50000,
-    priceUsd: 50,
-    discountable: false,
   },
   {
     slug: "todos-los-cursos",
@@ -388,11 +336,6 @@ export const products: Product[] = [
     longDescription:
       "Los 8 cursos técnicos del club — ataque, defensa, bloqueo, armado, saque, recepción, conceptos generales y mentalidad — en un solo pack, con descuento por volumen.",
     includes: "8 productos",
-    priceArs: 350000,
-    priceUsd: 350,
-    compareArs: 400000,
-    compareUsd: 400,
-    discountable: false,
   },
   {
     slug: "combo-k1-recepcion-armado-ataque",
@@ -402,11 +345,6 @@ export const products: Product[] = [
     longDescription:
       "Recepción, armado y ataque — los tres fundamentos que construyen la jugada con balón — combinados en un solo pack.",
     includes: "3 productos",
-    priceArs: 135000,
-    priceUsd: 135,
-    compareArs: 150000,
-    compareUsd: 150,
-    discountable: false,
   },
   {
     slug: "combo-k2-saque-defensa-bloqueo",
@@ -416,11 +354,6 @@ export const products: Product[] = [
     longDescription:
       "Saque, defensa y bloqueo — los tres fundamentos que sostienen el punto desde el lado defensivo — combinados en un solo pack.",
     includes: "3 productos",
-    priceArs: 135000,
-    priceUsd: 135,
-    compareArs: 150000,
-    compareUsd: 150,
-    discountable: false,
   },
   {
     slug: "banco-de-120-ejercicios",
@@ -429,9 +362,6 @@ export const products: Product[] = [
     shortDescription: "120 ejercicios de voley playa para entrenar por tu cuenta.",
     longDescription:
       "Un banco de 120 ejercicios de voley playa. Descripción provisional: Juli completa el texto final.",
-    priceArs: 50000,
-    priceUsd: 50,
-    discountable: false,
   },
   {
     slug: "curso-para-entrenadores",
@@ -440,10 +370,7 @@ export const products: Product[] = [
     shortDescription: "Curso por cohorte para entrenadores de voley playa.",
     longDescription:
       "Curso online para entrenadores, por cohorte. Descripción provisional: Juli completa el texto final.",
-    priceArs: 300000,
-    priceUsd: 300,
     waitlist: true,
-    discountable: false,
   },
   {
     slug: "campamento-cerrito",
@@ -452,9 +379,6 @@ export const products: Product[] = [
     shortDescription: "Campamento presencial anual de voley playa.",
     longDescription:
       "Campamento presencial anual en Cerrito. Descripción provisional: Juli completa fecha y texto final.",
-    priceArs: 200000,
-    priceUsd: 200,
-    discountable: true,
   },
 ];
 
