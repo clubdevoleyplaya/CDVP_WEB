@@ -463,11 +463,6 @@
       "shortDescription": "Posicionamiento y lectura de saque para una recepción más consistente.",
       "longDescription": "Posicionamiento, lectura de saque y ajustes de recepción para llegar más consistente al primer contacto."
     },
-    "analisis-tecnico-biomecanico": {
-      "title": "Análisis técnico-biomecánico",
-      "shortDescription": "Informe detallado del gesto técnico, pensado para entrenadores.",
-      "longDescription": "Un informe detallado del gesto técnico desde la biomecánica, pensado para entrenadores que quieren entender el porqué detrás de cada corrección."
-    },
     "plan-de-movilidad-21-dias": {
       "title": "Plan de movilidad — 21 días",
       "shortDescription": "Rutina progresiva de movilidad para sostener el volumen de entrenamiento.",
@@ -525,6 +520,11 @@
       "title": "Campamento Cerrito",
       "shortDescription": "Campamento presencial anual de voley playa.",
       "longDescription": "Campamento presencial anual en Cerrito. Descripción provisional: Juli completa fecha y texto final."
+    },
+    "the-beach-volley-lab": {
+      "title": "The Beach Volley Lab",
+      "shortDescription": "Análisis biomecánico personalizado de tu juego con Juli Azaad.",
+      "longDescription": "Análisis biomecánico personalizado de tu juego con Juli Azaad. Los cupos son limitados. Al pagar seguimos el proceso por WhatsApp."
     }
   },
   "Testimonials": {
@@ -570,13 +570,10 @@
       "packs": "Packs"
     },
     "services": {
-      "beachVolleyLab": {
-        "title": "Beach Volley Lab — análisis biomecánico con Juli Azaad",
-        "text": "Análisis biomecánico personalizado de tu juego. Los cupos son limitados."
-      },
       "personalTraining": {
         "title": "Entrenamiento físico personalizado con Juli Azaad",
-        "text": "Entrenamiento físico a tu medida, con seguimiento personal. Se aplica y se aprueba antes de empezar."
+        "text": "Juli Azaad te prepara el plan físico a tu medida. Completá el formulario y seguimos la conversación por WhatsApp.",
+        "cta": "Completar el formulario"
       },
       "cta": "Consultar por Contacto"
     }
@@ -597,5 +594,13 @@
     "submitting": "Anotando...",
     "done": "¡Listo! Te anotamos. Te escribiremos cuando abra la próxima cohorte.",
     "error": "No pudimos anotarte. Probá de nuevo en unos minutos."
+  },
+  "PayThanks": {
+    "metaTitle": "Gracias por tu compra — Club de Voley Playa",
+    "title": "¡Gracias por tu compra!",
+    "text": "Estamos confirmando tu pago. Si ya se acreditó, vas a ver tu compra en el perfil.",
+    "profile": "Ir a mi perfil",
+    "whatsappText": "Para seguir con el proceso, escribile a Juli por WhatsApp.",
+    "whatsapp": "Abrir WhatsApp"
   }
 }

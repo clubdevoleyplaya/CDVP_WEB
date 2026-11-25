@@ -4,7 +4,13 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import { ProductCard } from "@/components/product-card";
-import { CATEGORY_PAGES, CUSTOM_SERVICES, categoryGroups, isCategoryPageSlug } from "@/lib/menu";
+import {
+  CATEGORY_PAGES,
+  CUSTOM_SERVICES,
+  PERSONAL_TRAINING_FORM,
+  categoryGroups,
+  isCategoryPageSlug,
+} from "@/lib/menu";
 import { getProductBySlug } from "@/lib/products";
 
 export function generateStaticParams() {
@@ -63,6 +69,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                   {tc(`services.${service}.title`)}
                 </h2>
                 <p className="mt-2 text-sm text-ink-soft">{tc(`services.${service}.text`)}</p>
+                <a
+                  href={PERSONAL_TRAINING_FORM}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-block rounded-lg bg-blue px-5 py-2 font-display text-xs font-bold uppercase tracking-wide text-primary-foreground transition-colors hover:brightness-110"
+                >
+                  {tc(`services.${service}.cta`)}
+                </a>
               </li>
             ))}
           </ul>

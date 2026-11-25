@@ -8,7 +8,7 @@ import { useLocale, useTranslations } from "next-intl";
 type PaddleGlobal = {
   Environment: { set: (env: "sandbox") => void };
   Initialize: (options: { token: string }) => void;
-  Checkout: { open: (options: { transactionId: string; settings?: { locale?: string } }) => void };
+  Checkout: { open: (options: { transactionId: string; settings?: { locale?: string; successUrl?: string } }) => void };
 };
 
 declare global {
@@ -29,7 +29,10 @@ export function PaddleCheckout() {
     if (!loaded || !transactionId || !CLIENT_TOKEN || !window.Paddle) return;
     if (CLIENT_TOKEN.startsWith("test_")) window.Paddle.Environment.set("sandbox");
     window.Paddle.Initialize({ token: CLIENT_TOKEN });
-    window.Paddle.Checkout.open({ transactionId, settings: { locale } });
+    window.Paddle.Checkout.open({
+      transactionId,
+      settings: { locale, successUrl: `${window.location.origin}/pago/gracias` },
+    });
   }, [loaded, transactionId, locale]);
 
   if (!CLIENT_TOKEN) {

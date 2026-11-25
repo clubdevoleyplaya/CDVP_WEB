@@ -16,6 +16,8 @@ export interface Product {
   vslVimeoId?: string;
   // Se vende por cohorte: en vez de comprar, la persona se anota en la lista de espera.
   waitlist?: boolean;
+  // Servicio que sigue por WhatsApp: mensaje con el que la persona le escribe a Juli tras pagar.
+  whatsappAfterPurchase?: string;
 }
 
 // Texto, imagen (captura) o ambos; los videos no van aquí.
@@ -281,15 +283,20 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "analisis-tecnico-biomecanico",
+    slug: "the-beach-volley-lab",
+    image: "/images/products/the-beach-volley-lab.png",
     category: "descargable",
-    title: "Análisis técnico-biomecánico",
-    shortDescription: "Informe detallado del gesto técnico, pensado para entrenadores.",
+    title: "The Beach Volley Lab",
+    shortDescription: "Análisis biomecánico personalizado de tu juego con Juli Azaad.",
     longDescription:
-      "Un informe detallado del gesto técnico desde la biomecánica, pensado para entrenadores que quieren entender el porqué detrás de cada corrección.",
+      "Análisis biomecánico personalizado de tu juego con Juli Azaad. Los cupos son limitados. Al pagar seguimos el proceso por WhatsApp.",
+    vslVimeoId: "1248772023",
+    // Tras pagar, la persona vuelve a /pago/gracias y de ahí pasa a WhatsApp con este mensaje.
+    whatsappAfterPurchase: "Acabo de comprar THE BEACH VOLLEY LAB en el club de voley playa",
   },
   {
     slug: "plan-de-movilidad-21-dias",
+    image: "/images/products/plan-de-movilidad-21-dias.png",
     category: "descargable",
     title: "Plan de movilidad — 21 días",
     shortDescription: "Rutina progresiva de movilidad para sostener el volumen de entrenamiento.",
@@ -314,6 +321,7 @@ export const products: Product[] = [
   },
   {
     slug: "plan-de-gimnasio-para-mejorar-el-salto",
+    image: "/images/products/plan-de-gimnasio-para-mejorar-el-salto.png",
     category: "descargable",
     title: "Plan de gimnasio PRO",
     shortDescription: "Rutina de gimnasio orientada a potencia de salto y prevención de lesiones.",
@@ -357,6 +365,7 @@ export const products: Product[] = [
   },
   {
     slug: "banco-de-160-ejercicios",
+    image: "/images/products/banco-de-160-ejercicios.png",
     category: "descargable",
     title: "Banco de 160 ejercicios de voley playa",
     shortDescription: "160 ejercicios de voley playa para entrenar por tu cuenta.",

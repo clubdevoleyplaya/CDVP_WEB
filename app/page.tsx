@@ -11,7 +11,7 @@ import { getProductBySlug, type CategoryRoute } from "@/lib/products";
 const FEATURED_SLUGS = [
   "ataque",
   "recepcion",
-  "analisis-tecnico-biomecanico",
+  "the-beach-volley-lab",
   "todos-los-cursos",
 ] as const;
 
