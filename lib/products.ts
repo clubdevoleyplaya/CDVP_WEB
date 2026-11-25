@@ -356,20 +356,20 @@ export const products: Product[] = [
     includes: "3 productos",
   },
   {
-    slug: "banco-de-120-ejercicios",
+    slug: "banco-de-160-ejercicios",
     category: "descargable",
-    title: "Banco de 120 ejercicios de voley playa",
-    shortDescription: "120 ejercicios de voley playa para entrenar por tu cuenta.",
+    title: "Banco de 160 ejercicios de voley playa",
+    shortDescription: "160 ejercicios de voley playa para entrenar por tu cuenta.",
     longDescription:
-      "Un banco de 120 ejercicios de voley playa. Descripción provisional: Juli completa el texto final.",
+      "Un banco de 160 ejercicios de voley playa. Descripción provisional: Juli completa el texto final.",
   },
   {
     slug: "curso-para-entrenadores",
     category: "curso",
-    title: "Curso online para entrenadores",
-    shortDescription: "Curso por cohorte para entrenadores de voley playa.",
+    title: "Curso para entrenadores: una vez al año",
+    shortDescription: "Se hace una sola vez al año. Anotate en la lista de espera.",
     longDescription:
-      "Curso online para entrenadores, por cohorte. Descripción provisional: Juli completa el texto final.",
+      "Formación integral para entrenadores/as de voley playa: 6 encuentros en vivo con especialistas invitados y con Juli Azaad, 8 cursos completos, ejercicios y 12 meses de acceso. Se realiza una sola vez al año y la próxima edición es en agosto de 2027. Anotate en la lista de espera: los suscriptores acceden a la preventa.",
     waitlist: true,
   },
   {

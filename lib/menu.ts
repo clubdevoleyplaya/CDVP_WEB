@@ -28,7 +28,7 @@ export const CATEGORY_PAGES = {
           "mentalidad-deportiva",
         ],
       },
-      { key: "exercises", products: ["banco-de-120-ejercicios"] },
+      { key: "exercises", products: ["banco-de-160-ejercicios"] },
       { key: "packs", products: ["todos-los-cursos"] },
     ],
   },
@@ -36,7 +36,7 @@ export const CATEGORY_PAGES = {
     key: "coaches",
     products: [
       "curso-para-entrenadores",
-      "banco-de-120-ejercicios",
+      "banco-de-160-ejercicios",
       "planificacion",
       "recepcion",
       "armado",
@@ -46,7 +46,7 @@ export const CATEGORY_PAGES = {
       "saque",
     ],
   },
-  eventos: { key: "events", products: ["campamento-cerrito"] },
+  eventos: { key: "events", products: ["curso-para-entrenadores", "campamento-cerrito"] },
   // Aún no son productos con compra (spec 7): se consultan por Contacto.
   personalizado: { key: "custom", products: [] },
 } as const;
