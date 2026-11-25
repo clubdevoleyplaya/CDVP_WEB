@@ -463,11 +463,6 @@
       "shortDescription": "Positioning and serve reading for more consistent reception.",
       "longDescription": "Positioning, serve reading and reception adjustments to arrive more consistently at the first contact."
     },
-    "analisis-tecnico-biomecanico": {
-      "title": "Technical-biomechanical analysis",
-      "shortDescription": "Detailed report of the technical movement, designed for coaches.",
-      "longDescription": "A detailed report of the technical movement from a biomechanics perspective, designed for coaches who want to understand the why behind each correction."
-    },
     "plan-de-movilidad-21-dias": {
       "title": "Mobility plan — 21 days",
       "shortDescription": "Progressive mobility routine to sustain training volume.",
@@ -511,20 +506,25 @@
       "longDescription": "Serve, defense and blocking — the three fundamentals that sustain the point from the defensive side — combined in a single bundle.",
       "includes": "3 products"
     },
-    "banco-de-120-ejercicios": {
-      "title": "Bank of 120 beach volleyball exercises",
-      "shortDescription": "120 beach volleyball exercises to train on your own.",
-      "longDescription": "A bank of 120 beach volleyball exercises. Provisional description: Juli will complete the final text."
+    "banco-de-160-ejercicios": {
+      "title": "Bank of 160 beach volleyball exercises",
+      "shortDescription": "160 beach volleyball exercises to train on your own.",
+      "longDescription": "A bank of 160 beach volleyball exercises. Provisional description: Juli will complete the final text."
     },
     "curso-para-entrenadores": {
-      "title": "Online course for coaches",
-      "shortDescription": "Cohort-based course for beach volleyball coaches.",
-      "longDescription": "Online course for coaches, by cohort. Provisional description: Juli will complete the final text."
+      "title": "Coaches course: once a year",
+      "shortDescription": "Held once a year. Join the waitlist.",
+      "longDescription": "A full training program for beach volleyball coaches: 6 live sessions with guest specialists and Juli Azaad, 8 complete courses, exercises and 12 months of access. It runs only once a year and the next edition is in August 2027. Join the waitlist: subscribers get access to the presale."
     },
     "campamento-cerrito": {
       "title": "Cerrito Camp",
       "shortDescription": "Annual in-person beach volleyball camp.",
       "longDescription": "Annual in-person camp in Cerrito. Provisional description: Juli will complete the date and final text."
+    },
+    "the-beach-volley-lab": {
+      "title": "The Beach Volley Lab",
+      "shortDescription": "Personalized biomechanical analysis of your game with Juli Azaad.",
+      "longDescription": "Personalized biomechanical analysis of your game with Juli Azaad. Spots are limited. After paying, we continue the process on WhatsApp."
     }
   },
   "Testimonials": {
@@ -570,13 +570,10 @@
       "packs": "Packs"
     },
     "services": {
-      "beachVolleyLab": {
-        "title": "Beach Volley Lab — biomechanical analysis with Juli Azaad",
-        "text": "Personalized biomechanical analysis of your game. Spots are limited."
-      },
       "personalTraining": {
         "title": "Personalized physical training with Juli Azaad",
-        "text": "Physical training tailored to you, with personal follow-up. You apply and are approved before starting."
+        "text": "Juli Azaad prepares your physical training plan, tailored to you. Fill in the form and we continue the conversation on WhatsApp.",
+        "cta": "Fill in the form"
       },
       "cta": "Inquire via Contact"
     }
@@ -597,5 +594,13 @@
     "submitting": "Joining...",
     "done": "Done! You're on the list. We'll write to you when the next cohort opens.",
     "error": "We couldn't add you. Please try again in a few minutes."
+  },
+  "PayThanks": {
+    "metaTitle": "Thank you for your purchase — Club de Voley Playa",
+    "title": "Thank you for your purchase!",
+    "text": "We're confirming your payment. Once it clears, you'll see your purchase in your profile.",
+    "profile": "Go to my profile",
+    "whatsappText": "To continue the process, message Juli on WhatsApp.",
+    "whatsapp": "Open WhatsApp"
   }
 }

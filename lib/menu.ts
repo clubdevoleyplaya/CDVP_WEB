@@ -28,7 +28,7 @@ export const CATEGORY_PAGES = {
           "mentalidad-deportiva",
         ],
       },
-      { key: "exercises", products: ["banco-de-120-ejercicios"] },
+      { key: "exercises", products: ["banco-de-160-ejercicios"] },
       { key: "packs", products: ["todos-los-cursos"] },
     ],
   },
@@ -36,7 +36,7 @@ export const CATEGORY_PAGES = {
     key: "coaches",
     products: [
       "curso-para-entrenadores",
-      "banco-de-120-ejercicios",
+      "banco-de-160-ejercicios",
       "planificacion",
       "recepcion",
       "armado",
@@ -46,9 +46,8 @@ export const CATEGORY_PAGES = {
       "saque",
     ],
   },
-  eventos: { key: "events", products: ["campamento-cerrito"] },
-  // Aún no son productos con compra (spec 7): se consultan por Contacto.
-  personalizado: { key: "custom", products: [] },
+  eventos: { key: "events", products: ["curso-para-entrenadores", "campamento-cerrito"] },
+  personalizado: { key: "custom", products: ["the-beach-volley-lab"] },
 } as const;
 export function categoryGroups(
   page: (typeof CATEGORY_PAGES)[keyof typeof CATEGORY_PAGES],
@@ -63,12 +62,13 @@ export function isCategoryPageSlug(value: string): value is CategoryPageSlug {
 }
 
 // Servicios personalizados del documento de Juli.
-export const CUSTOM_SERVICES = ["beachVolleyLab", "personalTraining"] as const;
+// El Beach Volley Lab ya es un producto con compra; el entrenamiento personalizado va a un formulario.
+export const CUSTOM_SERVICES = ["personalTraining"] as const;
+export const PERSONAL_TRAINING_FORM = "https://tally.so/r/68y70A";
 
 export const CONTACT = {
   email: "clubdevoleyplaya@gmail.com",
-  // El número de WhatsApp lo pasa Juli: mientras no esté, el botón no aparece.
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "5493416167967",
   socials: [
     { name: "Instagram", href: "https://www.instagram.com/clubdevoleyplaya/" },
     { name: "TikTok", href: "https://www.tiktok.com/@clubdevoleyplaya" },

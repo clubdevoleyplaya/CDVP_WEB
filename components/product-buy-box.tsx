@@ -51,6 +51,11 @@ export function ProductBuyBox({ product }: { product: Product }) {
       });
       if (!res.ok) throw new Error();
       const data = await res.json();
+      try {
+        sessionStorage.setItem("cdvp_last_product", product.slug);
+      } catch {
+        // sin almacenamiento: la página de gracias igual funciona sin el producto
+      }
 
       if (data.init_point) {
         window.location.href = data.init_point;
